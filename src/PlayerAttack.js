@@ -8,15 +8,16 @@ import PropTypes from 'prop-types'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
-  turn: PropTypes.bool.isRequired
+  turn: PropTypes.bool.isRequired,
+  actions: PropTypes.func.isRequired
 }
 
 const defaultProps = {}
 
-const Player = ({ data, turn }) => {
+const PlayerAttack = ({ data, turn, actions }) => {
 
   // Component styling
-  const defaultClasses = `playerWrapper`
+  const defaultClasses = `playerAttack`
   const turnClasses = turn ? `turn` : ``
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
@@ -24,17 +25,19 @@ const Player = ({ data, turn }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <h2>{data.name}</h2>
-      <p>Attack : {data.physicalAttack}</p>
-      <p>HP : {data.hitPoints}</p>
-      <p>MP : {data.magicPoints}</p>
+      {turn &&
+        <div>
+          <button onClick={() => actions(`physicalAttack`)}>Attack</button>
+          <button onClick={() => actions(`physicalAttack`)}>Full attack</button>
+        </div>
+      }
     </div>
   )
 }
 
 // Applying propTypes definition and default values
-Player.propTypes = propTypes
-Player.defaultProps = defaultProps
+PlayerAttack.propTypes = propTypes
+PlayerAttack.defaultProps = defaultProps
 
 // Exporting as default
-export default Player
+export default PlayerAttack

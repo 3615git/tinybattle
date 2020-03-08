@@ -7,29 +7,31 @@ import PropTypes from 'prop-types'
 */
 
 const propTypes = {
-  data: PropTypes.string
+  data: PropTypes.object.isRequired
 }
 
 const defaultProps = {}
 
-const Logs = ({ data }) => {
+const PlayerInfo = ({ data }) => {
 
   // Component styling
-  const defaultClasses = `LogsWrapper`
+  const defaultClasses = `playerInfo`
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
   // Display component
   return (
     <div className={itemClasses}>
-      {data}
+      <div>{data.gold} Gold</div>
+      <div>{data.name}</div>
+      <div>Level {data.level} - {data.xp} xp</div>
     </div>
   )
 }
 
 // Applying propTypes definition and default values
-Logs.propTypes = propTypes
-Logs.defaultProps = defaultProps
+PlayerInfo.propTypes = propTypes
+PlayerInfo.defaultProps = defaultProps
 
 // Exporting as default
-export default Logs
+export default PlayerInfo

@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import Opponent from './Opponent'
 import Logs from './Logs'
-import Player from './Player'
-import './App.css';
+import PlayerInfo from './PlayerInfo'
+import PlayerStats from './PlayerStats'
+import PlayerItems from './PlayerItems'
+import PlayerGauge from './PlayerGauge'
+import PlayerAttack from './PlayerAttack'
+import './App.css'
 
 class App extends Component {
   constructor(props) {
@@ -11,15 +15,29 @@ class App extends Component {
     const opponent = {
       name: `Gorblog`,
       physicalAttack: this.diceRoll(20),
-      hitPoints: this.diceRoll(100),
-      magicPoints: 15
+      magicalAttack: this.diceRoll(20),
+      hitPoints: 70,
+      maxHitPoints: 70
     }
 
     const player = {
       name: `Krapok`,
+      level: 1,
+      xp: 0,
+      gold: 35,
       physicalAttack: 8,
+      magicalAttack: 5,
+      physicalResistance: 2,
+      magicalResistance: 3,
+      luck: 2,
       hitPoints: 70,
-      magicPoints: 40
+      maxHitPoints: 70,
+      magicPoints: 30,
+      maxMagicPoints: 30,
+      physicalRage: 4,
+      maxPhysicalRage: 20,
+      magicalRage: 12,
+      maxMagicalRage: 30,
     }
 
     this.state = {
@@ -33,10 +51,6 @@ class App extends Component {
     this.setState(prevState => ({
       log: `Go!`
     }))
-    
-    setTimeout(() => {
-      this.refreshGame()
-    }, 1000)
   }
 
   // Utils
@@ -45,11 +59,15 @@ class App extends Component {
   }
 
   // Attacks
-  physicalAttack = (player) => {
-    let attack = player.physicalAttack
+  physicalAttack = () => {
+    const { player, opponent, playerTurn } = this.state
+    let activePlayer = playerTurn ? { ...player } : { ...opponent }
+    let targetPlayer = !playerTurn ? { ...player } : { ...opponent }
+
+    let attack = activePlayer.physicalAttack
     const roll = this.diceRoll(20)
 
-    let log = player.name + ` attacks !`
+    let log = activePlayer.name + ` attacks !`
 
     if (roll <= 3) {
       attack -= parseInt(this.diceRoll(6))
@@ -60,57 +78,90 @@ class App extends Component {
       log += ` CRITICAL!`
     }
 
+    // Action resolution
+    log += targetPlayer.name + ` takes ` + attack + ` damage!`
+
+    // New HP count
+    targetPlayer.hitPoints -= attack
+    
     this.setState({log})
 
-    return attack
+    return {
+      player: playerTurn ? activePlayer : targetPlayer,
+      opponent: !playerTurn ? activePlayer : targetPlayer
+    }
+  }
+
+  resolveAction = (action) => {
+    // Todo : disable all action buttons
+
+    // Compute new data
+    let updatedData
+    switch (action) {
+      case `physicalAttack`:
+        updatedData = this.physicalAttack()
+        break;
+      default:
+        break;
+    }
+
+    // Log and apply
+    this.setState(prevState => ({
+      player: updatedData.player,
+      opponent: updatedData.opponent
+    }))
+
+    // Next player
+    setTimeout(() => { this.refreshGame() }, 1000)
+  }
+
+  opponentAction = () => {
+    const { playerTurn } = this.state
+    if (!playerTurn) this.resolveAction(`physicalAttack`)
   }
 
   refreshGame = () => {
-    const { player, opponent, playerTurn } = this.state
+    const { player, opponent } = this.state
+    let log 
 
-    // Compute actions
-    let activePlayer = !playerTurn ? player : opponent
-    let passivePlayer = !playerTurn ? opponent : player
-
-    // Physical attack
-    const damage = this.physicalAttack(activePlayer)
-    passivePlayer.hitPoints -= damage
-
-    let updatedPlayer = !playerTurn ? activePlayer : passivePlayer
-    let updatedOpponent = !playerTurn ? passivePlayer : activePlayer
-
-    this.setState(prevState => ({
-      playerTurn: !prevState.playerTurn
-    }))
-
-    // Log
-    
-    // Action resolution
-    let log = passivePlayer.name + ` takes ` + damage + ` damage`
-
-    // Dead
-    if (passivePlayer.hitPoints <= 0) {
-      log = passivePlayer.name + ` is dead`
-    }
-
-    setTimeout(() => {
+    // Player lost
+    if (player.hitPoints <= 0) {
+      log = player.name + ` is dead.`
+      this.setState({ log })
+    } 
+    // Next opponent
+    else if (opponent.hitPoints <= 0) {
+      log = opponent.name + ` is dead.`
+      this.setState({ log })
+    } 
+    // Keep going
+    else {
       this.setState(prevState => ({
-        player: updatedPlayer,
-        opponent: updatedOpponent,
-        log
+        playerTurn: !prevState.playerTurn
       }))
-      if (passivePlayer.hitPoints > 0) setTimeout(() => { this.refreshGame() }, 1000)
-    }, 1000)
+  
+      if (!this.state.playerTurn) this.opponentAction()
+    }
   }
 
   render() {
     const { player, opponent, playerTurn, log } = this.state
 
     return (
-      <div className="App">
-        <Opponent data={opponent} turn={!playerTurn} />
-        <Player data={player} turn={playerTurn} />
-        <Logs data={log} />
+      <div className="mainWrapper rpgui-container">
+        <div className="appWrapper rpgui-content">
+          <PlayerInfo data={player} />
+          <Opponent data={opponent} turn={!playerTurn} />
+          <PlayerStats data={player} />
+          <PlayerItems data={player} />
+          <PlayerGauge data={player} type="hitPoints" />
+          <PlayerGauge data={player} type="physicalRage" />
+          <PlayerGauge data={player} type="magicPoints" />
+          <PlayerGauge data={player} type="magicalRage" />
+          <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
+          <PlayerAttack type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
+          <Logs data={log} />
+        </div>
       </div>
     )
   }
