@@ -52,6 +52,7 @@ const PlayerGauge = ({ data, type, size }) => {
   // Display component
   return (
     <div className={itemClasses}>
+      <div className="value">{value}/{maxValue}</div>
       <div className="indicator" style={indicatorStyle} />
     </div>
   )

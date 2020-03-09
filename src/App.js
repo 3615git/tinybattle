@@ -16,6 +16,9 @@ class App extends Component {
       name: `Gorblog`,
       physicalAttack: this.diceRoll(20),
       magicalAttack: this.diceRoll(20),
+      physicalResistance: this.diceRoll(10),
+      magicalResistance: this.diceRoll(10),
+      luck: this.diceRoll(6),
       hitPoints: 70,
       maxHitPoints: 70
     }
@@ -48,14 +51,25 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState(prevState => ({
-      log: `Go!`
-    }))
+    // this.setState(prevState => ({
+    //   log: `Go!`
+    // }))
   }
 
   // Utils
   diceRoll = (sides) => {
     return Math.floor(Math.random() * sides) + 1
+  }
+
+  makeLog = (action, roll, special, result) => {
+    const { player, opponent, playerTurn } = this.state
+    let activePlayer = playerTurn ? { ...player } : { ...opponent }
+    let targetPlayer = !playerTurn ? { ...player } : { ...opponent }
+
+    const log ={
+      activePlayer, targetPlayer, action, roll, special, result
+    }
+    this.setState({log})
   }
 
   // Attacks
@@ -64,27 +78,28 @@ class App extends Component {
     let activePlayer = playerTurn ? { ...player } : { ...opponent }
     let targetPlayer = !playerTurn ? { ...player } : { ...opponent }
 
-    let attack = activePlayer.physicalAttack
+    let result = activePlayer.physicalAttack
+
+    // todo : add item bonus
+
+    let special
     const roll = this.diceRoll(20)
 
-    let log = activePlayer.name + ` attacks !`
-
     if (roll <= 3) {
-      attack -= parseInt(this.diceRoll(6))
-      log += ` FUMBLE!`
+      result -= parseInt(this.diceRoll(6))
+      special = `fumble`
     }
     if (roll >= 17) {
-      attack += parseInt(this.diceRoll(6))
-      log += ` CRITICAL!`
+      result += parseInt(this.diceRoll(6))
+      special = `critical`
     }
 
-    // Action resolution
-    log += targetPlayer.name + ` takes ` + attack + ` damage!`
+    // todo : remove shield/dodge
 
-    // New HP count
-    targetPlayer.hitPoints -= attack
+    // Final HP count
+    targetPlayer.hitPoints -= result
     
-    this.setState({log})
+    this.makeLog(`physicalAttack`, roll, special, result)
 
     return {
       player: playerTurn ? activePlayer : targetPlayer,
@@ -110,14 +125,20 @@ class App extends Component {
       player: updatedData.player,
       opponent: updatedData.opponent
     }))
-
-    // Next player
-    setTimeout(() => { this.refreshGame() }, 1000)
   }
 
   opponentAction = () => {
-    const { playerTurn } = this.state
-    if (!playerTurn) this.resolveAction(`physicalAttack`)
+    console.log(`here`)
+    setTimeout(() => {
+      this.resolveAction(`physicalAttack`)
+    }, 1000);
+  }
+
+  nextRound = () => {
+    this.setState({
+      log: null
+    })
+    this.refreshGame()
   }
 
   refreshGame = () => {
@@ -140,7 +161,7 @@ class App extends Component {
         playerTurn: !prevState.playerTurn
       }))
   
-      if (!this.state.playerTurn) this.opponentAction()
+      if (this.state.playerTurn) this.opponentAction()
     }
   }
 
@@ -151,7 +172,10 @@ class App extends Component {
       <div className="mainWrapper rpgui-container">
         <div className="appWrapper rpgui-content">
           <PlayerInfo data={player} />
-          <Opponent data={opponent} turn={!playerTurn} />
+          <Opponent 
+            data={opponent} 
+            turn={!playerTurn} 
+          />
           <PlayerStats data={player} />
           <PlayerItems data={player} />
           <PlayerGauge data={player} type="hitPoints" />
@@ -160,7 +184,9 @@ class App extends Component {
           <PlayerGauge data={player} type="magicalRage" />
           <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
           <PlayerAttack type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
-          <Logs data={log} />
+          {log &&
+            <Logs data={log} onClick={this.nextRound} />
+          }
         </div>
       </div>
     )

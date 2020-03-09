@@ -25,12 +25,10 @@ const PlayerAttack = ({ data, turn, actions }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      {turn &&
-        <div>
-          <button onClick={() => actions(`physicalAttack`)}>Attack</button>
-          <button onClick={() => actions(`physicalAttack`)}>Full attack</button>
-        </div>
-      }
+      <div>
+        <button onClick={() => actions(`physicalAttack`)}>Attack</button>
+        <button onClick={() => actions(`physicalAttack`)}>Full attack</button>
+      </div>
     </div>
   )
 }
