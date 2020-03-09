@@ -23,13 +23,11 @@ const Logs = ({ data, onClick }) => {
 
   // Build log message
   let title, message, special, result
-
-  // console.log(data)
   
   switch (data.action) {
     case `physicalAttack`:
       title = data.activePlayer.name + ` attacks !`
-      result = data.targetPlayer.name + ` takes `+ data.result +` damage.`
+      result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
       break;
     default:
         break;
@@ -48,7 +46,7 @@ const Logs = ({ data, onClick }) => {
       {title && <div className="title">{title}</div>}
       {message && <div className="message">{message}</div>}
       {special &&<div className="special">{special}</div>}
-      {result &&<div className="result">{result}</div>}
+      {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
     </animated.div>
   )
 }

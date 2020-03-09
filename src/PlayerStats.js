@@ -22,11 +22,11 @@ const PlayerStats = ({ data }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div>{data.physicalAttack}<span>PHY</span></div>
-      <div>{data.magicalAttack}<span>MAG</span></div>
-      <div>{data.physicalResistance}<span>RES</span></div>
-      <div>{data.magicalResistance}<span>PSY</span></div>
-      <div>{data.luck}<span>LCK</span></div>
+      <div>{data.STR}<span>STR</span></div>
+      <div>{data.DEX}<span>DEX</span></div>
+      <div>{data.CON}<span>CON</span></div>
+      <div>{data.MAG}<span>MAG</span></div>
+      <div>{data.LCK}<span>LCK</span></div>
     </div>
   )
 }

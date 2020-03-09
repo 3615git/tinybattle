@@ -13,26 +13,26 @@ class App extends Component {
     super(props)
 
     const opponent = {
-      name: `Gorblog`,
-      physicalAttack: this.diceRoll(20),
-      magicalAttack: this.diceRoll(20),
-      physicalResistance: this.diceRoll(10),
-      magicalResistance: this.diceRoll(10),
-      luck: this.diceRoll(6),
+      name: `Gorblog the Great`,
+      STR: this.diceRoll(20),
+      DEX: this.diceRoll(20),
+      CON: this.diceRoll(10),
+      MAG: this.diceRoll(10),
+      LCK: this.diceRoll(6),
       hitPoints: 70,
       maxHitPoints: 70
     }
 
     const player = {
-      name: `Krapok`,
-      level: 1,
+      name: `Rémi`,
       xp: 0,
+      level: 1,
+      STR: 8,
+      DEX: 5,
+      CON: 2,
+      MAG: 3,
+      LCK: 2,
       gold: 35,
-      physicalAttack: 8,
-      magicalAttack: 5,
-      physicalResistance: 2,
-      magicalResistance: 3,
-      luck: 2,
       hitPoints: 70,
       maxHitPoints: 70,
       magicPoints: 30,
@@ -51,9 +51,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // this.setState(prevState => ({
-    //   log: `Go!`
-    // }))
+
   }
 
   // Utils
@@ -78,7 +76,7 @@ class App extends Component {
     let activePlayer = playerTurn ? { ...player } : { ...opponent }
     let targetPlayer = !playerTurn ? { ...player } : { ...opponent }
 
-    let result = activePlayer.physicalAttack
+    let result = activePlayer.STR
 
     // todo : add item bonus
 
@@ -128,7 +126,6 @@ class App extends Component {
   }
 
   opponentAction = () => {
-    console.log(`here`)
     setTimeout(() => {
       this.resolveAction(`physicalAttack`)
     }, 1000);
@@ -169,8 +166,8 @@ class App extends Component {
     const { player, opponent, playerTurn, log } = this.state
 
     return (
-      <div className="mainWrapper rpgui-container">
-        <div className="appWrapper rpgui-content">
+      <div className="mainWrapper">
+        <div className="appWrapper">
           <PlayerInfo data={player} />
           <Opponent 
             data={opponent} 
@@ -178,16 +175,21 @@ class App extends Component {
           />
           <PlayerStats data={player} />
           <PlayerItems data={player} />
-          <PlayerGauge data={player} type="hitPoints" />
-          <PlayerGauge data={player} type="physicalRage" />
-          <PlayerGauge data={player} type="magicPoints" />
-          <PlayerGauge data={player} type="magicalRage" />
+          <div className="playerGaugeWrapper">
+            <div>
+              <PlayerGauge data={player} type="hitPoints" />
+              <PlayerGauge data={player} type="physicalRage" />
+            </div>
+            <div>
+              <PlayerGauge data={player} type="magicPoints" />
+              <PlayerGauge data={player} type="magicalRage" />
+            </div>
+          </div>
           <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
-          <PlayerAttack type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
-          {log &&
-            <Logs data={log} onClick={this.nextRound} />
-          }
         </div>
+        {log &&
+          <Logs data={log} onClick={this.nextRound} />
+        }
       </div>
     )
   }

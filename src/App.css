@@ -14,6 +14,8 @@
   font-style: normal;
 }
 
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 /* Main app */
 html, body, #root {
   height: 100%;
@@ -37,12 +39,8 @@ html, body, #root {
 }
 
 .appWrapper {
-  width: 250px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Player info on top */
@@ -72,29 +70,39 @@ html, body, #root {
 
 .playerStats span {
   font-size: 8px;
-  opacity: .4;
+  opacity: .6;
+  margin-bottom: 3px;
 }
 
 /* Player items */
 .playerItems {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.playerItems div {
+.playerItems > div {
   width: 50px;
   height: 50px;
-  border-radius: 3px;
+  font-size: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
   text-align: center;
   background-color: #20373e;
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.89);
+  /* box-shadow: -1px -1px 1px rgba(241, 241, 241, 0.3), 1px 1px 1px rgba(27, 66, 61, 0.3); */
 }
-
 
 /* Opponent area */
 .opponentWrapper {
   position: relative;
   padding: 10px;
-  margin: 15px;
+  margin-bottom: 15px;
+  margin-top: 15px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -105,11 +113,16 @@ html, body, #root {
 }
 
 .opponentWrapper.turn {
- color: red
+  transition: all 250ms;
+  /* transform: scale(1.05); */
+  box-shadow: 0px 0px 20px rgba(255, 43, 43, 0.3);
 }
 
 .opponentWrapper .infos {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .opponentWrapper .portrait {
@@ -126,6 +139,24 @@ html, body, #root {
 }
 
 /* Gauge */
+.playerGaugeWrapper {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.playerGaugeWrapper > div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.playerGaugeWrapper > div:first-child {
+  padding-right: 5px;
+}
+.playerGaugeWrapper > div:last-child {
+  padding-left: 5px;
+}
+
 .playerGauge {
   width: 100%;
   margin-bottom: 5px;
@@ -137,6 +168,7 @@ html, body, #root {
 
 .playerGauge .indicator {
   border-radius: 4px;
+  transition: all 2000ms;
 }
 
 .playerGauge .value {
@@ -192,10 +224,57 @@ html, body, #root {
 }
 
 .LogsWrapper .message {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .LogsWrapper .special {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.LogsWrapper .result {
+
+}
+
+.damage {
+  color: #e7323b;
+  font-size: 26px;
+  padding: 10px;
+  display: block;
+}
+
+/* Items */
+.item {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 2px;
+  background: url('./pics/items.png');
+  background-repeat: no-repeat;
+  background-size: 1408px;
+}
+
+.item.weapon {
+  background-position: 0 -736px;
+}
+.item.ring {
+  background-position: -928px 0;
+}
+.item.armor {
+  background-position: -256px -320px;
+}
+.item.wand {
+  background-position: -320px -320px;
+}
+.item.trinket {
+  background-position: -672px -672px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+}
+
+a {
+  height: 40px;
+  border: none;
 }

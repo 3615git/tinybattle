@@ -17,7 +17,7 @@ const defaultProps = {}
 const PlayerAttack = ({ data, turn, actions }) => {
 
   // Component styling
-  const defaultClasses = `playerAttack`
+  const defaultClasses = `buttons`
   const turnClasses = turn ? `turn` : ``
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
@@ -25,10 +25,9 @@ const PlayerAttack = ({ data, turn, actions }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div>
-        <button onClick={() => actions(`physicalAttack`)}>Attack</button>
-        <button onClick={() => actions(`physicalAttack`)}>Full attack</button>
-      </div>
+      <a className="physical secondary" onClick={() => actions(`physicalDefend`)}>Defend</a>
+      <a className="physical primary" onClick={() => actions(`physicalAttack`)}>Attack</a>
+      <a className="physical secondary" onClick={() => actions(`physicalCharge`)}>Charge</a>
     </div>
   )
 }

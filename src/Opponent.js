@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import PlayerGauge from './PlayerGauge'
 import PlayerStats from './PlayerStats'
-import Logs from './Logs'
 
 /**
   * @desc description of the component
