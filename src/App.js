@@ -185,7 +185,9 @@ class App extends Component {
               <PlayerGauge data={player} type="magicalRage" />
             </div>
           </div>
-          <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
+          <div className="actionWrapper">
+            <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
+          </div>
         </div>
         {log &&
           <Logs data={log} onClick={this.nextRound} />

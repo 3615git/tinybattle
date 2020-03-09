@@ -270,6 +270,10 @@ html, body, #root {
 }
 
 /* Buttons */
+.actionWrapper {
+  margin-top: 10px;
+}
+
 .buttons {
   display: flex;
   justify-content: space-between;
