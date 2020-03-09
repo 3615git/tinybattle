@@ -25,9 +25,9 @@ const PlayerAttack = ({ data, turn, actions }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <a className="physical secondary" onClick={() => actions(`physicalDefend`)}>Defend</a>
-      <a className="physical primary" onClick={() => actions(`physicalAttack`)}>Attack</a>
-      <a className="physical secondary" onClick={() => actions(`physicalCharge`)}>Charge</a>
+      <button className="physical secondary" onClick={() => actions(`physicalDefend`)}>Defend</button>
+      <button className="physical primary" onClick={() => actions(`physicalAttack`)}>Attack</button>
+      <button className="physical secondary" onClick={() => actions(`physicalCharge`)}>Charge</button>
     </div>
   )
 }
