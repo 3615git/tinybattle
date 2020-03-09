@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 */
 
 const propTypes = {
+  type: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   turn: PropTypes.bool.isRequired,
   actions: PropTypes.func.isRequired
@@ -14,7 +15,7 @@ const propTypes = {
 
 const defaultProps = {}
 
-const PlayerAttack = ({ data, turn, actions }) => {
+const PlayerAttack = ({ type, data, turn, actions }) => {
 
   // Component styling
   const defaultClasses = `buttons`
@@ -25,9 +26,9 @@ const PlayerAttack = ({ data, turn, actions }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <button className="physical secondary" onClick={() => actions(`physicalDefend`)}>Defend</button>
-      <button className="physical primary" onClick={() => actions(`physicalAttack`)}>Attack</button>
-      <button className="physical secondary" onClick={() => actions(`physicalCharge`)}>Charge</button>
+      <button className={type +" secondary"} onClick={() => actions(`physicalDefend`)}>Defend</button>
+      <button className={type +" primary"} onClick={() => actions(`physicalAttack`)}>Attack</button>
+      <button className={type +" secondary"} onClick={() => actions(`physicalCharge`)}>Charge</button>
     </div>
   )
 }

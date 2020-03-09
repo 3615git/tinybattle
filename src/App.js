@@ -187,6 +187,7 @@ class App extends Component {
           </div>
           <div className="actionWrapper">
             <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
+            <PlayerAttack type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
           </div>
         </div>
         {log &&
