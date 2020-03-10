@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from "react-redux"
 
 import PlayerGauge from './PlayerGauge'
 import PlayerStats from './PlayerStats'
@@ -9,12 +9,12 @@ import PlayerStats from './PlayerStats'
   * @todo Use a todo tag to store future changes
 */
 
-const propTypes = {
-  data: PropTypes.object.isRequired,
-  turn: PropTypes.bool.isRequired
+const mapStateToProps = state => {
+  return { 
+    data: state.opponent,
+    turn: !state.playerTurn
+  }
 }
-
-const defaultProps = {}
 
 const Opponent = ({ data, turn }) => {
 
@@ -37,9 +37,4 @@ const Opponent = ({ data, turn }) => {
   )
 }
 
-// Applying propTypes definition and default values
-Opponent.propTypes = propTypes
-Opponent.defaultProps = defaultProps
-
-// Exporting as default
-export default Opponent
+export default connect(mapStateToProps)(Opponent)

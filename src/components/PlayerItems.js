@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Item from './Item'
+import Item from '..//Item'
 
 /**
   * @desc description of the component
