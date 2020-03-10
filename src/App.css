@@ -283,14 +283,18 @@ html, body, #root {
   margin-bottom: 10px;
 }
 
-.buttons button:first-child {
-  border-radius: 30px 0 0 30px;
-  border-right: 1px solid rgba(255,255,255,.2);
+.buttons button.defend {
+  border-radius: 10px 0 0 10px;
 }
 
-.buttons button:last-child {
-  border-radius: 0 30px 30px 0;
-  border-left: 1px solid rgba(255,255,255,.2);
+.buttons button.attack {
+  border-radius: 0 10px 10px 0;
+  border-left: 1px solid rgba(255,255,255,.15);
+}
+
+.buttons button.special {
+  border-radius: 10px;
+  margin-left: 10px;
 }
 
 button {
@@ -298,9 +302,10 @@ button {
   border: none;
   flex-basis: 25%;
   font-size: 9px;
+  cursor: pointer;
 }
 
-button.primary {
+button.attack {
   flex-basis: 50%;
   font-size: 10px;
 }
@@ -311,4 +316,9 @@ button.physical {
 
 button.magical {
   background: #0494ab;
+}
+
+button.disabled {
+  opacity: .3;
+  cursor: not-allowed;
 }

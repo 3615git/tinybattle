@@ -29,6 +29,10 @@ const Logs = ({ data, onClick }) => {
       title = data.activePlayer.name + ` attacks !`
       result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
       break;
+    case `physicalSpecial`:
+      title = data.activePlayer.name + ` special attacks !`
+      result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
+      break;
     default:
         break;
       }

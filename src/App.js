@@ -5,7 +5,7 @@ import PlayerInfo from './PlayerInfo'
 import PlayerStats from './PlayerStats'
 import PlayerItems from './PlayerItems'
 import PlayerGauge from './PlayerGauge'
-import PlayerAttack from './PlayerAttack'
+import Action from './Action'
 import './App.css'
 
 class App extends Component {
@@ -20,7 +20,9 @@ class App extends Component {
       MAG: this.diceRoll(10),
       LCK: this.diceRoll(6),
       hitPoints: 70,
-      maxHitPoints: 70
+      maxHitPoints: 70,
+      physicalRage: 0,
+      maxPhysicalRage: 20
     }
 
     const player = {
@@ -37,7 +39,7 @@ class App extends Component {
       maxHitPoints: 70,
       magicPoints: 30,
       maxMagicPoints: 30,
-      physicalRage: 4,
+      physicalRage: 0,
       maxPhysicalRage: 20,
       magicalRage: 12,
       maxMagicalRage: 30,
@@ -97,12 +99,80 @@ class App extends Component {
     // Final HP count
     targetPlayer.hitPoints -= result
     
+    // Rage
+    this.rage(`physical`, targetPlayer, result)
+
+    // Display result
     this.makeLog(`physicalAttack`, roll, special, result)
 
     return {
       player: playerTurn ? activePlayer : targetPlayer,
       opponent: !playerTurn ? activePlayer : targetPlayer
     }
+  }
+
+  physicalSpecial = () => {
+    const { player, opponent, playerTurn } = this.state
+    let activePlayer = playerTurn ? { ...player } : { ...opponent }
+    let targetPlayer = !playerTurn ? { ...player } : { ...opponent }
+
+    let result = activePlayer.STR
+
+    // todo : add item bonus
+
+    let special
+    const roll = this.diceRoll(20)
+
+    if (roll <= 3) {
+      result -= parseInt(this.diceRoll(6))
+      special = `fumble`
+    }
+    if (roll >= 17) {
+      result += parseInt(this.diceRoll(6))
+      special = `critical`
+    }
+
+    // todo : remove shield/dodge
+
+    // Special attack!
+    result = result * 3
+
+    // Final HP count
+    targetPlayer.hitPoints -= result
+    
+    // Rage
+    this.rage(`physical`, targetPlayer, result)
+
+    // Display result
+    this.makeLog(`physicalSpecial`, roll, special, result)
+
+    return {
+      player: playerTurn ? activePlayer : targetPlayer,
+      opponent: !playerTurn ? activePlayer : targetPlayer
+    }
+  }
+
+  // Rage management
+  rage = (type, player, value) => {
+    if (type === `physical`) {
+      player.physicalRage = (player.physicalRage + value > player.maxPhysicalRage) ? player.maxPhysicalRage : player.physicalRage + value
+    }
+    if (type === `magical`) {
+      player.magicalRage = (player.magicalRage + value > player.maxMagicalRage) ? player.maxMagicalRage : player.magicalRage + value
+    }
+
+    return player
+  }
+
+  resetRage = (type, player) => {
+    if (type === `physical`) {
+      player.physicalRage = 0
+    }
+    if (type === `magical`) {
+      player.magicalRage = 0
+    }
+
+    return player
   }
 
   resolveAction = (action) => {
@@ -113,6 +183,9 @@ class App extends Component {
     switch (action) {
       case `physicalAttack`:
         updatedData = this.physicalAttack()
+        break;
+      case `physicalSpecial`:
+        updatedData = this.physicalSpecial()
         break;
       default:
         break;
@@ -186,8 +259,8 @@ class App extends Component {
             </div>
           </div>
           <div className="actionWrapper">
-            <PlayerAttack type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
-            <PlayerAttack type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
+            <Action type="physical" data={player} actions={this.resolveAction} turn={playerTurn} />
+            <Action type="magical" data={player} actions={this.resolveAction} turn={playerTurn} />
           </div>
         </div>
         {log &&

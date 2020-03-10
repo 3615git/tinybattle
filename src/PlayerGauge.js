@@ -49,6 +49,10 @@ const PlayerGauge = ({ data, type, size }) => {
   const indicatorStyle = {
     width: (value*100)/maxValue + `%`
   }
+
+  console.log(data)
+  console.log(value)
+
   // Display component
   return (
     <div className={itemClasses}>
