@@ -25,23 +25,23 @@ const PlayerItems = ({ data }) => {
   return (
     <div className={itemClasses}>
       <div className="attack">
-        <Item item="weapon" />
+        <Item item="axe" level={3} />
         <span>+2</span>
       </div>
       <div className="speed">
-        <Item item="ring" />
+        <Item item="ring" level={10} />
         <span>+3</span>
       </div>
       <div className="armor">
-        <Item item="armor" />
+        <Item item="shield" level={14} />
         <span>+1</span>
       </div>
       <div className="magic">
-        <Item item="wand" />
+        <Item item="magic" level={2} />
         <span>+2</span>
       </div>
       <div className="luck">
-        <Item item="trinket" />
+        <Item item="amulet" level={6} />
         <span>+2</span>
       </div>
     </div>

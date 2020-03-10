@@ -6,7 +6,8 @@ import PlayerStats from './PlayerStats'
 import PlayerItems from './PlayerItems'
 import PlayerGauge from './PlayerGauge'
 import Action from './Action'
-import './App.css'
+import './css/app.css'
+import './css/items.css'
 
 class App extends Component {
   constructor(props) {
