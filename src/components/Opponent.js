@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from "react-redux"
 
-import PlayerGauge from './PlayerGauge'
-import PlayerStats from './PlayerStats'
+import Bar from './Bar'
+import Stats from './Stats'
 
 /**
   * @desc description of the component
@@ -30,9 +30,10 @@ const Opponent = ({ data, turn }) => {
       <div className="infos">
         <div className="portrait" />
         <div className="name">{data.name}</div>
+        <div className="job">{data.job}</div>
       </div>
-      <PlayerStats data={data} />
-      <PlayerGauge data={data} type="hitPoints" />
+      <Stats opponent />
+      <Bar opponent type="hitPoints" />
     </div>
   )
 }

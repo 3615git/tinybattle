@@ -52,6 +52,54 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255,255,255,.08);
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.89);
+}
+
+.playerInfo .gold {
+  display: flex;
+  align-items: center;
+  flex-basis: 15%;
+}
+
+.playerInfo .gold span {
+  padding-left: 5px;
+}
+
+.playerInfo .player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.playerInfo .player .name {
+  
+}
+
+.playerInfo .player .job {
+  padding-top: 5px;
+  font-size: 10px;
+}
+
+.playerInfo .level {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 15%;
+  font-size: 10px;
+}
+
+.playerInfo .level .bar {
+  margin: 5px 0px 0px 0px;
 }
 
 /* Player stats */
@@ -82,7 +130,7 @@ html, body, #root {
 .playerItems {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin: 5px 0px 10px 0px;
 }
 
 .playerItems > div {
@@ -95,10 +143,30 @@ html, body, #root {
   justify-content: center;
   border-radius: 5px;
   text-align: center;
-  background-color: #20373e;
+  background-color: rgba(255,255,255,.08);
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.89);
   /* box-shadow: -1px -1px 1px rgba(241, 241, 241, 0.3), 1px 1px 1px rgba(27, 66, 61, 0.3); */
+}
+
+/* Player skills */
+.playerSkills {
+  display: flex;
+  justify-content: space-between;
+}
+
+.playerSkills > div {
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  text-align: center;
+  background-color: #402d24;
+  opacity: .3;
 }
 
 /* Opponent area */
@@ -132,50 +200,55 @@ html, body, #root {
 .opponentWrapper .portrait {
   width: 128px;
   height: 128px;
-  background: url('../pics/opponents/Portraits_03.png');
+  background: url('../pics/opponents/Portraits2_02.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .opponentWrapper .name {
   font-size: 18px;
-  margin: 10px 0px;
+  margin: 10px 0px 5px 0px;
+}
+
+.opponentWrapper .job {
+  margin-bottom: 10px;
+  font-size: 10px;
 }
 
 /* Gauge */
-.playerGaugeWrapper {
+.barsWrapper {
   display: flex;
   margin-bottom: 10px;
 }
 
-.playerGaugeWrapper > div {
+.barsWrapper > div {
   width: 50%;
   display: flex;
   flex-direction: column;
 }
 
-.playerGaugeWrapper > div:first-child {
+.barsWrapper > div:first-child {
   padding-right: 5px;
 }
-.playerGaugeWrapper > div:last-child {
+.barsWrapper > div:last-child {
   padding-left: 5px;
 }
 
-.playerGauge {
+.bar {
   width: 100%;
   margin-bottom: 5px;
-  background-color: #20373e;
+  background-color: rgba(255,255,255,.10);
   border-radius: 4px;
   display: flex;
   position: relative;
 }
 
-.playerGauge .indicator {
+.bar .indicator {
   border-radius: 4px;
   transition: all 2000ms;
 }
 
-.playerGauge .value {
+.bar .value {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -185,27 +258,32 @@ html, body, #root {
   font-size: 9px;
 }
 
-.playerGauge.hitPoints .indicator {
+.bar.hitPoints .indicator {
   background-color: #e7323b;
   height: 20px;
 }
 
-.playerGauge.magicPoints .indicator {
+.bar.magicPoints .indicator {
   background-color: #0494ab;
   height: 20px;
 }
 
-.playerGauge.physicalRage .indicator {
+.bar.physicalRage .indicator {
   background-color: #ce6d0a;
   height: 12px;
 }
 
-.playerGauge.magicalRage .indicator {
+.bar.magicalRage .indicator {
   background-color: #01a972;
   height: 12px;
 }
 
-.playerGauge.small .indicator {
+.bar.xp .indicator {
+  background-color: #01a972;
+  height: 10px;
+}
+
+.bar.small .indicator {
   height: 12px;
 }
 

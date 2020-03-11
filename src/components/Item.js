@@ -7,25 +7,31 @@ import PropTypes from 'prop-types'
 */
 
 const propTypes = {
-  item: PropTypes.string.isRequired,
-  level: PropTypes.number.isRequired,
+  item: PropTypes.string,
+  level: PropTypes.number,
+  small: PropTypes.bool
 }
 
-const defaultProps = {}
+const defaultProps = {
+  small: false
+}
 
-const Item = ({ item, level }) => {
+const Item = ({ item, level, small }) => {
 
   // Component styling
   const defaultClasses = `item`
   // Item reference
   const itemReference = item+'_'+level
+  // Size
+  const itemSize = small ? `small` : ``
   // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, itemReference].filter(val => val).join(` `)
+  const itemClasses = [defaultClasses, itemReference, itemSize].filter(val => val).join(` `)
 
   // Display component
-  return (
+  if (item && level) return (
     <div className={itemClasses} />
-  )
+  ) 
+  else return null
 }
 
 // Applying propTypes definition and default values

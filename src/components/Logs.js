@@ -1,20 +1,27 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {useSpring, animated} from 'react-spring'
+import { connect } from "react-redux"
+import { useSpring, animated } from 'react-spring'
+
+import { confirm } from '../redux/actions/index'
 
 /**
   * @desc description of the component
   * @todo Use a todo tag to store future changes
 */
 
-const propTypes = {
-  data: PropTypes.object,
-  onClick: PropTypes.func
+const mapStateToProps = state => {
+  return {
+    log: state.nextState ? state.nextState.log : null
+  }
 }
 
-const defaultProps = {}
+function mapDispatchToProps(dispatch) {
+  return {
+    confirm: payload => dispatch(confirm(payload))
+  }
+}
 
-const Logs = ({ data, onClick }) => {
+const Logs = ({ log, confirm }) => {
 
   // Component styling
   const defaultClasses = `LogsWrapper`
@@ -22,42 +29,44 @@ const Logs = ({ data, onClick }) => {
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
   // Build log message
-  let title, message, special, result
+  // let title, message, special, result
   
-  switch (data.action) {
-    case `physicalAttack`:
-      title = data.activePlayer.name + ` attacks !`
-      result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
-      break;
-    case `physicalSpecial`:
-      title = data.activePlayer.name + ` special attacks !`
-      result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
-      break;
-    default:
-        break;
-      }
+  // switch (data.action) {
+  //   case `physicalAttack`:
+  //     title = data.activePlayer.name + ` attacks !`
+  //     result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
+  //     break;
+  //   case `physicalSpecial`:
+  //     title = data.activePlayer.name + ` special attacks !`
+  //     result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
+  //     break;
+  //   default:
+  //       break;
+  //     }
       
-  message = data.activePlayer.name + ` rolls a `+ data.roll + `.`
-  if (data.special === `critical`) special = `Critical !!!`
-  if (data.special === `fumble`) special = `Fumble !!!`
+  // message = data.activePlayer.name + ` rolls a `+ data.roll + `.`
+  // if (data.special === `critical`) special = `Critical !!!`
+  // if (data.special === `fumble`) special = `Fumble !!!`
 
   const props = useSpring({opacity: 1, from: {opacity: 0}})
 
   // Display component
-  // https://www.react-spring.io/docs/hooks/basics
-  return (
-    <animated.div style={props} className={itemClasses} onClick={()=>onClick()}>
-      {title && <div className="title">{title}</div>}
-      {message && <div className="message">{message}</div>}
-      {special &&<div className="special">{special}</div>}
-      {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
-    </animated.div>
-  )
+  // return (
+  //   <animated.div style={props} className={itemClasses} onClick={()=>{}}>
+  //     {title && <div className="title">{title}</div>}
+  //     {message && <div className="message">{message}</div>}
+  //     {special &&<div className="special">{special}</div>}
+  //     {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
+  //   </animated.div>
+  // )
+  if (log) {
+    return (
+      <animated.div style={props} className={itemClasses} onClick={() => confirm()}>
+        <div className="title">{log}</div>
+      </animated.div>
+    )
+  } else return null
 }
 
-// Applying propTypes definition and default values
-Logs.propTypes = propTypes
-Logs.defaultProps = defaultProps
-
 // Exporting as default
-export default Logs
+export default connect(mapStateToProps, mapDispatchToProps)(Logs)

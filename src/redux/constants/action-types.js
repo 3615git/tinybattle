@@ -1,1 +1,2 @@
-export const ADD_ARTICLE = "ADD_ARTICLE"
+export const ATTACK = "ATTACK"
+export const CONFIRM = "CONFIRM"

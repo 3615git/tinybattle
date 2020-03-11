@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux"
 
 /**
   * @desc description of the component
@@ -7,20 +8,29 @@ import PropTypes from 'prop-types'
 */
 
 const propTypes = {
-  data: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  size: PropTypes.string
+  opponent: PropTypes.bool
 }
 
-const defaultProps = {}
+const defaultProps = {
+  opponent: false
+}
 
-const PlayerGauge = ({ data, type, size }) => {
+const mapStateToProps = state => {
+  return {
+    connectedData: state
+  }
+}
+
+const Bar = ({ connectedData, type, opponent }) => {
+  // Current player
+  const data = opponent ? connectedData.opponent : connectedData.player
 
   // Component styling
-  const defaultClasses = `playerGauge`
+  const defaultClasses = `bar`
 
   // Gauge types
-  let value, maxValue
+  let value, maxValue, size
   switch (type) {
     case `hitPoints`:
       value = data.hitPoints
@@ -33,10 +43,17 @@ const PlayerGauge = ({ data, type, size }) => {
     case `physicalRage`:
       value = data.physicalRage
       maxValue = data.maxPhysicalRage
+      size = `small`
       break
     case `magicalRage`:
       value = data.magicalRage
       maxValue = data.maxMagicalRage
+      size = `small`
+      break
+    case `xp`:
+      value = data.xp
+      maxValue = data.maxMagicalRage
+      size = `tiny`
       break
     default :
       break
@@ -53,15 +70,17 @@ const PlayerGauge = ({ data, type, size }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div className="value">{value}/{maxValue}</div>
+      {size !== `tiny` &&
+        <div className="value">{value}/{maxValue}</div>
+      }
       <div className="indicator" style={indicatorStyle} />
     </div>
   )
 }
 
 // Applying propTypes definition and default values
-PlayerGauge.propTypes = propTypes
-PlayerGauge.defaultProps = defaultProps
+Bar.propTypes = propTypes
+Bar.defaultProps = defaultProps
 
 // Exporting as default
-export default PlayerGauge
+export default connect(mapStateToProps)(Bar)

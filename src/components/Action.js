@@ -1,5 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux"
+
+import { attack } from '../redux/actions/index'
+import { toHit } from '../combat/hit'
 
 /**
   * @desc description of the component
@@ -7,15 +11,27 @@ import PropTypes from 'prop-types'
 */
 
 const propTypes = {
-  type: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
-  turn: PropTypes.bool.isRequired,
-  actions: PropTypes.func.isRequired
+  type: PropTypes.string.isRequired
 }
 
 const defaultProps = {}
 
-const Action = ({ type, data, turn, actions }) => {
+
+const mapStateToProps = state => {
+  return {
+    data: state.player,
+    opponent: state.opponent,
+    turn: state.playerTurn
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    attack: payload => dispatch(attack(payload))
+  }
+}
+
+const Action = ({ type, data, opponent, turn, attack }) => {
 
   // Component styling
   const defaultClasses = `buttons`
@@ -29,38 +45,31 @@ const Action = ({ type, data, turn, actions }) => {
 
   // Wordings
   let w_Defend, w_Attack, w_Special
-  let buttonAttack, buttonDefend, buttonSpecial
-  let actionAttack, actionDefend, actionSpecial
+  let buttonSpecial, actionSpecial
+
+  function notready() {}
 
   if (type === `physical`) {
     w_Defend = `Defend`
-    w_Attack = `Attack`
+    w_Attack = `Attack ` + toHit(data, opponent)
     w_Special = `Special`
-    buttonDefend = type +" defend"
-    buttonAttack = type +" attack"
     buttonSpecial = specialPhysical ? type +" special" : type +" special disabled"
-    actionAttack = () => actions(`physicalAttack`)
-    actionDefend = () => actions(`physicalDefend`)
-    actionSpecial = specialPhysical ? () => actions(`physicalSpecial`) : null
+    actionSpecial = specialPhysical ? attack : notready
   } 
   else {
     w_Defend = `Focus`
     w_Attack = `Cast`
     w_Special = `Special`
-    buttonDefend = type +" defend"
-    buttonAttack = type +" attack"
     buttonSpecial = specialMagical ? type +" special" : type +" special disabled"
-    actionAttack = () => actions(`magicalAttack`)
-    actionDefend = () => actions(`magicalDefend`)
-    actionSpecial = specialPhysical ? () => actions(`magicalSpecial`) : null
+    actionSpecial = specialMagical ? attack : notready
   }
 
   // Display component
   return (
     <div className={itemClasses}>
-      <button className={buttonDefend} onClick={actionDefend}>{w_Defend}</button>
-      <button className={buttonAttack} onClick={actionAttack}>{w_Attack}</button>
-      <button className={buttonSpecial} onClick={actionSpecial}>{w_Special}</button>
+      <button className={type + " defend"} onClick={() => attack({ type: type, mode: `defend` })}>{w_Defend}</button>
+      <button className={type + " attack"} onClick={() => attack({ type: type, mode: `attack` })}>{w_Attack}</button>
+      <button className={buttonSpecial} onClick={() => actionSpecial({ type: type, mode: `special` })}>{w_Special}</button>
     </div>
   )
 }
@@ -70,4 +79,4 @@ Action.propTypes = propTypes
 Action.defaultProps = defaultProps
 
 // Exporting as default
-export default Action
+export default connect(mapStateToProps, mapDispatchToProps)(Action)

@@ -1,5 +1,9 @@
-import { ADD_ARTICLE } from "../constants/action-types"
+import { ATTACK, CONFIRM } from "../constants/action-types"
 
-export function addArticle(payload) {
-  return { type: ADD_ARTICLE, payload }
+export function attack(payload) {
+  return { type: ATTACK, payload }
+}
+
+export function confirm(payload) {
+  return { type: CONFIRM, payload }
 }

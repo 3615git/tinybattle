@@ -1,46 +1,47 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from "react-redux"
 
-import Item from '..//Item'
+import Item from './Item'
 
 /**
   * @desc description of the component
   * @todo Use a todo tag to store future changes
 */
 
-const propTypes = {
-  data: PropTypes.object.isRequired
+const mapStateToProps = state => {
+  return {
+    data: state.player,
+    turn: state.playerTurn
+  }
 }
 
-const defaultProps = {}
-
-const PlayerItems = ({ data }) => {
+const Skills = ({ data }) => {
 
   // Component styling
-  const defaultClasses = `playerItems`
+  const defaultClasses = `playerSkills`
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
   // Display component
   return (
     <div className={itemClasses}>
-      <div className="attack">
+      <div>
         <Item item="axe" level={3} />
         <span>+2</span>
       </div>
-      <div className="speed">
+      <div>
         <Item item="ring" level={10} />
         <span>+3</span>
       </div>
-      <div className="armor">
+      <div>
         <Item item="shield" level={14} />
         <span>+1</span>
       </div>
-      <div className="magic">
+      <div>
         <Item item="magic" level={2} />
         <span>+2</span>
       </div>
-      <div className="luck">
+      <div>
         <Item item="amulet" level={6} />
         <span>+2</span>
       </div>
@@ -48,9 +49,5 @@ const PlayerItems = ({ data }) => {
   )
 }
 
-// Applying propTypes definition and default values
-PlayerItems.propTypes = propTypes
-PlayerItems.defaultProps = defaultProps
-
 // Exporting as default
-export default PlayerItems
+export default connect(mapStateToProps)(Skills)
