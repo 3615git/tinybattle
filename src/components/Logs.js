@@ -11,7 +11,7 @@ import { confirm } from '../redux/actions/index'
 
 const mapStateToProps = state => {
   return {
-    log: state.nextState ? state.nextState.log : null
+    log: state.log
   }
 }
 
@@ -59,13 +59,13 @@ const Logs = ({ log, confirm }) => {
   //     {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
   //   </animated.div>
   // )
-  if (log) {
-    return (
-      <animated.div style={props} className={itemClasses} onClick={() => confirm()}>
-        <div className="title">{log}</div>
-      </animated.div>
-    )
-  } else return null
+  if (!log) log = "Your turn!"
+
+  return (
+    <animated.div style={props} className={itemClasses} onClick={() => confirm()}>
+      <div className="title">{log}</div>
+    </animated.div>
+  )
 }
 
 // Exporting as default

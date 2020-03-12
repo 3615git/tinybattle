@@ -64,11 +64,9 @@ const physicalAttack = (data) => {
   */
 
   const nextState = {
-    data: {
-      player: playerTurn ? activePlayer : targetPlayer,
-      opponent: !playerTurn ? activePlayer : targetPlayer,
-      playerTurn: !playerTurn
-    },
+    player: playerTurn ? activePlayer : targetPlayer,
+    opponent: !playerTurn ? activePlayer : targetPlayer,
+    playerTurn: !playerTurn,
     log: hitResult.roll
   } 
 

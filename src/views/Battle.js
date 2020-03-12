@@ -4,10 +4,9 @@ import { connect } from "react-redux"
 import Opponent from '../components/Opponent'
 import Infos from '../components/Infos'
 import Stats from '../components/Stats'
-import Skills from '../components/Skills'
 import Items from '../components/Items'
 import Bars from '../components/Bars'
-import Action from '../components/Action'
+import Actions from '../components/Actions'
 import Logs from '../components/Logs'
 
 import '../css/app.css'
@@ -77,31 +76,6 @@ class Battle extends Component {
   //   }
   // }
 
-  // resolveAction = (action) => {
-  //   // Todo : disable all action buttons
-
-  //   // Compute new data
-  //   let updatedData
-  //   switch (action) {
-  //     case `physicalAttack`:
-  //       updatedData = physicalAttack
-  //       console.log(`here`)
-  //       console.log(updatedData)
-  //       break;
-  //     case `physicalSpecial`:
-  //       updatedData = this.physicalSpecial()
-  //       break;
-  //     default:
-  //       break;
-  //   }
-
-  //   // Log and apply
-  //   // this.setState(prevState => ({
-  //   //   player: updatedData.player,
-  //   //   opponent: updatedData.opponent
-  //   // }))
-  // }
-
   // opponentAction = () => {
   //   setTimeout(() => {
   //     this.resolveAction(`physicalAttack`)
@@ -144,17 +118,13 @@ class Battle extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <Opponent />
+          <Logs />
           <Infos />
           <Stats />
           <Items />
           <Bars />
-          <Skills />
-          <div className="actionWrapper">
-            <Action type="physical" />
-            <Action type="magical" />
-          </div>
+          <Actions />
         </div>
-        <Logs />
       </div>
     )
   }

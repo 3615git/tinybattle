@@ -7,9 +7,9 @@ import { diceRoll } from '../../utils/utils'
 const initialState = {
   'opponent': {
     name: `Gorblox`,
-    job: `Cave troll`,
+    job: `Pit Lord`,
     STR: 10,
-    DEX: 3,
+    DEX: 8,
     CON: 3,
     MAG: diceRoll(10),
     LCK: diceRoll(6),
@@ -68,15 +68,14 @@ const initialState = {
 function rootReducer(state = initialState, action) {
 
   // Prepare next state
-  let currentState = {...state}
-  let nextState
+  let nextState = {...state}
 
   if (action.type === ATTACK) {
     // Switch attack type
     if (action.payload.type === `physical`) {
       switch (action.payload.mode) {
         case `attack`:
-          nextState = physicalAttack(currentState)
+          nextState = physicalAttack(nextState)
           break;
         case `defend`:
 
@@ -106,19 +105,9 @@ function rootReducer(state = initialState, action) {
           break;
       }
     }
-
-    // Compute updated object and log
-
-    // Pass log + nextState to redux store
-    currentState.nextState = nextState
   }
 
-  if (action.type === CONFIRM) {
-    // Update redux store using nextState and reset nextState
-    currentState = currentState.nextState.data
-  }
-
-  return currentState
+  return nextState
 }
 
 export default rootReducer
