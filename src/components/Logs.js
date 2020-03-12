@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from "react-redux"
 import { useSpring, animated } from 'react-spring'
 
-import { confirm } from '../redux/actions/index'
-
 /**
   * @desc description of the component
   * @todo Use a todo tag to store future changes
@@ -17,11 +15,11 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    confirm: payload => dispatch(confirm(payload))
+
   }
 }
 
-const Logs = ({ log, confirm }) => {
+const Logs = ({ log }) => {
 
   // Component styling
   const defaultClasses = `LogsWrapper`
@@ -62,7 +60,7 @@ const Logs = ({ log, confirm }) => {
   if (!log) log = "Your turn!"
 
   return (
-    <animated.div style={props} className={itemClasses} onClick={() => confirm()}>
+    <animated.div style={props} className={itemClasses}>
       <div className="title">{log}</div>
     </animated.div>
   )

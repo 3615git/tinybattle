@@ -1,4 +1,4 @@
-import { ATTACK, CONFIRM } from "../constants/action-types"
+import { ATTACK } from "../constants/action-types"
 
 import { physicalAttack } from '../../combat/physicalAttack'
 

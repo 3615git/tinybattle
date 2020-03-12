@@ -23,6 +23,8 @@ const mapStateToProps = state => {
 
 class Battle extends Component {
 
+  // todo : background color using vibrant https://github.com/akfish/node-vibrant/
+
   // makeLog = (action, roll, special, result) => {
   //   const { player, opponent, playerTurn } = this.props
   //   let activePlayer = playerTurn ? { ...player } : { ...opponent }
