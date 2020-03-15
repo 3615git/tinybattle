@@ -1,25 +1,12 @@
 import { ATTACK } from "../constants/action-types"
 
 import { physicalAttack } from '../../combat/physicalAttack'
-
-import { diceRoll } from '../../utils/utils'
+import { physicalSpecial } from '../../combat/physicalSpecial'
+import { monsterInfo } from '../../monsters/monster'
 
 const initialState = {
-  'opponent': {
-    name: `Gorblox`,
-    job: `Pit Lord`,
-    STR: 10,
-    DEX: 8,
-    CON: 3,
-    MAG: diceRoll(10),
-    LCK: diceRoll(6),
-    hitPoints: 80,
-    maxHitPoints: 80,
-    physicalRage: 0,
-    maxPhysicalRage: 20,
-    items: {}
-  },
-  'player': {
+  opponent: monsterInfo(`demon`),
+  player: {
     name: `Michel le Magnifique`,
     job: `Warrior`,
     xp: 0,
@@ -62,7 +49,10 @@ const initialState = {
       }
     }
   },
-  'playerTurn': true
+  playerTurn: true,
+  log: {
+    type: `battleStart`
+  }
 }
 
 function rootReducer(state = initialState, action) {
@@ -81,7 +71,7 @@ function rootReducer(state = initialState, action) {
 
           break;
         case `special`:
-
+          nextState = physicalSpecial(nextState)
           break;
       
         default:
@@ -106,6 +96,8 @@ function rootReducer(state = initialState, action) {
       }
     }
   }
+
+  // @todo : Removes edge of the active player
 
   return nextState
 }

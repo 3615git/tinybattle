@@ -16,11 +16,22 @@
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+textarea:focus, input:focus, button:focus{
+  outline: none;
+}
+
+/* Utils */
+.transparent {
+  opacity: .1;
+  transition: opacity 700ms;
+}
+
 /* Main app */
 html, body, #root, button {
   font-family: "eight_bit_dragonregular";
   font-size: 12px;
   color: white;
+  /* cursor: url("../pics/ui/cursor_default.png") 10 0, auto !important; */
 }
 
 html, body, #root {
@@ -45,6 +56,12 @@ html, body, #root {
 .appWrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 750px;
+  padding: 30px;
+  margin-top: 30px;
 }
 
 /* Player info on top */
@@ -178,19 +195,25 @@ html, body, #root {
   padding: 10px;
   margin-bottom: 10px;
   margin-top: 15px;
-  flex: 1;
+  flex: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background:rgba(0, 0, 0, 0.4);
   border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all 500ms;
 }
 
 .opponentWrapper.turn {
-  transition: all 250ms;
+  transition: all 500ms;
   /* transform: scale(1.5); */
-  box-shadow: 0px 0px 20px rgba(255, 43, 43, 0.3);
+}
+
+.opponentWrapper.turn .portrait {
+  transform: scale(1.05);
+  transition: all 300ms;
 }
 
 .opponentWrapper .infos {
@@ -205,16 +228,17 @@ html, body, #root {
   width: 400px;
   height: 400px;
   position: absolute;
-  background: url('../pics/monsters/Boss Darkness Titan Ilnoct.png');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
+  transition: all 300ms;
 }
 
 .opponentWrapper .name {
   font-size: 22px;
   margin: 10px 0px 3px 0px;
   z-index: 10;
+  text-shadow: 0px 0px 7px black, 0px 0px 10px black;
 }
 
 .opponentWrapper .job {
@@ -295,8 +319,80 @@ html, body, #root {
   height: 12px;
 }
 
+/* Hit bar */
+.hitbar {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+  background-color: rgba(255,255,255,.05);
+  border-radius: 4px;
+  position: relative;
+}
+
+.hitbar .wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.hitbar .wrapper.position {
+  z-index: 11;
+  width: 0px;
+  transition: all 1s;
+}
+
+.hitbar .wrapper.position div {
+  border-right: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hitbar .wrapper div {
+  border-right: 1px dotted rgba(0, 0, 0, 0.22);
+  flex: 1 1 0px;
+}
+
+.hitbar div.fumble {
+  background: #112022 url('../pics/ui/hitBar_fumble.png') no-repeat center center;
+}
+
+.hitbar div.miss {
+  background-color: #3c3c3c;
+}
+
+.hitbar div.hit {
+  background-color: #e7323b;
+}
+
+.hitbar div.critical {
+  background: #ce6d0a url('../pics/ui/hitBar_critical.png') no-repeat center center;
+}
+
+.hitbar div.roll {
+  background-color: rgba(255,255,255,.9);
+  flex-basis: 10px;
+  height: 10px;
+  flex-grow: 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.hitbar .wrapper > div:first-child {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.hitbar .wrapper > div:last-child {
+  border-right: none;
+  border-radius: 0px 4px 4px 0px;
+}
+
 .LogsWrapper {
-  height:80px;
+  min-height:80px;
+  padding: 10px;
+  flex:1;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
@@ -304,18 +400,21 @@ html, body, #root {
   justify-content: center;
   text-align: center;
   border-radius: 5px;
-  /* background: rgba(0,0,0,.8); */
+  background: rgba(0, 0, 0, 0.2);
   box-shadow: inset 0px 0px 60px 0px #00000052;
   z-index: 10;
 }
 
+.LogsWrapper > div {
+  width: 100%;
+}
+
 .LogsWrapper .title {
-  font-size: 20px;
   margin-bottom: 10px;
 }
 
 .LogsWrapper .message {
-  margin-bottom: 20px;
+  font-size: 26px;
 }
 
 .LogsWrapper .special {
@@ -329,14 +428,16 @@ html, body, #root {
 
 .damage {
   color: #e7323b;
-  font-size: 26px;
-  padding: 10px;
-  display: block;
 }
 
 /* Buttons */
 .actionWrapper {
+  position: relative;
   margin-top: 10px;
+}
+
+.actionsWrapper {
+  position: relative;
 }
 
 .buttons {
@@ -383,4 +484,25 @@ button.magical {
 button.disabled {
   opacity: .3;
   cursor: not-allowed;
+}
+
+.opponentButtonWrapper {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0px 0px 7px black, 0px 0px 10px black;
+}
+
+.opponentButtonWrapper div:first-child {
+  margin-bottom: 5px;
+}
+
+.opponentButtonWrapper div:last-child {
+  font-size: 20px;
 }

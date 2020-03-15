@@ -3,10 +3,10 @@ import { rage } from '../combat/rage'
 import { hit, damage } from '../combat/hit'
 
 /**
-  * @desc Computing the basic physical attack results
+  * @desc Computing the special physical attack results
 */
 
-const physicalAttack = (data) => {
+const physicalSpecial = (data) => {
   let { player, opponent, playerTurn } = data
 
   let activePlayer = playerTurn ? {...player} : {...opponent}
@@ -17,39 +17,29 @@ const physicalAttack = (data) => {
   // Hit ?
   const hitResult = hit(activePlayer, targetPlayer)
 
-  console.log(hitResult)
-
-  /* Compute damages */
-
-  // Critical hit
-  if (hitResult.hit && hitResult.critical) {
-    damageResult = damage(activePlayer, targetPlayer, true)
+  // Compute damages
+  if (hitResult.hit) {
+    damageResult = damage(activePlayer, targetPlayer)
     rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
     // Applying rage
     targetPlayer.physicalRage = rageResult
   }
-  // Normal hit
-  else if (hitResult.hit && !hitResult.critical) {
-    damageResult = damage(activePlayer, targetPlayer, false)
-    rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
-    // Applying damage
-    targetPlayer.hitPoints -= damageResult.damage
-    // Applying rage
-    targetPlayer.physicalRage = rageResult
-  }
-  // Fumble miss
-  else if (!hitResult.hit && hitResult.fumble) {
-    // Give edge to opponent 
 
-    // Reset rage because of the fumble
-    activePlayer.physicalRage = 0
+  /*
+  const roll = diceRoll(20)
+  let special
+
+  if (roll <= 3) {
+    result -= parseInt(diceRoll(6))
+    special = `fumble`
   }
-  // Miss
-  else if (!hitResult.hit && !hitResult.fumble) {
-    // nothing to do
+  if (roll >= 17) {
+    result += parseInt(diceRoll(6))
+    special = `critical`
   }
+  */
 
   let log = {
     type: `physicalAttack`,
@@ -73,4 +63,4 @@ const physicalAttack = (data) => {
 
 }
 
-export { physicalAttack }
+export { physicalSpecial }

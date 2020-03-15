@@ -1,5 +1,9 @@
 import { ATTACK } from "../constants/action-types"
 
-export function attack(payload) {
+function attack(payload) {
   return { type: ATTACK, payload }
+}
+
+export {
+  attack
 }

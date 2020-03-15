@@ -1,13 +1,14 @@
 // Rage management
 const rage = (type, player, value) => {
-  if (type === `physical`) {
-    player.physicalRage = (player.physicalRage + value > player.maxPhysicalRage) ? player.maxPhysicalRage : player.physicalRage + value
+  let rage 
+  if (type === `physicalAttack`) {
+    rage = (player.physicalRage + value > player.maxPhysicalRage) ? player.maxPhysicalRage : player.physicalRage + value
   }
-  if (type === `magical`) {
-    player.magicalRage = (player.magicalRage + value > player.maxMagicalRage) ? player.maxMagicalRage : player.magicalRage + value
+  if (type === `magicalAttack`) {
+    rage = (player.magicalRage + value > player.maxMagicalRage) ? player.maxMagicalRage : player.magicalRage + value
   }
 
-  return player
+  return rage
 }
 
 const resetRage = (type, player) => {

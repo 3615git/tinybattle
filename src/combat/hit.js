@@ -13,16 +13,32 @@ const toHit = (activePlayer, targetPlayer) => {
 const hit = (activePlayer, targetPlayer) => {
   const roll = diceRoll(20)
   const hit = roll >= toHit(activePlayer, targetPlayer)
+  const critical = roll >= criticalChance(activePlayer)
+  const fumble = roll <= fumbleChance(activePlayer)
 
   return {
-    roll: roll,
+    roll,
     toHit: toHit(activePlayer, targetPlayer),
-    hit: hit
+    hit,
+    critical,
+    fumble
   }
 }
 
+// Critical chance
+const criticalChance = (activePlayer) => {
+  const playerLuck = activePlayer.LCK
+  const playerLuckItem = activePlayer.items.LCK ? activePlayer.items.LCK.score : 0
+  return 20 - playerLuck - playerLuckItem
+}
+
+// Fumble chance
+const fumbleChance = (activePlayer) => {
+  return 1
+}
+
 // Damage count
-const damage = (activePlayer, targetPlayer) => {
+const damage = (activePlayer, targetPlayer, critical) => {
   // Item bonus / item malus
   const activePlayerItem = activePlayer.items.STR ? activePlayer.items.STR.score : false
   const targetPlayerItem = targetPlayer.items.CON ? targetPlayer.items.CON.score : 0
@@ -37,7 +53,11 @@ const damage = (activePlayer, targetPlayer) => {
     itemDamage = itemDamageRoll.value
   }
 
-  const damage = activePlayer.STR - targetPlayer.CON - targetPlayerItem + itemDamage
+  // Critical hit bonus, @TBT : ignores opponent CON + double STR
+  let criticalBonus = critical ? activePlayer.STR + targetPlayer.CON : 0
+
+  let damage = activePlayer.STR - targetPlayer.CON - targetPlayerItem + itemDamage + criticalBonus
+  if (damage < 0) damage = 0
   
   return {
     roll: itemDamageResults,
@@ -48,5 +68,7 @@ const damage = (activePlayer, targetPlayer) => {
 export {
   toHit,
   hit, 
-  damage
+  damage,
+  criticalChance,
+  fumbleChance
 }

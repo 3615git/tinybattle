@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { useSpring, animated } from 'react-spring'
+// import { useSpring, animated } from 'react-spring'
+import * as Vibrant from 'node-vibrant'
 
 import Bar from './Bar'
 import Stats from './Stats'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Main opponent block
+  * @todo get current monster visual form the redux store
+  * @todo better animation on appear
+  * @todo better animation on attack
 */
 
 const mapStateToProps = state => {
@@ -17,36 +20,72 @@ const mapStateToProps = state => {
   }
 }
 
-const Opponent = ({ data, turn }) => {
+function mapDispatchToProps(dispatch) {
+  return {
 
-  // Component styling
-  const defaultClasses = `opponentWrapper`
-  const turnClasses = turn ? `turn` : ``
-  // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
-
-  // Spring test
-  const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 2) / 20, 1.1]
-  const trans = (x, y, s) => `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
-  const [props, set] = useSpring(() => ({ xys: [0, 0, 1], config: { mass: 5, tension: 350, friction: 40 } }))
-
-  // Display component
-  return (
-    <div className={itemClasses}>
-      <div className="infos">
-        <animated.div
-          class="portrait"
-          onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-          onMouseLeave={() => set({ xys: [0, 0, 1] })}
-          style={{ transform: props.xys.interpolate(trans) }}
-        />
-        <div className="name">{data.name}</div>
-        <div className="job">{data.job}</div>
-      </div>
-      <Stats opponent />
-      <Bar opponent type="hitPoints" />
-    </div>
-  )
+  }
 }
 
-export default connect(mapStateToProps)(Opponent)
+class Opponent extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      monstercolor: `black`,
+      monsterbackground: `rgba(0, 0, 0, 0.4)`
+    }
+  }
+
+  fetchPalette = (imgSrc) => {
+    Vibrant.from(imgSrc).getPalette()
+      .then(palette => {
+        this.setState({
+          monstercolor: palette.Vibrant.getHex(),
+          monsterbackground: palette.DarkMuted.getHex()
+        })
+      })
+  }
+
+  componentDidMount() {
+    const { data } = this.props
+    this.fetchPalette(data.pic)
+  }
+
+  // Display component
+  render() {
+    const { data, turn } = this.props
+    const { monstercolor, monsterbackground } = this.state
+
+    // Component styling
+    const defaultClasses = `opponentWrapper`
+    const turnClasses = turn ? `` : `turn`
+  
+    const portraitStyle = {
+      backgroundImage: `url("${data.pic}")`
+    } 
+  
+    const wrapperStyle = !turn ? {
+      background: monsterbackground,
+      boxShadow: `0px 0px 30px ${monstercolor}`
+    } : {
+      background: monsterbackground,
+    }
+  
+    // Add custom classes to defined classes
+    const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
+
+    return (
+      <div className={itemClasses} style={wrapperStyle}>
+        <div className="infos">
+          <div className="portrait" style={portraitStyle} />
+          <div className="name">{data.name}</div>
+          <div className="job">{data.job}</div>
+        </div>
+        <Stats opponent />
+        <Bar opponent type="hitPoints" color={monstercolor} />
+      </div>
+    )
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Opponent)

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import Skills from '../components/Skills'
 import Action from '../components/Action'
+import OpponentAction from '../components/OpponentAction'
 
 import { attack } from '../redux/actions/index'
 
@@ -27,14 +28,17 @@ function mapDispatchToProps(dispatch) {
 }
 
 const Actions = ({ player, opponent, playerTurn, attack }) => {
-  // todo : display opponent action button when !turn
+
   // Display component
   return (
-    <div>
-        <Skills />
-        <div className="actionWrapper">
-        <Action type="physical" />
-        <Action type="magical" />
+    <div className="actionsWrapper">
+      {!playerTurn && <OpponentAction type="physical" />}
+      <div className={playerTurn ? `` : `transparent`}>
+          <Skills />
+          <div className="actionWrapper">
+          <Action type="physical" />
+          <Action type="magical" />
+          </div>
         </div>
     </div>
   )

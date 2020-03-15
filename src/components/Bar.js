@@ -9,7 +9,8 @@ import { connect } from "react-redux"
 
 const propTypes = {
   type: PropTypes.string.isRequired,
-  opponent: PropTypes.bool
+  opponent: PropTypes.bool,
+  color: PropTypes.string
 }
 
 const defaultProps = {
@@ -22,7 +23,7 @@ const mapStateToProps = state => {
   }
 }
 
-const Bar = ({ connectedData, type, opponent }) => {
+const Bar = ({ connectedData, type, opponent, color }) => {
   // Current player
   const data = opponent ? connectedData.opponent : connectedData.player
 
@@ -63,8 +64,11 @@ const Bar = ({ connectedData, type, opponent }) => {
   const itemClasses = [defaultClasses, type, size].filter(val => val).join(` `)
 
   // Compute gauge width
-  const indicatorStyle = {
-    width: (value*100)/maxValue + `%`
+  const indicatorStyle = color ? {
+    background: color,
+    width: (value*100)/maxValue + `%`,
+  } : {
+    width: (value * 100) / maxValue + `%`,
   }
 
   // Display component

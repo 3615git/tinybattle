@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { useSpring, animated } from 'react-spring'
+
+import HitBar from './HitBar'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Display what happened in the last battle action
 */
 
 const mapStateToProps = state => {
   return {
-    log: state.log
+    log: state.log,
+    playerTurn: state.playerTurn
   }
 }
 
@@ -19,50 +20,79 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Logs = ({ log }) => {
+const Logs = ({ log, playerTurn }) => {
+
+  const { type, activePlayer, data } = log
 
   // Component styling
   const defaultClasses = `LogsWrapper`
-  // Add custom classes to defined classes
-  const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
   // Build log message
-  // let title, message, special, result
-  
-  // switch (data.action) {
-  //   case `physicalAttack`:
-  //     title = data.activePlayer.name + ` attacks !`
-  //     result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
-  //     break;
-  //   case `physicalSpecial`:
-  //     title = data.activePlayer.name + ` special attacks !`
-  //     result = data.targetPlayer.name + ` takes <span class="damage">`+ data.result +`</span> damage.`
-  //     break;
-  //   default:
-  //       break;
-  //     }
+  let display
+  let title, damage
+  let wrapperStyling
+
+  switch (type) {
+    case `physicalAttack`:
+      title = activePlayer.name + ` attacks !`
+      damage = data.damage ? `<span class="damage">` + data.damage.damage + `</span> damage!` : `<span>No damage.</span>`
       
-  // message = data.activePlayer.name + ` rolls a `+ data.roll + `.`
-  // if (data.special === `critical`) special = `Critical !!!`
-  // if (data.special === `fumble`) special = `Fumble !!!`
+      // Hit text
+      let hit
 
-  const props = useSpring({opacity: 1, from: {opacity: 0}})
+      if (data.hit.critical) { 
+        hit = `Critical hit!`
+        wrapperStyling = playerTurn ? `animation-critical` : `opponent-animation-critical`
+      } 
+      else if (data.hit.fumble) {
+        hit = `Fail !`
+        wrapperStyling = playerTurn ? `animation-fumble` : `opponent-animation-fumble`
+      }
+      else if (data.hit.hit) {
+        hit = `Hit!` 
+        wrapperStyling = playerTurn ? `animation-hit` : `opponent-animation-hit`
+      }
+      else {
+        hit = `Missed.`
+        wrapperStyling = playerTurn ? `animation-missed` : `opponent-animation-missed`
+      }
 
-  // Display component
-  // return (
-  //   <animated.div style={props} className={itemClasses} onClick={()=>{}}>
-  //     {title && <div className="title">{title}</div>}
-  //     {message && <div className="message">{message}</div>}
-  //     {special &&<div className="special">{special}</div>}
-  //     {result && <div dangerouslySetInnerHTML={{ __html: result }} className="result" />}
-  //   </animated.div>
-  // )
-  if (!log) log = "Your turn!"
+      display = (
+        <div>
+          { title && <div className="title">{title}</div>}
+          <HitBar type={type} hit={data.hit} />
+          {hit && <div className="title">{hit}</div>}
+          { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
+        </div>
+      )
+      break;
+    case `battleStart`:
+      title = `Battle starts !`
+      display = (
+        <div>
+          {title && <div className="title">{title}</div>}
+        </div>
+      )
+      break;
+    default:
+        break;
+  }
 
-  return (
-    <animated.div style={props} className={itemClasses}>
-      <div className="title">{log}</div>
-    </animated.div>
+  // Add custom classes to defined classes
+  const itemClasses = [defaultClasses, wrapperStyling].filter(val => val).join(` `)
+
+
+  if (type === `physicalAttack`) return (
+    // <div key={+new Date()} className={itemClasses}>
+    <div className={itemClasses}>
+      {display}
+    </div>
+  ) 
+  else return (
+    // <div key={+new Date()} className={itemClasses}>
+    <div className={itemClasses}>
+      {display}
+    </div>
   )
 }
 
