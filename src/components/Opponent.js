@@ -15,7 +15,7 @@ import Stats from './Stats'
 const mapStateToProps = state => {
   return { 
     data: state.opponent,
-    turn: !state.playerTurn
+    turn: !state.game.playerTurn
   }
 }
 

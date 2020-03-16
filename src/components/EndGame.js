@@ -10,7 +10,7 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     opponent: state.opponent,
-    playerTurn: state.playerTurn
+    playerTurn: state.game.playerTurn
   }
 }
 

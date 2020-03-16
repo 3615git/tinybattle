@@ -25,7 +25,7 @@ const mapStateToProps = state => {
 
 const HitBar = ({ connectedData, type, hit }) => {
   // Current player
-  const opponent = connectedData.playerTurn
+  const opponent = connectedData.game.playerTurn
   const data = opponent ? connectedData.opponent : connectedData.player
 
   // Component styling

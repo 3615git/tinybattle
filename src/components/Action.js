@@ -21,7 +21,7 @@ const mapStateToProps = state => {
   return {
     data: state.player,
     opponent: state.opponent,
-    turn: state.playerTurn
+    turn: state.game.playerTurn
   }
 }
 

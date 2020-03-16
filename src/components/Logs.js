@@ -10,7 +10,7 @@ import HitBar from './HitBar'
 const mapStateToProps = state => {
   return {
     log: state.log,
-    playerTurn: state.playerTurn
+    playerTurn: state.game.playerTurn
   }
 }
 

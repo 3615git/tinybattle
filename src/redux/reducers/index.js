@@ -50,7 +50,10 @@ const initialState = {
       }
     }
   },
-  playerTurn: true,
+  game: {
+    playerTurn: true,
+    level: 1
+  },
   log: {
     type: `battleStart`
   }
@@ -99,7 +102,7 @@ function rootReducer(state = initialState, action) {
     }
 
     // Switch player turn
-    nextState.playerTurn = !nextState.playerTurn
+    nextState.game.playerTurn = !nextState.game.playerTurn
   }
   
   return nextState

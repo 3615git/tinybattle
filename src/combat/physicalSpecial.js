@@ -7,10 +7,10 @@ import { hit, damage } from '../combat/hit'
 */
 
 const physicalSpecial = (data) => {
-  let { player, opponent, playerTurn } = data
+  let { player, opponent, game } = data
 
-  let activePlayer = playerTurn ? {...player} : {...opponent}
-  let targetPlayer = playerTurn ? {...opponent} : {...player}
+  let activePlayer = game.playerTurn ? {...player} : {...opponent}
+  let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
   let damageResult, rageResult
 
@@ -53,10 +53,10 @@ const physicalSpecial = (data) => {
   }
 
   const nextState = {
-    player: playerTurn ? activePlayer : targetPlayer,
-    opponent: !playerTurn ? activePlayer : targetPlayer,
-    playerTurn: !playerTurn,
-    log: log
+    player: game.playerTurn ? activePlayer : targetPlayer,
+    opponent: !game.playerTurn ? activePlayer : targetPlayer,
+    game,
+    log
   } 
 
   return nextState 

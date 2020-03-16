@@ -11,7 +11,7 @@ import Item from './Item'
 const mapStateToProps = state => {
   return {
     data: state.player,
-    turn: state.playerTurn
+    turn: state.game.playerTurn
   }
 }
 
