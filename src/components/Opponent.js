@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-// import { useSpring, animated } from 'react-spring'
 import * as Vibrant from 'node-vibrant'
 
 import Bar from './Bar'
@@ -58,15 +57,11 @@ class Opponent extends Component {
 
     // Component styling
     const defaultClasses = `opponentWrapper`
-    const turnClasses = turn ? `` : `turn`
+    const turnClasses = !turn ? `` : `turn`
   
-    const portraitStyle = {
-      backgroundImage: `url("${data.pic}")`
-    } 
-  
-    const wrapperStyle = !turn ? {
+    const wrapperStyle = turn ? {
       background: monsterbackground,
-      boxShadow: `0px 0px 30px ${monstercolor}`
+      boxShadow: `rgba(0, 0, 0, 0.59) 0px 0px 11px 0px, 0px 0px 40px ${monstercolor}`
     } : {
       background: monsterbackground,
     }
@@ -77,7 +72,8 @@ class Opponent extends Component {
     return (
       <div className={itemClasses} style={wrapperStyle}>
         <div className="infos">
-          <div className="portrait" style={portraitStyle} />
+          {/* <div className="portrait" style={portraitStyle} /> */}
+          <img className="portrait" src={data.pic} alt={ data.name } />
           <div className="name">{data.name}</div>
           <div className="job">{data.job}</div>
         </div>

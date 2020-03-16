@@ -61,7 +61,7 @@ const Logs = ({ log, playerTurn }) => {
         <div>
           { title && <div className="title">{title}</div>}
           <HitBar type={type} hit={data.hit} />
-          {hit && <div className="title">{hit}</div>}
+          {hit && <div className="title">{data.hit.roll} : {hit}</div>}
           { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
         </div>
       )

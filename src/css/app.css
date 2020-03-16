@@ -214,6 +214,8 @@ html, body, #root {
 .opponentWrapper.turn .portrait {
   transform: scale(1.05);
   transition: all 300ms;
+  filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5));
+  filter: brightness(100%);
 }
 
 .opponentWrapper .infos {
@@ -232,6 +234,7 @@ html, body, #root {
   background-size: contain;
   background-position: center center;
   transition: all 300ms;
+  filter: brightness(60%);
 }
 
 .opponentWrapper .name {
@@ -270,6 +273,7 @@ html, body, #root {
   width: 100%;
   margin-bottom: 5px;
   background-color: rgba(255,255,255,.10);
+  box-shadow: 0px 0px 3px #00000052;
   border-radius: 4px;
   display: flex;
   position: relative;
@@ -399,9 +403,10 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0px 0px 60px 0px #00000052;
+  /* border-radius: 5px; */
+  /* background: rgba(0, 0, 0, 0.2); */
+  /* box-shadow: inset 0px 0px 60px 0px #00000052; */
+  background: linear-gradient(0deg, #112022 74%, rgba(0, 212, 255, 0) 100%);
   z-index: 10;
 }
 
@@ -505,4 +510,20 @@ button.disabled {
 
 .opponentButtonWrapper div:last-child {
   font-size: 20px;
+}
+
+/* End game screen */
+.endGame {
+  z-index: 20;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.9);
+  transition: opacity 2s;
 }

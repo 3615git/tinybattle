@@ -5,8 +5,9 @@ const toHit = (activePlayer, targetPlayer) => {
   // Item bonus / item malus
   const activePlayerItem = activePlayer.items.DEX ? activePlayer.items.DEX.score : 0
   const targetPlayerItem = targetPlayer.items.DEX ? targetPlayer.items.DEX.score : 0
+  const edgeBonus = activePlayer.edge ? activePlayer.edge : 0
 
-  return 20 - (10 + activePlayer.DEX + activePlayerItem - targetPlayer.DEX - targetPlayerItem)
+  return 20 - (10 + activePlayer.DEX + activePlayerItem - targetPlayer.DEX - targetPlayerItem + edgeBonus)
 }
 
 // Hit chance
@@ -29,12 +30,14 @@ const hit = (activePlayer, targetPlayer) => {
 const criticalChance = (activePlayer) => {
   const playerLuck = activePlayer.LCK
   const playerLuckItem = activePlayer.items.LCK ? activePlayer.items.LCK.score : 0
-  return 20 - playerLuck - playerLuckItem
+  const edgeBonus = activePlayer.edge ? activePlayer.edge : 0
+
+  return 20 - playerLuck - playerLuckItem - edgeBonus
 }
 
 // Fumble chance
 const fumbleChance = (activePlayer) => {
-  return 1
+  return activePlayer.fumble
 }
 
 // Damage count

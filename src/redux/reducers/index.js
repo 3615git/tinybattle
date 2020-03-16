@@ -16,6 +16,7 @@ const initialState = {
     CON: 2,
     MAG: 3,
     LCK: 2,
+    fumble: 1,
     gold: 35,
     hitPoints: 70,
     maxHitPoints: 70,
@@ -61,6 +62,7 @@ function rootReducer(state = initialState, action) {
   let nextState = {...state}
 
   if (action.type === ATTACK) {
+  
     // Switch attack type
     if (action.payload.type === `physical`) {
       switch (action.payload.mode) {
@@ -95,10 +97,11 @@ function rootReducer(state = initialState, action) {
           break;
       }
     }
+
+    // Switch player turn
+    nextState.playerTurn = !nextState.playerTurn
   }
-
-  // @todo : Removes edge of the active player
-
+  
   return nextState
 }
 

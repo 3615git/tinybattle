@@ -17,7 +17,7 @@ const physicalAttack = (data) => {
   // Hit ?
   const hitResult = hit(activePlayer, targetPlayer)
 
-  console.log(hitResult)
+  console.log(data)
 
   /* Compute damages */
 
@@ -27,6 +27,7 @@ const physicalAttack = (data) => {
     rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
+    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
     // Applying rage
     targetPlayer.physicalRage = rageResult
   }
@@ -36,13 +37,14 @@ const physicalAttack = (data) => {
     rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
+    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
     // Applying rage
     targetPlayer.physicalRage = rageResult
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
     // Give edge to opponent 
-
+    targetPlayer.edge ? targetPlayer.edge++ : targetPlayer.edge = 1
     // Reset rage because of the fumble
     activePlayer.physicalRage = 0
   }
@@ -51,6 +53,10 @@ const physicalAttack = (data) => {
     // nothing to do
   }
 
+  // Removes edge of the active player
+  // activePlayer.edge = false
+
+  // Build log
   let log = {
     type: `physicalAttack`,
     activePlayer,
@@ -65,12 +71,11 @@ const physicalAttack = (data) => {
   const nextState = {
     player: playerTurn ? activePlayer : targetPlayer,
     opponent: !playerTurn ? activePlayer : targetPlayer,
-    playerTurn: !playerTurn,
-    log: log
+    playerTurn,
+    log
   } 
 
   return nextState 
-
 }
 
 export { physicalAttack }

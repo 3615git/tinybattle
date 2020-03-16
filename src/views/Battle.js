@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 
+import EndGame from '../components/EndGame'
 import Opponent from '../components/Opponent'
 import Infos from '../components/Infos'
 import Stats from '../components/Stats'
@@ -27,6 +28,7 @@ class Battle extends Component {
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
+          <EndGame />
           <Opponent />
           <Logs />
           <Infos />

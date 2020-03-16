@@ -59,6 +59,7 @@ function monsterInfo(job) {
     CON: monsterSpecs[`CON`],
     MAG: monsterSpecs[`MAG`],
     LCK: monsterSpecs[`LCK`],
+    fumble: monsterData.fumble,
     hitPoints: monsterSpecs[`hitPoints`],
     maxHitPoints: monsterSpecs[`maxHitPoints`],
     magicPoints: monsterSpecs[`magicPoints`],

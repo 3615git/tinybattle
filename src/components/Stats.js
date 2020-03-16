@@ -37,7 +37,10 @@ const Stats = ({ opponent, data }) => {
       <div>{caracs.DEX}<span>DEX</span></div>
       <div>{caracs.CON}<span>CON</span></div>
       <div>{caracs.MAG}<span>MAG</span></div>
-      <div>{caracs.LCK}<span>LCK</span></div>
+      <div>
+        {caracs.LCK}
+        {caracs.edge && `+`+caracs.edge}
+        <span>LCK</span></div>
     </div>
   )
 }
