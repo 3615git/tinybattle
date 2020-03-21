@@ -25,7 +25,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Logs = ({ log, playerTurn }) => {
+const Logs = ({ log, playerTurn, color }) => {
 
   const { type, activePlayer, data } = log
 
@@ -74,7 +74,7 @@ const Logs = ({ log, playerTurn }) => {
       display = (
         <div>
           { title && <div className="title">{title}</div>}
-          <HitBar type={type} hit={data.hit} />
+          <HitBar type={type} hit={data.hit} color={color} />
           {hit && <div className="title">{data.hit.roll} : {hit}</div>}
           { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
         </div>

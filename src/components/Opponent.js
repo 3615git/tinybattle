@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import * as Vibrant from 'node-vibrant'
 
 import Bar from './Bar'
 import Stats from './Stats'
@@ -24,35 +23,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Opponent extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      monstercolor: `black`,
-      monsterbackground: `rgba(0, 0, 0, 0.4)`
-    }
-  }
-
-  fetchPalette = (imgSrc) => {
-    Vibrant.from(imgSrc).getPalette()
-      .then(palette => {
-        this.setState({
-          monstercolor: palette.Vibrant.getHex(),
-          monsterbackground: palette.DarkVibrant.getHex(),
-          appbackground: palette.DarkMuted.getHex()
-        })
-      })
-  }
-
-  componentDidMount() {
-    const { data } = this.props
-    this.fetchPalette(data.pic)
-  }
 
   // Display component
   render() {
-    const { data, turn, level } = this.props
-    const { monstercolor, monsterbackground, appbackground } = this.state
+    const { data, turn, level, color } = this.props
+
+    // Get colors from scene
+    const monstercolor = color.vibrant
+    const monsterbackground = color.darkVibrant
+    const appbackground = color.darkMuted
 
     // Component styling
     const defaultClasses = `opponentWrapper`
@@ -76,8 +55,8 @@ class Opponent extends Component {
     }
 
     return [
-      <div className="monsterOverlay" style={bgStyling} />,
-      <div className={itemClasses} style={wrapperStyle}>
+      <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
+      <div key="opponent" className={itemClasses} style={wrapperStyle}>
         <div className="level">Level {level}</div>
         <div className="infos">
           <img className="portrait" src={data.pic} alt={data.name} />

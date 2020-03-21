@@ -10,11 +10,13 @@ import { criticalChance, fumbleChance } from '../combat/hit'
 
 const propTypes = {
   type: PropTypes.string.isRequired,
-  hit: PropTypes.object.isRequired
+  hit: PropTypes.object.isRequired,
+  color: PropTypes.object
 }
 
 const defaultProps = {
-
+  color: false,
+  playerTurn: false
 }
 
 const mapStateToProps = state => {
@@ -43,7 +45,7 @@ class HitBar extends Component {
   }
 
   render() {
-    const { connectedData, type, hit } = this.props
+    const { connectedData, color, hit } = this.props
     const { rollPosition } = this.state
     // Current player
     const opponent = connectedData.game.playerTurn
@@ -66,14 +68,21 @@ class HitBar extends Component {
     let position = []
     for (let index = 1; index <= 20; index++) {
       let limit
+      let style = {}
       // Compute current class
       if (index <= fumbleLimit) limit = `fumble`
-      else if (index >= criticalLimit) limit = `critical`
-      else if(index >= hitLimit) limit = `hit`
+      else if (index >= criticalLimit) {
+        limit = `critical`
+        style = opponent ? { backgroundColor: color.vibrant } : {}
+      }
+      else if(index >= hitLimit) {
+        limit = `hit`
+        style = opponent ? { backgroundColor: color.darkVibrant } : {}
+      }
       else limit = `miss`
 
       stages.push(
-        <div key={index} className={limit} />
+        <div key={index} className={limit} style={style} />
       )
     }
 
