@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { useSpring, animated } from 'react-spring'
 
 /**
   * @desc Display what happened when either player has lost the battle
@@ -28,18 +27,16 @@ const EndGame = ({player, opponent, playerTurn }) => {
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
-  const props = useSpring({ opacity: 1, from: { opacity: 0 } })
-
   // Player is dead
   if (player.hitPoints <= 0) return (
-    <animated.div style={props} className={itemClasses}>
+    <div className={itemClasses}>
       Player is dead
-    </animated.div>
+    </div>
   ) 
   else if (opponent.hitPoints <= 0) return (
-    <animated.div style={props} className={itemClasses}>
+    <div className={itemClasses}>
       Opponent is dead
-    </animated.div>
+    </div>
   ) 
   // Nothing to display
   else return null

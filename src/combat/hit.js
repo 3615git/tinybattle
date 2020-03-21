@@ -1,13 +1,13 @@
 import { diceRoll } from '../utils/utils'
+import { getStat } from '../combat/stats'
 import rpgDice from "rpgdicejs"
 
 const toHit = (activePlayer, targetPlayer) => {
-  // Item bonus / item malus
-  const activePlayerItem = activePlayer.items.DEX ? activePlayer.items.DEX.score : 0
-  const targetPlayerItem = targetPlayer.items.DEX ? targetPlayer.items.DEX.score : 0
-  const edgeBonus = activePlayer.edge ? activePlayer.edge : 0
+  // Get DEX from both players
+  const activePlayerDEX = getStat(activePlayer, `DEX`)
+  const targetPlayerDEX = getStat(targetPlayer, `DEX`)
 
-  return 20 - (10 + activePlayer.DEX + activePlayerItem - targetPlayer.DEX - targetPlayerItem + edgeBonus)
+  return 20 - (10 + activePlayerDEX.total - targetPlayerDEX.total)
 }
 
 // Hit chance
@@ -28,11 +28,9 @@ const hit = (activePlayer, targetPlayer) => {
 
 // Critical chance
 const criticalChance = (activePlayer) => {
-  const playerLuck = activePlayer.LCK
-  const playerLuckItem = activePlayer.items.LCK ? activePlayer.items.LCK.score : 0
-  const edgeBonus = activePlayer.edge ? activePlayer.edge : 0
-
-  return 20 - playerLuck - playerLuckItem - edgeBonus
+  const playerLuck = getStat(activePlayer, `LCK`)
+  
+  return 20 - playerLuck.total
 }
 
 // Fumble chance
@@ -43,8 +41,10 @@ const fumbleChance = (activePlayer) => {
 // Damage count
 const damage = (activePlayer, targetPlayer, critical) => {
   // Item bonus / item malus
+  const activePlayerSTR = getStat(activePlayer, `STR`)
+  const targetPlayerCON = getStat(targetPlayer, `CON`)
+  // Weapon
   const activePlayerItem = activePlayer.items.STR ? activePlayer.items.STR.score : false
-  const targetPlayerItem = targetPlayer.items.CON ? targetPlayer.items.CON.score : 0
 
   // Item damage
   let itemDamage = 0 
@@ -57,9 +57,9 @@ const damage = (activePlayer, targetPlayer, critical) => {
   }
 
   // Critical hit bonus, @TBT : ignores opponent CON + double STR
-  let criticalBonus = critical ? activePlayer.STR + targetPlayer.CON : 0
+  let criticalBonus = critical ? activePlayerSTR.total + targetPlayerCON.total : 0
 
-  let damage = activePlayer.STR - targetPlayer.CON - targetPlayerItem + itemDamage + criticalBonus
+  let damage = activePlayerSTR.total - targetPlayerCON.total + itemDamage + criticalBonus
   if (damage < 0) damage = 0
   
   return {
@@ -68,9 +68,17 @@ const damage = (activePlayer, targetPlayer, critical) => {
   }
 }
 
+// Heal a player
+const heal = (player, value) => {
+  player.hitPoints += value
+  if (player.hitPoints > player.maxHitPoints) player.hitPoints = player.maxHitPoints
+  return player
+}
+
 export {
   toHit,
   hit, 
+  heal,
   damage,
   criticalChance,
   fumbleChance

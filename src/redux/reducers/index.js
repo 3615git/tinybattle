@@ -1,11 +1,14 @@
 import { ATTACK } from "../constants/action-types"
-
+// Combat system
 import { physicalAttack } from '../../combat/physicalAttack'
+import { physicalDefend } from '../../combat/physicalDefend'
 import { physicalSpecial } from '../../combat/physicalSpecial'
-import { monsterInfo } from '../../monsters/monster'
+import { autoResetBuff } from '../../combat/stats'
+// Monster stuff
+import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 
 const initialState = {
-  opponent: monsterInfo(`demon`),
+  opponent: getMonsterFromLevel(1),
   player: {
     name: `Michel le Magnifique`,
     job: `Warrior`,
@@ -73,7 +76,7 @@ function rootReducer(state = initialState, action) {
           nextState = physicalAttack(nextState)
           break;
         case `defend`:
-
+          nextState = physicalDefend(nextState)
           break;
         case `special`:
           nextState = physicalSpecial(nextState)
@@ -101,9 +104,15 @@ function rootReducer(state = initialState, action) {
       }
     }
 
+    // Reset temporary buffs
+    nextState = autoResetBuff(nextState)
+
     // Switch player turn
     nextState.game.playerTurn = !nextState.game.playerTurn
+
   }
+
+  console.log(nextState)
   
   return nextState
 }

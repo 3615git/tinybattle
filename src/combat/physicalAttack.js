@@ -1,6 +1,7 @@
 // import { diceRoll } from '../utils/utils'
 import { rage } from '../combat/rage'
 import { hit, damage } from '../combat/hit'
+import { pushBuff } from './stats'
 
 /**
   * @desc Computing the basic physical attack results
@@ -16,8 +17,6 @@ const physicalAttack = (data) => {
 
   // Hit ?
   const hitResult = hit(activePlayer, targetPlayer)
-
-  console.log(data)
 
   /* Compute damages */
 
@@ -43,8 +42,8 @@ const physicalAttack = (data) => {
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
-    // Give edge to opponent 
-    targetPlayer.edge ? targetPlayer.edge++ : targetPlayer.edge = 1
+    // Give LCK bonus to opponent 
+    pushBuff(targetPlayer, `temporary`, `LCK`, 1, 5)
     // Reset rage because of the fumble
     activePlayer.physicalRage = 0
   }
@@ -52,9 +51,6 @@ const physicalAttack = (data) => {
   else if (!hitResult.hit && !hitResult.fumble) {
     // nothing to do
   }
-
-  // Removes edge of the active player
-  // activePlayer.edge = false
 
   // Build log
   let log = {

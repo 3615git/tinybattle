@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
@@ -23,65 +23,86 @@ const mapStateToProps = state => {
   }
 }
 
-const HitBar = ({ connectedData, type, hit }) => {
-  // Current player
-  const opponent = connectedData.game.playerTurn
-  const data = opponent ? connectedData.opponent : connectedData.player
 
-  // Component styling
-  const defaultClasses = `hitbar`
+class HitBar extends Component {
+  constructor(props) {
+    super(props)
 
-  // Add custom classes to defined classes
-  const itemClasses = [defaultClasses].filter(val => val).join(` `)
-
-  // Get limits
-  let fumbleLimit = fumbleChance(data)
-  let hitLimit = hit.toHit
-  let criticalLimit = criticalChance(data)
-  let roll = hit.roll
-
-  // Compute hit stages
-  let stages = []
-  let position = []
-  for (let index = 1; index <= 20; index++) {
-
-    let limit
-    // Compute current class
-    if (index <= fumbleLimit) limit = `fumble`
-    else if (index >= criticalLimit) limit = `critical`
-    else if(index >= hitLimit) limit = `hit`
-    else limit = `miss`
-
-    stages.push(
-      <div key={index} className={limit} />
-    )
+    this.state = {
+      rollPosition: 0
+    }
   }
 
-  for (let index = 1; index <= roll; index++) {
-
-    let rollMarker
-    // Compute roll indicator
-    if (index === roll) rollMarker = <div className="roll"></div>
-
-    position.push(
-      <div key={index}>{rollMarker}</div>
-    )
+  componentDidMount() {
+    const { hit } = this.props
+    setTimeout(() => {
+      this.setState({
+        rollPosition: hit.roll
+      })
+    }, 600)
   }
 
-  // Animate
-  const indicatorStyle = {
-    width: (roll * 5)  + `%`,
-  }
+  render() {
+    const { connectedData, type, hit } = this.props
+    const { rollPosition } = this.state
+    // Current player
+    const opponent = connectedData.game.playerTurn
+    const data = opponent ? connectedData.opponent : connectedData.player
 
-  // Display component
-  return (
-    <div className={itemClasses}>
-      <div style={indicatorStyle} className="wrapper position">
-        {position}
+    // Component styling
+    const defaultClasses = `hitbar`
+
+    // Add custom classes to defined classes
+    const itemClasses = [defaultClasses].filter(val => val).join(` `)
+
+    // Get limits
+    let fumbleLimit = fumbleChance(data)
+    let hitLimit = hit.toHit
+    let criticalLimit = criticalChance(data)
+    let roll = hit.roll
+
+    // Compute hit stages
+    let stages = []
+    let position = []
+    for (let index = 1; index <= 20; index++) {
+      let limit
+      // Compute current class
+      if (index <= fumbleLimit) limit = `fumble`
+      else if (index >= criticalLimit) limit = `critical`
+      else if(index >= hitLimit) limit = `hit`
+      else limit = `miss`
+
+      stages.push(
+        <div key={index} className={limit} />
+      )
+    }
+
+    for (let index = 1; index <= roll; index++) {
+
+      let rollMarker
+      // Compute roll indicator
+      if (index === rollPosition) rollMarker = <div className="roll"></div>
+
+      position.push(
+        <div key={index}>{rollMarker}</div>
+      )
+    }
+
+    // Animate
+    const indicatorStyle = {
+      width: (rollPosition * 5)  + `%`,
+    }
+
+    // Display component
+    return (
+      <div className={itemClasses}>
+        <div style={indicatorStyle} className="wrapper position">
+          {position}
+        </div>
+        <div className="wrapper stages">{stages}</div>
       </div>
-      <div className="wrapper stages">{stages}</div>
-    </div>
-  )
+    )
+  }
 }
 
 // Applying propTypes definition and default values

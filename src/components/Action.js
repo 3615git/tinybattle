@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
 import { attack } from '../redux/actions/index'
-import { toHit } from '../combat/hit'
 
 /**
   * @desc description of the component
@@ -51,7 +50,7 @@ const Action = ({ type, data, opponent, turn, attack }) => {
 
   if (type === `physical`) {
     w_Defend = `Defend`
-    w_Attack = `Attack ` + toHit(data, opponent)
+    w_Attack = `Attack`
     w_Special = `Special`
     buttonSpecial = specialPhysical ? type +" special" : type +" special disabled"
     actionSpecial = specialPhysical ? attack : notready

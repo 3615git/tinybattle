@@ -26,6 +26,10 @@ textarea:focus, input:focus, button:focus{
   transition: opacity 700ms;
 }
 
+.position-relative {
+  position: relative;
+}
+
 /* Main app */
 html, body, #root, button {
   font-family: "eight_bit_dragonregular";
@@ -50,7 +54,15 @@ html, body, #root {
   width: 100%;
   height: 100%;
   background: #112022;
-  box-shadow: inset 0px 0px 60px 0px #00000052;
+}
+
+.monsterOverlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0.3;
 }
 
 .appWrapper {
@@ -71,11 +83,7 @@ html, body, #root {
   width: 100%;
   padding: 10px;
   margin-bottom: 5px;
-  border-radius: 5px;
   text-align: center;
-  background-color: rgba(255,255,255,.08);
-  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.89);
   z-index: 10;
 }
 
@@ -92,7 +100,7 @@ html, body, #root {
 .playerInfo .player {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   flex: 1;
@@ -109,7 +117,6 @@ html, body, #root {
 
 .playerInfo .level {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-basis: 15%;
@@ -129,7 +136,7 @@ html, body, #root {
   text-shadow: 0px 0px 3px black;
 }
 
-.playerStats div {
+.playerStats > div {
   width: 50px;
   height: 40px;
   display: flex;
@@ -144,6 +151,10 @@ html, body, #root {
   font-size: 8px;
   opacity: .6;
   margin-bottom: 3px;
+}
+
+.playerStats div.buff {
+  color: #e7323b;
 }
 
 /* Player items */
@@ -166,7 +177,6 @@ html, body, #root {
   background-color: rgba(255,255,255,.08);
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.89);
-  /* box-shadow: -1px -1px 1px rgba(241, 241, 241, 0.3), 1px 1px 1px rgba(27, 66, 61, 0.3); */
 }
 
 /* Player skills */
@@ -212,14 +222,24 @@ html, body, #root {
 }
 
 .opponentWrapper.turn .portrait {
-  transform: scale(1.05);
+  transform: scale(1.08);
   transition: all 300ms;
-  filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5));
-  filter: brightness(100%);
+  filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5)) brightness(100%);
+}
+
+.opponentWrapper .level {
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  font-size: 10px;
+  opacity: 0.6;
 }
 
 .opponentWrapper .infos {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -230,11 +250,12 @@ html, body, #root {
   width: 400px;
   height: 400px;
   position: absolute;
+  /* top: -200px; only for desktop ? */
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
   transition: all 300ms;
-  filter: brightness(60%);
+  filter: brightness(50%);
 }
 
 .opponentWrapper .name {
@@ -242,12 +263,14 @@ html, body, #root {
   margin: 10px 0px 3px 0px;
   z-index: 10;
   text-shadow: 0px 0px 7px black, 0px 0px 10px black;
+  align-self: flex-start;
 }
 
 .opponentWrapper .job {
   margin-bottom: 10px;
   font-size: 10px;
   z-index: 10;
+  align-self: flex-start;
 }
 
 /* Gauge */
@@ -273,7 +296,7 @@ html, body, #root {
   width: 100%;
   margin-bottom: 5px;
   background-color: rgba(255,255,255,.10);
-  box-shadow: 0px 0px 3px #00000052;
+  filter: drop-shadow(0px 0px 3px #000000);
   border-radius: 4px;
   display: flex;
   position: relative;
@@ -282,6 +305,7 @@ html, body, #root {
 .bar .indicator {
   border-radius: 4px;
   transition: all 2000ms;
+  box-shadow: inset 1px 1px 3px #ffffff42, inset -1px -1px 3px #0000008a;
 }
 
 .bar .value {
@@ -329,6 +353,7 @@ html, body, #root {
   height: 20px;
   margin-bottom: 10px;
   background-color: rgba(255,255,255,.05);
+  filter: drop-shadow(0px 0px 3px #000000);
   border-radius: 4px;
   position: relative;
 }
@@ -371,6 +396,10 @@ html, body, #root {
   background-color: #e7323b;
 }
 
+.hitbar div.physicalDefend {
+  background-color: #e7323b;
+}
+
 .hitbar div.critical {
   background: #ce6d0a url('../pics/ui/hitBar_critical.png') no-repeat center center;
 }
@@ -380,8 +409,9 @@ html, body, #root {
   flex-basis: 10px;
   height: 10px;
   flex-grow: 0;
+  flex-shrink: 0;
   border-radius: 10px;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.7));
 }
 
 .hitbar .wrapper > div:first-child {
@@ -393,8 +423,20 @@ html, body, #root {
   border-radius: 0px 4px 4px 0px;
 }
 
+.LogsContainer {
+  position: relative;
+  flex: 1;
+}
+
+.LogsAnimationContainer {
+  flex: 1;
+}
+
 .LogsWrapper {
-  min-height:80px;
+  position: absolute;
+  width: 100%;
+  min-height: 80px;
+  height: 100%;
   padding: 10px;
   flex:1;
   margin-bottom: 10px;
@@ -403,10 +445,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   text-align: center;
-  /* border-radius: 5px; */
-  /* background: rgba(0, 0, 0, 0.2); */
-  /* box-shadow: inset 0px 0px 60px 0px #00000052; */
-  background: linear-gradient(0deg, #112022 74%, rgba(0, 212, 255, 0) 100%);
+  /* background: linear-gradient(0deg, #112022 74%, rgba(0, 212, 255, 0) 100%); */
   z-index: 10;
 }
 
@@ -422,6 +461,25 @@ html, body, #root {
   font-size: 26px;
 }
 
+.LogsWrapper .logvalue {
+  padding: 0px 5px;
+} 
+
+.LogsWrapper .log_defend .logvalue {
+  color: #e7323b;
+} 
+
+.LogsWrapper .smallMessage {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.LogsWrapper .tinyMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .LogsWrapper .special {
   font-size: 16px;
   margin-bottom: 20px;
@@ -429,6 +487,11 @@ html, body, #root {
 
 .LogsWrapper .result {
 
+}
+
+.log_defend {
+  display: flex;
+  align-items: center;
 }
 
 .damage {
@@ -479,7 +542,7 @@ button.attack {
 }
 
 button.physical {
-  background: #e8323b;
+  background: #e7323b;
 }
 
 button.magical {
@@ -523,7 +586,7 @@ button.disabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
+  /* opacity: 0; */
   background: rgba(0, 0, 0, 0.9);
   transition: opacity 2s;
 }

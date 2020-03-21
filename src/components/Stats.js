@@ -2,9 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
+import { getStat } from '../combat/stats'
+
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Caracs bar for player and monster
 */
 
 const propTypes = {
@@ -21,9 +22,22 @@ const mapStateToProps = state => {
   }
 }
 
+const StatCounter = ({ stat }) => {
+  const {natural, temporary} = stat
+
+  let itemClasses = temporary !== 0 ? `buff` : ``
+  let statValue = natural + temporary
+
+  return (
+    <div className={itemClasses}>
+      {statValue}
+    </div>
+  )
+}
+
 const Stats = ({ opponent, data }) => { 
   // Current player
-  const caracs = opponent ? data.opponent : data.player
+  const activePlayer = opponent ? data.opponent : data.player
 
   // Component styling
   const defaultClasses = `playerStats`
@@ -33,14 +47,11 @@ const Stats = ({ opponent, data }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div>{caracs.STR}<span>STR</span></div>
-      <div>{caracs.DEX}<span>DEX</span></div>
-      <div>{caracs.CON}<span>CON</span></div>
-      <div>{caracs.MAG}<span>MAG</span></div>
-      <div>
-        {caracs.LCK}
-        {caracs.edge && `+`+caracs.edge}
-        <span>LCK</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `STR`)} /><span>STR</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `DEX`)} /><span>DEX</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `CON`)} /><span>CON</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `MAG`)} /><span>MAG</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `LCK`)} /><span>LCK</span></div>
     </div>
   )
 }

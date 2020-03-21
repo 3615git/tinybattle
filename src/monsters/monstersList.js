@@ -3,6 +3,7 @@ import leviathan from '../pics/opponents/leviathan.png'
 import thanatos from '../pics/opponents/thanatos.png'
 import gazer from '../pics/opponents/gazer.png'
 import mermaid from '../pics/opponents/mermaid.png'
+import dragonemperor from '../pics/opponents/dragonemperor.png'
 
 const monstersList = {
   demon: {
@@ -30,6 +31,19 @@ const monstersList = {
     maxMagicPoints: [20, 30],
     items: [`STR`, `LCK`],
     pic: [leviathan]
+  },
+  dragonemperor: {
+    name: [`Dragon Emperor`],
+    STR: [8, 12],
+    DEX: [5, 9],
+    CON: [10, 15],
+    MAG: [2, 6],
+    LCK: [0, 3],
+    fumble: 4,
+    maxHitPoints: [80, 130],
+    maxMagicPoints: [20, 30],
+    items: [`STR`, `LCK`],
+    pic: [dragonemperor]
   },
   thanatos: {
     name: [`Thanatos`],
