@@ -531,9 +531,16 @@ html, body, #root {
 button {
   height: 40px;
   border: none;
+  display: flex;
+  align-items: center;
   flex-basis: 25%;
   font-size: 9px;
   cursor: pointer;
+}
+
+.buttons img {
+  height: 70%;
+  flex-grow: 0;
 }
 
 button.attack {

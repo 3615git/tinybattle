@@ -4,6 +4,7 @@ import { physicalAttack } from '../../combat/physicalAttack'
 import { physicalDefend } from '../../combat/physicalDefend'
 import { physicalSpecial } from '../../combat/physicalSpecial'
 import { autoResetBuff } from '../../combat/stats'
+import { manaRefresh } from '../../combat/mana'
 // Monster stuff
 import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 
@@ -23,7 +24,7 @@ const initialState = {
     gold: 35,
     hitPoints: 70,
     maxHitPoints: 70,
-    magicPoints: 30,
+    magicPoints: 0,
     maxMagicPoints: 30,
     physicalRage: 0,
     maxPhysicalRage: 20,
@@ -104,6 +105,9 @@ function rootReducer(state = initialState, action) {
       }
     }
 
+    // Mana reloads
+    nextState = manaRefresh(nextState)
+
     // Reset temporary buffs
     nextState = autoResetBuff(nextState)
 
@@ -112,7 +116,7 @@ function rootReducer(state = initialState, action) {
 
   }
 
-  console.log(nextState)
+  // console.log(nextState)
   
   return nextState
 }
