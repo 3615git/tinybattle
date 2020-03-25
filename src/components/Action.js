@@ -44,11 +44,12 @@ const Action = ({ type, data, opponent, turn, attack }) => {
   // Compute special actions
   let specialPhysical = data.physicalRage === data.maxPhysicalRage
   let specialMagical = data.magicalRage === data.maxMagicalRage
+  let castMagical = data.magicPoints >= data.items.MAG.cost
 
   // Wordings
   let w_Defend, w_Attack, w_Special
   let pic_Defend, pic_Attack, pic_Special
-  let buttonSpecial, actionSpecial
+  let buttonAttack, actionAttack, buttonSpecial, actionSpecial
 
   function notready() {}
 
@@ -59,7 +60,10 @@ const Action = ({ type, data, opponent, turn, attack }) => {
     pic_Defend = shield
     pic_Attack = sword
     pic_Special = sword
-    buttonSpecial = specialPhysical ? type +" special" : type +" special disabled"
+
+    buttonAttack = type + " attack"
+    actionAttack = attack
+    buttonSpecial = specialPhysical ? type + " special" : type + " special disabled"
     actionSpecial = specialPhysical ? attack : notready
   } 
   else {
@@ -69,6 +73,9 @@ const Action = ({ type, data, opponent, turn, attack }) => {
     pic_Defend = shield
     pic_Attack = sword
     pic_Special = sword
+
+    buttonAttack = castMagical ? type + " attack" : type + " attack disabled"
+    actionAttack = castMagical ? attack : notready
     buttonSpecial = specialMagical ? type +" special" : type +" special disabled"
     actionSpecial = specialMagical ? attack : notready
   }
@@ -79,7 +86,7 @@ const Action = ({ type, data, opponent, turn, attack }) => {
       <button className={type + " defend"} onClick={() => attack({ type: type, mode: `defend` })}>
         {w_Defend}
         </button>
-      <button className={type + " attack"} onClick={() => attack({ type: type, mode: `attack` })}>
+      <button className={buttonAttack} onClick={() => actionAttack({ type: type, mode: `attack` })}>
         {w_Attack}
       </button>
       <button className={buttonSpecial} onClick={() => actionSpecial({ type: type, mode: `special` })}>

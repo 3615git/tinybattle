@@ -3,6 +3,8 @@ import { ATTACK } from "../constants/action-types"
 import { physicalAttack } from '../../combat/physicalAttack'
 import { physicalDefend } from '../../combat/physicalDefend'
 import { physicalSpecial } from '../../combat/physicalSpecial'
+import { magicalAttack } from '../../combat/magicalAttack'
+import { magicalDefend } from '../../combat/magicalDefend'
 import { autoResetBuff } from '../../combat/stats'
 import { manaRefresh } from '../../combat/mana'
 // Monster stuff
@@ -12,7 +14,6 @@ const initialState = {
   opponent: getMonsterFromLevel(1),
   player: {
     name: `Michel le Magnifique`,
-    job: `Warrior`,
     xp: 0,
     level: 1,
     STR: 8,
@@ -24,11 +25,11 @@ const initialState = {
     gold: 35,
     hitPoints: 70,
     maxHitPoints: 70,
-    magicPoints: 0,
+    magicPoints: 30,
     maxMagicPoints: 30,
     physicalRage: 0,
     maxPhysicalRage: 20,
-    magicalRage: 12,
+    magicalRage: 0,
     maxMagicalRage: 30,
     items: {
       STR: {
@@ -46,7 +47,12 @@ const initialState = {
         id: 5,
         score: 3
       },
-      MAG: {},
+      MAG: {
+        type: `magic`,
+        id: 2,
+        score: `3d10`,
+        cost: 10
+      },
       LCK: {
         type: `amulet`,
         id: 3,
@@ -91,10 +97,10 @@ function rootReducer(state = initialState, action) {
     if (action.payload.type === `magical`) {
       switch (action.payload.mode) {
         case `attack`:
-
+          nextState = magicalAttack(nextState)
           break;
         case `defend`:
-
+          nextState = magicalDefend(nextState)
           break;
         case `special`:
 

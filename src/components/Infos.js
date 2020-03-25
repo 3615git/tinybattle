@@ -30,7 +30,6 @@ const Infos = ({ name, job, level, xp, gold }) => {
     <div className={itemClasses}>
       <div className="player">
         <span className="name">{name}</span>
-        <span className="job">{job}</span>
       </div>
       <div className="gold">
         <Item item="coins" level={5} small />

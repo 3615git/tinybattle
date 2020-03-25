@@ -35,7 +35,7 @@ const Logs = ({ log, playerTurn, color }) => {
   // Build log message
   let display
   let title, damage
-  let wrapperStyling
+  let wrapperStyling, iconStyling
 
   switch (type) {
     case `battleStart`:
@@ -88,7 +88,7 @@ const Logs = ({ log, playerTurn, color }) => {
         marginRight: `15px`
       }
 
-      const iconStyling = {
+      iconStyling = {
         position: `relative`,
         top: `-1px`,
         marginRight: `3px`
@@ -102,6 +102,69 @@ const Logs = ({ log, playerTurn, color }) => {
             <div className="smallMessage">DEX <span className="logvalue">+{data.dexBonus}</span> - HP <span className="logvalue">+{data.healValue}</span></div>
             <ValueBar type={type} value={data.healRoll} maxValue={data.maxHeal} />
             <div className="tinyMessage"><img src={skullPic} style={iconStyling} alt="Opponent bonus" />STR<span className="logvalue">+{data.strBonus}</span> for opponent</div>
+          </div>
+        </div>
+      )
+      break;
+    
+    case `magicalAttack`:
+      title = activePlayer.name + ` casts a spell !`
+      damage = data.damage ? `<span class="damage">` + data.damage.damage + `</span> damage!` : `<span>No damage.</span>`
+
+      // Hit text
+      let magicalHit
+
+      if (data.hit.critical) {
+        magicalHit = `Perfect cast !`
+        // wrapperStyling = playerTurn ? `animation-critical` : `opponent-animation-critical`
+      }
+      else if (data.hit.fumble) {
+        magicalHit = `Disaster !`
+        // wrapperStyling = playerTurn ? `animation-fumble` : `opponent-animation-fumble`
+      }
+      else if (data.hit.hit) {
+        magicalHit = `Success !`
+        // wrapperStyling = playerTurn ? `animation-hit` : `opponent-animation-hit`
+      }
+      else {
+        magicalHit = `Spell failed.`
+        // wrapperStyling = playerTurn ? `animation-missed` : `opponent-animation-missed`
+      }
+
+      display = (
+        <div>
+          {title && <div className="title">{title}</div>}
+          <HitBar type={type} hit={data.hit} color={color} />
+          {magicalHit && <div className="title">{data.hit.roll} : {magicalHit}</div>}
+          {damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} />}
+        </div>
+      )
+      break;
+
+    case `magicalDefend`:
+      title = activePlayer.name + ` focus !`
+
+      const focusStyling = {
+        marginRight: `15px`
+      }
+
+      iconStyling = {
+        position: `relative`,
+        top: `-1px`,
+        marginRight: `3px`
+      }
+
+      display = (
+        <div className="log_defend">
+          <img src={shield} style={focusStyling} alt="Defence!" />
+          <div>
+            {title && <div className="title">{title}</div>}
+            <div className="smallMessage">MAG <span className="logvalue">+{data.magBonus}</span></div>
+            <div className="tinyMessage">
+              <img src={skullPic} style={iconStyling} alt="Malus" />STR<span className="logvalue">{data.strMalus}</span>
+              &nbsp;
+              <img src={skullPic} style={iconStyling} alt="Malus" />DEX<span className="logvalue">{data.dexMalus}</span>
+              </div>
           </div>
         </div>
       )

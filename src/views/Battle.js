@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import * as Vibrant from 'node-vibrant'
 
 import EndGame from '../components/EndGame'
+import TurnIndicator from '../components/TurnIndicator'
 import Opponent from '../components/Opponent'
 import Infos from '../components/Infos'
 import Stats from '../components/Stats'
@@ -63,6 +64,7 @@ class Battle extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <EndGame />
+          <TurnIndicator color={monstercolor} />
           <Opponent color={monstercolor} />
           <Logs color={monstercolor} />
           <Infos />

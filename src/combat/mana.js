@@ -21,6 +21,13 @@ const manaRefresh = (data) => {
   return data
 }
 
+const manaBurn = (player, value) => {
+  player.magicPoints = player.magicPoints - value
+  if (player.magicPoints < 0) player.magicPoints = 0
+  return player
+}
+
 export {
-  manaRefresh
+  manaRefresh, 
+  manaBurn
 }

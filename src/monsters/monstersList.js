@@ -2,7 +2,7 @@ import demon from '../pics/opponents/demon.png'
 import leviathan from '../pics/opponents/leviathan.png'
 import thanatos from '../pics/opponents/thanatos.png'
 import gazer from '../pics/opponents/gazer.png'
-import mermaid from '../pics/opponents/mermaid.png'
+import icetitan from '../pics/opponents/icetitan.png'
 import dragonemperor from '../pics/opponents/dragonemperor.png'
 
 const monstersList = {
@@ -71,8 +71,8 @@ const monstersList = {
     items: [`STR`, `LCK`],
     pic: [gazer]
   },
-  mermaid: {
-    name: [`Arliette`, `Sasha`],
+  icetitan: {
+    name: [`Demeres`],
     STR: [3, 5],
     DEX: [3, 6],
     CON: [2, 4],
@@ -82,7 +82,7 @@ const monstersList = {
     maxHitPoints: [40, 70],
     maxMagicPoints: [100, 200],
     items: [`STR`, `LCK`],
-    pic: [mermaid]
+    pic: [icetitan]
   }
 }
 

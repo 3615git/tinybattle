@@ -45,7 +45,7 @@ class HitBar extends Component {
   }
 
   render() {
-    const { connectedData, color, hit } = this.props
+    const { connectedData, color, hit, type } = this.props
     const { rollPosition } = this.state
     // Current player
     const opponent = connectedData.game.playerTurn
@@ -80,6 +80,8 @@ class HitBar extends Component {
         style = opponent ? { backgroundColor: color.darkVibrant } : {}
       }
       else limit = `miss`
+
+      limit = type + ` ` + limit
 
       stages.push(
         <div key={index} className={limit} style={style} />

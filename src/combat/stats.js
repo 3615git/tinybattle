@@ -104,8 +104,13 @@ const decreaseBuffCounters = (player) => {
     // Decrease counts
     player.buff.temporary[index].rounds--
     // Remove buffs with a now dead counter
-    if (player.buff.temporary[index].rounds < 0) player.buff.temporary.splice(index, 1)
+    if (player.buff.temporary[index].rounds < 0) {
+      delete player.buff.temporary[index]
+    }
   }
+
+  // Removing empty items (delete calls) from array
+  player.buff.temporary = player.buff.temporary.filter(val => val)
 
   return player
 }

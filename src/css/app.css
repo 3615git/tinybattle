@@ -63,6 +63,7 @@ html, body, #root {
   left: 0;
   top: 0;
   opacity: 0.3;
+  z-index: 0;
 }
 
 .appWrapper {
@@ -134,6 +135,7 @@ html, body, #root {
   width: 100%;
   z-index: 10;
   text-shadow: 0px 0px 3px black;
+  z-index: 1;
 }
 
 .playerStats > div {
@@ -162,6 +164,7 @@ html, body, #root {
   display: flex;
   justify-content: space-between;
   margin: 5px 0px 10px 0px;
+  z-index: 1;
 }
 
 .playerItems > div {
@@ -177,6 +180,14 @@ html, body, #root {
   background-color: rgba(255,255,255,.08);
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.89);
+}
+
+.playerItems .itemCost {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 4px;
+  color: #1fbbd4;
 }
 
 /* Player skills */
@@ -214,17 +225,23 @@ html, body, #root {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   transition: all 500ms;
+  z-index: 1;
 }
 
 .opponentWrapper.turn {
   transition: all 500ms;
+  transform: scale(1.05);
   /* transform: scale(1.5); */
 }
 
 .opponentWrapper.turn .portrait {
-  transform: scale(1.08);
   transition: all 300ms;
   filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5)) brightness(100%);
+  
+  animation: critical 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .opponentWrapper .level {
@@ -248,7 +265,7 @@ html, body, #root {
 
 .opponentWrapper .portrait {
   width: 400px;
-  height: 400px;
+  /* height: 400px; */
   position: absolute;
   /* top: -200px; only for desktop ? */
   background-repeat: no-repeat;
@@ -277,6 +294,7 @@ html, body, #root {
 .barsWrapper {
   display: flex;
   margin-bottom: 10px;
+  z-index: 1;
 }
 
 .barsWrapper > div {
@@ -353,7 +371,7 @@ html, body, #root {
   height: 20px;
   margin-bottom: 10px;
   background-color: rgba(255,255,255,.05);
-  filter: drop-shadow(0px 0px 3px #000000);
+  filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.5));
   border-radius: 4px;
   position: relative;
 }
@@ -392,16 +410,24 @@ html, body, #root {
   background-color: #3c3c3c;
 }
 
-.hitbar div.hit {
+.hitbar div.physicalAttack.hit {
   background-color: #e7323b;
+}
+
+.hitbar div.physicalAttack.critical {
+  background: #ce6d0a url('../pics/ui/hitBar_critical.png') no-repeat center center;
 }
 
 .hitbar div.physicalDefend {
   background-color: #e7323b;
 }
 
-.hitbar div.critical {
-  background: #ce6d0a url('../pics/ui/hitBar_critical.png') no-repeat center center;
+.hitbar div.magicalAttack.hit {
+  background-color: #0494ab;
+}
+
+.hitbar div.magicalAttack.critical {
+  background: #01a972 url('../pics/ui/hitBar_critical.png') no-repeat center center;
 }
 
 .hitbar div.roll {
@@ -426,6 +452,7 @@ html, body, #root {
 .LogsContainer {
   position: relative;
   flex: 1;
+  z-index: 1;
 }
 
 .LogsAnimationContainer {
@@ -506,6 +533,7 @@ html, body, #root {
 
 .actionsWrapper {
   position: relative;
+  z-index: 1;
 }
 
 .buttons {
@@ -515,23 +543,23 @@ html, body, #root {
 }
 
 .buttons button.defend {
-  border-radius: 10px 0 0 10px;
 }
 
 .buttons button.attack {
-  border-radius: 0 10px 10px 0;
   border-left: 1px solid rgba(255,255,255,.15);
 }
 
 .buttons button.special {
-  border-radius: 10px;
   margin-left: 10px;
 }
 
 button {
   height: 40px;
   border: none;
+  border-radius: 10px;
   display: flex;
+  text-align: center;
+  justify-content: center;
   align-items: center;
   flex-basis: 25%;
   font-size: 9px;
@@ -546,6 +574,7 @@ button {
 button.attack {
   flex-basis: 50%;
   font-size: 10px;
+  margin-left: 10px;
 }
 
 button.physical {
@@ -580,6 +609,39 @@ button.disabled {
 
 .opponentButtonWrapper div:last-child {
   font-size: 20px;
+}
+
+/** Turn indicator in the background */
+.turnIndicator {
+  z-index: 1;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  transition: all .3s cubic-bezier(0.87, 0, 0.13, 1);
+  opacity: .1;
+  overflow: hidden;
+}
+
+.turnIndicator img.opponent {
+  width: 500px;
+  position: absolute;
+  top: -500px;
+  left: 0;
+  right: 0;
+  transform: scale(2);
+  margin: 0 auto;
+  transition: all .3s cubic-bezier(0.87, 0, 0.13, 1);
+  animation-name: spin;
+  animation-duration: 35000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; 
+}
+
+.turnIndicator.turn img.opponent {
+  transition: all .3s cubic-bezier(0.87, 0, 0.13, 1);
+  top: -150px;
 }
 
 /* End game screen */

@@ -46,7 +46,11 @@ const Items = ({ STR, DEX, CON, MAG, LCK }) => {
       </div>
       {renderItem(DEX)}
       {renderItem(CON)}
-      {renderItem(MAG)}
+      <div className="position-relative">
+        <div className="itemCost">{MAG.cost}</div>
+        <Item item={MAG.type} level={MAG.id} />
+        <span>{MAG.score}</span>
+      </div>
       {renderItem(LCK)}
     </div>
   )
