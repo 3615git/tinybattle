@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { criticalChance, fumbleChance } from '../combat/hit'
+import { criticalChance, fumbleChance } from '../../actions/combat/hit'
 
 /**
   * @desc Display an animated hit bar

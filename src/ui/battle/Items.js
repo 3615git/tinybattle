@@ -40,14 +40,15 @@ const Items = ({ STR, DEX, CON, MAG, LCK }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div>
+      <div className="position-relative">
+        <div className="itemCost physical">{STR.cost}</div>
         <Item item={STR.type} level={STR.id} />
         <span>{STR.score}</span>
       </div>
       {renderItem(DEX)}
       {renderItem(CON)}
       <div className="position-relative">
-        <div className="itemCost">{MAG.cost}</div>
+        <div className="itemCost magical">{MAG.cost}</div>
         <Item item={MAG.type} level={MAG.id} />
         <span>{MAG.score}</span>
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { getStat } from '../combat/stats'
+import { getStat } from '../../actions/combat/stats'
 
 /**
   * @desc Caracs bar for player and monster
@@ -25,12 +25,17 @@ const mapStateToProps = state => {
 const StatCounter = ({ stat }) => {
   const {natural, temporary} = stat
 
-  let itemClasses = temporary !== 0 ? `buff` : ``
-  let statValue = natural + temporary
+  let currentStatValue = natural + temporary
+
+  let variationClasses = ``
+  if (currentStatValue > stat.natural) variationClasses = `up`
+  else if (currentStatValue < stat.natural) variationClasses = `down`
+
+  const itemClasses = [variationClasses].filter(val => val).join(` `)
 
   return (
     <div className={itemClasses}>
-      {statValue}
+      {currentStatValue}
     </div>
   )
 }

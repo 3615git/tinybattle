@@ -1,4 +1,4 @@
-import { monstersList } from '../monsters/monstersList'
+import { monsterList } from './monsterList'
 
 function monsterName(monsterData) {
   // todo : bosses have a prefix
@@ -6,7 +6,6 @@ function monsterName(monsterData) {
 }
 
 function monsterPic(monsterData) {
-  // todo : bosses have a prefix
   return monsterData.pic[Math.floor(Math.random() * monsterData.pic.length)]
 }
 
@@ -41,18 +40,13 @@ function monsterStats(monsterData) {
   }
 }
 
-// function monsterItems(stat, boss) {
-//   // return items depending on the group + boss
-//   // bosses have better items
-// }
-
-function monsterInfo(job) {
-  const monsterData = monstersList[job]
+function monsterInfo(type) {
+  const monsterData = monsterList[type]
   const monsterSpecs = monsterStats(monsterData)
 
   return {
     name: monsterName(monsterData),
-    job: job,
+    job: type,
     pic: monsterPic(monsterData),
     STR: monsterSpecs[`STR`],
     DEX: monsterSpecs[`DEX`],
@@ -64,7 +58,8 @@ function monsterInfo(job) {
     maxHitPoints: monsterSpecs[`maxHitPoints`],
     magicPoints: monsterSpecs[`magicPoints`],
     maxMagicPoints: monsterSpecs[`maxMagicPoints`],
-    items: {}
+    items: {},
+    weapons: {},
   }
 }
 

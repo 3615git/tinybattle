@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import sigil from '../pics/ui/sigil.svg'
+import sigil from '../../pics/ui/sigil.svg'
 
 /**
   * @desc Display turn indicator in the background

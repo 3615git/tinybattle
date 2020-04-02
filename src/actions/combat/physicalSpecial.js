@@ -1,7 +1,7 @@
-import { resetRage } from '../combat/rage'
+import { resetRage } from './rage'
 import { pushBuff } from './stats'
-import { physicalAttack } from '../combat/physicalAttack'
-import { getStat } from '../combat/stats'
+import { physicalAttack } from './physicalAttack'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the special physical attack results

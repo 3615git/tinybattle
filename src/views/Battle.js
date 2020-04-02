@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import * as Vibrant from 'node-vibrant'
 
-import EndGame from '../components/EndGame'
-import TurnIndicator from '../components/TurnIndicator'
-import Opponent from '../components/Opponent'
-import Infos from '../components/Infos'
-import Stats from '../components/Stats'
-import Items from '../components/Items'
-import Bars from '../components/Bars'
-import Actions from '../components/Actions'
-import Logs from '../components/Logs'
+import EndGame from '../ui/battle/EndGame'
+import Opponent from '../ui/battle/Opponent'
+import Infos from '../ui/battle/Infos'
+import Stats from '../ui/battle/Stats'
+import Items from '../ui/battle/Items'
+import Bars from '../ui/battle/Bars'
+import Actions from '../ui/battle/Actions'
+import Logs from '../ui/battle/Logs'
 
 import '../css/app.css'
 import '../css/items.css'
@@ -57,21 +56,24 @@ class Battle extends Component {
   }
 
   render() {
-
     const { monstercolor } = this.state
+    const { playerTurn } = this.props
+
+    const playerAreaClass = playerTurn ? `playerArea playerTurn` : `playerArea opponentTurn`
 
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
           <EndGame />
-          <TurnIndicator color={monstercolor} />
+          <Infos />
           <Opponent color={monstercolor} />
           <Logs color={monstercolor} />
-          <Infos />
-          <Stats />
-          <Items />
-          <Bars />
-          <Actions />
+          <div className={playerAreaClass}>
+            <Stats />
+            <Items />
+            <Bars />
+            <Actions />
+          </div>
         </div>
       </div>
     )

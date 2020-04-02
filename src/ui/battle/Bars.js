@@ -1,5 +1,5 @@
 import React from 'react'
-import Bar from '../components/Bar'
+import Bar from './Bar'
 
 /**
   * @desc description of the component
@@ -11,14 +11,7 @@ const Bars = () => {
   // Display component
   return (
     <div className="barsWrapper">
-      <div>
-        <Bar type="hitPoints" />
-        <Bar type="physicalRage" />
-      </div>
-      <div>
-        <Bar type="magicPoints" />
-        <Bar type="magicalRage" />
-      </div>
+      <Bar type="hitPoints" />
     </div>
   )
 }

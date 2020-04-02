@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import Bar from './Bar'
 import Stats from './Stats'
+import TurnIndicator from './TurnIndicator'
 
 /**
   * @desc Main opponent block
@@ -24,9 +25,33 @@ function mapDispatchToProps(dispatch) {
 
 class Opponent extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      portraitReady: false
+    }
+  }
+  
+  componentDidMount() {
+    // Defining portrait or landscape mode for portraits
+    var portrait = document.getElementById('portrait')
+    let that = this
+
+    portrait.addEventListener('load', function () {
+      let mode = this.naturalWidth > this.naturalHeight ? `landscape` : `portrait`
+      that.setState({
+        mode,
+        portraitReady: true
+      })
+    })
+
+  }
+
   // Display component
   render() {
     const { data, turn, level, color } = this.props
+    const { mode, portraitReady } = this.state
 
     // Get colors from scene
     const monstercolor = color.vibrant
@@ -54,14 +79,24 @@ class Opponent extends Component {
 
     }
 
+    // Monster portrait size
+    const portraitStyling = mode === `portrait` ? {
+      width: `400px`
+    } : {
+        width: `500px`
+    }
+
+    // Monster display
+    const portraitClasses = portraitReady ? `portrait ready` : `portrait`
+
     return [
       <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
+        <TurnIndicator color={monstercolor} />
         <div className="level">Level {level}</div>
         <div className="infos">
-          <img className="portrait" src={data.pic} alt={data.name} />
+          <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
           <div className="name">{data.name}</div>
-          <div className="job">{data.job}</div>
         </div>
         <Stats opponent />
         <Bar opponent type="hitPoints" color={monstercolor} />

@@ -41,6 +41,10 @@ const Bar = ({ connectedData, type, opponent, color }) => {
       value = data.magicPoints
       maxValue = data.maxMagicPoints
       break
+    case `stamina`:
+      value = data.stamina
+      maxValue = data.maxStamina
+      break
     case `physicalRage`:
       value = data.physicalRage
       maxValue = data.maxPhysicalRage

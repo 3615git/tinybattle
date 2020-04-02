@@ -1,6 +1,4 @@
 import { pushBuff } from './stats'
-import { heal } from './hit'
-import rpgDice from "rpgdicejs"
 
 /**
   * @desc Computing the results of magical defense
@@ -12,7 +10,7 @@ const magicalDefend = (data) => {
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
   let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
-  // Defends gives temporary MAGx3, lasts 2 turns, but decreases DEX and STR by half
+  // Defends gives temporary MAGx2, lasts 2 turns, but decreases DEX and STR by half
   const MAGbonus = Math.ceil(activePlayer.MAG * 2)
   const DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
   const STRmalus = -Math.abs(Math.ceil(targetPlayer.STR / 2))

@@ -1,5 +1,5 @@
-import { diceRoll } from '../utils/utils'
-import { getStat } from '../combat/stats'
+import { diceRoll } from '../../utils/utils'
+import { getStat } from './stats'
 import rpgDice from "rpgdicejs"
 
 const toHit = (activePlayer, targetPlayer, type) => {
@@ -69,7 +69,7 @@ const physicalDamage = (activePlayer, targetPlayer, critical) => {
   const activePlayerSTR = getStat(activePlayer, `STR`)
   const targetPlayerCON = getStat(targetPlayer, `CON`)
   // Weapon
-  const activePlayerItem = activePlayer.items.STR ? activePlayer.items.STR.score : false
+  const activePlayerItem = activePlayer.weapons.STR ? activePlayer.weapons.STR.score : false
 
   // Item damage
   let itemDamage = 0 
@@ -99,7 +99,7 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   const activePlayerMAG = getStat(activePlayer, `MAG`)
   const targetPlayerMAG = getStat(targetPlayer, `MAG`)
   // Weapon
-  const activePlayerItem = activePlayer.items.MAG ? activePlayer.items.MAG.score : false
+  const activePlayerItem = activePlayer.weapons.MAG ? activePlayer.weapons.MAG.score : false
 
   // Item damage
   let itemDamage = 0
@@ -123,18 +123,10 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   }
 }
 
-// Heal a player
-const heal = (player, value) => {
-  player.hitPoints += value
-  if (player.hitPoints > player.maxHitPoints) player.hitPoints = player.maxHitPoints
-  return player
-}
-
 export {
   toHit,
   physicalHit, 
   magicalHit,
-  heal,
   physicalDamage,
   magicalDamage,
   criticalChance,

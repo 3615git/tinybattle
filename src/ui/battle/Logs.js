@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from "react-redux"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 
-import shield from '../pics/ui/shield.png'
-import skullPic from '../pics/ui/hitBar_fumble.png'
+import shield from '../../pics/ui/shield.png'
+// import sword from '../pics/ui/sword.png'
+import book from '../../pics/ui/book.png'
+import skullPic from '../../pics/ui/hitBar_fumble.png'
 
 import HitBar from './HitBar'
 import ValueBar from './ValueBar'
@@ -72,17 +74,20 @@ const Logs = ({ log, playerTurn, color }) => {
       }
 
       display = (
-        <div>
-          { title && <div className="title">{title}</div>}
-          <HitBar type={type} hit={data.hit} color={color} />
-          {hit && <div className="title">{data.hit.roll} : {hit}</div>}
-          { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
+        <div className="log_attack">
+          {/* <img src={sword} alt="Attack!" /> */}
+          <div>
+            { title && <div className="title">{title}</div>}
+            <HitBar type={type} hit={data.hit} color={color} />
+            {hit && <div className="title">{data.hit.roll} : {hit}</div>}
+            { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
+          </div>
         </div>
       )
       break;
 
     case `physicalDefend`:
-      title = activePlayer.name + ` defends !`
+      title = `Defence !`
       
       const shieldStyling = {
         marginRight: `15px`
@@ -99,9 +104,12 @@ const Logs = ({ log, playerTurn, color }) => {
           <img src={shield} style={shieldStyling} alt="Defence!" />
           <div>
             {title && <div className="title">{title}</div>}
-            <div className="smallMessage">DEX <span className="logvalue">+{data.dexBonus}</span> - HP <span className="logvalue">+{data.healValue}</span></div>
+            <div className="smallMessage">HP <span className="logvalue bonusColor">+{data.healValue}</span></div>
             <ValueBar type={type} value={data.healRoll} maxValue={data.maxHeal} />
-            <div className="tinyMessage"><img src={skullPic} style={iconStyling} alt="Opponent bonus" />STR<span className="logvalue">+{data.strBonus}</span> for opponent</div>
+            <div className="tinyMessage">
+              DEX <span className="logvalue bonusColor">+{data.dexBonus}</span>&nbsp;-&nbsp;
+              <img src={skullPic} style={iconStyling} alt="Opponent bonus" />STR<span className="logvalue malusColor">+{data.strBonus}</span>
+            </div>
           </div>
         </div>
       )
@@ -142,7 +150,7 @@ const Logs = ({ log, playerTurn, color }) => {
       break;
 
     case `magicalDefend`:
-      title = activePlayer.name + ` focus !`
+      title = `Focus !`
 
       const focusStyling = {
         marginRight: `15px`
@@ -156,14 +164,14 @@ const Logs = ({ log, playerTurn, color }) => {
 
       display = (
         <div className="log_defend">
-          <img src={shield} style={focusStyling} alt="Defence!" />
+          <img src={book} style={focusStyling} alt="Defence!" />
           <div>
             {title && <div className="title">{title}</div>}
-            <div className="smallMessage">MAG <span className="logvalue">+{data.magBonus}</span></div>
+            <div className="smallMessage">MAG <span className="logvalue bonusColor">+{data.magBonus}</span></div>
             <div className="tinyMessage">
-              <img src={skullPic} style={iconStyling} alt="Malus" />STR<span className="logvalue">{data.strMalus}</span>
+              <img src={skullPic} style={iconStyling} alt="Malus" />STR<span className="logvalue malusColor">{data.strMalus}</span>
               &nbsp;
-              <img src={skullPic} style={iconStyling} alt="Malus" />DEX<span className="logvalue">{data.dexMalus}</span>
+              <img src={skullPic} style={iconStyling} alt="Malus" />DEX<span className="logvalue malusColor">{data.dexMalus}</span>
               </div>
           </div>
         </div>

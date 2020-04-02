@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from "react-redux"
 
-import Skills from '../components/Skills'
-import Action from '../components/Action'
-import OpponentAction from '../components/OpponentAction'
+import Skills from './Skills'
+import Action from './Action'
+import OpponentAction from './OpponentAction'
 
-import { attack } from '../redux/actions/index'
+import { attack } from '../../redux/actions/index'
 
 /**
   * @desc description of the component

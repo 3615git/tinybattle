@@ -5,7 +5,13 @@ import gazer from '../pics/opponents/gazer.png'
 import icetitan from '../pics/opponents/icetitan.png'
 import dragonemperor from '../pics/opponents/dragonemperor.png'
 
-const monstersList = {
+const monsterTiers = {
+  low: [`gazer`, `icetitan`],
+  medium: [`thanatos`, `leviathan`],
+  high: [`demon`,  `dragonemperor`]
+}
+
+const monsterList = {
   demon: {
     name: [`Korganas`, `Ilnokt`, `Banduuz`],
     STR: [8,12],
@@ -87,5 +93,6 @@ const monstersList = {
 }
 
 export {
-  monstersList
+  monsterList,
+  monsterTiers
 }

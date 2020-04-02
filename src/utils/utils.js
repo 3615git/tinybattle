@@ -13,8 +13,13 @@ function randomKey(obj) {
   return keys[keys.length * Math.random() << 0]
 }
 
+function randomValue(array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
 export {
   diceRoll,
   randomProperty,
-  randomKey
+  randomKey,
+  randomValue
 }

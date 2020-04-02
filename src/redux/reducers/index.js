@@ -1,12 +1,15 @@
-import { ATTACK } from "../constants/action-types"
+import { GAMESTATE, ATTACK } from "../constants/action-types"
+// Game system
+import { startBattle } from '../../actions/game/startBattle'
 // Combat system
-import { physicalAttack } from '../../combat/physicalAttack'
-import { physicalDefend } from '../../combat/physicalDefend'
-import { physicalSpecial } from '../../combat/physicalSpecial'
-import { magicalAttack } from '../../combat/magicalAttack'
-import { magicalDefend } from '../../combat/magicalDefend'
-import { autoResetBuff } from '../../combat/stats'
-import { manaRefresh } from '../../combat/mana'
+import { physicalAttack } from '../../actions/combat/physicalAttack'
+import { physicalDefend } from '../../actions/combat/physicalDefend'
+import { physicalSpecial } from '../../actions/combat/physicalSpecial'
+import { magicalAttack } from '../../actions/combat/magicalAttack'
+import { magicalDefend } from '../../actions/combat/magicalDefend'
+import { magicalSpecial } from '../../actions/combat/magicalSpecial'
+import { autoResetBuff } from '../../actions/combat/stats'
+import { energyRefresh } from '../../actions/combat/energy'
 // Monster stuff
 import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 
@@ -27,16 +30,14 @@ const initialState = {
     maxHitPoints: 70,
     magicPoints: 30,
     maxMagicPoints: 30,
+    stamina: 30,
+    maxStamina: 30,
     physicalRage: 0,
     maxPhysicalRage: 20,
     magicalRage: 0,
     maxMagicalRage: 30,
     items: {
-      STR: {
-        type: `axe`,
-        id: 5,
-        score: `d6+2`
-      },
+      STR: {},
       DEX: {
         type: `ring`,
         id: 6,
@@ -47,20 +48,30 @@ const initialState = {
         id: 5,
         score: 3
       },
+      MAG: {},
+      LCK: {
+        type: `amulet`,
+        id: 3,
+        score: 2
+      }
+    },
+    weapons: {
+      STR: {
+        type: `axe`,
+        id: 5,
+        score: `d6+2`,
+        cost: 12
+      }, 
       MAG: {
         type: `magic`,
         id: 2,
         score: `3d10`,
         cost: 10
       },
-      LCK: {
-        type: `amulet`,
-        id: 3,
-        score: 2
-      }
-    }
+    },
   },
   game: {
+    state: `welcome`,
     playerTurn: true,
     level: 1
   },
@@ -73,6 +84,18 @@ function rootReducer(state = initialState, action) {
 
   // Prepare next state
   let nextState = {...state}
+
+  // console.log(action)
+
+  if (action.type === GAMESTATE) {
+    switch (action.payload.state) {
+      case `battle`:
+        nextState = startBattle(nextState)
+        break;
+      default:
+        break;
+    }
+  } 
 
   if (action.type === ATTACK) {
   
@@ -88,7 +111,6 @@ function rootReducer(state = initialState, action) {
         case `special`:
           nextState = physicalSpecial(nextState)
           break;
-      
         default:
           break;
       }
@@ -103,7 +125,7 @@ function rootReducer(state = initialState, action) {
           nextState = magicalDefend(nextState)
           break;
         case `special`:
-
+          nextState = magicalSpecial(nextState)
           break;
 
         default:
@@ -112,7 +134,8 @@ function rootReducer(state = initialState, action) {
     }
 
     // Mana reloads
-    nextState = manaRefresh(nextState)
+    nextState = energyRefresh(nextState, `magical`)
+    nextState = energyRefresh(nextState, `physical`)
 
     // Reset temporary buffs
     nextState = autoResetBuff(nextState)

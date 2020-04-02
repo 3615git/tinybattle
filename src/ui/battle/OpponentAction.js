@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { attack } from '../redux/actions/index'
+import { attack } from '../../redux/actions/index'
 
 /**
   * @desc description of the component

@@ -8,8 +8,7 @@ const getStat = (player, stat) => {
   // Permanent buff
   const permanentBuff = findBuff(player, `permanent`, stat)
   // Item buff
-  let itemBuff = player.items[stat] ? player.items[stat].score : 0
-  if (stat === `STR` || stat === `MAG`) itemBuff = 0 // ! not for STR and MAG (damage only)
+  let itemBuff = player.items[stat] && player.items[stat].score ? player.items[stat].score : 0
 
   // Return base/bonus/total
   return {

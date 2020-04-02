@@ -1,14 +1,14 @@
 // import { diceRoll } from '../utils/utils'
-import { magicalHit, magicalDamage } from '../combat/hit'
-import { rage } from '../combat/rage'
-import { manaBurn } from '../combat/mana'
+import { rage } from './rage'
+import { physicalHit, physicalDamage } from './hit'
 import { pushBuff } from './stats'
+import { energyBurn } from './energy'
 
 /**
-  * @desc Computing the basic magical attack results
+  * @desc Computing the basic physical attack results
 */
 
-const magicalAttack = (data) => {
+const physicalAttack = (data) => {
   let { player, opponent, game } = data
 
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
@@ -17,37 +17,41 @@ const magicalAttack = (data) => {
   let damageResult, rageResult
 
   // Hit ?
-  const hitResult = magicalHit(activePlayer, targetPlayer)
+  const hitResult = physicalHit(activePlayer, targetPlayer)
 
-  // Amount of mana burned by item/attack
-  let manaburnResult = activePlayer.items.MAG.cost ? activePlayer.items.MAG.cost : 0
-  // Applying rage & mana burn
-  rageResult = rage(`magicalAttack`, activePlayer, manaburnResult)
-  activePlayer.magicalRage = rageResult
-  activePlayer = manaBurn(activePlayer, manaburnResult)
+  // Amount of stamina burned by item/attack
+  let staminaburnResult = activePlayer.weapons.STR ? activePlayer.weapons.STR.cost : 0
+  // Applying stamina burn
+  activePlayer = energyBurn(activePlayer, staminaburnResult, `physical`)
 
   /* Compute damages */
 
   // Critical hit
   if (hitResult.hit && hitResult.critical) {
-    damageResult = magicalDamage(activePlayer, targetPlayer, true)
+    damageResult = physicalDamage(activePlayer, targetPlayer, true)
+    rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
     if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    // Applying rage
+    targetPlayer.physicalRage = rageResult
   }
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
-    damageResult = magicalDamage(activePlayer, targetPlayer, false)
+    damageResult = physicalDamage(activePlayer, targetPlayer, false)
+    rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
     if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    // Applying rage
+    targetPlayer.physicalRage = rageResult
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
     // Give LCK bonus to opponent 
     pushBuff(targetPlayer, `temporary`, `LCK`, 1, 5)
     // Reset rage because of the fumble
-    activePlayer.magicalRage = 0
+    activePlayer.physicalRage = 0
   }
   // Miss
   else if (!hitResult.hit && !hitResult.fumble) {
@@ -56,11 +60,12 @@ const magicalAttack = (data) => {
 
   // Build log
   let log = {
-    type: `magicalAttack`,
+    type: `physicalAttack`,
     activePlayer,
     targetPlayer,
     data: {
       hit: hitResult,
+      critical: false,
       damage: damageResult
     }
   }
@@ -75,4 +80,4 @@ const magicalAttack = (data) => {
   return nextState 
 }
 
-export { magicalAttack }
+export { physicalAttack }

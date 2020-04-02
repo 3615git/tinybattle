@@ -2,10 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { attack } from '../redux/actions/index'
+import { attack } from '../../redux/actions/index'
+import Bar from './Bar'
+import Item from './Item'
 
-import shield from '../pics/ui/shield.png'
-import sword from '../pics/ui/sword.png'
+import shield_small from '../../pics/ui/shield_small.png'
+// import sword from '../pics/ui/sword.png'
+import book_small from '../../pics/ui/book_small.png'
 
 /**
   * @desc description of the component
@@ -21,7 +24,7 @@ const defaultProps = {}
 
 const mapStateToProps = state => {
   return {
-    data: state.player,
+    player: state.player,
     opponent: state.opponent,
     turn: state.game.playerTurn
   }
@@ -33,7 +36,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Action = ({ type, data, opponent, turn, attack }) => {
+const Action = ({ type, player, opponent, turn, attack }) => {
 
   // Component styling
   const defaultClasses = `buttons`
@@ -42,55 +45,74 @@ const Action = ({ type, data, opponent, turn, attack }) => {
   const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
 
   // Compute special actions
-  let specialPhysical = data.physicalRage === data.maxPhysicalRage
-  let specialMagical = data.magicalRage === data.maxMagicalRage
-  let castMagical = data.magicPoints >= data.items.MAG.cost
+  let specialPhysical = player.physicalRage === player.maxPhysicalRage
+  let specialMagical = player.magicalRage === player.maxMagicalRage
+  let attackMagical = player.magicPoints >= player.weapons.MAG.cost
+  let attackPhysical = player.stamina >= player.weapons.STR.cost
 
   // Wordings
-  let w_Defend, w_Attack, w_Special
-  let pic_Defend, pic_Attack, pic_Special
-  let buttonAttack, actionAttack, buttonSpecial, actionSpecial
+  let w_Defend, w_Special
+  let buttonAttack, actionAttack, buttonSpecial, actionSpecial, weapon, damage, picture
 
   function notready() {}
 
   if (type === `physical`) {
     w_Defend = `Defend`
-    w_Attack = `Attack`
     w_Special = `Special`
-    pic_Defend = shield
-    pic_Attack = sword
-    pic_Special = sword
 
-    buttonAttack = type + " attack"
-    actionAttack = attack
+    buttonAttack = attackPhysical ? type + " attack" : type + " attack disabled"
+    actionAttack = attackPhysical ? attack : notready
     buttonSpecial = specialPhysical ? type + " special" : type + " special disabled"
     actionSpecial = specialPhysical ? attack : notready
+
+    picture = shield_small
+
+    weapon = (
+      <div className="weapon">
+        <div className="itemCost physical">{player.weapons.STR.cost}</div>
+        <Item item={player.weapons.STR.type} level={player.weapons.STR.id} />
+      </div>
+    )
+    damage = (
+      <span>{player.weapons.STR.score}</span>
+    )
   } 
   else {
     w_Defend = `Focus`
-    w_Attack = `Cast`
     w_Special = `Special`
-    pic_Defend = shield
-    pic_Attack = sword
-    pic_Special = sword
 
-    buttonAttack = castMagical ? type + " attack" : type + " attack disabled"
-    actionAttack = castMagical ? attack : notready
+    buttonAttack = attackMagical ? type + " attack" : type + " attack disabled"
+    actionAttack = attackMagical ? attack : notready
     buttonSpecial = specialMagical ? type +" special" : type +" special disabled"
     actionSpecial = specialMagical ? attack : notready
+
+    picture = book_small
+
+    weapon = (
+      <div className="weapon">
+        <div className="itemCost magical">{player.weapons.MAG.cost}</div>
+        <Item item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
+      </div>
+    )
+    damage = (
+      <span>{player.weapons.MAG.score}</span>
+    )
   }
 
   // Display component
   return (
     <div className={itemClasses}>
       <button className={type + " defend"} onClick={() => attack({ type: type, mode: `defend` })}>
-        {w_Defend}
+        <img src={picture} alt={w_Defend}/>
         </button>
       <button className={buttonAttack} onClick={() => actionAttack({ type: type, mode: `attack` })}>
-        {w_Attack}
+        {damage}
+        {weapon}
+        <Bar type={type === `physical` ? "stamina" : "magicPoints"} />
       </button>
       <button className={buttonSpecial} onClick={() => actionSpecial({ type: type, mode: `special` })}>
         {w_Special}
+        <Bar type={type === `physical` ? "physicalRage" : "magicalRage"} />
       </button>
     </div>
   )
