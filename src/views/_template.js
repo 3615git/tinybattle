@@ -3,10 +3,7 @@ import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
 
-import logo from '../pics/ui/logo.png'
-
 import '../css/app.css'
-import '../css/welcome.css'
 import '../css/items.css'
 import '../css/animations.css'
 
@@ -34,12 +31,10 @@ class Welcome extends Component {
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
-          <div className="presentationArea">
-            <img id="logo" src={logo} alt="Caves of D20" />
-          </div>
-          <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Start game !</button>
-          </div>
+          Welcome to Tiny Battle !
+
+          <button onClick={() => setGameState({ state: `battle` })}>Start !</button>
+
         </div>
       </div>
     )

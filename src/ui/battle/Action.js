@@ -6,10 +6,6 @@ import { attack } from '../../redux/actions/index'
 import Bar from './Bar'
 import Item from './Item'
 
-import shield_small from '../../pics/ui/shield_small.png'
-// import sword from '../pics/ui/sword.png'
-import book_small from '../../pics/ui/book_small.png'
-
 /**
   * @desc description of the component
   * @todo Use a todo tag to store future changes
@@ -20,7 +16,6 @@ const propTypes = {
 }
 
 const defaultProps = {}
-
 
 const mapStateToProps = state => {
   return {
@@ -52,7 +47,7 @@ const Action = ({ type, player, opponent, turn, attack }) => {
 
   // Wordings
   let w_Defend, w_Special
-  let buttonAttack, actionAttack, buttonSpecial, actionSpecial, weapon, damage, picture
+  let buttonAttack, actionAttack, buttonSpecial, actionSpecial, weapon, damage
 
   function notready() {}
 
@@ -64,8 +59,6 @@ const Action = ({ type, player, opponent, turn, attack }) => {
     actionAttack = attackPhysical ? attack : notready
     buttonSpecial = specialPhysical ? type + " special" : type + " special disabled"
     actionSpecial = specialPhysical ? attack : notready
-
-    picture = shield_small
 
     weapon = (
       <div className="weapon">
@@ -86,8 +79,6 @@ const Action = ({ type, player, opponent, turn, attack }) => {
     buttonSpecial = specialMagical ? type +" special" : type +" special disabled"
     actionSpecial = specialMagical ? attack : notready
 
-    picture = book_small
-
     weapon = (
       <div className="weapon">
         <div className="itemCost magical">{player.weapons.MAG.cost}</div>
@@ -103,8 +94,8 @@ const Action = ({ type, player, opponent, turn, attack }) => {
   return (
     <div className={itemClasses}>
       <button className={type + " defend"} onClick={() => attack({ type: type, mode: `defend` })}>
-        <img src={picture} alt={w_Defend}/>
-        </button>
+        {w_Defend}
+      </button>
       <button className={buttonAttack} onClick={() => actionAttack({ type: type, mode: `attack` })}>
         {damage}
         {weapon}

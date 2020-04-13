@@ -123,6 +123,13 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   }
 }
 
+// Set hit state for UI display
+const displayHits = (prevState, nextState) => {
+  nextState.game.playerHit = prevState.player.hitPoints > nextState.player.hitPoints
+  nextState.game.opponentHit = prevState.opponent.hitPoints > nextState.opponent.hitPoints
+  return nextState
+}
+
 export {
   toHit,
   physicalHit, 
@@ -130,5 +137,6 @@ export {
   physicalDamage,
   magicalDamage,
   criticalChance,
-  fumbleChance
+  fumbleChance,
+  displayHits
 }

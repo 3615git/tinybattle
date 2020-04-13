@@ -29,15 +29,14 @@ const Infos = ({ name, job, level, xp, gold }) => {
   return (
     <div className="playerInfoWrapper">
       <div className={itemClasses}>
-        <div className="player">
-          <span className="name">{name}</span>
-        </div>
         <div className="gold">
           <Item item="coins" level={5} small />
           <span>{gold}</span>
         </div>
+        <div className="player">
+          <span className="name">{name}</span>
+        </div>
         <div className="level">
-          <div>Nv. {level}</div>
           <Bar type="xp" />
         </div>
       </div>

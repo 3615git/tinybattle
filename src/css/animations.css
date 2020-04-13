@@ -53,40 +53,40 @@
 
 
 /* Critical animation : rubber bounce */
-@keyframes critical {
+@keyframes monsterAttack {
   from {
     -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
+    transform: translateY(-50%) scale3d(1, 1, 1);
   }
 
   30% {
     -webkit-transform: scale3d(1.25, 0.75, 1);
-    transform: scale3d(1.25, 0.75, 1);
+    transform: translateY(-80%) scale3d(1.25, 0.75, 1);
   }
 
   40% {
     -webkit-transform: scale3d(0.75, 1.25, 1);
-    transform: scale3d(0.75, 1.25, 1) scale(1.08);
+    transform: translateY(-30%) scale3d(0.75, 1.25, 1) scale(1.20);
   }
 
   50% {
     -webkit-transform: scale3d(1.15, 0.85, 1);
-    transform: scale3d(1.15, 0.85, 1);
+    transform: translateY(-20%) scale3d(1.15, 0.85, 1) scale(1.20);
   }
 
   65% {
     -webkit-transform: scale3d(0.95, 1.05, 1);
-    transform: scale3d(0.95, 1.05, 1);
+    transform: translateY(-30%) scale3d(0.95, 1.05, 1) scale(1.20);
   }
 
   75% {
     -webkit-transform: scale3d(1.05, 0.95, 1);
-    transform: scale3d(1.05, 0.95, 1);
+    transform: translateY(-40%) scale3d(1.05, 0.95, 1) scale(1.20);
   }
 
   to {
     -webkit-transform: scale3d(1, 1, 1);
-    transform: scale3d(1, 1, 1);
+    transform: translateY(-50%) scale3d(1, 1, 1);
   }
 }
 
@@ -97,6 +97,20 @@
     to {
         transform:rotate(360deg);
     }
+}
+
+@keyframes rumble {
+    0% {transform: rotate(0deg);}
+    20% {transform: translate(4px, 0px) rotate(-2deg);}
+    40% {transform: translate(2px, -6px) rotate(2deg);}
+    60% {transform: translate(-2px, -4px) rotate(0deg);}
+    80% {transform: translate(6px, 2px) rotate(2deg);} 
+    90% {transform: translate(4px, -2px) rotate(-2deg);} 
+    100% {transform: translate(0px, 0px) rotate(0deg);} 
+}
+
+.animation-rumble {
+  animation: rumble 0.40s cubic-bezier(.36,.07,.19,.97) both;
 }
 
 /** TRANSITIONS **/
@@ -150,4 +164,26 @@
   opacity: 0;
   transform: translate(0, 100px) scale(.4);
   transition: all 300ms ease-in-out;
+}
+
+/** Fade between views transition */
+.fadeView_2000-enter, .fadeView_2000-appear {
+  opacity: 0;
+}
+
+/* ending ENTER animation */
+.fadeView_2000-enter-active, .fadeView_2000-appear-active, .fadeView_2000-appear-done {
+  opacity: 1;
+  transition: all 2000ms ease-in-out;
+}
+
+/* starting EXIT animation */
+.fadeView_2000-exit {
+  opacity: 1;
+}
+
+/* ending EXIT animation */
+.fadeView_2000-exit-active {
+  opacity: 0;
+  transition: all 2000ms ease-in-out;
 }

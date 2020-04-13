@@ -1,6 +1,8 @@
 import { GAMESTATE, ATTACK } from "../constants/action-types"
 // Game system
+import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
+import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
 // Combat system
 import { physicalAttack } from '../../actions/combat/physicalAttack'
 import { physicalDefend } from '../../actions/combat/physicalDefend'
@@ -10,11 +12,9 @@ import { magicalDefend } from '../../actions/combat/magicalDefend'
 import { magicalSpecial } from '../../actions/combat/magicalSpecial'
 import { autoResetBuff } from '../../actions/combat/stats'
 import { energyRefresh } from '../../actions/combat/energy'
-// Monster stuff
-import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
+import { displayHits } from '../../actions/combat/hit'
 
 const initialState = {
-  opponent: getMonsterFromLevel(1),
   player: {
     name: `Michel le Magnifique`,
     xp: 0,
@@ -60,35 +60,43 @@ const initialState = {
         type: `axe`,
         id: 5,
         score: `d6+2`,
-        cost: 12
+        cost: 4
       }, 
       MAG: {
         type: `magic`,
         id: 2,
         score: `3d10`,
-        cost: 10
+        cost: 4
       },
     },
   },
   game: {
     state: `welcome`,
-    playerTurn: true,
-    level: 1
-  },
-  log: {
-    type: `battleStart`
+    settings: {
+      combatSpeed: 1500
+    }
   }
 }
 
 function rootReducer(state = initialState, action) {
 
   // Prepare next state
-  let nextState = {...state}
+  let prevState = { ...state }
+  let nextState = { ...state }
 
-  // console.log(action)
+  console.log(action)
 
   if (action.type === GAMESTATE) {
     switch (action.payload.state) {
+      case `welcome`:
+        // nextState = resetWelcome(nextState)
+        break;
+      case `battleIntro`:
+        nextState = battleIntro(nextState)
+        break;
+      case `playerTurn`:
+        nextState = logsToPlayerTurn(nextState)
+        break;
       case `battle`:
         nextState = startBattle(nextState)
         break;
@@ -127,7 +135,6 @@ function rootReducer(state = initialState, action) {
         case `special`:
           nextState = magicalSpecial(nextState)
           break;
-
         default:
           break;
       }
@@ -140,9 +147,11 @@ function rootReducer(state = initialState, action) {
     // Reset temporary buffs
     nextState = autoResetBuff(nextState)
 
+    // Compute hits for UI display
+    nextState = displayHits(prevState, nextState)
+
     // Switch player turn
     nextState.game.playerTurn = !nextState.game.playerTurn
-
   }
 
   // console.log(nextState)

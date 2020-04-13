@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import Bar from './Bar'
+import Items from './Items'
 import Stats from './Stats'
-import TurnIndicator from './TurnIndicator'
+// import TurnIndicator from './TurnIndicator'
 
 /**
   * @desc Main opponent block
@@ -12,7 +13,6 @@ import TurnIndicator from './TurnIndicator'
 const mapStateToProps = state => {
   return { 
     data: state.opponent,
-    turn: !state.game.playerTurn,
     level: state.game.level
   }
 }
@@ -45,7 +45,6 @@ class Opponent extends Component {
         portraitReady: true
       })
     })
-
   }
 
   // Display component
@@ -56,7 +55,7 @@ class Opponent extends Component {
     // Get colors from scene
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
-    const appbackground = color.darkMuted
+    const appbackground = color.darkVibrant // color.darkMuted
 
     // Component styling
     const defaultClasses = `opponentWrapper`
@@ -92,14 +91,15 @@ class Opponent extends Component {
     return [
       <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
-        <TurnIndicator color={monstercolor} />
-        <div className="level">Level {level}</div>
+        {/* <TurnIndicator color={monstercolor} /> */}
         <div className="infos">
-          <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
+          <div className="level">Level {level}</div>
           <div className="name">{data.name}</div>
         </div>
         <Stats opponent />
+        <Items opponent />
         <Bar opponent type="hitPoints" color={monstercolor} />
+        <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
       </div>
     ]
   }

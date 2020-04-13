@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from "react-redux"
 
+import { setGameState } from '../../redux/actions/index'
+
 /**
   * @desc Display what happened when either player has lost the battle
 */
@@ -15,11 +17,11 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    setGameState: payload => dispatch(setGameState(payload))
   }
 }
 
-const EndGame = ({player, opponent, playerTurn }) => {
+const EndGame = ({ player, opponent, setGameState }) => {
 
   // Component styling
   const defaultClasses = `endGame`
@@ -31,11 +33,13 @@ const EndGame = ({player, opponent, playerTurn }) => {
   if (player.hitPoints <= 0) return (
     <div className={itemClasses}>
       Player is dead
+      <button onClick={() => setGameState({ state: `welcome` })}>Start again !</button>
     </div>
   ) 
   else if (opponent.hitPoints <= 0) return (
     <div className={itemClasses}>
       Opponent is dead
+      <button onClick={() => setGameState({ state: `battleIntro` })}>Next level !</button>
     </div>
   ) 
   // Nothing to display

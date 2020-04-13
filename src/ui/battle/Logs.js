@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
+import chroma from "chroma-js"
 
 import shield from '../../pics/ui/shield.png'
 // import sword from '../pics/ui/sword.png'
@@ -32,16 +33,30 @@ const Logs = ({ log, playerTurn, color }) => {
   const { type, activePlayer, data } = log
 
   // Component styling
-  const defaultClasses = `LogsWrapper`
+  const defaultClasses = `LogsWrapper ${type}`
 
   // Build log message
   let display
   let title, damage
   let wrapperStyling, iconStyling
 
+  // Log styling
+  const logStyle = playerTurn 
+    ? { background: chroma(color.darkVibrant).alpha(0.5) }
+    : {  }
+
   switch (type) {
     case `battleStart`:
       title = `Battle starts !`
+      display = (
+        <div>
+          {title && <div className="title">{title}</div>}
+        </div>
+      )
+      break;
+
+    case `playerTurn`:
+      title = `Your turn !`
       display = (
         <div>
           {title && <div className="title">{title}</div>}
@@ -140,7 +155,7 @@ const Logs = ({ log, playerTurn, color }) => {
       }
 
       display = (
-        <div>
+        <div className="log_attack">
           {title && <div className="title">{title}</div>}
           <HitBar type={type} hit={data.hit} color={color} />
           {magicalHit && <div className="title">{data.hit.roll} : {magicalHit}</div>}
@@ -185,16 +200,11 @@ const Logs = ({ log, playerTurn, color }) => {
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses, wrapperStyling].filter(val => val).join(` `)
 
-  let logContent
-
-  if (type === `physicalAttack`) logContent = (
+  let logContent = (
     <div className={itemClasses}>
-      {display}
-    </div>
-  ) 
-  else logContent = (
-    <div className={itemClasses}>
-      {display}
+      <div className="log" style={logStyle}>
+        {display}
+      </div>
     </div>
   )
 

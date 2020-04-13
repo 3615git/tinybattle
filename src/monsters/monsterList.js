@@ -2,11 +2,13 @@ import demon from '../pics/opponents/demon.png'
 import leviathan from '../pics/opponents/leviathan.png'
 import thanatos from '../pics/opponents/thanatos.png'
 import gazer from '../pics/opponents/gazer.png'
-import icetitan from '../pics/opponents/icetitan.png'
+import arcanegolem from '../pics/opponents/arcanegolem.png'
+import dryad from '../pics/opponents/dryad.png'
 import dragonemperor from '../pics/opponents/dragonemperor.png'
+import blindworm from '../pics/opponents/blindworm.png'
 
 const monsterTiers = {
-  low: [`gazer`, `icetitan`],
+  low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
   medium: [`thanatos`, `leviathan`],
   high: [`demon`,  `dragonemperor`]
 }
@@ -77,18 +79,44 @@ const monsterList = {
     items: [`STR`, `LCK`],
     pic: [gazer]
   },
-  icetitan: {
-    name: [`Demeres`],
+  arcanegolem: {
+    name: [`Arcane Golem`],
     STR: [3, 5],
     DEX: [3, 6],
-    CON: [2, 4],
-    MAG: [10, 15],
+    CON: [1, 2],
+    MAG: [2, 3],
     LCK: [4, 7],
     fumble: 2,
-    maxHitPoints: [40, 70],
+    maxHitPoints: [10, 20],
     maxMagicPoints: [100, 200],
     items: [`STR`, `LCK`],
-    pic: [icetitan]
+    pic: [arcanegolem]
+  },
+  dryad: {
+    name: [`Dryad`],
+    STR: [3, 5],
+    DEX: [3, 6],
+    CON: [1, 2],
+    MAG: [2, 3],
+    LCK: [4, 7],
+    fumble: 2,
+    maxHitPoints: [10, 20],
+    maxMagicPoints: [100, 200],
+    items: [`STR`, `LCK`],
+    pic: [dryad]
+  },
+  blindworm: {
+    name: [`Blind Worm`, `Cave Worm`],
+    STR: [3, 5],
+    DEX: [3, 6],
+    CON: [1, 2],
+    MAG: [2, 3],
+    LCK: [4, 7],
+    fumble: 2,
+    maxHitPoints: [10, 20],
+    maxMagicPoints: [100, 200],
+    items: [`STR`, `LCK`],
+    pic: [blindworm]
   }
 }
 

@@ -57,8 +57,8 @@ const Bar = ({ connectedData, type, opponent, color }) => {
       break
     case `xp`:
       value = data.xp
-      maxValue = data.maxMagicalRage
-      size = `tiny`
+      maxValue = `trouze`
+      size = `small`
       break
     default :
       break

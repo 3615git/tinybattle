@@ -1,15 +1,15 @@
+
 /**
   * @desc Starting a new battle
 */
 
 const startBattle = (data) => {
-  let { player, opponent, game } = data
+  // Set log to battleStart
+  data.log = { type: `battleStart` }
+  // Set game state
+  data.game.state = `battle`
 
-  
-
-  const nextState = data
-
-  return nextState
+  return data
 }
 
 export { startBattle }

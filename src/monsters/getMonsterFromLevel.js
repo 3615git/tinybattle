@@ -7,10 +7,10 @@ function getLevelInfo(level) {
   
   // Tier switch
   switch (level) {
-    case level > 2:
+    case level = 3:
       levelMonsters = monsterTiers[`high`]
       break;
-    case level > 1:
+    case level = 2:
       levelMonsters = monsterTiers[`medium`]
       break;
     case level = 1:
@@ -31,7 +31,7 @@ function getMonsterFromLevel(level) {
   const levelInfo = getLevelInfo(level)
   // Todo : remove alredy played monsters from array
   const monster = randomValue(levelInfo.monsters)
-  console.log(monster)
+  
   return monsterInfo(monster)
 }
 

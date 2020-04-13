@@ -37,19 +37,9 @@ const Action = ({ type, data, opponent, turn, attack }) => {
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
-  // const portraitStyle = {
-  //   backgroundImage: `url("${opponent.pic}")`,
-  //   backgroundSize: `contain`,
-  //   backgroundRepeat: `no-repeat`,
-  //   backgroundPosition: `center center`
-  // }
-
   // Display component
   return (
-    <div className={itemClasses} onClick={() => attack({ type: type, mode: `attack` })}>
-      <div>Next turn</div>
-      <div>{opponent.name}</div>
-    </div>
+    <div className={itemClasses} />
   )
 }
 

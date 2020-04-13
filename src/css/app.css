@@ -44,6 +44,7 @@ html, body, #root {
   margin: 0;
   text-shadow: 1px 1px black;
   image-rendering: pixelated;
+  background-color: black;
 }
 
 .mainWrapper {
@@ -70,42 +71,77 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 500px;
   height: 100%;
-  max-width: 340px;
-  max-height: 750px;
-  padding-bottom: 30px;
-  padding-top: 60px;
+  /* max-width: 340px;
+  max-height: 750px; */
+  padding: 0px;
+  overflow: hidden; /* Prevents side scrolling for overflowing pictures */
+}
+
+.vibrationWrapper {
+  display: flex;
+  flex: 1;
+}
+
+.presentationArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.actionArea {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Player area */
+.playerArea {
+  flex: 1;
+  position: relative;
+  transition: all 500ms;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  /* border-radius: 5px; */
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.playerArea.playerTurn {
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.playerArea.opponentTurn {
+  opacity: .5;
+  transition: all 500ms;
 }
 
 /* Player info on top */
 
 .playerInfoWrapper {
-  position: fixed;
   display: flex;
   justify-content: center;
-  top: 0;
-  left: 0;
   width: 100%;
   z-index: 10;
 }
 
 .playerInfo {
   display: flex;
-  background: rgba(0, 0, 0, 0.64);
   justify-content: space-between;
-  width: 100%;
-  max-width: 340px;
-  padding: 5px 10px;
-  margin-bottom: 5px;
+  flex: 1;
+  font-size: 11px;
+  margin-bottom: 10px;
   text-align: center;
-  z-index: 10;
-  border-radius: 0px 0px 5px 5px;
 }
 
 .playerInfo .gold {
   display: flex;
   align-items: center;
-  flex-basis: 15%;
+  flex-basis: 20%;
 }
 
 .playerInfo .gold span {
@@ -115,7 +151,7 @@ html, body, #root {
 .playerInfo .player {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   text-align: center;
   flex: 1;
@@ -134,7 +170,7 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-basis: 15%;
+  flex-basis: 20%;
   font-size: 10px;
 }
 
@@ -151,6 +187,8 @@ html, body, #root {
   text-shadow: 0px 0px 3px black;
   filter: drop-shadow( 0px 0px 5px rgba(0, 0, 0, 1));
   z-index: 1;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .playerStats > div {
@@ -193,9 +231,12 @@ html, body, #root {
 /* Player items */
 .playerItems {
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  margin: 5px 0px 10px 0px;
+  padding: 5px 0px 10px 0px;
   z-index: 1;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .playerItems > div {
@@ -217,6 +258,8 @@ html, body, #root {
 .playerSkills {
   display: flex;
   justify-content: space-between;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .playerSkills > div {
@@ -237,9 +280,10 @@ html, body, #root {
 .opponentWrapper {
   position: relative;
   padding: 10px;
-  margin-bottom: 10px;
-  margin-top: 15px;
+  margin: 10px;;
   flex: 1;
+  overflow: hidden;
+  min-height: 260px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -253,57 +297,35 @@ html, body, #root {
 
 .opponentWrapper.turn {
   transition: all 500ms;
-}
-
-.opponentWrapper.turn .portrait {
-  transition: all 2000ms;
-  transform: scale(1.05);
-  opacity: 0;
+  overflow: visible;
 }
 
 .opponentWrapper.turn .portrait.ready {
   opacity: 1;
   transition: all 2000ms;
   filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5)) brightness(100%);
-  animation: critical 1s cubic-bezier(.36,.07,.19,.97) both;
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-.opponentWrapper .level {
-  z-index: 1;
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 10px;
-  font-size: 10px;
-  opacity: 0.6;
+  animation: monsterAttack 1s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translateY(-50%);
 }
 
 .opponentWrapper .infos {
+  z-index: 1;
   display: flex;
+  justify-content: space-between;
   width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
 }
 
 .opponentWrapper .portrait {
   position: absolute;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
+  top: 50%;
+  transform: translateY(-50%);
   transition: all 300ms;
   filter: brightness(50%);
-}
-
-.opponentWrapper .name {
-  font-size: 16px;
-  margin: 10px 0px 3px 0px;
-  z-index: 10;
-  text-shadow: 0px 0px 7px black, 0px 0px 10px black;
-  align-self: flex-end;
+  z-index: 0;
 }
 
 /* Gauge */
@@ -315,11 +337,11 @@ html, body, #root {
 
 .bar {
   width: 100%;
-  background-color: rgba(255,255,255,.10);
-  filter: drop-shadow(0px 0px 3px #000000);
+  background-color: rgba(0, 0, 0, 0.39);
   border-radius: 4px;
   display: flex;
   position: relative;
+  z-index: 1;
 }
 
 .bar .indicator {
@@ -340,7 +362,11 @@ html, body, #root {
 
 .bar.hitPoints .indicator {
   background-color: #e7323b;
-  height: 25px;
+  height: 35px;
+}
+
+.bar.hitPoints .value {
+  font-size: 12px;
 }
 
 .bar.magicPoints .indicator {
@@ -456,79 +482,23 @@ html, body, #root {
   border-radius: 0px 4px 4px 0px;
 }
 
-.LogsContainer {
-  position: relative;
-  flex: 1;
-  z-index: 1;
-}
-
-.LogsAnimationContainer {
-  flex: 1;
-}
-
-.LogsWrapper {
-  position: absolute;
-  width: 100%;
-  min-height: 80px;
-  height: 100%;
-  padding: 10px;
-  flex:1;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  /* background: linear-gradient(0deg, #112022 74%, rgba(0, 212, 255, 0) 100%); */
-  z-index: 10;
-}
-
-.LogsWrapper > div {
-  width: 100%;
-}
-
-.LogsWrapper .title {
-  margin-bottom: 10px;
-}
-
-.LogsWrapper .message {
-  font-size: 26px;
-}
-
-.LogsWrapper .logvalue {
-  padding: 0px 5px;
-} 
-
-.LogsWrapper .smallMessage {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.LogsWrapper .tinyMessage {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.LogsWrapper .special {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.LogsWrapper .result {
-
-}
-
-.log_defend {
-  display: flex;
-  align-items: center;
-}
-
 .damage {
   color: #e7323b;
 }
 
 /* Buttons */
+button.navigation {
+  width: 250px;
+  margin: 0 auto;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 16px;
+}
+
 .actionWrapper {
   position: relative;
   margin-top: 10px;
@@ -549,7 +519,7 @@ html, body, #root {
   margin-left: 10px;
 }
 
-button {
+.buttons button {
   position: relative;
   height: 52px;
   border: none;
@@ -566,33 +536,33 @@ button {
   top: -6px;
 }
 
-button.attack {
+.buttons button.attack {
   flex-basis: 50%;
   margin-left: 10px;
   padding: 0px 8px 0px 55px;
 }
 
-button.physical {
+.buttons button.physical {
   background: #e7323b;
 }
 
-button.magical {
+.buttons button.magical {
   background: #0494ab;
 }
 
-button.disabled {
+.buttons button.disabled {
   cursor: not-allowed;
 }
 
-button.physical.disabled {
+.buttons button.physical.disabled {
   background: #e8323b30;
 }
 
-button.magical.disabled {
+.buttons button.magical.disabled {
   background: #0494ab2e;
 }
 
-button .weapon {
+.buttons button .weapon {
   width: 48px;
   height: 52px;
   position: absolute;
@@ -605,7 +575,7 @@ button .weapon {
   background-color: rgba(0, 0, 0, 0.55);
 }
 
-button .weapon .itemCost {
+.buttons button .weapon .itemCost {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -613,15 +583,15 @@ button .weapon .itemCost {
   font-size: 8px;
 }
 
-button .weapon .itemCost.magical {
+.buttons button .weapon .itemCost.magical {
   color: #1fbbd4;
 }
 
-button .weapon .itemCost.physical {
+.buttons button .weapon .itemCost.physical {
   color: #cf6d0b;
 }
 
-button .bar {
+.buttons button .bar {
   background-color: rgba(0, 0, 0, 0.28);
   margin-top: 5px;
   filter: drop-shadow(0px 0px 2px rgba(0,0,0,.5));

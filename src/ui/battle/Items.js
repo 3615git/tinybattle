@@ -1,26 +1,33 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
 import Item from './Item'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc items bar for player and opponent
 */
+
+const propTypes = {
+  opponent: PropTypes.bool
+}
+
+const defaultProps = {
+  opponent: false
+}
 
 const mapStateToProps = state => {
   return {
-    STR: state.player.items.STR,
-    DEX: state.player.items.DEX,
-    CON: state.player.items.CON,
-    MAG: state.player.items.MAG,
-    LCK: state.player.items.LCK
+    data: state
   }
 }
 
 function renderItem(STAT) {
-  if (STAT.type && STAT.id && STAT.score) return (
-    <div>
+  if (STAT && STAT.type && STAT.id && STAT.score) return (
+    <div className="position-relative">
+      {STAT.cost &&
+        <div className="itemCost physical">{STAT.cost}</div>
+      }
       <Item item={STAT.type} level={STAT.id} />
       <span>+{STAT.score}</span>
     </div>
@@ -30,7 +37,9 @@ function renderItem(STAT) {
   )
 }
 
-const Items = ({ STR, DEX, CON, MAG, LCK }) => {
+const Items = ({ data, opponent }) => {
+
+  const activePlayer = opponent ? data.opponent : data.player
 
   // Component styling
   const defaultClasses = `playerItems`
@@ -40,22 +49,18 @@ const Items = ({ STR, DEX, CON, MAG, LCK }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div className="position-relative">
-        <div className="itemCost physical">{STR.cost}</div>
-        <Item item={STR.type} level={STR.id} />
-        <span>{STR.score}</span>
-      </div>
-      {renderItem(DEX)}
-      {renderItem(CON)}
-      <div className="position-relative">
-        <div className="itemCost magical">{MAG.cost}</div>
-        <Item item={MAG.type} level={MAG.id} />
-        <span>{MAG.score}</span>
-      </div>
-      {renderItem(LCK)}
+      {renderItem(activePlayer.items.STR)}
+      {renderItem(activePlayer.items.DEX)}
+      {renderItem(activePlayer.items.CON)}
+      {renderItem(activePlayer.items.MAG)}
+      {renderItem(activePlayer.items.LCK)}
     </div>
   )
 }
+
+// Applying propTypes definition and default values
+Items.propTypes = propTypes
+Items.defaultProps = defaultProps
 
 // Exporting as default
 export default connect(mapStateToProps)(Items)
