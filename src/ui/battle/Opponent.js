@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import Bar from './Bar'
-import Items from './Items'
-import Stats from './Stats'
-// import TurnIndicator from './TurnIndicator'
+import StatsAndItems from './StatsAndItems'
+import EliteBackground from './EliteBackground'
 
 /**
   * @desc Main opponent block
@@ -91,13 +90,17 @@ class Opponent extends Component {
     return [
       <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
-        {/* <TurnIndicator color={monstercolor} /> */}
+        {data.elite && <EliteBackground color={monstercolor} />}
         <div className="infos">
           <div className="level">Level {level}</div>
-          <div className="name">{data.name}</div>
+          <div className="name">
+            {data.elite 
+              ? <div>{data.name}<div className="eliteMarker">Elite</div></div>
+              : <div>{data.name}</div>
+            }
+          </div>
         </div>
-        <Stats opponent />
-        <Items opponent />
+        <StatsAndItems opponent />
         <Bar opponent type="hitPoints" color={monstercolor} />
         <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
       </div>

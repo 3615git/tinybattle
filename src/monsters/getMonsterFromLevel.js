@@ -32,7 +32,7 @@ function getMonsterFromLevel(level) {
   // Todo : remove alredy played monsters from array
   const monster = randomValue(levelInfo.monsters)
   
-  return monsterInfo(monster)
+  return monsterInfo(monster, level)
 }
 
 export {

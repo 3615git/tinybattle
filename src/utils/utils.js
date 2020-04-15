@@ -17,9 +17,17 @@ function randomValue(array) {
   return array[Math.floor(Math.random() * array.length)]
 }
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+const sumOfArray = arr => arr.reduce((a, b) => a + b, 0)
+
 export {
   diceRoll,
   randomProperty,
   randomKey,
-  randomValue
+  randomValue,
+  getRandomInt, 
+  sumOfArray
 }

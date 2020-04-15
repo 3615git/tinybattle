@@ -22,18 +22,18 @@ const mapStateToProps = state => {
   }
 }
 
-function renderItem(STAT) {
-  if (STAT && STAT.type && STAT.id && STAT.score) return (
-    <div className="position-relative">
-      {STAT.cost &&
-        <div className="itemCost physical">{STAT.cost}</div>
+function renderItem(item) {
+  if (item && item.type && item.id && item.score) return (
+    <div className={`item_wrapper ${item.quality}`}>
+      {item.cost &&
+        <div className="itemCost physical">{item.cost}</div>
       }
-      <Item item={STAT.type} level={STAT.id} />
-      <span>+{STAT.score}</span>
+      <Item item={item.type} level={item.id} />
+      <span>+{item.score}</span>
     </div>
   ) 
   else return (
-    <div />
+    <div className="item_wrapper" />
   )
 }
 

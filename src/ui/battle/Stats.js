@@ -23,19 +23,19 @@ const mapStateToProps = state => {
 }
 
 const StatCounter = ({ stat }) => {
-  const {natural, temporary} = stat
+  const {natural, temporary, items} = stat
 
   let currentStatValue = natural + temporary
 
   let variationClasses = ``
-  if (currentStatValue > stat.natural) variationClasses = `up`
-  else if (currentStatValue < stat.natural) variationClasses = `down`
+  if (currentStatValue > natural) variationClasses = `up`
+  else if (currentStatValue < natural) variationClasses = `down`
 
   const itemClasses = [variationClasses].filter(val => val).join(` `)
 
   return (
     <div className={itemClasses}>
-      {currentStatValue}
+      {currentStatValue + items}
     </div>
   )
 }

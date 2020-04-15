@@ -40,15 +40,14 @@ const initialState = {
       STR: {},
       DEX: {
         type: `ring`,
-        id: 6,
-        score: 2
+        id: 12,
+        score: 3
       },
       CON: {
         type: `shield`,
         id: 5,
         score: 3
       },
-      MAG: {},
       LCK: {
         type: `amulet`,
         id: 3,
@@ -63,7 +62,7 @@ const initialState = {
         cost: 4
       }, 
       MAG: {
-        type: `magic`,
+        type: `magicweapon`,
         id: 2,
         score: `3d10`,
         cost: 4

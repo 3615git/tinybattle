@@ -4,8 +4,7 @@ import * as Vibrant from 'node-vibrant'
 
 import EndGame from '../ui/battle/EndGame'
 import Opponent from '../ui/battle/Opponent'
-import Stats from '../ui/battle/Stats'
-import Items from '../ui/battle/Items'
+import StatsAndItems from '../ui/battle/StatsAndItems'
 import Bars from '../ui/battle/Bars'
 import Actions from '../ui/battle/Actions'
 import Logs from '../ui/battle/Logs'
@@ -15,7 +14,8 @@ import { setGameState, attack } from '../redux/actions/index'
 
 import '../css/app.css'
 import '../css/battle_logs.scss'
-import '../css/items.css'
+import '../css/battle_stats.scss'
+import '../css/items.scss'
 import '../css/animations.css'
 
 const mapStateToProps = state => {
@@ -133,8 +133,7 @@ class Battle extends Component {
             <div className={playerAreaClass}>
               {/* <Infos /> */}
               <Bars />
-              <Stats />
-              <Items />
+              <StatsAndItems />
               <Actions />
             </div>
           </VibrationWrapper>

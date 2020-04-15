@@ -1,0 +1,73 @@
+/* Items */
+.item_wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  font-size: 9px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255,255,255,.08);
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.89);
+
+  &.magic { 
+    border: 1px solid #0072ffd1;
+    background-color: #1964e226;
+  }
+  &.rare { 
+    border: 1px solid #ffe000bf; 
+    background-color: #eac13845;
+  }
+  &.legendary { 
+    border: 1px solid #ff5e00; 
+    background-color: #ed3d0861;
+  }
+}
+
+.item {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 2px;
+  background-repeat: no-repeat;
+  background-size: 32px;
+
+  &.small {
+    width: 16px;
+    height: 16px;
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+  }
+}
+
+/** Items lists **/
+$forge: (
+  "amulet": 43, 
+  "armor": 194, 
+  "axe": 120,
+  "bag": 12,
+  "belt": 2,
+  "book":25,
+  "bow":28,
+  "coin": 12,
+  "coins": 12,
+  "glove": 11,
+  "hammer": 36,
+  "helmet": 181,
+  "leg": 58,
+  "magicweapon": 28,
+  "potion": 60,
+  "ring": 20,
+  "shield": 145,
+  "shoe": 44,
+  "sword": 162,
+  "vial": 8
+);
+
+@each $item, $count in $forge {
+  @for $i from 1 through $count { .item.#{$item}_#{$i} { background-image: url('../pics/items/#{$item}/#{$item}_#{$i}.png'); } }
+}

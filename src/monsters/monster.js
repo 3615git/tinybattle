@@ -1,4 +1,6 @@
 import { monsterList } from './monsterList'
+import { getMonsterItems } from './getMonsterItems'
+import { getRandomInt } from '../utils/utils'
 
 function monsterName(monsterData) {
   // todo : bosses have a prefix
@@ -7,6 +9,12 @@ function monsterName(monsterData) {
 
 function monsterPic(monsterData) {
   return monsterData.pic[Math.floor(Math.random() * monsterData.pic.length)]
+}
+
+// Check if current moster is elite level
+function monsterElite(monsterData) {
+  const eliteRate = monsterData.elite ? monsterData.elite : 0
+  return getRandomInt(1, 100) <= eliteRate
 }
 
 function monsterStat(monsterData, stat) {
@@ -36,17 +44,22 @@ function monsterStats(monsterData) {
     hitPoints: hitPoints,
     maxHitPoints: hitPoints,
     magicPoints: magicPoints,
-    maxMagicPoints: magicPoints
+    maxMagicPoints: magicPoints,
+    items: monsterData.items,
+    weapons: monsterData.weapons,
+    humanoid: monsterData.humanoid
   }
 }
 
-function monsterInfo(type) {
+function monsterInfo(type, level) {
   const monsterData = monsterList[type]
+  const elite = monsterElite(monsterData)
   const monsterSpecs = monsterStats(monsterData)
 
   return {
     name: monsterName(monsterData),
     job: type,
+    elite: elite,
     pic: monsterPic(monsterData),
     STR: monsterSpecs[`STR`],
     DEX: monsterSpecs[`DEX`],
@@ -58,7 +71,7 @@ function monsterInfo(type) {
     maxHitPoints: monsterSpecs[`maxHitPoints`],
     magicPoints: monsterSpecs[`magicPoints`],
     maxMagicPoints: monsterSpecs[`maxMagicPoints`],
-    items: {},
+    items: getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite),
     weapons: {},
   }
 }

@@ -7,7 +7,6 @@ import logo from '../pics/ui/logo.png'
 
 import '../css/app.css'
 import '../css/welcome.css'
-import '../css/items.css'
 import '../css/animations.css'
 
 const mapStateToProps = state => {
