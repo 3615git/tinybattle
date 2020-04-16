@@ -5,14 +5,18 @@ const charItems = {
     DEX: [`glove`, `ring`, `shoe`],
     CON: [`armor`, `helmet`, `shield`],
     MAG: [`amulet`, `book`, `ring`],
-    LCK: [`amulet`, `bag`]
+    LCK: [`amulet`, `crystal`, `gem`],
+    physicalWeapon: [`axe`, `bow`, `flail`, `hammer`, `mace`, `morningstar`, `sword`],
+    magicalWeapon: [`cross`, `sceptre`, `wand`]
   },
   beast: {
     STR: [],
     DEX: [],
     CON: [],
     MAG: [],
-    LCK: []
+    LCK: [],
+    physicalWeapon: [],
+    magicalWeapon: []
   }
 }
 
@@ -50,17 +54,23 @@ const itemRanges = {
   "bow": 28,
   "coin": 12,
   "coins": 12,
+  "cross": 36,
+  "crystal": 12,
+  "flail": 26,
+  "gem": 13,
   "glove": 11,
   "hammer": 36,
   "helmet": 181,
-  "leg": 58,
-  "magicweapon": 28,
+  "mace": 71,
+  "morningstar": 23,
   "potion": 60,
   "ring": 20,
+  "sceptre": 22,
   "shield": 145,
   "shoe": 44,
   "sword": 162,
-  "vial": 8
+  "vial": 8,
+  "wand": 18
 }
 
 export {

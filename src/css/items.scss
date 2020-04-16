@@ -28,6 +28,22 @@
   }
 }
 
+.itemCost {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 4px;
+  font-size: 8px;
+}
+
+.itemCost.magical {
+  color: #1fbbd4;
+}
+
+.itemCost.physical {
+  color: #cf6d0b;
+}
+
 .item {
   width: 32px;
   height: 32px;
@@ -55,17 +71,23 @@ $forge: (
   "bow":28,
   "coin": 12,
   "coins": 12,
+  "cross": 36,
+  "crystal": 12,
+  "flail": 26,
+  "gem": 13,
   "glove": 11,
   "hammer": 36,
   "helmet": 181,
-  "leg": 58,
-  "magicweapon": 28,
+  "mace": 71,
+  "morningstar": 23,
   "potion": 60,
   "ring": 20,
+  "sceptre": 22,
   "shield": 145,
   "shoe": 44,
   "sword": 162,
-  "vial": 8
+  "vial": 8,
+  "wand": 18
 );
 
 @each $item, $count in $forge {

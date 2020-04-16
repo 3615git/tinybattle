@@ -32,11 +32,10 @@ function getItemPowerFromLevel(CHAR, level) {
   return getRandomInt(possiblePowerLow, possiblePowerHigh)
 }
 
-function getItemQualityFromLevel(level, elite) {
+function getItemQuality(elite) {
   const qualities = itemQuality.quality
   const weight = elite ? itemQuality.eliteWeight : itemQuality.basicWeight
 
-  // const totalweight = sumOfArray(weight)
   var weighedqualities = []
   var currentquality = 0
   var i
@@ -50,9 +49,45 @@ function getItemQualityFromLevel(level, elite) {
   return randomValue(weighedqualities)
 }
 
+// Weapon utils
+function getWeaponType(type, humanoid) {
+  const weapons = humanoid 
+    ? type === `STR` 
+      ? charItems.humanoid[`physicalWeapon`] 
+      : charItems.humanoid[`magicalWeapon`]
+    : type === `STR`
+      ? charItems.beast[`physicalWeapon`]
+      : charItems.beast[`magicalWeapon`]
+  return weapons[Math.floor(Math.random() * weapons.length)]
+}
+
+function getWeaponScore(type, level, itemQuality) {
+  // Pick from a weighed array of dice (d4, d6, d8, d10, d12, d20)
+
+  // Pick from a weighed array of multiplicators
+
+  return `2d10`
+}
+
+function getWeaponBonus(type, level, itemQuality) {
+  // Pick from a weighed array of bonuses
+
+  return 3
+}
+
+function getWeaponCost(type, level, itemQuality) {
+  // Pick from a weighed array of costs (stamina : lower is rare / mana : equally balanced)
+
+  return 6
+}
+
 export {
   getItemFromChar,
   getItemIdFromLevel,
   getItemPowerFromLevel,
-  getItemQualityFromLevel
+  getItemQuality,
+  getWeaponType,
+  getWeaponScore, 
+  getWeaponBonus, 
+  getWeaponCost
 }

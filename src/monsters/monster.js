@@ -1,5 +1,6 @@
 import { monsterList } from './monsterList'
 import { getMonsterItems } from './getMonsterItems'
+import { getMonsterWeapons } from './getMonsterWeapons'
 import { getRandomInt } from '../utils/utils'
 
 function monsterName(monsterData) {
@@ -72,7 +73,7 @@ function monsterInfo(type, level) {
     magicPoints: monsterSpecs[`magicPoints`],
     maxMagicPoints: monsterSpecs[`maxMagicPoints`],
     items: getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite),
-    weapons: {},
+    weapons: getMonsterWeapons(monsterSpecs[`weapons`], level, monsterSpecs[`humanoid`], elite)
   }
 }
 

@@ -56,16 +56,18 @@ const initialState = {
     },
     weapons: {
       STR: {
-        type: `axe`,
+        type: `sword`,
         id: 5,
         score: `d6+2`,
-        cost: 4
+        cost: 4,
+        quality: `rare`
       }, 
       MAG: {
-        type: `magicweapon`,
-        id: 2,
+        type: `sceptre`,
+        id: 10,
         score: `3d10`,
-        cost: 4
+        cost: 4,
+        quality: `legendary`
       },
     },
   },

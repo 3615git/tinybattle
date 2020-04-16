@@ -34,7 +34,7 @@ class Welcome extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea">
-            <img id="logo" src={logo} alt="Caves of D20" />
+            <img id="logo" src={logo} alt="Champions of D20" />
           </div>
           <div className="actionArea">
             <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Start game !</button>

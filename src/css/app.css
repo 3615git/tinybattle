@@ -26,6 +26,11 @@ textarea:focus, input:focus, button:focus{
   transition: opacity 700ms;
 }
 
+.half-transparent {
+  opacity: .5;
+  transition: opacity 700ms;
+}
+
 .position-relative {
   position: relative;
 }
@@ -203,7 +208,7 @@ html, body, #root {
 .opponentWrapper {
   position: relative;
   padding: 10px;
-  margin: 10px;;
+  margin: 10px;
   flex: 1;
   overflow: hidden;
   min-height: 230px;
@@ -504,22 +509,6 @@ button.navigation {
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.55);
-}
-
-.buttons button .weapon .itemCost {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  padding: 4px;
-  font-size: 8px;
-}
-
-.buttons button .weapon .itemCost.magical {
-  color: #1fbbd4;
-}
-
-.buttons button .weapon .itemCost.physical {
-  color: #cf6d0b;
 }
 
 .buttons button .bar {

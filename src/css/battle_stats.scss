@@ -72,15 +72,39 @@
   flex: 0;
   margin-left: 12px;
 
-  .physical {
+  > .physical {
     background-color: rgba(231, 49, 59, 0.46);
-    border: none;
-    border-radius: 6px 6px 0 0;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
   }
 
-  .magical {
+  > .magical {
     background-color: rgba(3, 148, 171, 0.46);;
-    border: none;
-    border-radius: 0 0 6px 6px;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .weaponQuality {
+    display: block;
+    margin-left: 2px;
+    margin-top: 3px;
+    width: 4px;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background-image: url('../pics/ui/qualitySprites.png');
+    background-repeat: no-repeat;
+    background-position: 0px top;
+
+    &.physical {
+      &.magic { background-position: -4px top; }
+      &.rare { background-position: -12px top; }
+      &.legendary { background-position: -20px top; }
+    }
+    &.magical {
+      &.magic { background-position: -8px top; }
+      &.rare { background-position: -16px top; }
+      &.legendary { background-position: -24px top; }
+    }
   }
 }

@@ -8,8 +8,8 @@ import dragonemperor from '../pics/opponents/dragonemperor.png'
 import blindworm from '../pics/opponents/blindworm.png'
 
 const monsterTiers = {
-  low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
-  // low: [`demon`],
+  // low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
+  low: [`demon`],
   medium: [`thanatos`, `leviathan`],
   high: [`demon`,  `dragonemperor`]
 }
@@ -52,6 +52,7 @@ const monsterList = {
     maxHitPoints: [80,130],
     maxMagicPoints: [20, 30],
     items: [`STR`, `DEX`, `CON`, `MAG`, `LCK`],
+    weapons: [`STR`, `MAG`],
     humanoid: true,
     elite: 70,
     pic: [demon]
