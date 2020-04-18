@@ -3,9 +3,9 @@ import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
 
-import logo from '../pics/ui/logo.png'
+// import logo from '../pics/ui/logo.png'
 
-import '../css/app.css'
+import '../css/app.scss'
 import '../css/welcome.css'
 import '../css/animations.css'
 
@@ -34,7 +34,11 @@ class Welcome extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea">
-            <img id="logo" src={logo} alt="Champions of D20" />
+            Champions of D20<br />
+            <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Shop demo</button>
+            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Battle intro demo</button>
+            <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Defeat demo</button>
+            <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
           </div>
           <div className="actionArea">
             <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Start game !</button>

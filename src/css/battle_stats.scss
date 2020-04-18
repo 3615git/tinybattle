@@ -1,3 +1,5 @@
+@import 'variables';
+
 /* Wrapper */
 .statsAndItemsWrapper {
   width: 100%;
@@ -36,13 +38,13 @@
   }
 
   div.down {
-    color: #f51518;
+    color: $color_malus;
     padding-right: 16px;
     background: url('../pics/ui/stat_down.png') right 2px no-repeat;
   }
 
   div.up {
-    color: #15f515;
+    color: $color_bonus;
     padding-right: 16px;
     background: url('../pics/ui/stat_up.png') right 1px no-repeat;
   }
@@ -73,13 +75,13 @@
   margin-left: 12px;
 
   > .physical {
-    background-color: rgba(231, 49, 59, 0.46);
+    background-color: $color_STR;
     border-bottom: none;
     border-radius: 5px 5px 0 0;
   }
 
   > .magical {
-    background-color: rgba(3, 148, 171, 0.46);;
+    background-color: $color_MAG;
     border-top: none;
     border-radius: 0 0 5px 5px;
   }
@@ -98,12 +100,12 @@
 
     &.physical {
       &.magic { background-position: -4px top; }
-      &.rare { background-position: -12px top; }
-      &.legendary { background-position: -20px top; }
+      &.rare { background-position: -8px top; }
+      &.legendary { background-position: -12px top; }
     }
     &.magical {
-      &.magic { background-position: -8px top; }
-      &.rare { background-position: -16px top; }
+      &.magic { background-position: -16px top; }
+      &.rare { background-position: -20px top; }
       &.legendary { background-position: -24px top; }
     }
   }

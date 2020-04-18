@@ -22,21 +22,6 @@ const mapStateToProps = state => {
   }
 }
 
-function renderItem(item) {
-  if (item && item.type && item.id && item.score) return (
-    <div className={`item_wrapper ${item.quality}`}>
-      {item.cost &&
-        <div className="itemCost physical">{item.cost}</div>
-      }
-      <Item item={item.type} level={item.id} />
-      <span>+{item.score}</span>
-    </div>
-  ) 
-  else return (
-    <div className="item_wrapper" />
-  )
-}
-
 const Items = ({ data, opponent }) => {
 
   const activePlayer = opponent ? data.opponent : data.player
@@ -49,11 +34,11 @@ const Items = ({ data, opponent }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      {renderItem(activePlayer.items.STR)}
-      {renderItem(activePlayer.items.DEX)}
-      {renderItem(activePlayer.items.CON)}
-      {renderItem(activePlayer.items.MAG)}
-      {renderItem(activePlayer.items.LCK)}
+      <Item item={activePlayer.items.STR} />
+      <Item item={activePlayer.items.DEX} />
+      <Item item={activePlayer.items.CON} />
+      <Item item={activePlayer.items.MAG} />
+      <Item item={activePlayer.items.LCK} />
     </div>
   )
 }

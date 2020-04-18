@@ -12,7 +12,8 @@ import VibrationWrapper from '../ui/battle/VibrationWrapper'
 
 import { setGameState, attack } from '../redux/actions/index'
 
-import '../css/app.css'
+import '../css/app.scss'
+import '../css/buttons.scss'
 import '../css/battle_logs.scss'
 import '../css/battle_stats.scss'
 import '../css/items.scss'

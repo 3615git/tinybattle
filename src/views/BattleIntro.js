@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import Stats from '../ui/battle/Stats'
 import { setGameState } from '../redux/actions/index'
 
-import '../css/app.css'
+import '../css/app.scss'
 import '../css/battleIntro.css'
 import '../css/animations.css'
 

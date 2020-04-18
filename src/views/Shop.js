@@ -4,7 +4,6 @@ import { connect } from "react-redux"
 import { setGameState } from '../redux/actions/index'
 
 import '../css/app.scss'
-import '../css/items.css'
 import '../css/animations.css'
 
 const mapStateToProps = state => {
@@ -12,6 +11,7 @@ const mapStateToProps = state => {
     player: state.player,
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
+    game: state.game,
     log: state.log
   }
 }
@@ -22,23 +22,23 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-class Welcome extends Component {
+class Shop extends Component {
 
   render() {
-
-    const { setGameState } = this.props
     
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
-          Welcome to Tiny Battle !
-
-          <button onClick={() => setGameState({ state: `battle` })}>Start !</button>
-
+          <div className="presentationArea">
+            Shop items
+          </div>
+          <div className="actionArea">
+            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Back</button>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(Shop)

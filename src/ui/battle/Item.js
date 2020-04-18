@@ -1,42 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux"
+
+import ItemVisual from './ItemVisual'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc item block
 */
 
 const propTypes = {
-  item: PropTypes.string,
-  level: PropTypes.number,
-  small: PropTypes.bool
+  item: PropTypes.object.isRequired
 }
 
-const defaultProps = {
-  small: false
+const mapStateToProps = state => {
+  return {
+    data: state
+  }
 }
 
-const Item = ({ item, level, small }) => {
+const Item = ({ item }) => {
 
-  // Component styling
-  const defaultClasses = `item`
-  // Item reference
-  const itemReference = item+'_'+level
-  // Size
-  const itemSize = small ? `small` : ``
-  // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, itemReference, itemSize].filter(val => val).join(` `)
-
-  // Display component
-  if (item && level) return (
-    <div className={itemClasses} />
-  ) 
-  else return null
+  if (item && item.type && item.id && item.score) return (
+    <div className={`item_wrapper ${item.quality}`}>
+      {item.cost &&
+        <div className="itemCost physical">{item.cost}</div>
+      }
+      <ItemVisual item={item.type} level={item.id} />
+      <span>+{item.score}</span>
+    </div>
+  )
+  else return (
+    <div className="item_wrapper" />
+  )
 }
 
 // Applying propTypes definition and default values
 Item.propTypes = propTypes
-Item.defaultProps = defaultProps
 
 // Exporting as default
-export default Item
+export default connect(mapStateToProps)(Item)

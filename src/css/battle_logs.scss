@@ -1,3 +1,5 @@
+@import 'variables';
+
 .LogsContainer {
   position: relative;
   flex: 1;
@@ -69,9 +71,9 @@
 }
 
 .bonusColor {
-  color: #15f515;
+  color: $color_bonus;
 }
 
 .malusColor {
-  color: #f51518;
+  color: $color_malus;
 }

@@ -2,6 +2,7 @@ import { GAMESTATE, ATTACK } from "../constants/action-types"
 // Game system
 import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
+import { openShop } from '../../actions/game/openShop'
 import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
 // Combat system
 import { physicalAttack } from '../../actions/combat/physicalAttack'
@@ -100,6 +101,9 @@ function rootReducer(state = initialState, action) {
         break;
       case `battle`:
         nextState = startBattle(nextState)
+        break;
+      case `shop`:
+        nextState = openShop(nextState)
         break;
       default:
         break;

@@ -43,6 +43,45 @@ const itemQualityBonus = {
   legendary: [7,10]
 }
 
+const weaponDamage = {
+  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`],
+  normal: [50, 40, 20, 10, 5, 1],
+  magic: [10, 30, 40, 30, 30, 5],
+  rare: [5, 10, 20, 30, 40, 10],
+  legendary: [1, 5, 10, 40, 40, 15]
+}
+
+const weaponMultiplicator = {
+  damage: [``, `2`, `3`, `4`, `5`],
+  normal: [70, 20, 5, 1, 1],
+  magic: [40, 40, 10, 3, 3],
+  rare: [10, 50, 30, 8, 5],
+  legendary: [1, 20, 40, 15, 10]
+}
+
+const weaponBonus = {
+  damage: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  normal: [50, 50, 30, 20, 10, 5, 3, 2, 1, 1, 1],
+  magic: [10, 50, 50, 30, 20, 10, 6, 4, 3, 2, 1],
+  rare: [5, 10, 40, 50, 40, 30, 15, 10, 6, 4, 3],
+  legendary: [1, 1, 10, 30, 40, 50, 40, 30, 20, 10, 8]
+}
+
+const weaponCost = {
+  physicalWeapon: {
+    normal: [10,20],
+    magic: [8,15],
+    rare: [6,10],
+    legendary: [4,8]
+  },
+  magicalWeapon: {
+    normal: [3,15],
+    magic: [3,15],
+    rare: [3,15],
+    legendary: [3,15]
+  }
+}
+
 // @todo : share variables https://itnext.io/sharing-variables-between-js-and-sass-using-webpack-sass-loader-713f51fa7fa0
 const itemRanges = {
   "amulet": 43,
@@ -78,5 +117,9 @@ export {
   charPower,
   itemQuality,
   itemRanges,
-  itemQualityBonus
+  itemQualityBonus,
+  weaponDamage,
+  weaponMultiplicator, 
+  weaponBonus,
+  weaponCost
 }

@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 
 import { attack } from '../../redux/actions/index'
 import Bar from './Bar'
-import Item from './Item'
+import ItemVisual from './ItemVisual'
 
 /**
   * @desc description of the component
@@ -63,7 +63,7 @@ const Action = ({ type, player, opponent, turn, attack }) => {
     weapon = (
       <div className="weapon">
         <div className="itemCost physical">{player.weapons.STR.cost}</div>
-        <Item item={player.weapons.STR.type} level={player.weapons.STR.id} />
+        <ItemVisual item={player.weapons.STR.type} level={player.weapons.STR.id} />
       </div>
     )
     damage = (
@@ -82,7 +82,7 @@ const Action = ({ type, player, opponent, turn, attack }) => {
     weapon = (
       <div className="weapon">
         <div className="itemCost magical">{player.weapons.MAG.cost}</div>
-        <Item item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
+        <ItemVisual item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
       </div>
     )
     damage = (

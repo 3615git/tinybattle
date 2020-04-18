@@ -1,3 +1,10 @@
+@import 'variables';
+
+@mixin itemStyle($color) {
+  border: 1px solid rgba($color, .8);
+  background-color: rgba($color, .3);
+}
+
 /* Items */
 .item_wrapper {
   position: relative;
@@ -10,21 +17,17 @@
   justify-content: center;
   border-radius: 5px;
   text-align: center;
-  background-color: rgba(255,255,255,.08);
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.89);
+  @include itemStyle($color_itemNormal);
 
   &.magic { 
-    border: 1px solid #0072ffd1;
-    background-color: #1964e226;
+    @include itemStyle($color_itemMagic);
   }
   &.rare { 
-    border: 1px solid #ffe000bf; 
-    background-color: #eac13845;
+    @include itemStyle($color_itemRare);
   }
   &.legendary { 
-    border: 1px solid #ff5e00; 
-    background-color: #ed3d0861;
+    @include itemStyle($color_itemLegendary);
   }
 }
 
@@ -37,11 +40,11 @@
 }
 
 .itemCost.magical {
-  color: #1fbbd4;
+  color: lighten($color_MAG, 20);
 }
 
 .itemCost.physical {
-  color: #cf6d0b;
+  color: lighten($color_STR, 20);
 }
 
 .item {

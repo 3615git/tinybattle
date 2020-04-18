@@ -5,6 +5,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import Welcome from './views/Welcome'
 import BattleIntro from './views/BattleIntro'
 import Battle from './views/Battle'
+import Shop from './views/Shop'
 
 const mapStateToProps = state => {
   return {
@@ -28,6 +29,9 @@ class App extends Component {
         break;
       case `battle`:
         view = <Battle />
+        break;
+      case `shop`:
+        view = <Shop />
         break;
       default:
         break;

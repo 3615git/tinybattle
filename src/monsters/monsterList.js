@@ -68,6 +68,7 @@ const monsterList = {
     maxHitPoints: [80, 130],
     maxMagicPoints: [20, 30],
     items: [`STR`, `LCK`],
+    weapons: [`STR`, `MAG`],
     pic: [dragonemperor]
   },
   dryad: {
@@ -81,6 +82,7 @@ const monsterList = {
     maxHitPoints: [10, 20],
     maxMagicPoints: [100, 200],
     items: [`STR`, `LCK`],
+    weapons: [`STR`],
     humanoid: true,
     pic: [dryad]
   },
@@ -95,6 +97,7 @@ const monsterList = {
     maxHitPoints: [40, 70],
     maxMagicPoints: [100, 200],
     items: [`STR`, `DEX`, `MAG`, `LCK`],
+    weapons: [`MAG`],
     humanoid: true,
     elite: 70,
     pic: [gazer]

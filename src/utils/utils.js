@@ -23,11 +23,26 @@ function getRandomInt(min, max) {
 
 const sumOfArray = arr => arr.reduce((a, b) => a + b, 0)
 
+function generateWeight(items, weight) {
+  var weighedItems = []
+  var currentItem = 0
+  var i
+
+  while (currentItem < items.length) {
+    for (i = 0; i < weight[currentItem]; i++)
+      weighedItems[weighedItems.length] = items[currentItem]
+    currentItem++
+  }
+
+  return weighedItems
+}
+
 export {
   diceRoll,
   randomProperty,
   randomKey,
   randomValue,
   getRandomInt, 
-  sumOfArray
+  sumOfArray,
+  generateWeight
 }

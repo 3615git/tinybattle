@@ -1,3 +1,5 @@
+@import 'variables';
+
 @font-face {
     font-family: 'pixelsix00regular';
     src: url('../fonts/pixelsix00-webfont.woff2') format('woff2'),
@@ -14,7 +16,11 @@
   font-style: normal;
 }
 
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+* { 
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
 
 textarea:focus, input:focus, button:focus{
   outline: none;
@@ -40,6 +46,13 @@ html, body, #root, button {
   font-family: "eight_bit_dragonregular";
   font-size: 12px;
   color: white;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
   /* cursor: url("../pics/ui/cursor_default.png") 10 0, auto !important; */
 }
 
@@ -260,7 +273,7 @@ html, body, #root {
 .eliteMarker {
   margin-top: 3px;
   font-size: 10px;
-  color: #ff7847;
+  color: $color_elite;
   text-align: right;
 }
 
@@ -297,7 +310,7 @@ html, body, #root {
 }
 
 .bar.hitPoints .indicator {
-  background-color: #e7323b;
+  background-color: $color_STR;
   height: 35px;
 }
 
@@ -306,27 +319,27 @@ html, body, #root {
 }
 
 .bar.magicPoints .indicator {
-  background-color: #01a972;
+  background-color: $color_mana;
   height: 12px;
 }
 
 .bar.stamina .indicator {
-  background-color: #ce6d0a;
+  background-color: $color_stamina;
   height: 12px;
 }
 
 .bar.physicalRage .indicator {
-  background-color: #ce6d0a;
+  background-color: $color_stamina;
   height: 12px;
 }
 
 .bar.magicalRage .indicator {
-  background-color: #01a972;
+  background-color: $color_mana;
   height: 12px;
 }
 
 .bar.xp .indicator {
-  background-color: #01a972;
+  background-color: $color_mana;
   height: 10px;
 }
 
@@ -380,23 +393,23 @@ html, body, #root {
 }
 
 .hitbar div.physicalAttack.hit {
-  background-color: #e7323b;
+  background-color: $color_STR;
 }
 
 .hitbar div.physicalAttack.critical {
-  background: #ce6d0a url('../pics/ui/hitBar_critical.png') no-repeat center center;
+  background: $color_stamina url('../pics/ui/hitBar_critical.png') no-repeat center center;
 }
 
 .hitbar div.physicalDefend {
-  background-color: #e7323b;
+  background-color: $color_STR;
 }
 
 .hitbar div.magicalAttack.hit {
-  background-color: #0494ab;
+  background-color: $color_MAG;
 }
 
 .hitbar div.magicalAttack.critical {
-  background: #01a972 url('../pics/ui/hitBar_critical.png') no-repeat center center;
+  background: $color_mana url('../pics/ui/hitBar_critical.png') no-repeat center center;
 }
 
 .hitbar div.roll {
@@ -419,123 +432,18 @@ html, body, #root {
 }
 
 .damage {
-  color: #e7323b;
+  color: $color_STR;
 }
 
-/* Buttons */
-button.navigation {
-  width: 250px;
-  margin: 0 auto;
-  height: 60px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  font-size: 16px;
-}
-
-.actionWrapper {
-  position: relative;
-  margin-top: 10px;
-}
-
+/* Action zone */
 .actionsWrapper {
   position: relative;
   z-index: 1;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.buttons button.special {
-  margin-left: 10px;
-}
-
-.buttons button {
+.actionWrapper {
   position: relative;
-  height: 46px;
-  border: none;
-  border-radius: 16px;
-  text-align: center;
-  flex-basis: 25%;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.buttons img {
-  flex-grow: 0;
-  position: relative;
-  top: -6px;
-}
-
-.buttons button.attack {
-  flex-basis: 50%;
-  margin-left: 10px;
-  padding: 0px 8px 0px 55px;
-}
-
-.buttons button.physical {
-  background: #e7323b;
-}
-
-.buttons button.magical {
-  background: #0494ab;
-}
-
-.buttons button.disabled {
-  cursor: not-allowed;
-}
-
-.buttons button.physical.disabled {
-  background: #e8323b30;
-}
-
-.buttons button.magical.disabled {
-  background: #0494ab2e;
-}
-
-.buttons button .weapon {
-  width: 48px;
-  height: 46px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  border-radius: 16px 0px 0px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.55);
-}
-
-.buttons button .bar {
-  background-color: rgba(0, 0, 0, 0.28);
-  margin-top: 5px;
-  filter: drop-shadow(0px 0px 2px rgba(0,0,0,.5));
-}
-
-.opponentButtonWrapper {
-  position: absolute;
-  cursor: pointer;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-shadow: 0px 0px 7px black, 0px 0px 10px black;
-}
-
-.opponentButtonWrapper div:first-child {
-  margin-bottom: 5px;
-}
-
-.opponentButtonWrapper div:last-child {
-  font-size: 20px;
+  margin-top: 10px;
 }
 
 /** Turn indicator in the background */

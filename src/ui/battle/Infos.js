@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 
-import Item from './Item'
+import ItemVisual from './ItemVisual'
 import Bar from './Bar'
 
 /**
@@ -30,7 +30,7 @@ const Infos = ({ name, job, level, xp, gold }) => {
     <div className="playerInfoWrapper">
       <div className={itemClasses}>
         <div className="gold">
-          <Item item="coins" level={5} small />
+          <ItemVisual item="coins" level={5} small />
           <span>{gold}</span>
         </div>
         <div className="player">
