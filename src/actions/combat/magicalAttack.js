@@ -20,7 +20,7 @@ const magicalAttack = (data) => {
   const hitResult = magicalHit(activePlayer, targetPlayer)
 
   // Amount of mana burned by item/attack
-  let manaburnResult = activePlayer.weapons.MAG.cost ? activePlayer.weapons.MAG.cost : 0
+  let manaburnResult = activePlayer.weapons.MAG ? activePlayer.weapons.MAG.cost : 0
   // Applying rage & mana burn
   rageResult = rage(`magicalAttack`, activePlayer, manaburnResult)
   activePlayer.magicalRage = rageResult

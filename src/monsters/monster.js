@@ -61,6 +61,7 @@ function monsterInfo(type, level) {
     name: monsterName(monsterData),
     job: type,
     elite: elite,
+    humanoid: monsterData.humanoid ? true : false,
     pic: monsterPic(monsterData),
     STR: monsterSpecs[`STR`],
     DEX: monsterSpecs[`DEX`],

@@ -19,6 +19,11 @@ const toHit = (activePlayer, targetPlayer, type) => {
   }
 }
 
+// Turns D20 to hit into classic %
+const hitChance = (toHit) => {
+  return (20 - toHit) * 5
+}
+
 // Physical hit chance
 const physicalHit = (activePlayer, targetPlayer) => {
   const roll = diceRoll(20)
@@ -132,6 +137,7 @@ const displayHits = (prevState, nextState) => {
 
 export {
   toHit,
+  hitChance,
   physicalHit, 
   magicalHit,
   physicalDamage,

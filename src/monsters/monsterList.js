@@ -8,8 +8,8 @@ import dragonemperor from '../pics/opponents/dragonemperor.png'
 import blindworm from '../pics/opponents/blindworm.png'
 
 const monsterTiers = {
-  // low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
-  low: [`demon`],
+  low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
+  // low: [`demon`],
   medium: [`thanatos`, `leviathan`],
   high: [`demon`,  `dragonemperor`]
 }

@@ -100,7 +100,7 @@ class Opponent extends Component {
             }
           </div>
         </div>
-        <StatsAndItems opponent />
+        <StatsAndItems opponent humanoid={data.humanoid} />
         <Bar opponent type="hitPoints" color={monstercolor} />
         <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
       </div>

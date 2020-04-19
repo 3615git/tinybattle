@@ -11,11 +11,13 @@ import Weapons from './Weapons'
 */
 
 const propTypes = {
-  opponent: PropTypes.bool
+  opponent: PropTypes.bool,
+  humanoid: PropTypes.bool
 }
 
 const defaultProps = {
-  opponent: false
+  opponent: false,
+  humanoid: false
 }
 
 const mapStateToProps = state => {
@@ -24,7 +26,7 @@ const mapStateToProps = state => {
   }
 }
 
-const StatsAndItems = ({ opponent }) => { 
+const StatsAndItems = ({ opponent, humanoid }) => { 
   // Component styling
   const defaultClasses = `statsAndItemsWrapper`
   // Add custom classes to defined classes
@@ -37,7 +39,9 @@ const StatsAndItems = ({ opponent }) => {
         <Stats opponent={opponent} />
         <Items opponent={opponent} />
       </div>
-      <Weapons opponent={opponent} />
+      {humanoid &&
+        <Weapons opponent={opponent} />
+      }
     </div>
   )
 }

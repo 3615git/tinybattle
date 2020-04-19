@@ -9,7 +9,7 @@ import ItemVisual from './ItemVisual'
 */
 
 const propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object
 }
 
 const mapStateToProps = state => {
