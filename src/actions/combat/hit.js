@@ -56,6 +56,44 @@ const magicalHit = (activePlayer, targetPlayer) => {
   }
 }
 
+// Elemental fight rules
+const elementalRules = (a,b) => {
+  let bonus
+
+  if (a === `fire`) {
+    if (b === `fire`) bonus = false
+    if (b === `water`) bonus = false
+    if (b === `earth`) bonus = true
+  }
+  else if (a === `water`) {
+    if (b === `fire`) bonus = true
+    if (b === `water`) bonus = false
+    if (b === `earth`) bonus = false
+  }
+  else if (a === `earth`) {
+    if (b === `fire`) bonus = false
+    if (b === `water`) bonus = true
+    if (b === `earth`) bonus = false
+  }
+  return bonus
+}
+
+// Elemental damage bonus
+const elementalDamage = (activePlayer, targetPlayer, CHAR, damage) => {
+  // If activePlayer has item
+  const weaponElement = activePlayer.weapons[CHAR].element
+  // If targetPlayer has base element
+  const targetElement = targetPlayer.element
+  // If element has ascendant
+  console.log(weaponElement, targetElement)
+  if (weaponElement && targetElement) {
+    if (elementalRules(weaponElement, targetElement)) {
+      // @todo random bonus ?
+      return Math.round(damage*50/100)
+    } else return false
+  } else return false
+}
+
 // Critical chance
 const criticalChance = (activePlayer) => {
   const playerLuck = getStat(activePlayer, `LCK`)
@@ -79,21 +117,35 @@ const physicalDamage = (activePlayer, targetPlayer, critical) => {
   // Item damage
   let itemDamage = 0 
   let itemDamageResults = 0
+  let elementalBonus = 0
+
+  let baseDamage = activePlayerSTR.total - targetPlayerCON.total
 
   if (activePlayerItem) {
     let itemDamageRoll = rpgDice.eval(activePlayerItem)
     itemDamageResults = itemDamageRoll.render()
     itemDamage = itemDamageRoll.value
+    elementalBonus = elementalDamage(activePlayer, targetPlayer, `STR`, baseDamage+itemDamage)
   }
 
   // Critical hit bonus, @TBT : ignores opponent CON + double STR
   let criticalBonus = critical ? activePlayerSTR.total + targetPlayerCON.total : 0
 
-  let damage = activePlayerSTR.total - targetPlayerCON.total + itemDamage + criticalBonus
+  let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
+
+  console.log(`baseDamage`, baseDamage)
+  console.log(`itemDamage`, itemDamage)
+  console.log(`criticalBonus`, criticalBonus)
+  console.log(`elementalBonus`, elementalBonus)
+  console.log(`damage`, damage)
   
   return {
     roll: itemDamageResults,
+    base: baseDamage,
+    item: itemDamage,
+    critical: criticalBonus,
+    elemental: elementalBonus,
     damage: damage
   }
 }
@@ -109,21 +161,30 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   // Item damage
   let itemDamage = 0
   let itemDamageResults = 0
+  let elementalBonus = 0
+
+  let baseDamage = activePlayerMAG.total - targetPlayerMAG.total
+
 
   if (activePlayerItem) {
     let itemDamageRoll = rpgDice.eval(activePlayerItem)
     itemDamageResults = itemDamageRoll.render()
     itemDamage = itemDamageRoll.value
+    elementalBonus = elementalDamage(activePlayer, targetPlayer, `MAG`, baseDamage+itemDamage)
   }
 
-  // Critical hit bonus, @TBT : ignores opponent MAG + double STR
+  // Critical hit bonus, @TBT : ignores opponent MAG + double MAG
   let criticalBonus = critical ? activePlayerMAG.total + targetPlayerMAG.total : 0
 
-  let damage = activePlayerMAG.total - targetPlayerMAG.total + itemDamage + criticalBonus
+  let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
 
   return {
     roll: itemDamageResults,
+    base: baseDamage,
+    item: itemDamage,
+    critical: criticalBonus,
+    elemental: elementalBonus,
     damage: damage
   }
 }

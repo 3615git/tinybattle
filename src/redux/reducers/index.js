@@ -1,7 +1,13 @@
 import { GAMESTATE, ATTACK } from "../constants/action-types"
 // Game system
+import { welcome } from '../../actions/game/welcome'
+import { gameCreate } from '../../actions/game/gameCreate'
+import { gameSelect } from '../../actions/game/gameSelect'
 import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
+import { victory } from '../../actions/game/victory'
+import { defeat } from '../../actions/game/defeat'
+import { hallOfFame } from '../../actions/game/hallOfFame'
 import { openShop } from '../../actions/game/openShop'
 import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
 // Combat system
@@ -58,15 +64,19 @@ const initialState = {
     weapons: {
       STR: {
         type: `sword`,
+        char: `STR`,
         id: 5,
         score: `d6+2`,
+        element: `fire`,
         cost: 4,
         quality: `rare`
       }, 
       MAG: {
         type: `sceptre`,
+        char: `MAG`,
         id: 10,
         score: `3d10`,
+        element: `earth`,
         cost: 4,
         quality: `legendary`
       },
@@ -91,7 +101,13 @@ function rootReducer(state = initialState, action) {
   if (action.type === GAMESTATE) {
     switch (action.payload.state) {
       case `welcome`:
-        // nextState = resetWelcome(nextState)
+        nextState = welcome(nextState)
+        break;
+      case `gameCreate`:
+        nextState = gameCreate(nextState)
+        break;
+      case `gameSelect`:
+        nextState = gameSelect(nextState)
         break;
       case `battleIntro`:
         nextState = battleIntro(nextState)
@@ -101,6 +117,15 @@ function rootReducer(state = initialState, action) {
         break;
       case `battle`:
         nextState = startBattle(nextState)
+        break;
+      case `victory`:
+        nextState = victory(nextState)
+        break;
+      case `defeat`:
+        nextState = defeat(nextState)
+        break;
+      case `hallOfFame`:
+        nextState = hallOfFame(nextState)
         break;
       case `shop`:
         nextState = openShop(nextState)

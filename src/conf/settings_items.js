@@ -36,6 +36,11 @@ const itemQuality = {
   eliteWeight: [40, 30, 20, 10]
 }
 
+const weaponElements = {
+  elements: [`none`, `fire`, `water`, `earth`],
+  basicWeight: [20, 1, 1, 1]
+}
+
 const itemQualityBonus = {
   normal: [0,0],
   magic: [1,3],
@@ -121,5 +126,6 @@ export {
   weaponDamage,
   weaponMultiplicator, 
   weaponBonus,
-  weaponCost
+  weaponCost,
+  weaponElements
 }

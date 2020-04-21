@@ -1,5 +1,5 @@
 import { gameSettings } from "../conf/settings"
-import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost } from "../conf/settings_items"
+import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost, weaponElements } from "../conf/settings_items"
 import { getRandomInt, randomValue, generateWeight } from "../utils/utils"
 
 // Item utils
@@ -73,6 +73,13 @@ function getWeaponCost(type, itemQuality) {
   return itemCost
 }
 
+function getWeaponElement() {
+  // Pick from a weighed array of elements
+  const heavyElements = generateWeight(weaponElements.elements, weaponElements.basicWeight)
+
+  return randomValue(heavyElements)
+}
+
 export {
   getItemFromChar,
   getItemIdFromLevel,
@@ -80,5 +87,6 @@ export {
   getItemQuality,
   getWeaponType,
   getWeaponDamage, 
-  getWeaponCost
+  getWeaponCost,
+  getWeaponElement
 }

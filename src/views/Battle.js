@@ -19,7 +19,7 @@ import '../css/buttons.scss'
 import '../css/battle_logs.scss'
 import '../css/battle_stats.scss'
 import '../css/items.scss'
-import '../css/animations.css'
+import '../css/animations.scss'
 
 const mapStateToProps = state => {
   return {
@@ -45,8 +45,8 @@ class Battle extends Component {
 
     this.state = {
       playerTurnUI: this.props.playerTurn,
-      playerHitpoints: this.props.player.hitPoints,
-      opponentHitpoints: this.props.opponent.hitPoints,
+      // playerHitpoints: this.props.player.hitPoints,
+      // opponentHitpoints: this.props.opponent.hitPoints,
       monstercolor: {
         vibrant: `black`,
         darkVibrant: `rgba(0, 0, 0, 0.4)`,
@@ -150,9 +150,12 @@ class Battle extends Component {
 
   render() {
     const { monstercolor, playerTurnUI } = this.state
-    const { game } = this.props
+    const { game, player } = this.props
 
-    const playerAreaClass = playerTurnUI ? `playerArea playerTurn` : `playerArea opponentTurn`
+    // Low HP
+    const hpRange = 10 - Math.round((player.hitPoints * 10) / player.maxHitPoints)
+
+    const playerAreaClass = playerTurnUI ? `playerArea playerTurn danger_${hpRange}` : `playerArea opponentTurn danger_${hpRange}`
 
     return (
       <div className="mainWrapper">

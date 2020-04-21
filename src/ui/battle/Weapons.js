@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import ItemVisual from './ItemVisual'
+import Item from './Item'
 
 /**
   * @desc magical and physical weapons
@@ -37,37 +37,8 @@ const Weapons = ({ data, opponent }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div className="item_wrapper physical">
-        {activePlayer.weapons.STR 
-          ?
-            <>
-              <div className="itemCost physical">{activePlayer.weapons.STR.cost}</div>
-              <ItemVisual item={activePlayer.weapons.STR.type} level={activePlayer.weapons.STR.id} />
-              <span className={`weaponQuality physical ${activePlayer.weapons.STR.quality}`} />
-              <span>{activePlayer.weapons.STR.score}</span>
-            </>
-          : 
-            <>
-              <span className="half-transparent">No weapon</span>
-            </>
-        }
-
-      </div>
-      <div className="item_wrapper magical">
-        {activePlayer.weapons.MAG 
-          ?
-            <>
-              <div className="itemCost magical">{activePlayer.weapons.MAG.cost}</div>
-              <ItemVisual item={activePlayer.weapons.MAG.type} level={activePlayer.weapons.MAG.id} />
-              <span className={`weaponQuality magical ${activePlayer.weapons.MAG.quality}`} />
-              <span>{activePlayer.weapons.MAG.score}</span>
-            </>
-          :
-            <>
-              <span className="half-transparent">No weapon</span>
-            </>
-        }
-      </div>
+      <Item item={activePlayer.weapons.STR} />
+      <Item item={activePlayer.weapons.MAG} />
     </div>
   )
 }

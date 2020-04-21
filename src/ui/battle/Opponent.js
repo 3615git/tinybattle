@@ -95,8 +95,8 @@ class Opponent extends Component {
           <div className="level">Level {level}</div>
           <div className="name">
             {data.elite 
-              ? <div>{data.name}<div className="eliteMarker">Elite</div></div>
-              : <div>{data.name}</div>
+              ? <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span><span className="eliteMarker">Elite</span></div></div>
+              : <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span></div></div>
             }
           </div>
         </div>

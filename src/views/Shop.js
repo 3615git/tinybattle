@@ -8,7 +8,7 @@ import Item from '../ui/battle/Item'
 
 import '../css/app.scss'
 import '../css/shop.scss'
-import '../css/animations.css'
+import '../css/animations.scss'
 
 const mapStateToProps = state => {
   return {
@@ -35,7 +35,7 @@ const generateItems = (CHAR, level, elite, amount) => {
   }
 
   return (
-  <div className="shopCatalog">
+  <div key={`catalog_items_${CHAR}`} className="shopCatalog">
     <div className="title">{CHAR}</div>
     <div className="items">
       {items} 
@@ -53,7 +53,7 @@ const generateWeapons = (CHAR, level, elite, amount) => {
   }
 
   return (
-    <div className="shopCatalog">
+    <div key={`catalog_weapons_${CHAR}`} className="shopCatalog">
       <div className="title">{CHAR}</div>
       <div className="items">
         {items}
@@ -82,6 +82,7 @@ class Shop extends Component {
 
   render() {
     const itemCatalog = generateCatalog(3, false, 5)
+    const { setGameState } = this.props
 
     return (
       <div className="mainWrapper">
@@ -92,7 +93,7 @@ class Shop extends Component {
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Back</button>
+            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Enter next battle</button>
           </div>
         </div>
       </div>

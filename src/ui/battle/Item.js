@@ -19,14 +19,19 @@ const mapStateToProps = state => {
 }
 
 const Item = ({ item }) => {
-
-  if (item && item.type && item.id && item.score) return (
+  const plusSign = (item && item.cost) ? `` : `+`
+    if (item && item.type && item.id && item.score) return (
     <div className={`item_wrapper ${item.quality}`}>
       {item.cost &&
-        <div className="itemCost physical">{item.cost}</div>
+        <>
+          <div className="itemCost physical">{item.cost}</div>
+          {item.element !== `none` && <div className={`element ${item.element}`} /> }
+        </>
       }
       <ItemVisual item={item.type} level={item.id} />
-      <span>+{item.score}</span>
+      <span>
+        {plusSign}     
+        {item.score}</span>
     </div>
   )
   else return (

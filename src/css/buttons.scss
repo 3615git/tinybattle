@@ -3,9 +3,16 @@
 @mixin buttonStyle($color) {
   background: $color;
   box-shadow: inset -1px -2px darken($color, 9), inset 1px 2px lighten($color, 9);
+  transition: all 200ms ease-in-out;
+  &:hover {
+    background: lighten($color,5);
+    box-shadow: inset 0px 0px 0 2px lighten($color, 12);
+    transition: all 200ms ease-in-out;
+  }
   &:active {
     background: darken($color,5);
     box-shadow: inset 0px 0px 0 2px darken($color, 12);
+    transition: all 100ms ease-in-out;
   }
 }
 
@@ -17,12 +24,20 @@ button {
   font-size: 12px;
   text-align: center;
   cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0.85);
+  border: 2px solid rgba(0, 0, 0, 0.85);
   border-radius: 8px;
   @include buttonStyle(grey);
+  text-shadow: 1px 1px black;
 
   &.disabled {
     cursor: not-allowed;
+  }
+
+  .note {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 9px;
   }
   
   // Special buttons
@@ -35,7 +50,7 @@ button {
   &.attack {
     flex-basis: 50%;
     margin-left: 10px;
-    padding: 0px 8px 0px 50px;
+    padding: 0px 8px 0px 44px;
   }
 
   &.physical {
@@ -64,8 +79,8 @@ button {
 }
 
 .buttons button .weapon {
-  width: 48px;
-  height: 42px;
+  width: 42px;
+  height: 44px;
   position: absolute;
   left: 0px;
   top: 0px;

@@ -1,8 +1,13 @@
 @import 'variables';
 
 @mixin itemStyle($color) {
-  border: 1px solid rgba($color, .8);
-  background-color: rgba($color, .3);
+  border: 2px solid rgba($color, 1);
+  background-color: rgba($color, .6);
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.1);
+  box-shadow: inset 0px 0px 5px darken(rgba($color, 1),30);
+  .item {
+    filter: drop-shadow(0px 0px 2px darken(rgba($color, 1),30));
+  }
 }
 
 /* Items */
@@ -17,17 +22,41 @@
   justify-content: center;
   border-radius: 5px;
   text-align: center;
-  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.08);
   @include itemStyle($color_itemNormal);
 
   &.magic { 
     @include itemStyle($color_itemMagic);
+    .element {
+      @include itemStyle($color_itemMagic);
+    }
   }
   &.rare { 
     @include itemStyle($color_itemRare);
+    .element {
+      @include itemStyle($color_itemRare);
+    }
   }
   &.legendary { 
     @include itemStyle($color_itemLegendary);
+    .element {
+      @include itemStyle($color_itemLegendary);
+    }
+  }
+
+  .element {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    position: absolute;
+    left: -7px;
+    border-radius: 6px;
+    // transform: rotate(45deg);
+    box-shadow: inset 0px 0px 1px 1px #00000094 !important;
+    @include itemStyle($color_itemNormal);
+
+    &.fire { background: radial-gradient(circle at 40% 25%, yellow 6%, $element_fire 60%) !important; }
+    &.earth { background: radial-gradient(circle at 40% 25%, lightgreen 6%, $element_earth 60%) !important; }
+    &.water { background: radial-gradient(circle at 40% 25%, #42cbff 6%, $element_water 60%) !important; }
   }
 }
 

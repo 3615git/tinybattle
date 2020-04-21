@@ -60,6 +60,7 @@ function monsterInfo(type, level) {
   return {
     name: monsterName(monsterData),
     job: type,
+    element: monsterData.element,
     elite: elite,
     humanoid: monsterData.humanoid ? true : false,
     pic: monsterPic(monsterData),

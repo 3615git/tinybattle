@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'animations';
 
 @font-face {
     font-family: 'pixelsix00regular';
@@ -62,7 +63,7 @@ html, body, #root {
   margin: 0;
   text-shadow: 1px 1px black;
   image-rendering: pixelated;
-  background-color: black;
+  background-color: #cedade;
 }
 
 .mainWrapper {
@@ -113,6 +114,7 @@ html, body, #root {
 .actionArea {
   height: 130px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -124,8 +126,23 @@ html, body, #root {
   transition: all 500ms;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.25);
-  /* border-radius: 5px; */
-  border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 15px 13px rgba(255, 0, 0, 0.22);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  &.danger_6:after { @include animation-danger(6); opacity: .2; }
+  &.danger_7:after { @include animation-danger(7); opacity: .4; }
+  &.danger_8:after { @include animation-danger(8); opacity: .6; }
+  &.danger_9:after { @include animation-danger(9); opacity: .8; }
+  &.danger_10:after { @include animation-danger(9); opacity: .9; }
 }
 
 .playerArea.playerTurn {
@@ -270,11 +287,26 @@ html, body, #root {
   z-index: 0;
 }
 
-.eliteMarker {
-  margin-top: 3px;
-  font-size: 10px;
-  color: $color_elite;
+.name {
   text-align: right;
+  
+  .details {
+    margin-top: 5px;
+    font-size: 10px;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    .fire { color: $element_fire; }
+    .water { color: $element_water; }
+    .earth { color: $element_earth; }
+
+    .eliteMarker {
+      margin-left: 7px;
+      color: $color_elite;
+    }
+  }
 }
 
 /* Gauge */
@@ -462,7 +494,7 @@ html, body, #root {
 
 /* End game screen */
 .endGame {
-  z-index: 20;
+  z-index: 0;
   position: absolute;
   left: 0px;
   top: 0px;
@@ -471,7 +503,12 @@ html, body, #root {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* opacity: 0; */
+  opacity: 0;
   background: rgba(0, 0, 0, 0.9);
-  transition: opacity 2s;
+
+  &.active {
+    z-index: 200;
+    opacity: 1;
+    transition: opacity 3s;
+  }
 }

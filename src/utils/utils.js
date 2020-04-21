@@ -21,6 +21,12 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function limitValue(value, min, max) {
+  if (value > max) value = max
+  if (value < min) value = min
+  return value
+}
+
 const sumOfArray = arr => arr.reduce((a, b) => a + b, 0)
 
 function generateWeight(items, weight) {
@@ -43,6 +49,7 @@ export {
   randomKey,
   randomValue,
   getRandomInt, 
+  limitValue,
   sumOfArray,
   generateWeight
 }

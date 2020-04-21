@@ -17,6 +17,7 @@ const monsterTiers = {
 const monsterList = {
   arcanegolem: {
     name: [`Arcane Golem`],
+    element: `water`,
     STR: [3, 5],
     DEX: [3, 6],
     CON: [1, 2],
@@ -30,6 +31,7 @@ const monsterList = {
   },
   blindworm: {
     name: [`Blind Worm`, `Cave Worm`],
+    element: `earth`,
     STR: [3, 5],
     DEX: [3, 6],
     CON: [1, 2],
@@ -43,7 +45,8 @@ const monsterList = {
   },
   demon: {
     name: [`Korganas`, `Ilnokt`, `Banduuz`],
-    STR: [8,12],
+    element: `fire`,
+    STR: [8, 12],
     DEX: [5,9],
     CON: [10,15],
     MAG: [2,6],
@@ -59,6 +62,7 @@ const monsterList = {
   },
   dragonemperor: {
     name: [`Dragon Emperor`],
+    element: `darkness`,
     STR: [8, 12],
     DEX: [5, 9],
     CON: [10, 15],
@@ -73,6 +77,7 @@ const monsterList = {
   },
   dryad: {
     name: [`Dryad`],
+    element: `earth`,
     STR: [3, 5],
     DEX: [3, 6],
     CON: [1, 2],
@@ -88,6 +93,7 @@ const monsterList = {
   },
   gazer: {
     name: [`Eldritch Abomination`, `Bo'orkh Ag'rh`],
+    element: `darkness`,
     STR: [3, 5],
     DEX: [3, 6],
     CON: [2, 4],
@@ -104,6 +110,7 @@ const monsterList = {
   },
   leviathan: {
     name: [`Leviathan`],
+    element: `fire`,
     STR: [8, 12],
     DEX: [5, 9],
     CON: [10, 15],
@@ -117,6 +124,7 @@ const monsterList = {
   },
   thanatos: {
     name: [`Thanatos`],
+    element: `darkness`,
     STR: [8, 12],
     DEX: [5, 9],
     CON: [10, 15],

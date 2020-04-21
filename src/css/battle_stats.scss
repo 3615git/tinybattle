@@ -72,17 +72,17 @@
 /* Player weapons */
 .playerWeapons {
   flex: 0;
-  margin-left: 12px;
+  margin-left: 16px;
 
-  > .physical {
-    background-color: $color_STR;
-    border-bottom: none;
+  :first-child {
+    // background-color: $color_STR;
+    border-bottom: none !important;
     border-radius: 5px 5px 0 0;
   }
 
-  > .magical {
-    background-color: $color_MAG;
-    border-top: none;
+  :last-child {
+    // background-color: $color_MAG;
+    border-top: none !important;
     border-radius: 0 0 5px 5px;
   }
 

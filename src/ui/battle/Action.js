@@ -5,6 +5,8 @@ import { connect } from "react-redux"
 import { attack } from '../../redux/actions/index'
 import Bar from './Bar'
 import ItemVisual from './ItemVisual'
+import { toHit, hitChance } from '../../actions/combat/hit'
+import { limitValue } from '../../utils/utils'
 
 /**
   * @desc description of the component
@@ -46,47 +48,52 @@ const Action = ({ type, player, opponent, turn, attack }) => {
   let attackPhysical = player.stamina >= player.weapons.STR.cost
 
   // Wordings
-  let w_Defend, w_Special
-  let buttonAttack, actionAttack, buttonSpecial, actionSpecial, weapon, damage
+  let w_Defend, w_Special, w_Attack
+  let buttonAttack, actionAttack, buttonSpecial, actionSpecial, weapon
 
   function notready() {}
+
+  let hitRatio
+  let physicalHitChance = hitChance(toHit(player, opponent, `physical`))
+  let magicalHitChance = hitChance(toHit(player, opponent, `magical`))
+
 
   if (type === `physical`) {
     w_Defend = `Defend`
     w_Special = `Special`
+    w_Attack = `Attack`
 
     buttonAttack = attackPhysical ? type + " attack" : type + " attack disabled"
     actionAttack = attackPhysical ? attack : notready
     buttonSpecial = specialPhysical ? type + " special" : type + " special disabled"
     actionSpecial = specialPhysical ? attack : notready
 
+    hitRatio = physicalHitChance
+
     weapon = (
       <div className="weapon">
-        <div className="itemCost physical">{player.weapons.STR.cost}</div>
+        {/* <div className="itemCost physical">{player.weapons.STR.cost}</div> */}
         <ItemVisual item={player.weapons.STR.type} level={player.weapons.STR.id} />
       </div>
-    )
-    damage = (
-      <span>{player.weapons.STR.score}</span>
     )
   } 
   else {
     w_Defend = `Focus`
     w_Special = `Special`
+    w_Attack = `Spell`
 
     buttonAttack = attackMagical ? type + " attack" : type + " attack disabled"
     actionAttack = attackMagical ? attack : notready
     buttonSpecial = specialMagical ? type +" special" : type +" special disabled"
     actionSpecial = specialMagical ? attack : notready
 
+    hitRatio = limitValue(magicalHitChance, 0, 100)
+
     weapon = (
       <div className="weapon">
-        <div className="itemCost magical">{player.weapons.MAG.cost}</div>
+        {/* <div className="itemCost magical">{player.weapons.MAG.cost}</div> */}
         <ItemVisual item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
       </div>
-    )
-    damage = (
-      <span>{player.weapons.MAG.score}</span>
     )
   }
 
@@ -97,7 +104,8 @@ const Action = ({ type, player, opponent, turn, attack }) => {
         {w_Defend}
       </button>
       <button className={buttonAttack} onClick={() => actionAttack({ type: type, mode: `attack` })}>
-        {damage}
+        <span className="note">{hitRatio}%</span>
+        {w_Attack}
         {weapon}
         <Bar type={type === `physical` ? "stamina" : "magicPoints"} />
       </button>

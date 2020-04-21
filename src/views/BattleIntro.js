@@ -6,7 +6,7 @@ import { setGameState } from '../redux/actions/index'
 
 import '../css/app.scss'
 import '../css/battleIntro.css'
-import '../css/animations.css'
+import '../css/animations.scss'
 
 const mapStateToProps = state => {
   return {

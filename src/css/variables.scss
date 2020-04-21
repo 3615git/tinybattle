@@ -3,13 +3,17 @@ $color_STR: #e7323b;
 $color_MAG: #0494ab;
 $color_stamina: adjust-hue($color_STR, 30); //#ce6d0a
 $color_mana: adjust-hue($color_MAG, -30); //#01a972
+// Elements
+$element_fire: red;
+$element_earth: #004e00;
+$element_water: #00139e;
 // Elite monster label
 $color_elite: #ff7847;
 // Up/down arrows
 $color_malus: #f51518;
 $color_bonus: #15f515;
 // Item quality
-$color_itemNormal: #000000;
-$color_itemMagic: #0072ff;
-$color_itemRare: #ffe000;
-$color_itemLegendary: #ff5e00;
+$color_itemNormal: #73746f;
+$color_itemMagic: #125fa7;
+$color_itemRare: #9c3db3;
+$color_itemLegendary: #de5e05;

@@ -30,20 +30,24 @@ const EndGame = ({ player, opponent, setGameState }) => {
   const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
   // Player is dead
-  if (player.hitPoints <= 0) return (
-    <div className={itemClasses}>
-      Player is dead
-      <button onClick={() => setGameState({ state: `welcome` })}>Start again !</button>
-    </div>
-  ) 
-  else if (opponent.hitPoints <= 0) return (
-    <div className={itemClasses}>
-      Opponent is dead
-      <button onClick={() => setGameState({ state: `battleIntro` })}>Next level !</button>
-    </div>
-  ) 
+  if (player.hitPoints <= 0) {
+    setTimeout(function () { setGameState({ state: `defeat` }) }, 4000)
+    return (
+      <div className={`${itemClasses} active`}>
+        Player is dead
+      </div>
+    ) 
+    }
+  else if (opponent.hitPoints <= 0) {
+    setTimeout(function () { setGameState({ state: `victory` }) }, 4000)
+    return (
+      <div className={`${itemClasses} active`}>
+        Opponent is dead
+      </div>
+    ) 
+    }
   // Nothing to display
-  else return null
+  else return <div className={itemClasses} />
 }
 
 // Exporting as default

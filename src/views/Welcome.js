@@ -7,7 +7,7 @@ import { setGameState } from '../redux/actions/index'
 
 import '../css/app.scss'
 import '../css/welcome.css'
-import '../css/animations.css'
+import '../css/animations.scss'
 
 const mapStateToProps = state => {
   return {
@@ -31,7 +31,7 @@ class Welcome extends Component {
     const { setGameState } = this.props
     
     return (
-      <div className="mainWrapper">
+      <div className="mainWrapper welcomeScreen">
         <div className="appWrapper">
           <div className="presentationArea">
             Champions of D20<br />
@@ -41,7 +41,8 @@ class Welcome extends Component {
             <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Start game !</button>
+            <button className="navigation" onClick={() => setGameState({ state: `gameCreate` })}>Start new game</button>
+            <button className="navigation" onClick={() => setGameState({ state: `gameSelect` })}>Continue existing game</button>
           </div>
         </div>
       </div>

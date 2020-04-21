@@ -1,4 +1,4 @@
-import { getWeaponType, getItemQuality, getItemIdFromLevel, getWeaponDamage, getWeaponCost } from '../utils/forge'
+import { getWeaponType, getItemQuality, getItemIdFromLevel, getWeaponDamage, getWeaponCost, getWeaponElement } from '../utils/forge'
 
 function getMonsterWeapon(type, level, humanoid, elite) {
   // Get weapon type
@@ -6,12 +6,15 @@ function getMonsterWeapon(type, level, humanoid, elite) {
   const itemQuality = getItemQuality(level, elite) // Get item rank
   const itemId = getItemIdFromLevel(weaponType, level) // Select item id from level
   const weaponDamage = getWeaponDamage(itemQuality) // Get weapon damage from level
+  const weaponElement = getWeaponElement() // Get weapon cost
   const weaponCost = getWeaponCost(type, itemQuality) // Get weapon cost
 
     return {
       type: weaponType,
+      char: type,
       id: itemId,
       score: weaponDamage,
+      element: weaponElement,
       cost: weaponCost,
       quality: itemQuality
   }

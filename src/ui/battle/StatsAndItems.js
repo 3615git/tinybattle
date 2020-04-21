@@ -39,7 +39,7 @@ const StatsAndItems = ({ opponent, humanoid }) => {
         <Stats opponent={opponent} />
         <Items opponent={opponent} />
       </div>
-      {humanoid &&
+      {(humanoid || !opponent) &&
         <Weapons opponent={opponent} />
       }
     </div>

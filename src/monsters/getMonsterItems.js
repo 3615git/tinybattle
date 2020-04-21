@@ -13,7 +13,8 @@ function getMonsterItem(CHAR, level, humanoid, elite) {
   // Generate item conf
   return {
     type: itemType,
-    id: itemId,  
+    char: CHAR,
+    id: itemId,
     score: itemScore + itemBonus, 
     quality: itemQuality
   }
