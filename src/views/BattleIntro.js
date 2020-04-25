@@ -4,10 +4,6 @@ import { connect } from "react-redux"
 import Stats from '../ui/battle/Stats'
 import { setGameState } from '../redux/actions/index'
 
-import '../css/app.scss'
-import '../css/battleIntro.css'
-import '../css/animations.scss'
-
 const mapStateToProps = state => {
   return {
     player: state.player,
@@ -62,12 +58,10 @@ class BattleIntro extends Component {
     }
     
     return (
-      <div className="mainWrapper">
+      <div className="mainWrapper wideScreen">
         <div className="appWrapper">
-
           <div className="presentationArea">
             <div className="bi_opponent">
-              <div>Level {game.level}</div>
               <div className="infos">
                 <img id="portrait" className={portraitClasses} src={opponent.pic} style={portraitStyling} alt={opponent.name} />
               </div>

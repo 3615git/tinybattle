@@ -1,9 +1,9 @@
 import { getWeaponType, getItemQuality, getItemIdFromLevel, getWeaponDamage, getWeaponCost, getWeaponElement } from '../utils/forge'
 
-function getMonsterWeapon(type, level, humanoid, elite) {
+function getMonsterWeapon(type, level, humanoid, elite, forceQuality = false) {
   // Get weapon type
   const weaponType = getWeaponType(type, humanoid) // Get weapon from type
-  const itemQuality = getItemQuality(level, elite) // Get item rank
+  const itemQuality = forceQuality ? forceQuality : getItemQuality(level, elite) // Get item rank
   const itemId = getItemIdFromLevel(weaponType, level) // Select item id from level
   const weaponDamage = getWeaponDamage(itemQuality) // Get weapon damage from level
   const weaponElement = getWeaponElement() // Get weapon cost
@@ -20,14 +20,14 @@ function getMonsterWeapon(type, level, humanoid, elite) {
   }
 }
 
-function getMonsterWeapons(types, level, humanoid, elite) {
+function getMonsterWeapons(types, level, humanoid, elite, forceQuality=false) {
   let monsterWeapons = {}
 
   if (types) {
     // Parse items array
     for (var i = 0; i < types.length; i++) {
       // Get each weapons
-      monsterWeapons[types[i]] = getMonsterWeapon(types[i], level, humanoid, elite)
+      monsterWeapons[types[i]] = getMonsterWeapon(types[i], level, humanoid, elite, forceQuality)
     }
   }
 

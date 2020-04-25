@@ -20,11 +20,21 @@ const mapStateToProps = state => {
 
 const Item = ({ item }) => {
   const plusSign = (item && item.cost) ? `` : `+`
-    if (item && item.type && item.id && item.score) return (
-    <div className={`item_wrapper ${item.quality}`}>
+
+  // Weapon cost type
+  let costType
+  if (item && item.char && item.char === `STR`) costType = `physical`
+  if (item && item.char && item.char === `MAG`) costType = `magical`
+
+  // Elemental glow
+  let glow
+  if (item && item.element) glow = 'glow_' + item.element
+
+  if (item && item.type && item.id && item.score) return (
+    <div className={`item_wrapper ${item.quality} ${glow}`}>
       {item.cost &&
         <>
-          <div className="itemCost physical">{item.cost}</div>
+          <div className={`itemCost ${costType}`}>{item.cost}</div>
           {item.element !== `none` && <div className={`element ${item.element}`} /> }
         </>
       }

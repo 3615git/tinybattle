@@ -38,6 +38,11 @@ textarea:focus, input:focus, button:focus{
   transition: opacity 700ms;
 }
 
+.third-transparent {
+  opacity: .3;
+  transition: opacity 700ms;
+}
+
 .position-relative {
   position: relative;
 }
@@ -63,7 +68,7 @@ html, body, #root {
   margin: 0;
   text-shadow: 1px 1px black;
   image-rendering: pixelated;
-  background-color: #cedade;
+  background-color: $color_body;
 }
 
 .mainWrapper {
@@ -73,7 +78,6 @@ html, body, #root {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: #112022;
 }
 
 .monsterOverlay {
@@ -88,6 +92,7 @@ html, body, #root {
 
 .appWrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 100%;
   max-width: 500px;
@@ -105,18 +110,32 @@ html, body, #root {
 
 .presentationArea {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
+
+  &.highIndex {
+    z-index: 30;
+  }
+}
+
+.title {
+  font-size: 20px;
 }
 
 .actionArea {
-  height: 130px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 30;
+
+  button {
+    margin: 5px !important;
+  }
 }
 
 /* Player area */

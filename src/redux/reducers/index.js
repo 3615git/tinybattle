@@ -3,6 +3,7 @@ import { GAMESTATE, ATTACK } from "../constants/action-types"
 import { welcome } from '../../actions/game/welcome'
 import { gameCreate } from '../../actions/game/gameCreate'
 import { gameSelect } from '../../actions/game/gameSelect'
+import { levelTransition } from '../../actions/game/levelTransition'
 import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
 import { victory } from '../../actions/game/victory'
@@ -108,6 +109,9 @@ function rootReducer(state = initialState, action) {
         break;
       case `gameSelect`:
         nextState = gameSelect(nextState)
+        break;
+      case `levelTransition`:
+        nextState = levelTransition(nextState)
         break;
       case `battleIntro`:
         nextState = battleIntro(nextState)

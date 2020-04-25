@@ -5,11 +5,6 @@ import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 */
 
 const battleIntro = (data) => {
-  // Initialize level if needed
-  if (typeof data.game.level !== 'number' || !data.game.level) data.game.level = 0
-  // Increment level 
-  const previousLevel = data.game.level
-  data.game.level = previousLevel + 1
   // Prepare opponent data from level
   data.opponent = getMonsterFromLevel(data.game.level)
   // Get initiative and playerTurn value

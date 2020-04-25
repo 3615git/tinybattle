@@ -7,7 +7,6 @@ import { getMonsterWeapons } from '../monsters/getMonsterWeapons'
 import Item from '../ui/battle/Item'
 
 import '../css/app.scss'
-import '../css/shop.scss'
 import '../css/animations.scss'
 
 const mapStateToProps = state => {
@@ -93,7 +92,7 @@ class Shop extends Component {
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Enter next battle</button>
+            <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Enter next battle</button>
           </div>
         </div>
       </div>

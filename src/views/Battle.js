@@ -14,13 +14,6 @@ import { getRandomInt } from "../utils/utils"
 
 import { setGameState, attack } from '../redux/actions/index'
 
-import '../css/app.scss'
-import '../css/buttons.scss'
-import '../css/battle_logs.scss'
-import '../css/battle_stats.scss'
-import '../css/items.scss'
-import '../css/animations.scss'
-
 const mapStateToProps = state => {
   return {
     player: state.player,
@@ -45,8 +38,6 @@ class Battle extends Component {
 
     this.state = {
       playerTurnUI: this.props.playerTurn,
-      // playerHitpoints: this.props.player.hitPoints,
-      // opponentHitpoints: this.props.opponent.hitPoints,
       monstercolor: {
         vibrant: `black`,
         darkVibrant: `rgba(0, 0, 0, 0.4)`,

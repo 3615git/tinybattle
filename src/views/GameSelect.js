@@ -3,12 +3,6 @@ import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
 
-// import logo from '../pics/ui/logo.png'
-
-import '../css/app.scss'
-import '../css/welcome.css'
-import '../css/animations.scss'
-
 const mapStateToProps = state => {
   return {
     player: state.player,
@@ -37,7 +31,7 @@ class Welcome extends Component {
             Select game
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Load game</button>
+            <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Load game</button>
           </div>
         </div>
       </div>

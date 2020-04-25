@@ -3,12 +3,6 @@ import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
 
-// import logo from '../pics/ui/logo.png'
-
-import '../css/app.scss'
-import '../css/welcome.css'
-import '../css/animations.scss'
-
 const mapStateToProps = state => {
   return {
     player: state.player,
