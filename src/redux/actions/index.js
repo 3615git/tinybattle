@@ -1,5 +1,10 @@
 import { ATTACK } from "../constants/action-types"
 import { GAMESTATE } from "../constants/action-types"
+import { SETTINGS } from "../constants/action-types"
+
+function settings(payload) {
+  return { type: SETTINGS, payload }
+}
 
 function setGameState(payload) {
   return { type: GAMESTATE, payload }
@@ -10,6 +15,7 @@ function attack(payload) {
 }
 
 export {
+  settings,
   setGameState,
   attack
 }

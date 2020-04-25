@@ -1,4 +1,6 @@
-import { GAMESTATE, ATTACK } from "../constants/action-types"
+import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
+// Settings
+import { setUIColor } from '../../actions/settings/setUIColor'
 // Game system
 import { welcome } from '../../actions/game/welcome'
 import { gameCreate } from '../../actions/game/gameCreate'
@@ -98,6 +100,16 @@ function rootReducer(state = initialState, action) {
   let nextState = { ...state }
 
   console.log(action)
+
+  if (action.type === SETTINGS) {
+    switch (action.payload.setting) {
+      case `setUIColor`:
+        nextState = setUIColor(nextState, action.payload.color)
+        break;
+      default:
+        break;
+    }
+  }
 
   if (action.type === GAMESTATE) {
     switch (action.payload.state) {

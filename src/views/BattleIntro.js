@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import * as Vibrant from 'node-vibrant'
 
-import Stats from '../ui/battle/Stats'
-import { setGameState } from '../redux/actions/index'
+import { setGameState, settings } from '../redux/actions/index'
+import Opponent from '../ui/battle/Opponent'
 
 const mapStateToProps = state => {
   return {
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setGameState: payload => dispatch(setGameState(payload))
+    setGameState: payload => dispatch(setGameState(payload)),
+    settings: payload => dispatch(settings(payload))
   }
 }
 
@@ -24,58 +26,57 @@ class BattleIntro extends Component {
     super(props)
 
     this.state = {
-      portraitReady: false
+      // portraitReady: false,
+      monstercolor: {
+        vibrant: `black`,
+        darkVibrant: `rgba(0, 0, 0, 0.4)`,
+        darkMuted: `rgba(0, 0, 0, 0.4)`
+      }
     }
   }
 
-  componentDidMount() {
-    // Defining portrait or landscape mode for portraits
-    var portrait = document.getElementById('portrait')
-    let that = this
-
-    portrait.addEventListener('load', function () {
-      let mode = this.naturalWidth > this.naturalHeight ? `landscape` : `portrait`
-      that.setState({
-        mode,
-        portraitReady: true
+  fetchPalette = (imgSrc) => {
+    Vibrant.from(imgSrc).getPalette()
+      .then(palette => {
+        this.setState({
+          monstercolor: {
+            vibrant: palette.Vibrant.getHex(),
+            darkVibrant: palette.DarkVibrant.getHex(),
+            darkMuted: palette.DarkMuted.getHex()
+          }
+        })
       })
-    })
+  }
+
+  startBattle = () => {
+    const { monstercolor } = this.state
+    const { settings, setGameState } = this.props
+
+    settings({ setting: `setUIColor`, color: monstercolor })
+    setGameState({ state: `battle` })
+  }
+
+  componentDidMount() {
+    const { opponent } = this.props
+    this.fetchPalette(opponent.pic)
   }
   
   render() {
     
-    const { opponent, game, setGameState } = this.props
-    const { mode, portraitReady } = this.state
-
-    // Monster display
-    const portraitClasses = portraitReady ? `portrait ready` : `portrait`
-
-    // Monster portrait size
-    const portraitStyling = mode === `portrait` ? {
-      width: `350px`
-    } : {
-      width: `400px`
-    }
+    const { opponent, setGameState } = this.props
+    const { monstercolor } = this.state
     
     return (
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
-          <div className="presentationArea">
-            <div className="bi_opponent">
-              <div className="infos">
-                <img id="portrait" className={portraitClasses} src={opponent.pic} style={portraitStyling} alt={opponent.name} />
-              </div>
-            </div>
-            <div className="bi_text">
-              <div className="bi_name">
-                {opponent.name}
-              </div>
-              <Stats opponent />
+          <Opponent color={monstercolor}/>
+          <div className="bi_text">
+            <div className="bi_name">
+              {opponent.name}
             </div>
           </div>
-
           <div className="actionArea">
-            <button className="navigation bi_action" onClick={() => setGameState({ state: `battle` })}>Start battle !</button>
+            <button className="navigation bi_action" onClick={() => this.startBattle()}>Start battle !</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import * as Vibrant from 'node-vibrant'
 
 import EndGame from '../ui/battle/EndGame'
 import Opponent from '../ui/battle/Opponent'
@@ -21,7 +20,8 @@ const mapStateToProps = state => {
     playerTurn: state.game.playerTurn,
     game: state.game,
     settings: state.game.settings,
-    log: state.log
+    log: state.log,
+    uicolor: state.game.uicolor
   }
 }
 
@@ -37,26 +37,8 @@ class Battle extends Component {
     super(props)
 
     this.state = {
-      playerTurnUI: this.props.playerTurn,
-      monstercolor: {
-        vibrant: `black`,
-        darkVibrant: `rgba(0, 0, 0, 0.4)`,
-        darkMuted: `rgba(0, 0, 0, 0.4)`
-      }
+      playerTurnUI: this.props.playerTurn
     }
-  }
-
-  fetchPalette = (imgSrc) => {
-    Vibrant.from(imgSrc).getPalette()
-      .then(palette => {
-        this.setState({
-          monstercolor: {
-            vibrant: palette.Vibrant.getHex(),
-            darkVibrant: palette.DarkVibrant.getHex(),
-            darkMuted: palette.DarkMuted.getHex()
-          }
-        })
-      })
   }
 
   opponentAttackChoice = () => {
@@ -99,11 +81,6 @@ class Battle extends Component {
     }.bind(this), settings.combatSpeed)
   }
 
-  componentDidMount() {
-    const { opponent } = this.props
-    this.fetchPalette(opponent.pic)
-  }
-
   componentDidUpdate(prevProps) {
     const { opponent, playerTurn, settings, setGameState } = this.props
     // If opponent is dead, clear timer
@@ -140,8 +117,8 @@ class Battle extends Component {
   }
 
   render() {
-    const { monstercolor, playerTurnUI } = this.state
-    const { game, player } = this.props
+    const { playerTurnUI } = this.state
+    const { game, player, uicolor } = this.props
 
     // Low HP
     const hpRange = 10 - Math.round((player.hitPoints * 10) / player.maxHitPoints)
@@ -153,9 +130,9 @@ class Battle extends Component {
         <div className="appWrapper">
           <EndGame />
           <VibrationWrapper condition={game.opponentHit}>
-            <Opponent color={monstercolor} turn={playerTurnUI} />
+            <Opponent color={uicolor} turn={playerTurnUI} />
           </VibrationWrapper>
-          <Logs color={monstercolor} />
+          <Logs color={uicolor} />
           <VibrationWrapper condition={game.playerHit}>
             <div className={playerAreaClass}>
               {/* <Infos /> */}
