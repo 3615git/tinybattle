@@ -49,7 +49,6 @@ class Welcome extends Component {
   }
 
   setStyle = (baseCharacs) => {
-    console.log(baseCharacs)
     this.setState({ baseCharacs })
     return false
   }

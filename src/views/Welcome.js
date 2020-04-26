@@ -31,7 +31,6 @@ class Welcome extends Component {
     return [
       <div key="mainWrapper" className="mainWrapper wideScreen">
         <div className="appWrapper">
-          <div className="gradient" />
           <div className="presentationArea">
               <img src={coverart} className="coverArt" alt="Cover art" />
               <div className="homeSigil">

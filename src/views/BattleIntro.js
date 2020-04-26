@@ -63,16 +63,23 @@ class BattleIntro extends Component {
   
   render() {
     
-    const { opponent, setGameState } = this.props
+    const { opponent } = this.props
     const { monstercolor } = this.state
+
+    console.log(opponent)
     
     return (
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
           <Opponent color={monstercolor}/>
-          <div className="bi_text">
-            <div className="bi_name">
+          <div className="opponentIntro">
+            <div className="name">
               {opponent.name}
+            </div>
+            <div className="details">
+              {opponent.elite && <span className="eliteMarker">elite</span>}
+              {opponent.element && <span className={`element ${opponent.element}`}>{opponent.element}</span>}
+              <span>{opponent.job}</span>
             </div>
           </div>
           <div className="actionArea">

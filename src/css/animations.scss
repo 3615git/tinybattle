@@ -207,17 +207,20 @@
 /** Fade between views transition */
 .fadeView_2000-enter, .fadeView_2000-appear {
   opacity: 0;
+  z-index: 30;
 }
 
 /* ending ENTER animation */
 .fadeView_2000-enter-active, .fadeView_2000-appear-active, .fadeView_2000-appear-done {
   opacity: 1;
   transition: all 2000ms ease-in-out;
+  z-index: 30;
 }
 
 /* starting EXIT animation */
 .fadeView_2000-exit {
   opacity: 1;
+  z-index: 30;
 }
 
 /* ending EXIT animation */
