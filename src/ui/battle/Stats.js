@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
+import AnimatedNumber from "animated-number-react"
 
 import { getStat } from '../../actions/combat/stats'
 
@@ -35,7 +36,10 @@ const StatCounter = ({ stat }) => {
 
   return (
     <div className={itemClasses}>
-      {currentStatValue + items}
+      <AnimatedNumber
+        formatValue={value => value.toFixed(0)}
+        value={currentStatValue + items}
+      />
     </div>
   )
 }
@@ -52,11 +56,11 @@ const Stats = ({ opponent, data }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <div><StatCounter stat={getStat(activePlayer, `STR`)} /><span>STR</span></div>
-      <div><StatCounter stat={getStat(activePlayer, `DEX`)} /><span>DEX</span></div>
-      <div><StatCounter stat={getStat(activePlayer, `CON`)} /><span>CON</span></div>
-      <div><StatCounter stat={getStat(activePlayer, `MAG`)} /><span>MAG</span></div>
-      <div><StatCounter stat={getStat(activePlayer, `LCK`)} /><span>LCK</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `STR`)} /><span className="char">STR</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `DEX`)} /><span className="char">DEX</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `CON`)} /><span className="char">CON</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `MAG`)} /><span className="char">MAG</span></div>
+      <div><StatCounter stat={getStat(activePlayer, `LCK`)} /><span className="char">LCK</span></div>
     </div>
   )
 }

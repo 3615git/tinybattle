@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animated-number-react": "0.0.2",
     "chroma-js": "^2.1.0",
     "node-sass": "^4.13.1",
     "node-vibrant": "^3.1.5",

@@ -1,34 +1,165 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 
-import { setGameState } from '../redux/actions/index'
+import Item from '../ui/battle/Item'
+import ItemVisual from '../ui/battle/ItemVisual'
+import { clog } from '../utils/utils'
+
+import { setGameState, settings } from '../redux/actions/index'
 
 const mapStateToProps = state => {
   return {
     player: state.player,
-    opponent: state.opponent,
-    playerTurn: state.game.playerTurn,
-    log: state.log
+    opponent: state.opponent
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    setGameState: payload => dispatch(setGameState(payload))
+    setGameState: payload => dispatch(setGameState(payload)),
+    settings: payload => dispatch(settings(payload))
   }
 }
 
-class Welcome extends Component {
+class Victory extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { 
+      moveditems: [],
+      solditems: [],
+      gold: this.props.opponent.reward
+    }
+  }
+
+  getLoot = (type, char, item) => {
+    const { settings } = this.props
+    const { moveditems } = this.state
+    let updatedMovedItems = moveditems ? moveditems : []
+
+    clog(`getLoot`, `function`)
+
+    // Update store
+    settings({ setting: `moveItem`, type: type, char: char, item: item })
+    // Update UI
+    updatedMovedItems.push({ type: type, char: char})
+    this.setState({
+      moveditems: updatedMovedItems
+    })
+  }
+
+  sellLoot = (type, char, item) => {
+    const { opponent, settings } = this.props
+    const { solditems, gold } = this.state
+    let updatedSoldItems = solditems ? solditems : []
+
+    clog(`sellLoot`, `function`)
+
+    // Update store
+    settings({ setting: `sellItem`, type: type, char: char, item: item })
+    // Update UI
+    updatedSoldItems.push({ type: type, char: char })
+    this.setState({
+      gold: gold + opponent[type][char].reward
+    })
+  }
+
+  checkLoot = (type, char) => {
+    const { moveditems, solditems } = this.state
+    let loot
+
+    clog(`checkLoot`, `function`)
+
+    for (let index = 0; index < moveditems.length; index++) {
+      if (moveditems[index].type === type && moveditems[index].char === char) loot = `new`
+    }
+
+    for (let index = 0; index < solditems.length; index++) {
+      if (solditems[index].type === type && solditems[index].char === char) loot = `sold`
+    }
+
+    return loot
+  }
+
+  parseLoot = (type) => {
+    const { opponent, player } = this.props
+
+    clog(`parseLoot`, `function`)
+
+    let loot = []
+
+    for (let [key, value] of Object.entries(opponent[type])) {
+
+      // Check if item has been looted
+      const looted = this.checkLoot(type, key)
+
+      // Button labels
+      let sellButton = <><ItemVisual item="coins" level={5} small /> {opponent[type][key].reward}</>
+      let equipButton = "Equip"
+
+      if (looted === `sold`) {
+        sellButton = `Sold!`
+        equipButton = ``
+      } 
+      else if (looted === `new`) {
+        sellButton = ``
+        equipButton = `Got it!`
+      } 
+
+      loot.push(
+        <div className="lootBox" key={`lootbox_${type}_${key}`}>
+          <span className="characName">{key}</span>
+          <div className="storeWrapper">
+            <Item item={opponent[type][key]} />
+          </div>
+          <Item item={player[type][key]} effect={looted} />
+          <div className="actions">
+            <button onClick={() => this.getLoot(type, key, value)} disabled={looted}>
+              {equipButton}
+            </button>
+            <button onClick={() => this.sellLoot(type, key, value)} disabled={looted}>
+              {sellButton}
+            </button>
+          </div>
+        </div>
+      )
+    }
+
+    return loot
+  }
 
   render() {
-
-    const { setGameState } = this.props
+    const { setGameState, opponent } = this.props
+    const { gold } = this.state
     
+    clog(`Victory render`, `location`)
+
+    const goldIcon = {
+      id: 6,
+      score: gold,
+      type: "coins"
+    }
+
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
-          <div className="presentationArea">
-            You win! Loot dead ennemy.
+          <div className="presentationArea highIndex">
+            <div className="shopWrapper">
+              <span className="title">Loot</span>
+              <span className="subtitle">Items</span>
+              <div className="lootBoxes">
+                {this.parseLoot(`items`)}
+              </div>
+              <span className="subtitle">Weapons</span>
+              <div className="lootBoxes weapons">
+                {this.parseLoot(`weapons`)}
+              </div>
+              <span className="subtitle">Gold</span>
+              <div className="goldLoot">
+                <Item item={goldIcon} effect="new" />
+              </div>
+              <img src={opponent.pic} alt={opponent.name} />
+            </div>
           </div>
           <div className="actionArea">
             <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Enter shop</button>
@@ -40,4 +171,4 @@ class Welcome extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(Victory)

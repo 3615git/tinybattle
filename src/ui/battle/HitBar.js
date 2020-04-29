@@ -37,11 +37,15 @@ class HitBar extends Component {
 
   componentDidMount() {
     const { hit } = this.props
-    setTimeout(() => {
+    this.rollDelay = setTimeout(() => {
       this.setState({
         rollPosition: hit.roll
       })
     }, 600)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.rollDelay)
   }
 
   render() {

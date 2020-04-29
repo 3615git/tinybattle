@@ -1,11 +1,13 @@
 import { itemQualityBonus } from "../conf/settings_items"
 import { getItemFromChar, getItemIdFromLevel, getItemPowerFromLevel, getItemQuality } from '../utils/forge'
 import { getRandomInt } from "../utils/utils"
+import { getItemPrice } from '../monsters/getMonsterReward'
 
-function getMonsterItem(CHAR, level, humanoid, elite) {
+
+function getMonsterItem(CHAR, level, humanoid, elite, forceQuality = false) {
   const itemType = getItemFromChar(CHAR, humanoid) // Get item type from char
   // Check if item is special
-  const itemQuality = getItemQuality(elite) // Get item rank
+  const itemQuality = forceQuality ? forceQuality : getItemQuality(level, elite) // Get item rank
   const itemId = getItemIdFromLevel(itemType, level) // Select item id from level
   const itemScore = getItemPowerFromLevel(CHAR, level) // Select item power from level
   const itemBonus = getRandomInt(itemQualityBonus[itemQuality][0], itemQualityBonus[itemQuality][1]) // Get item bonus
@@ -16,16 +18,20 @@ function getMonsterItem(CHAR, level, humanoid, elite) {
     char: CHAR,
     id: itemId,
     score: itemScore + itemBonus, 
-    quality: itemQuality
+    quality: itemQuality,
+    reward: getItemPrice(level, itemQuality),
+    price: getItemPrice(level, itemQuality, `buy`)
   }
 }
 
-function getMonsterItems(items, level, humanoid, elite) {
+function getMonsterItems(items, level, humanoid, elite, forceQuality = false) {
   let monsterItems = {}
-  // Parse items array
-  for (var i = 0; i < items.length; i++) {
-    // Get each item
-    monsterItems[items[i]] = getMonsterItem(items[i], level, humanoid, elite)
+  if (items) {
+    // Parse items array
+    for (var i = 0; i < items.length; i++) {
+      // Get each item
+      monsterItems[items[i]] = getMonsterItem(items[i], level, humanoid, elite, forceQuality)
+    }
   }
 
   // Return conf

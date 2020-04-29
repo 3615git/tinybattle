@@ -1,3 +1,5 @@
+@import 'variables';
+
 label {
   display: block;
   margin-bottom: 10px;
@@ -10,11 +12,24 @@ input {
   height: 46px;
   border: 2px solid rgba(0, 0, 0, 0.85);
   font-family: "eight_bit_dragonregular";
+  text-align: center;
   color: white;
   background-color: #192c32;
   border-radius: 8px;
   font-size: 16px;
   padding: 0px 10px;
+}
+
+.legacyColor {
+  color: $color_legacy;
+}
+
+.physicalColor {
+  color: $color_STR;
+}
+
+.magicalColor {
+  color: $color_MAG;
 }
 
 .profileSelector {
@@ -31,6 +46,7 @@ input {
 .profileStats {
   width: 300px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   
   .playerStats {
@@ -40,29 +56,47 @@ input {
 
 .profileWeapons {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 300px;
 
   .weapons {
-    flex-basis: 50%;;
     display: flex;
-    flex-direction: column;
-    margin-right: 5px;
+    flex-direction: row;
+    align-items: flex-end;
 
-    div {
+    .weapon {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      justify-content: center;
+      flex-basis: 50%;
 
-      .item_wrapper {
-        margin: 5px;
+      .info {
+        font-size: 9px;
+        margin-top: 8px;
       }
+
+      &:first-child {
+        justify-content: flex-end;
+        text-align: right;
+        .item_wrapper {
+          margin: 5px 7px 5px 15px;
+        }
+      }
+
+      &:last-child {
+        justify-content: flex-start;
+        .item_wrapper {
+          margin: 5px 15px 5px 7px;
+        }
+      }
+
+      
     }
+
   }
 
   .legacy {
-    flex-basis: 50%;;
+    flex-basis: 50%;
     display: flex;
     flex-direction: column;
     margin-left: 5px;

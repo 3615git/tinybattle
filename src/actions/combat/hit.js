@@ -85,7 +85,6 @@ const elementalDamage = (activePlayer, targetPlayer, CHAR, damage) => {
   // If targetPlayer has base element
   const targetElement = targetPlayer.element
   // If element has ascendant
-  console.log(weaponElement, targetElement)
   if (weaponElement && targetElement) {
     if (elementalRules(weaponElement, targetElement)) {
       // @todo random bonus ?
@@ -134,11 +133,11 @@ const physicalDamage = (activePlayer, targetPlayer, critical) => {
   let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
 
-  console.log(`baseDamage`, baseDamage)
-  console.log(`itemDamage`, itemDamage)
-  console.log(`criticalBonus`, criticalBonus)
-  console.log(`elementalBonus`, elementalBonus)
-  console.log(`damage`, damage)
+  // console.log(`baseDamage`, baseDamage)
+  // console.log(`itemDamage`, itemDamage)
+  // console.log(`criticalBonus`, criticalBonus)
+  // console.log(`elementalBonus`, elementalBonus)
+  // console.log(`damage`, damage)
   
   return {
     roll: itemDamageResults,

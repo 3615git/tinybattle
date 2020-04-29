@@ -8,8 +8,9 @@ import dragonemperor from '../pics/opponents/dragonemperor.png'
 import blindworm from '../pics/opponents/blindworm.png'
 
 const monsterTiers = {
+  low: [`dryad`],
   // low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
-  low: [`demon`],
+  // low: [`demon`],
   medium: [`thanatos`, `leviathan`],
   high: [`demon`,  `dragonemperor`]
 }
@@ -26,7 +27,6 @@ const monsterList = {
     fumble: 2,
     maxHitPoints: [10, 20],
     maxMagicPoints: [100, 200],
-    items: [`STR`, `LCK`],
     pic: [arcanegolem]
   },
   blindworm: {
@@ -40,7 +40,6 @@ const monsterList = {
     fumble: 2,
     maxHitPoints: [10, 20],
     maxMagicPoints: [100, 200],
-    items: [`STR`, `LCK`],
     pic: [blindworm]
   },
   demon: {
@@ -73,21 +72,22 @@ const monsterList = {
     maxMagicPoints: [20, 30],
     items: [`STR`, `LCK`],
     weapons: [`STR`, `MAG`],
+    humanoid: true,
     pic: [dragonemperor]
   },
   dryad: {
     name: [`Dryad`],
     element: `earth`,
-    STR: [3, 5],
-    DEX: [3, 6],
+    STR: [2, 4],
+    DEX: [2, 6],
     CON: [1, 2],
     MAG: [2, 3],
-    LCK: [4, 7],
+    LCK: [1,2],
     fumble: 2,
     maxHitPoints: [10, 20],
     maxMagicPoints: [100, 200],
-    items: [`STR`, `LCK`],
-    weapons: [`STR`],
+    items: [`DEX`],
+    weapons: [`STR`, `MAG`],
     humanoid: true,
     pic: [dryad]
   },
@@ -119,7 +119,6 @@ const monsterList = {
     fumble: 4,
     maxHitPoints: [80, 130],
     maxMagicPoints: [20, 30],
-    items: [`STR`, `LCK`],
     pic: [leviathan]
   },
   thanatos: {

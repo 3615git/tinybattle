@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const EndGame = ({ player, opponent, setGameState }) => {
+const EndGame = ({ player, opponent }) => {
 
   // Component styling
   const defaultClasses = `endGame`
@@ -31,7 +31,6 @@ const EndGame = ({ player, opponent, setGameState }) => {
 
   // Player is dead
   if (player.hitPoints <= 0) {
-    setTimeout(function () { setGameState({ state: `defeat` }) }, 4000)
     return (
       <div className={`${itemClasses} active`}>
         Player is dead
@@ -39,7 +38,6 @@ const EndGame = ({ player, opponent, setGameState }) => {
     ) 
     }
   else if (opponent.hitPoints <= 0) {
-    setTimeout(function () { setGameState({ state: `victory` }) }, 4000)
     return (
       <div className={`${itemClasses} active`}>
         Opponent is dead

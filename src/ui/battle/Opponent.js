@@ -48,17 +48,18 @@ class Opponent extends Component {
 
   // Display component
   render() {
-    const { data, turn, level, color } = this.props
+    const { data, turn, level, color, intro } = this.props
     const { mode, portraitReady } = this.state
 
     // Get colors from scene
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
-    const appbackground = color.darkVibrant // color.darkMuted
+    const appbackground = color.darkMuted // color.darkMuted
 
     // Component styling
     const defaultClasses = `opponentWrapper`
     const turnClasses = turn ? `` : `turn`
+    const introClasses = intro ? intro : ``
   
     const wrapperStyle = !turn ? {
       background: monsterbackground,
@@ -68,7 +69,7 @@ class Opponent extends Component {
     }
   
     // Add custom classes to defined classes
-    const itemClasses = [defaultClasses, turnClasses].filter(val => val).join(` `)
+    const itemClasses = [defaultClasses, turnClasses, introClasses].filter(val => val).join(` `)
 
     // Monster bg styling
     const bgStyling = appbackground ? {
@@ -81,7 +82,7 @@ class Opponent extends Component {
     const portraitStyling = mode === `portrait` ? {
       width: `400px`
     } : {
-        width: `500px`
+      width: `500px`
     }
 
     // Monster display

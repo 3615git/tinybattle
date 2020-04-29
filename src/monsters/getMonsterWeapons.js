@@ -1,4 +1,5 @@
 import { getWeaponType, getItemQuality, getItemIdFromLevel, getWeaponDamage, getWeaponCost, getWeaponElement } from '../utils/forge'
+import { getItemPrice } from '../monsters/getMonsterReward'
 
 function getMonsterWeapon(type, level, humanoid, elite, forceQuality = false) {
   // Get weapon type
@@ -16,7 +17,9 @@ function getMonsterWeapon(type, level, humanoid, elite, forceQuality = false) {
       score: weaponDamage,
       element: weaponElement,
       cost: weaponCost,
-      quality: itemQuality
+      quality: itemQuality,
+      reward: getItemPrice(level, itemQuality),
+      price: getItemPrice(level, itemQuality, `buy`)
   }
 }
 

@@ -9,7 +9,9 @@ import ItemVisual from './ItemVisual'
 */
 
 const propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
+  effect: PropTypes.string,
+  noPlus: PropTypes.bool
 }
 
 const mapStateToProps = state => {
@@ -18,8 +20,9 @@ const mapStateToProps = state => {
   }
 }
 
-const Item = ({ item }) => {
-  const plusSign = (item && item.cost) ? `` : `+`
+const Item = ({ item, effect, noPlus }) => {
+  // Plus sign for bonus items
+  const plusSign = ((item && item.cost) || noPlus) ? `` : `+`
 
   // Weapon cost type
   let costType
@@ -27,11 +30,14 @@ const Item = ({ item }) => {
   if (item && item.char && item.char === `MAG`) costType = `magical`
 
   // Elemental glow
-  let glow
-  if (item && item.element) glow = 'glow_' + item.element
+  const defaultClasses = `item_wrapper`
+  const glowClasses = item && item.element ? 'glow_' + item.element : ``
+  const qualityClasses = item && item.quality ? item.quality : ``
+  const effectClasses = effect ? `animation-`+effect : ``
+  const itemClasses = [defaultClasses, qualityClasses, glowClasses, effectClasses].filter(val => val).join(` `)
 
-  if (item && item.type && item.id && item.score) return (
-    <div className={`item_wrapper ${item.quality} ${glow}`}>
+  if (item && item.type && item.id) return (
+    <div className={itemClasses}>
       {item.cost &&
         <>
           <div className={`itemCost ${costType}`}>{item.cost}</div>
@@ -41,7 +47,8 @@ const Item = ({ item }) => {
       <ItemVisual item={item.type} level={item.id} />
       <span>
         {plusSign}     
-        {item.score}</span>
+        {item.score}
+      </span>
     </div>
   )
   else return (

@@ -65,13 +65,11 @@ class BattleIntro extends Component {
     
     const { opponent } = this.props
     const { monstercolor } = this.state
-
-    console.log(opponent)
     
     return (
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
-          <Opponent color={monstercolor}/>
+          <Opponent color={monstercolor} intro="intro" />
           <div className="opponentIntro">
             <div className="name">
               {opponent.name}

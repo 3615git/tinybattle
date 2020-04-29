@@ -1,0 +1,107 @@
+.shopWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  span.title {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 2;
+  }
+
+  span.subtitle {
+    font-size: 12px;
+    display: block;
+    margin: 10px 0px;
+  }
+
+  .lootBoxes {
+    z-index: 2;
+
+    &.weapons .characName {
+      opacity: 0;
+    }
+  }
+
+  .goldLoot {
+    padding: 7px;
+    margin-top: 20px;
+
+    .item_wrapper {
+      width: 120px;
+      flex-direction: row;
+      font-size: 16px;
+
+      .item {
+        margin-right: 10px
+      }
+    }
+  }
+
+  .lootBox {
+    display: flex; 
+    align-items: center;
+
+    &:first-child .storeWrapper {
+      border-radius: 5px 7px 0px 0px;
+    }
+
+    &:last-child .storeWrapper {
+      border-radius: 0px 0px 7px 7px;
+    }
+
+    &:only-child .storeWrapper {
+      border-radius: 7px;
+    }
+
+    .storeWrapper {
+      padding: 7px 6px 7px 6px;
+      margin-left: 10px;
+      margin-right: 10px;
+      background-color: rgba($color: white, $alpha: 0.1);
+    }
+
+    .characName {
+      font-size: 11px;
+      opacity: .5;
+      width: 30px;
+      text-align: right;
+    }
+
+    .actions {
+      display: flex;
+      margin-left: 5px;
+      width: 150px;
+
+      button {
+        flex-basis: 50%;
+        margin-left: 5px;
+        text-align: center;
+
+        div {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  img {
+    position: absolute;
+    z-index: 1;
+    mix-blend-mode: luminosity;
+    height: 400px;
+    mix-blend-mode: luminosity;
+    opacity: .1
+  }
+
+  &.shop .lootBox .actions {
+    width: 100px;
+    button {
+      flex-basis: 100%;
+    }
+  }
+}

@@ -9,7 +9,7 @@ import Actions from '../ui/battle/Actions'
 import Logs from '../ui/battle/Logs'
 import VibrationWrapper from '../ui/battle/VibrationWrapper'
 import { toHit, hitChance } from '../actions/combat/hit'
-import { getRandomInt } from "../utils/utils"
+import { getRandomInt, clog } from "../utils/utils"
 
 import { setGameState, attack } from '../redux/actions/index'
 
@@ -82,10 +82,35 @@ class Battle extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { opponent, playerTurn, settings, setGameState } = this.props
-    // If opponent is dead, clear timer
-    if (opponent.hitPoints === 0) {
+    const { opponent, player, playerTurn, settings, setGameState } = this.props
+    const { battleEnd } = this.state
+
+    // If opponent or player is dead, clear timer
+    if (opponent.hitPoints === 0 || player.hitPoints === 0) {
       clearTimeout(this.opponentTurn)
+      clearTimeout(this.playerTurn)
+
+      if (!battleEnd) {
+        this.setState({
+          battleEnd: true
+        })
+      }
+
+      // If player is dead
+      if (player.hitPoints === 0 && !battleEnd) {
+        setTimeout(function () {
+          setGameState({ state: `defeat` })
+        }, 4000)
+      }
+
+      // If opponent is dead
+      if (opponent.hitPoints === 0 && !battleEnd) {
+        clog(`setting timeout`, `stop`)
+        setTimeout(function () {
+          setGameState({ state: `victory` })
+        }, 4000)
+      }
+
       return false
     }
 
@@ -119,6 +144,8 @@ class Battle extends Component {
   render() {
     const { playerTurnUI } = this.state
     const { game, player, uicolor } = this.props
+
+    clog(`Battle render`, `location`)
 
     // Low HP
     const hpRange = 10 - Math.round((player.hitPoints * 10) / player.maxHitPoints)

@@ -43,6 +43,44 @@ function generateWeight(items, weight) {
   return weighedItems
 }
 
+function clog(message, mode = "default") {
+  let color, icon
+  switch (mode) {
+    case "location":
+      color = "white"
+      icon = "📍"
+      break;
+    case  "action":
+      color = "red"
+      icon = "🟥"
+      break;
+    case "reducer":
+      color = "orange"
+      icon = "🟧"
+      break;
+    case "function":
+      color = "grey";
+      icon ="🕹"
+      break;
+    case "stop":
+      color = "red";
+      icon = "👋🏼"
+      break;
+    case "error":
+      color = "Red";
+      break;
+    case "warning":
+      color = "Orange";
+      break;
+    default:
+      color = "white"
+      break;
+  }
+
+  if (mode === `data`) console.table(message);
+  else console.log(`%c${icon} ${message}`, `color:${color}`);
+}
+
 export {
   diceRoll,
   randomProperty,
@@ -51,5 +89,6 @@ export {
   getRandomInt, 
   limitValue,
   sumOfArray,
-  generateWeight
+  generateWeight,
+  clog
 }

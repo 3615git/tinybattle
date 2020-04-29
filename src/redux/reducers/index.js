@@ -1,6 +1,14 @@
 import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
 // Settings
+import { createPlayer } from '../../actions/settings/createPlayer'
+import { setItem } from '../../actions/settings/setItem'
+import { keepItem } from '../../actions/settings/keepItem'
+import { buyItem } from '../../actions/settings/buyItem'
+import { sellItem } from '../../actions/settings/sellItem'
+import { deleteLegacy } from '../../actions/settings/deleteLegacy'
+import { moveItem } from '../../actions/settings/moveItem'
 import { setUIColor } from '../../actions/settings/setUIColor'
+import { preference } from '../../actions/settings/preference'
 // Game system
 import { welcome } from '../../actions/game/welcome'
 import { gameCreate } from '../../actions/game/gameCreate'
@@ -23,88 +31,57 @@ import { magicalSpecial } from '../../actions/combat/magicalSpecial'
 import { autoResetBuff } from '../../actions/combat/stats'
 import { energyRefresh } from '../../actions/combat/energy'
 import { displayHits } from '../../actions/combat/hit'
-
-const initialState = {
-  player: {
-    name: `Michel le Magnifique`,
-    xp: 0,
-    level: 1,
-    STR: 8,
-    DEX: 7,
-    CON: 2,
-    MAG: 3,
-    LCK: 2,
-    fumble: 1,
-    gold: 35,
-    hitPoints: 70,
-    maxHitPoints: 70,
-    magicPoints: 30,
-    maxMagicPoints: 30,
-    stamina: 30,
-    maxStamina: 30,
-    physicalRage: 0,
-    maxPhysicalRage: 20,
-    magicalRage: 0,
-    maxMagicalRage: 30,
-    items: {
-      STR: {},
-      DEX: {
-        type: `ring`,
-        id: 12,
-        score: 3
-      },
-      CON: {
-        type: `shield`,
-        id: 5,
-        score: 3
-      },
-      LCK: {
-        type: `amulet`,
-        id: 3,
-        score: 2
-      }
-    },
-    weapons: {
-      STR: {
-        type: `sword`,
-        char: `STR`,
-        id: 5,
-        score: `d6+2`,
-        element: `fire`,
-        cost: 4,
-        quality: `rare`
-      }, 
-      MAG: {
-        type: `sceptre`,
-        char: `MAG`,
-        id: 10,
-        score: `3d10`,
-        element: `earth`,
-        cost: 4,
-        quality: `legendary`
-      },
-    },
-  },
-  game: {
-    state: `welcome`,
-    settings: {
-      combatSpeed: 1500
-    }
-  }
-}
+// Utils
+import { clog } from '../../utils/utils'
+// Initial state
+import { initialState } from '../../conf/settings'
 
 function rootReducer(state = initialState, action) {
 
   // Prepare next state
   let prevState = { ...state }
-  let nextState = { ...state }
+  // Spread operator only shallow copy, needs deep copy
+  let nextState = JSON.parse(JSON.stringify(state))
 
-  console.log(action)
+  clog(action.type, `action`)
 
   if (action.type === SETTINGS) {
     switch (action.payload.setting) {
+      case `createPlayer`:
+        clog(`createPlayer`, `reducer`)
+        nextState = createPlayer(nextState, action.payload.style)
+        break;
+      case `setItem`:
+        clog(`setItem`, `reducer`)
+        nextState = setItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `keepItem`:
+        clog(`keepItem`, `reducer`)
+        nextState = keepItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `moveItem`:
+        clog(`moveItem`, `reducer`)
+        nextState = moveItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `buyItem`:
+        clog(`buyItem`, `reducer`)
+        nextState = buyItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `sellItem`:
+        clog(`sellItem`, `reducer`)
+        nextState = sellItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `deleteLegacy`:
+        clog(`deleteLegacy`, `reducer`)
+        nextState = deleteLegacy(nextState)
+        break;
       case `setUIColor`:
+        clog(`setUIColor`, `reducer`)
         nextState = setUIColor(nextState, action.payload.color)
+        break;
+      case `preference`:
+        clog(`preference`, `reducer`)
+        nextState = preference(nextState, action.payload.type, action.payload.value)
         break;
       default:
         break;
@@ -114,36 +91,47 @@ function rootReducer(state = initialState, action) {
   if (action.type === GAMESTATE) {
     switch (action.payload.state) {
       case `welcome`:
+        clog(`welcome`, `reducer`)
         nextState = welcome(nextState)
         break;
       case `gameCreate`:
+        clog(`gameCreate`, `reducer`)
         nextState = gameCreate(nextState)
         break;
       case `gameSelect`:
+        clog(`gameSelect`, `reducer`)
         nextState = gameSelect(nextState)
         break;
       case `levelTransition`:
+        clog(`levelTransition`, `reducer`)
         nextState = levelTransition(nextState)
         break;
       case `battleIntro`:
+        clog(`battleIntro`, `reducer`)
         nextState = battleIntro(nextState)
         break;
       case `playerTurn`:
+        clog(`playerTurn`, `reducer`)
         nextState = logsToPlayerTurn(nextState)
         break;
       case `battle`:
+        clog(`battle`, `reducer`)
         nextState = startBattle(nextState)
         break;
       case `victory`:
+        clog(`victory`, `reducer`)
         nextState = victory(nextState)
         break;
       case `defeat`:
+        clog(`defeat`, `reducer`)
         nextState = defeat(nextState)
         break;
       case `hallOfFame`:
+        clog(`hallOfFame`, `reducer`)
         nextState = hallOfFame(nextState)
         break;
       case `shop`:
+        clog(`shop`, `reducer`)
         nextState = openShop(nextState)
         break;
       default:
@@ -157,12 +145,15 @@ function rootReducer(state = initialState, action) {
     if (action.payload.type === `physical`) {
       switch (action.payload.mode) {
         case `attack`:
+          clog(`attack`, `reducer`)
           nextState = physicalAttack(nextState)
           break;
         case `defend`:
+          clog(`defend`, `reducer`)
           nextState = physicalDefend(nextState)
           break;
         case `special`:
+          clog(`special`, `reducer`)
           nextState = physicalSpecial(nextState)
           break;
         default:
@@ -173,12 +164,15 @@ function rootReducer(state = initialState, action) {
     if (action.payload.type === `magical`) {
       switch (action.payload.mode) {
         case `attack`:
+          clog(`attack`, `reducer`)
           nextState = magicalAttack(nextState)
           break;
         case `defend`:
+          clog(`defend`, `reducer`)
           nextState = magicalDefend(nextState)
           break;
         case `special`:
+          clog(`special`, `reducer`)
           nextState = magicalSpecial(nextState)
           break;
         default:
@@ -201,7 +195,7 @@ function rootReducer(state = initialState, action) {
   }
 
   // console.log(nextState)
-  
+
   return nextState
 }
 

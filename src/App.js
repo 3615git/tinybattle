@@ -27,6 +27,8 @@ import './css/form.scss'
 import './css/shop.scss'
 import './css/battle_logs.scss'
 import './css/battle_stats.scss'
+import './css/victory.scss'
+import './css/defeat.scss'
 import './css/items.scss'
 
 const mapStateToProps = state => {
@@ -64,21 +66,21 @@ class App extends Component {
 
     let view
     let ambiantFog = [
-      <div className="smoke" />,
-      <div className="fog" />,
+      <div className="smoke" key="smoke" />,
+      <div className="fog" key="fog" />,
       // <div className="gradient" />
     ]
 
     let options
     let fullOptions = (
-      <div className="optionsWrapper">
+      <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => this.openModal(`settings`)}><img src={settings} alt="Settings" /></button>
         <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
       </div>
     )
 
     let smallOptions = (
-      <div className="optionsWrapper">
+      <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => this.openModal(`settings`)}><img src={settings} alt="Settings" /></button>
       </div>
     )
@@ -119,7 +121,6 @@ class App extends Component {
         break;
       case `shop`:
         view = <Shop />
-        ambiantFog = []
         options = smallOptions
         break;
       case `hallOfFame`:
@@ -132,7 +133,7 @@ class App extends Component {
     }
 
     return [
-      <SwitchTransition>
+      <SwitchTransition key="switch">
         <CSSTransition
           key={game}
           timeout={2000}

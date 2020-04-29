@@ -1,0 +1,21 @@
+@import 'variables';
+
+.legacyTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 19px;
+
+  .legacyCount {
+    padding: 5px;
+    color: $color_legacy;
+  }
+}
+
+.lootBox.new .item_wrapper {
+  border-color: $color_legacy !important;
+  transition: background-color 300ms;
+}
+
+.lootBox.weapons .characName {
+  opacity: 0;
+}

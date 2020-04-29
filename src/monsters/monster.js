@@ -1,6 +1,7 @@
 import { monsterList } from './monsterList'
 import { getMonsterItems } from './getMonsterItems'
 import { getMonsterWeapons } from './getMonsterWeapons'
+import { getMonsterReward } from './getMonsterReward'
 import { getRandomInt } from '../utils/utils'
 
 function monsterName(monsterData) {
@@ -60,6 +61,7 @@ function monsterInfo(type, level) {
   return {
     name: monsterName(monsterData),
     job: type,
+    reward: getMonsterReward(level, elite),
     element: monsterData.element,
     elite: elite,
     humanoid: monsterData.humanoid ? true : false,
