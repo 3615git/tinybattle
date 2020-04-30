@@ -1,6 +1,7 @@
 import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
 // Settings
 import { createPlayer } from '../../actions/settings/createPlayer'
+import { resetLevel } from '../../actions/settings/resetLevel'
 import { setItem } from '../../actions/settings/setItem'
 import { keepItem } from '../../actions/settings/keepItem'
 import { buyItem } from '../../actions/settings/buyItem'
@@ -50,6 +51,10 @@ function rootReducer(state = initialState, action) {
       case `createPlayer`:
         clog(`createPlayer`, `reducer`)
         nextState = createPlayer(nextState, action.payload.style)
+        break;
+      case `resetLevel`:
+        clog(`resetLevel`, `reducer`)
+        nextState = resetLevel(nextState)
         break;
       case `setItem`:
         clog(`setItem`, `reducer`)

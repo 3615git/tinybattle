@@ -54,6 +54,7 @@ class GameCreate extends Component {
     settings({ setting: `preference`, type: `playerName`, value: name })
     // Reset legacy
     settings({ setting: `deleteLegacy` })
+    settings({ setting: `resetLevel` })
     // Move game state
     setGameState({ state: `levelTransition` })
   }
@@ -61,7 +62,7 @@ class GameCreate extends Component {
   checkLegacy(type, char) {
     const { game } = this.props
     let effect
-    if (game.legacy && game.legacy[type][char]) effect = `legacy`
+    if (game.legacy && game.legacy[type] && game.legacy[type][char]) effect = `legacy`
     return effect
   }
 
