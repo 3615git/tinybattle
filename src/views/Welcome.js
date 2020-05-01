@@ -27,6 +27,10 @@ function mapDispatchToProps(dispatch) {
 
 class Welcome extends Component {
 
+  componentDidMount() {
+
+  }
+
   newGame = () => {
     const { setGameState, settings, player } = this.props
     clog(`newGame`, `function`)

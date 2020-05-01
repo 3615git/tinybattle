@@ -4,7 +4,7 @@
 */
 
 const resetLevel = (data) => {
-  data.player.level = 1
+  data.game.level = 0 
 
   return data
 }

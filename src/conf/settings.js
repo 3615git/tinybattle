@@ -1,6 +1,8 @@
 // Main game settings
 const gameSettings = {
-  maxLevel : 3,                // Highest level of the game
+  maxLevel: 5, // Highest level of the game
+  monsterCharPoints: [20, 100], // Range of monsters points, from level 1 to last level
+  legacyStep: 1 // gain one more legacy item every x levels
 }
 
 // Initial game state
@@ -45,8 +47,8 @@ const defaultChars = {
 }
 
 const legacyItemsCount = (level) => {
-  // Gain 1 legacy item every 10 level
-  return Math.ceil(level/10)
+  // Gain 1 legacy item every x level
+  return Math.ceil(level/gameSettings.legacyStep)
 }
 
 export {

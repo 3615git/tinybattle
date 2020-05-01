@@ -1,4 +1,5 @@
 import { getRandomInt } from "../utils/utils"
+import { itemRanges } from "../conf/settings_items"
 
 function getMonsterReward(level, elite) {
   const baseReward = 10 * level
@@ -30,7 +31,40 @@ function getItemPrice(level, quality, transaction="sell") {
   return price
 }
 
+function getMonsterLoot(level, elite) {
+  let loot = []
+  // get base sell price
+  const baseReward = 20 * level / 2
+  const lootCount = getRandomInt(1, 3)
+  
+  for (let index = 0; index < lootCount; index++) {
+    const randomBoost = getRandomInt(0, 10)
+
+    loot.push({ 
+        type: "drops", 
+        id: getRandomInt(1, itemRanges[`drops`]), 
+        reward: baseReward + (Math.round(baseReward * randomBoost / 100))
+    })
+  }
+
+  // get elite body parts & price
+  if (elite) {
+    const randomBoost = getRandomInt(0, 10)
+    const eliteBoost = getRandomInt(200, 300)
+
+    loot.push({
+      type: "drops",
+      id: getRandomInt(1, itemRanges[`drops`]),
+      quality: `rare`,
+      reward: baseReward + (Math.round(baseReward * randomBoost / 100)) + (Math.round(baseReward * eliteBoost / 100))
+    })
+  }
+
+  return loot
+}
+
 export {
   getMonsterReward,
-  getItemPrice
+  getItemPrice,
+  getMonsterLoot
 }

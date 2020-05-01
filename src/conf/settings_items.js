@@ -100,6 +100,7 @@ const itemRanges = {
   "coins": 12,
   "cross": 36,
   "crystal": 12,
+  "drops": 21,
   "flail": 26,
   "gem": 13,
   "glove": 11,

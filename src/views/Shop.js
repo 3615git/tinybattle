@@ -150,7 +150,7 @@ class Shop extends Component {
 
   render() {
     const { setGameState } = this.props
-    const { gold, catalog } = this.state
+    const { gold } = this.state
 
     clog(`Shop render`, `location`)
 
@@ -160,14 +160,15 @@ class Shop extends Component {
       type: "coins"
     }
 
-    console.log(catalog)
-
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className="shopWrapper shop">
               <span className="title">Shop</span>
+              <div className="goldLoot">
+                <Item item={goldIcon} noPlus animateNumber />
+              </div>
               <span className="subtitle">Items</span>
               <div className="lootBoxes">
                 {this.parseLoot(`items`)}
@@ -175,9 +176,6 @@ class Shop extends Component {
               <span className="subtitle">Weapons</span>
               <div className="lootBoxes weapons">
                 {this.parseLoot(`weapons`)}
-              </div>
-              <div className="goldLoot">
-                <Item item={goldIcon} noPlus />
               </div>
             </div>
           </div>

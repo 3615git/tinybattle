@@ -253,7 +253,7 @@
 }
 
 /** Fade between views transition */
-.fadeView_2000-enter, .fadeView_2000-appear {
+.fadeView_2000-enter, .fadeView_2000-appear, .fadeView_1000-enter, .fadeView_1000-appear {
   opacity: 0;
   z-index: 30;
 }
@@ -264,9 +264,14 @@
   transition: all 2000ms ease-in-out;
   z-index: 30;
 }
+.fadeView_1000-enter-active, .fadeView_1000-appear-active, .fadeView_1000-appear-done {
+  opacity: 1;
+  transition: all 1000ms ease-in-out;
+  z-index: 30;
+}
 
 /* starting EXIT animation */
-.fadeView_2000-exit {
+.fadeView_2000-exit, .fadeView_1000-exit  {
   opacity: 1;
   z-index: 30;
 }
@@ -275,6 +280,11 @@
 .fadeView_2000-exit-active {
   opacity: 0;
   transition: all 2000ms ease-in-out;
+}
+
+.fadeView_1000-exit-active {
+  opacity: 0;
+  transition: all 1000ms ease-in-out;
 }
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
+import AnimatedNumber from "animated-number-react"
 
 import ItemVisual from './ItemVisual'
 
@@ -11,6 +12,7 @@ import ItemVisual from './ItemVisual'
 const propTypes = {
   item: PropTypes.object,
   effect: PropTypes.string,
+  animateNumber: PropTypes.bool,
   noPlus: PropTypes.bool
 }
 
@@ -20,7 +22,7 @@ const mapStateToProps = state => {
   }
 }
 
-const Item = ({ item, effect, noPlus }) => {
+const Item = ({ item, effect, noPlus, animateNumber }) => {
   // Plus sign for bonus items
   const plusSign = ((item && item.cost) || noPlus) ? `` : `+`
 
@@ -46,8 +48,15 @@ const Item = ({ item, effect, noPlus }) => {
       }
       <ItemVisual item={item.type} level={item.id} />
       <span>
-        {plusSign}     
-        {item.score}
+        {plusSign}
+        {animateNumber 
+          ? (<AnimatedNumber
+            formatValue={value => value.toFixed(0)}
+            value={item.score}
+          />)
+          : item.score
+        }
+        
       </span>
     </div>
   )

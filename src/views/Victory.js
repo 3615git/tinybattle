@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
+import { getMonsterLoot } from '../monsters/getMonsterReward'
 import { clog } from '../utils/utils'
 
 import { setGameState, settings } from '../redux/actions/index'
@@ -10,7 +11,8 @@ import { setGameState, settings } from '../redux/actions/index'
 const mapStateToProps = state => {
   return {
     player: state.player,
-    opponent: state.opponent
+    opponent: state.opponent,
+    game: state.game
   }
 }
 
@@ -25,10 +27,14 @@ class Victory extends Component {
   constructor(props) {
     super(props)
 
+    const { opponent, game } = this.props
+
     this.state = { 
       moveditems: [],
       solditems: [],
-      gold: this.props.opponent.reward
+      soldMonsterParts: [],
+      gold: this.props.opponent.reward,
+      monsterLoot: opponent.humanoid ? null : getMonsterLoot(game.level, opponent.elite)
     }
   }
 
@@ -61,6 +67,22 @@ class Victory extends Component {
     updatedSoldItems.push({ type: type, char: char })
     this.setState({
       gold: gold + opponent[type][char].reward
+    })
+  }
+
+  sellMonsterPart = (index, reward) => {
+    const { settings } = this.props
+    const { soldMonsterParts, gold } = this.state
+    let updatedSoldMonsterParts = soldMonsterParts ? soldMonsterParts : []
+
+    clog(`sellMonsterPart`, `function`)
+
+    // Update store
+    settings({ setting: `setGold`, type: `add`, value: reward })
+    // Update UI
+    updatedSoldMonsterParts.push(index)
+    this.setState({
+      gold: gold + reward
     })
   }
 
@@ -128,6 +150,41 @@ class Victory extends Component {
     return loot
   }
 
+  parseMonsterLoot = (type) => {
+    const { monsterLoot, soldMonsterParts } = this.state
+
+    clog(`parseMonsterLoot`, `function`)
+
+    let loot = []
+
+    for (let index = 0; index < monsterLoot.length; index++) {
+
+      // Button labels
+      let sellButton = <><ItemVisual item="coins" level={5} small /> {monsterLoot[index].reward}</>
+
+      let looted = soldMonsterParts.indexOf(index) !== -1
+
+      if (looted) {
+        sellButton = `Sold!`
+      }
+
+      loot.push(
+        <div className="lootBox" key={`lootbox_${index}`}>
+          <div className="storeWrapper">
+            <Item item={!looted ? monsterLoot[index] : {}} noPlus />
+          </div>
+          <div className="actions">
+            <button onClick={() => this.sellMonsterPart(index, monsterLoot[index].reward)} disabled={looted}>
+              {sellButton}
+            </button>
+          </div>
+        </div>
+      )
+    }
+
+    return loot
+  }
+
   render() {
     const { setGameState, opponent } = this.props
     const { gold } = this.state
@@ -140,24 +197,36 @@ class Victory extends Component {
       type: "coins"
     }
 
+    const shopClasses = opponent.humanoid ? "shopWrapper" : "shopWrapper shop"
+
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
-            <div className="shopWrapper">
+            <div className={shopClasses}>
               <span className="title">Loot</span>
-              <span className="subtitle">Items</span>
-              <div className="lootBoxes">
-                {this.parseLoot(`items`)}
-              </div>
-              <span className="subtitle">Weapons</span>
-              <div className="lootBoxes weapons">
-                {this.parseLoot(`weapons`)}
-              </div>
-              <span className="subtitle">Gold</span>
               <div className="goldLoot">
-                <Item item={goldIcon} effect="new" />
+                <Item item={goldIcon} effect="new" animateNumber />
               </div>
+              {opponent.humanoid ?
+                <>
+                  <span className="subtitle">Items</span>
+                  <div className="lootBoxes">
+                    {this.parseLoot(`items`)}
+                  </div>
+                  <span className="subtitle">Weapons</span>
+                  <div className="lootBoxes weapons">
+                    {this.parseLoot(`weapons`)}
+                  </div>
+                </>
+                :
+                <>
+                  <span className="subtitle">Sell monster parts</span>
+                  <div className="lootBoxes">
+                    {this.parseMonsterLoot()}
+                  </div>
+                </>
+              }
               <img src={opponent.pic} alt={opponent.name} />
             </div>
           </div>

@@ -3,6 +3,7 @@ import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
 import { createPlayer } from '../../actions/settings/createPlayer'
 import { resetLevel } from '../../actions/settings/resetLevel'
 import { setItem } from '../../actions/settings/setItem'
+import { setGold } from '../../actions/settings/setGold'
 import { keepItem } from '../../actions/settings/keepItem'
 import { buyItem } from '../../actions/settings/buyItem'
 import { sellItem } from '../../actions/settings/sellItem'
@@ -59,6 +60,10 @@ function rootReducer(state = initialState, action) {
       case `setItem`:
         clog(`setItem`, `reducer`)
         nextState = setItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `setGold`:
+        clog(`setGold`, `reducer`)
+        nextState = setGold(nextState, action.payload.type, action.payload.value)
         break;
       case `keepItem`:
         clog(`keepItem`, `reducer`)

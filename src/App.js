@@ -136,8 +136,8 @@ class App extends Component {
       <SwitchTransition key="switch">
         <CSSTransition
           key={game}
-          timeout={2000}
-          classNames={"fadeView_2000"}
+          timeout={1000}
+          classNames={"fadeView_1000"}
           addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
           appear
         >

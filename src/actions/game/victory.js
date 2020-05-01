@@ -9,6 +9,7 @@ const victory = (data) => {
   // Set game state
   // data.opponent = getMonsterFromLevel(1) // TO BE REMOVED
   // data = createPlayer(data, `warrior`) // TO BE REMOVED
+  // data.game.level = 1 // TO BE REMOVED
 
   // Get reward
   data.player.gold += data.opponent.reward
