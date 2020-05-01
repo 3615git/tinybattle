@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
-import AnimatedNumber from "animated-number-react"
 
 import { getStat } from '../../actions/combat/stats'
 
@@ -36,10 +35,12 @@ const StatCounter = ({ stat }) => {
 
   return (
     <div className={itemClasses}>
-      <AnimatedNumber
+      {/* AnimatedNumber is super slow */}
+      {/* <AnimatedNumber
         formatValue={value => value.toFixed(0)}
         value={currentStatValue + items}
-      />
+      /> */}
+      {currentStatValue + items}
     </div>
   )
 }

@@ -8,135 +8,110 @@ import dragonemperor from '../pics/opponents/dragonemperor.png'
 import blindworm from '../pics/opponents/blindworm.png'
 
 const monsterTiers = {
-  low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
+  low: [`arcanegolem`],
+  // low: [`gazer`, `arcanegolem`, `dryad`, `blindworm`],
   medium: [`thanatos`, `leviathan`],
   high: [`demon`,  `dragonemperor`]
 }
 
+const monsterProfiles = {
+  brute: { STR: 10, DEX: 4, CON: 5, MAG: 1, LCK: 1 },     // High STR
+  tank: { STR: 5, DEX: 4, CON: 11, MAG: 1, LCK: 1 },      // High CON
+  duelist: { STR: 8, DEX: 9, CON: 2, MAG: 1, LCK: 4 },    // Hit strong, high luck, low HP
+  archmage: { STR: 1, DEX: 1, CON: 3, MAG: 15, LCK: 2 },  // Ultra high MAG
+  wizard: { STR: 2, DEX: 2, CON: 5, MAG: 11, LCK: 1 },    // High MAG
+  balanced: { STR: 5, DEX: 5, CON: 5, MAG: 5, LCK: 2 },   // Full random
+}
+
 const monsterList = {
   arcanegolem: {
-    name: [`Arcane Golem`],
+    name: [`Arcane Golem`, `Crystal Golem`, `Ice elemental`],
     element: `water`,
-    STR: [3, 5],
-    DEX: [3, 6],
-    CON: [1, 2],
-    MAG: [2, 3],
-    LCK: [4, 7],
+    profile: `tank`,
+    boost: [`CON`],
     fumble: 2,
-    maxHitPoints: [10, 20],
-    maxMagicPoints: [100, 200],
+    elite: 10,
     pic: [arcanegolem]
   },
   blindworm: {
-    name: [`Blind Worm`, `Cave Worm`],
+    name: [`Blind Worm`, `Cave Worm`, `Earth worm`],
     element: `earth`,
-    STR: [3, 5],
-    DEX: [3, 6],
-    CON: [1, 2],
-    MAG: [2, 3],
-    LCK: [4, 7],
+    profile: `brute`,
     fumble: 2,
-    maxHitPoints: [10, 20],
-    maxMagicPoints: [100, 200],
+    elite: 5,
     pic: [blindworm]
   },
   demon: {
     name: [`Korganas`, `Ilnokt`, `Banduuz`],
     element: `fire`,
-    STR: [8, 12],
-    DEX: [5,9],
-    CON: [10,15],
-    MAG: [2,6],
-    LCK: [0,3],
-    fumble: 2,
-    maxHitPoints: [80,130],
-    maxMagicPoints: [20, 30],
+    profile: `balanced`,
+    boost: [`STR`, `MAG`],
     items: [`STR`, `DEX`, `CON`, `MAG`, `LCK`],
     weapons: [`STR`, `MAG`],
     humanoid: true,
-    elite: 70,
+    elite: 80,
     pic: [demon]
   },
   dragonemperor: {
     name: [`Dragon Emperor`],
     element: `darkness`,
-    STR: [8, 12],
-    DEX: [5, 9],
-    CON: [10, 15],
-    MAG: [2, 6],
-    LCK: [0, 3],
-    fumble: 4,
-    maxHitPoints: [80, 130],
-    maxMagicPoints: [20, 30],
-    items: [`STR`, `LCK`],
+    profile: `brute`,
+    boost: [`CON`, `MAG`],
+    fumble: 3,
+    items: [`STR`, `DEX`, `CON`, `MAG`, `LCK`],
     weapons: [`STR`, `MAG`],
     humanoid: true,
+    elite: 80,
     pic: [dragonemperor]
   },
   dryad: {
-    name: [`Dryad`],
+    name: [`Dryad`, `Sylve duelist`],
     element: `earth`,
-    STR: [2, 4],
-    DEX: [2, 6],
-    CON: [1, 2],
-    MAG: [2, 3],
-    LCK: [1,2],
+    profile: `duelist`,
+    boost: [`DEX`],
     fumble: 2,
-    maxHitPoints: [10, 20],
-    maxMagicPoints: [100, 200],
     items: [`DEX`],
-    weapons: [`STR`, `MAG`],
+    weapons: [`STR`],
     humanoid: true,
+    elite: 10,
     pic: [dryad]
   },
   gazer: {
-    name: [`Eldritch Abomination`, `Bo'orkh Ag'rh`],
+    name: [`Eldritch Abomination`, `Boorkh Agrh`],
     element: `darkness`,
-    STR: [3, 5],
-    DEX: [3, 6],
-    CON: [2, 4],
-    MAG: [10, 15],
-    LCK: [4, 7],
+    profile: `archmage`,
+    boost: [`MAG`],
     fumble: 2,
-    maxHitPoints: [40, 70],
-    maxMagicPoints: [100, 200],
-    items: [`STR`, `DEX`, `MAG`, `LCK`],
+    items: [`MAG`, `LCK`],
     weapons: [`MAG`],
     humanoid: true,
     elite: 70,
     pic: [gazer]
   },
   leviathan: {
-    name: [`Leviathan`],
+    name: [`Fire Wyvern`, `Fire Drake`, `Fire Worm`],
     element: `fire`,
-    STR: [8, 12],
-    DEX: [5, 9],
-    CON: [10, 15],
-    MAG: [2, 6],
-    LCK: [0, 3],
+    profile: `brute`,
+    boost: [`CON`],
     fumble: 4,
-    maxHitPoints: [80, 130],
-    maxMagicPoints: [20, 30],
+    elite: 30,
     pic: [leviathan]
   },
   thanatos: {
     name: [`Thanatos`],
     element: `darkness`,
-    STR: [8, 12],
-    DEX: [5, 9],
-    CON: [10, 15],
-    MAG: [2, 6],
-    LCK: [0, 3],
+    profile: `wizard`,
     fumble: 0,
-    maxHitPoints: [80, 130],
-    maxMagicPoints: [20, 30],
     items: [`STR`, `LCK`],
+    weapons: [`STR`, `MAG`],
     humanoid: true,
+    elite: 70,
     pic: [thanatos]
   }
 }
 
 export {
+  monsterProfiles,
   monsterList,
   monsterTiers
 }

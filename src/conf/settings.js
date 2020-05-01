@@ -1,7 +1,10 @@
 // Main game settings
 const gameSettings = {
   maxLevel: 5, // Highest level of the game
-  monsterCharPoints: [20, 100], // Range of monsters points, from level 1 to last level
+  monsterCharPointsRange: [20, 100], // Range of monsters points, from level 1 to last level
+  eliteCharPointsRange: [50, 100], // elite % spec bonus
+  beastHealthBoostRange: [30, 100], // non humanoid HP boost
+  manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
   legacyStep: 1 // gain one more legacy item every x levels
 }
 

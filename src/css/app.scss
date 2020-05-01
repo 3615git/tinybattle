@@ -176,63 +176,6 @@ html, body, #root {
   transition: all 500ms;
 }
 
-/* Player info on top */
-/* .playerInfoWrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  z-index: 10;
-}
-
-.playerInfo {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-  font-size: 11px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.playerInfo .gold {
-  display: flex;
-  align-items: center;
-  flex-basis: 20%;
-}
-
-.playerInfo .gold span {
-  padding-left: 5px;
-}
-
-.playerInfo .player {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex: 1;
-}
-
-.playerInfo .player .name {
-  
-}
-
-.playerInfo .player .job {
-  padding-top: 5px;
-  font-size: 10px;
-}
-
-.playerInfo .level {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-basis: 20%;
-  font-size: 10px;
-}
-
-.playerInfo .level .bar {
-  margin: 5px 0px 0px 0px;
-} */
-
 /* Player skills */
 .playerSkills {
   display: flex;

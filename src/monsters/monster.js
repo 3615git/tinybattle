@@ -1,11 +1,11 @@
-import { monsterList } from './monsterList'
+import { gameSettings } from '../conf/settings'
+import { monsterList, monsterProfiles } from './monsterList'
 import { getMonsterItems } from './getMonsterItems'
 import { getMonsterWeapons } from './getMonsterWeapons'
 import { getMonsterReward } from './getMonsterReward'
-import { getRandomInt } from '../utils/utils'
+import { getRandomInt, randomValue, generateWeight } from '../utils/utils'
 
 function monsterName(monsterData) {
-  // todo : bosses have a prefix
   return monsterData.name[Math.floor(Math.random() * monsterData.name.length)]
 }
 
@@ -13,36 +13,64 @@ function monsterPic(monsterData) {
   return monsterData.pic[Math.floor(Math.random() * monsterData.pic.length)]
 }
 
-// Check if current moster is elite level
+// Check if current monster is elite level
 function monsterElite(monsterData) {
   const eliteRate = monsterData.elite ? monsterData.elite : 0
   return getRandomInt(1, 100) <= eliteRate
 }
 
-function monsterStat(monsterData, stat) {
-  // todo : bosses have better stats
-  const statRange = monsterData[stat]
-  const min = Math.min(...statRange) 
-  const max = Math.max(...statRange) 
+function monsterStats(monsterData, level, elite) {
+  const { maxLevel, monsterCharPointsRange, eliteCharPointsRange, beastHealthBoostRange, manualCharBoostRange } = gameSettings
 
-  // build array
-  let rangeArray = []
-  for (let index = min; index <= max; index++) {
-    rangeArray.push(index)
+  // Get points counts (base * level)
+  let points = Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
+  // Apply random elite bonus
+  if (elite) points += Math.round(points * getRandomInt(eliteCharPointsRange[0], eliteCharPointsRange[1]) / 100)
+
+  // Weight of points
+  let chars = []
+  let weights = []
+  let profile = monsterProfiles[monsterData.profile]
+
+  // Loops weights
+  for (let [key, value] of Object.entries(profile)) {
+    // LCK is not weighted
+    if (key !== `LCK`) {
+      console.log(`push`, key, value)
+      chars.push(key)
+      weights.push(value)
+    }
   }
-  return rangeArray[Math.floor(Math.random() * rangeArray.length)]
-}
+  const weighedPoints = generateWeight(chars, weights)
 
-function monsterStats(monsterData) {
-  // todo : bosses have better stats
-  const hitPoints = monsterStat(monsterData, `maxHitPoints`)
-  const magicPoints = monsterStat(monsterData, `maxMagicPoints`)
+  // Draw randomized stats
+  let monsterCHAR = []
+  monsterCHAR[`LCK`] = monsterProfiles[monsterData.profile].LCK
+  for (let index = 0; index < points; index++) {
+    // Draw a point
+    let draw = randomValue(weighedPoints)
+    if (monsterCHAR[draw]) monsterCHAR[draw]++
+    else monsterCHAR[draw] = 1
+  }
+
+  // Apply optional boost
+  if (monsterData.boost) {
+    for (let index = 0; index < monsterData.boost.length; index++) {
+      monsterCHAR[monsterData.boost[index]] += Math.round(monsterCHAR[monsterData.boost[index]] * getRandomInt(manualCharBoostRange[0], manualCharBoostRange[1]) / 100)
+    }
+  }
+
+  // Compute mana & stamina
+  let hitPoints = monsterCHAR[`CON`] * 10
+  if (!monsterData.humanoid) hitPoints += Math.round(hitPoints * getRandomInt(beastHealthBoostRange[0], beastHealthBoostRange[1]) / 100)
+  const magicPoints = monsterCHAR[`MAG`] * 10 // Useless ATM
+
   return {
-    STR: monsterStat(monsterData, `STR`),
-    DEX: monsterStat(monsterData, `DEX`),
-    CON: monsterStat(monsterData, `CON`),
-    MAG: monsterStat(monsterData, `MAG`),
-    LCK: monsterStat(monsterData, `LCK`),
+    STR: monsterCHAR[`STR`] ? monsterCHAR[`STR`] : 1,
+    DEX: monsterCHAR[`DEX`] ? monsterCHAR[`DEX`] : 1,
+    CON: monsterCHAR[`CON`] ? monsterCHAR[`CON`] : 1,
+    MAG: monsterCHAR[`MAG`] ? monsterCHAR[`MAG`] : 1,
+    LCK: monsterCHAR[`LCK`] ? monsterCHAR[`LCK`] : 1,
     hitPoints: hitPoints,
     maxHitPoints: hitPoints,
     magicPoints: magicPoints,
@@ -56,7 +84,7 @@ function monsterStats(monsterData) {
 function monsterInfo(type, level) {
   const monsterData = monsterList[type]
   const elite = monsterElite(monsterData)
-  const monsterSpecs = monsterStats(monsterData)
+  const monsterSpecs = monsterStats(monsterData, level, elite)
 
   return {
     name: monsterName(monsterData),

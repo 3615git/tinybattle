@@ -30,8 +30,6 @@
 
   img {
     animation: spin 30s linear infinite;
-    will-change: transform;
-    transform: translateZ(0)
   }
 }
 
@@ -54,8 +52,6 @@
   background-size: cover;
   opacity: 1;
   animation: bg-slide 50s linear infinite;
-  will-change: transform;
-  transform: translateZ(0)
 }
 
 .smoke {
@@ -69,8 +65,6 @@
   opacity: 1;
   animation: bg-slide-wide 200s linear infinite;
   mix-blend-mode: color-dodge;
-  will-change: transform;
-  transform: translateZ(0)
 }
 
 .coverArt {
