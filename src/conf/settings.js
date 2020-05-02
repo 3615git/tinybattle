@@ -1,11 +1,11 @@
 // Main game settings
 const gameSettings = {
-  maxLevel: 5, // Highest level of the game
+  maxLevel: 50, // Highest level of the game
+  zones: 5, // Number of sections in levels (should be 5)
   monsterCharPointsRange: [20, 100], // Range of monsters points, from level 1 to last level
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
-  legacyStep: 1 // gain one more legacy item every x levels
 }
 
 // Initial game state
@@ -51,7 +51,7 @@ const defaultChars = {
 
 const legacyItemsCount = (level) => {
   // Gain 1 legacy item every x level
-  return Math.ceil(level/gameSettings.legacyStep)
+  return Math.ceil(level/(gameSettings.maxLevel/gameSettings.zones))
 }
 
 export {

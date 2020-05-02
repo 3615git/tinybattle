@@ -1,40 +1,57 @@
 import React, { Component } from 'react'
-import { connect } from "react-redux"
+import PropTypes from 'prop-types'
+import * as Vibrant from 'node-vibrant'
 
-import Bar from './Bar'
 import StatsAndItems from './StatsAndItems'
 import EliteBackground from './EliteBackground'
 
 /**
-  * @desc Main opponent block
+  * @desc Functional opponent block, also smaller
 */
 
-const mapStateToProps = state => {
-  return { 
-    data: state.opponent,
-    level: state.game.level
-  }
+const propTypes = {
+  type: PropTypes.string.isRequired
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
+const defaultProps = {
 
-  }
 }
 
-class Opponent extends Component {
+class Monster extends Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
-      portraitReady: false
+      portraitReady: false,
+      color: {
+        vibrant: `black`,
+        darkVibrant: `rgba(0, 0, 0, 0.4)`,
+        darkMuted: `rgba(0, 0, 0, 0.4)`
+      }
     }
+  }
+
+  fetchPalette = (imgSrc) => {
+    Vibrant.from(imgSrc).getPalette()
+      .then(palette => {
+        this.setState({
+          color: {
+            vibrant: palette.Vibrant.getHex(),
+            darkVibrant: palette.DarkVibrant.getHex(),
+            darkMuted: palette.DarkMuted.getHex()
+          }
+        })
+      })
   }
   
   componentDidMount() {
+    const { type, data } = this.props
+    // Fetch colors
+    this.fetchPalette(data.pic)
+
     // Defining portrait or landscape mode for portraits
-    var portrait = document.getElementById('portrait')
+    var portrait = document.getElementById('portrait_'+type)
     let that = this
 
     portrait.addEventListener('load', function () {
@@ -48,34 +65,22 @@ class Opponent extends Component {
 
   // Display component
   render() {
-    const { data, turn, level, color, intro } = this.props
-    const { mode, portraitReady } = this.state
+    const { type, data, level } = this.props
+    const { mode, portraitReady, color } = this.state
 
     // Get colors from scene
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
-    const appbackground = color.darkMuted // color.darkMuted
 
     // Component styling
-    const defaultClasses = `opponentWrapper`
-    const turnClasses = turn ? `` : `turn`
-    const introClasses = intro ? intro : ``
-  
-    const wrapperStyle = !turn ? {
-      background: monsterbackground,
-      boxShadow: `rgba(0, 0, 0, 0.59) 0px 0px 11px 0px, 0px 0px 40px ${monstercolor}`
-    } : {
-      background: monsterbackground,
-    }
+    const defaultClasses = `opponentWrapper small`
   
     // Add custom classes to defined classes
-    const itemClasses = [defaultClasses, turnClasses, introClasses].filter(val => val).join(` `)
+    const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
     // Monster bg styling
-    const bgStyling = appbackground ? {
-      backgroundColor: appbackground
-    } : {
-
+    const wrapperStyle = {
+      background: monsterbackground
     }
 
     // Monster portrait size
@@ -88,8 +93,7 @@ class Opponent extends Component {
     // Monster display
     const portraitClasses = portraitReady ? `portrait ready` : `portrait`
 
-    return [
-      <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
+    return (
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
         {data.elite && <EliteBackground />}
         <div className="infos">
@@ -101,12 +105,15 @@ class Opponent extends Component {
             }
           </div>
         </div>
-        <StatsAndItems opponent humanoid={data.humanoid} />
-        <Bar opponent type="hitPoints" color={monstercolor} />
-        <img id="portrait" className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
+        <StatsAndItems opponent humanoid={data.humanoid} forceData={data} />
+        <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
       </div>
-    ]
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Opponent)
+// Applying propTypes definition and default values
+Monster.propTypes = propTypes
+Monster.defaultProps = defaultProps
+
+export default Monster

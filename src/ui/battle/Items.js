@@ -22,9 +22,12 @@ const mapStateToProps = state => {
   }
 }
 
-const Items = ({ data, opponent }) => {
+const Items = ({ data, opponent, forceData }) => {
 
-  const activePlayer = opponent ? data.opponent : data.player
+  let activePlayer = opponent ? data.opponent : data.player
+
+  // Override store
+  if (forceData) activePlayer = forceData
 
   // Component styling
   const defaultClasses = `playerItems`

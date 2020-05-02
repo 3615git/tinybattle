@@ -23,7 +23,7 @@ function monsterStats(monsterData, level, elite) {
   const { maxLevel, monsterCharPointsRange, eliteCharPointsRange, beastHealthBoostRange, manualCharBoostRange } = gameSettings
 
   // Get points counts (base * level)
-  let points = Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
+  let points = monsterCharPointsRange[0] + Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
   // Apply random elite bonus
   if (elite) points += Math.round(points * getRandomInt(eliteCharPointsRange[0], eliteCharPointsRange[1]) / 100)
 
@@ -36,7 +36,6 @@ function monsterStats(monsterData, level, elite) {
   for (let [key, value] of Object.entries(profile)) {
     // LCK is not weighted
     if (key !== `LCK`) {
-      console.log(`push`, key, value)
       chars.push(key)
       weights.push(value)
     }

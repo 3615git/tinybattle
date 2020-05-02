@@ -12,6 +12,7 @@ import Victory from './views/Victory'
 import Defeat from './views/Defeat'
 import Shop from './views/Shop'
 import HallOfFame from './views/HallOfFame'
+import MonstersDemo from './views/MonstersDemo'
 
 import Modal from './ui/general/Modal'
 
@@ -127,6 +128,10 @@ class App extends Component {
         view = <HallOfFame />
         ambiantFog = []
         options = smallOptions
+        break;
+      case `monstersDemo`:
+        view = <MonstersDemo />
+        options = []
         break;
       default:
         break;

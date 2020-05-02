@@ -112,6 +112,7 @@ class Defeat extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
+            @todo : gold is legacy
             <div className="shopWrapper shop legacy">
               <div className="legacyTitle">You may pass <span className="legacyCount">{itemCountLabel}</span><br />to your next game : choose wisely !</div>
               <div className="lootBoxes">

@@ -33,6 +33,8 @@ import { magicalSpecial } from '../../actions/combat/magicalSpecial'
 import { autoResetBuff } from '../../actions/combat/stats'
 import { energyRefresh } from '../../actions/combat/energy'
 import { displayHits } from '../../actions/combat/hit'
+// Private views (tests, WIP, etc)
+import { monstersDemo } from '../../actions/private/monstersDemo'
 // Utils
 import { clog } from '../../utils/utils'
 // Initial state
@@ -143,6 +145,11 @@ function rootReducer(state = initialState, action) {
       case `shop`:
         clog(`shop`, `reducer`)
         nextState = openShop(nextState)
+        break;
+      // Private views
+      case `monstersDemo`:
+        clog(`monstersDemo`, `reducer`)
+        nextState = monstersDemo(nextState)
         break;
       default:
         break;

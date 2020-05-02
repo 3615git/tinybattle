@@ -26,7 +26,7 @@ const mapStateToProps = state => {
   }
 }
 
-const StatsAndItems = ({ opponent, humanoid }) => { 
+const StatsAndItems = ({ opponent, humanoid, forceData }) => { 
   // Component styling
   const defaultClasses = `statsAndItemsWrapper`
   // Add custom classes to defined classes
@@ -36,11 +36,11 @@ const StatsAndItems = ({ opponent, humanoid }) => {
   return (
     <div className={itemClasses}>
       <div className="statsWrapper">
-        <Stats opponent={opponent} />
-        <Items opponent={opponent} />
+        <Stats opponent={opponent} forceData={forceData} />
+        <Items opponent={opponent} forceData={forceData} />
       </div>
       {(humanoid || !opponent) &&
-        <Weapons opponent={opponent} />
+        <Weapons opponent={opponent} forceData={forceData} />
       }
     </div>
   )

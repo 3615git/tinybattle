@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const TurnIndicator = ({ color }) => {
+const TurnIndicator = () => {
 
   // Component styling
   const defaultClasses = `eliteIndicator`

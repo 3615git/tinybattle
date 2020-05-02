@@ -53,7 +53,7 @@ class OpponentCard extends Component {
     return [
       <div key="monsterOverlay" className="monsterOverlay" style={bgStyling} />,
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
-        {data.elite && <EliteBackground color={monstercolor} />}
+        {data.elite && <EliteBackground />}
         <div className="infos">
           <div className="level">Level {level}</div>
           <div className="name">

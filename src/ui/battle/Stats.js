@@ -45,9 +45,12 @@ const StatCounter = ({ stat }) => {
   )
 }
 
-const Stats = ({ opponent, data }) => { 
+const Stats = ({ opponent, data, forceData }) => { 
   // Current player
-  const activePlayer = opponent ? data.opponent : data.player
+  let activePlayer = opponent ? data.opponent : data.player
+
+  // Override store
+  if (forceData) activePlayer = forceData
 
   // Component styling
   const defaultClasses = `playerStats`
