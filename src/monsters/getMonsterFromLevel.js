@@ -1,9 +1,8 @@
 import { monsterInfo } from '../monsters/monster'
-import { monsterTiers } from '../monsters/monsterList'
 import { randomValue } from '../utils/utils'
 import { gameSettings } from "../conf/settings"
 
-function getLevelInfo(level) {
+function getLevelInfo(level, monsterTiers) {
   let levelMonsters
   
   // Tier switch
@@ -16,12 +15,12 @@ function getLevelInfo(level) {
   return levelInfo
 }
 
-function getMonsterFromLevel(level) {
-  const levelInfo = getLevelInfo(level)
+function getMonsterFromLevel(level, monsterTiers, monsters) {
+  const levelInfo = getLevelInfo(level, monsterTiers)
   // Todo : remove alredy played monsters from array
   const monster = randomValue(levelInfo.monsters)
   
-  return monsterInfo(monster, level)
+  return monsterInfo(monster, level, monsters)
 }
 
 export {

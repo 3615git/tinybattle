@@ -5,7 +5,8 @@ import { getRandomInt, randomValue, generateWeight } from "../utils/utils"
 // Item utils
 function getItemFromChar(CHAR, humanoid) {
   const items = humanoid ? charItems.humanoid[CHAR] : charItems.beast[CHAR]
-  return items[Math.floor(Math.random() * items.length)]
+  if (items && items.length > 0) return items[Math.floor(Math.random() * items.length)]
+  else return null
 }
 
 function getItemIdFromLevel(itemType, level) {

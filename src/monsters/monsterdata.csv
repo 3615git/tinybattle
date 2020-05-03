@@ -1,51 +1,51 @@
-Code,Names,Tier,Humanoid,Items,Weapons,Profile,Element,Boost,Elite
-tbd,tbd,1,,,,brute,earth,STR,5
-tbd,tbd,1,1,"DEX, STR",STR,duelist,earth,DEX,5
-tbd,tbd,1,,,,tank,water,CON,5
-tbd,tbd,1,1,MAG,MAG,archmage,fire,,10
-tbd,tbd,1,1,"DEX, CON","STR, MAG",archmage,fire,,10
-tbd,tbd,1,1,,"STR, MAG",wizard,water,MAG,10
-tbd,tbd,1,,,,balanced,water,,15
-tbd,tbd,1,,,,duelist,earth,,15
-tbd,tbd,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
-tbd,tbd,1,,,,brute,darkness,,15
-tbd,tbd,2,1,,,archmage,fire,,10
-tbd,tbd,2,1,,,brute,fire,STR,10
-tbd,tbd,2,1,,,brute,fire,,10
-tbd,tbd,2,1,,,archmage,water,,15
-tbd,tbd,2,1,,,wizard,water,,15
-tbd,tbd,2,,,,wizard,water,,15
-tbd,tbd,2,,,,duelist,earth,,20
-tbd,tbd,2,,,,duelist,earth,,20
-tbd,tbd,2,,,,balanced,earth,,70
-tbd,tbd,2,,,,tank,darkness,,70
-tbd,tbd,3,1,"MAG, LCK",MAG,archmage,darkness,MAG,15
-tbd,tbd,3,,,,balanced,fire,,15
-tbd,tbd,3,1,"MAG, DEX, LCK","STR, MAG",wizard,darkness,,15
-tbd,tbd,3,1,,,brute,fire,,20
-tbd,tbd,3,1,,,duelist,water,,20
-tbd,tbd,3,1,,,duelist,water,,20
-tbd,tbd,3,1,,,tank,fire,,20
-tbd,tbd,3,,,,archmage,earth,,70
-tbd,tbd,3,,,,balanced,earth,,70
-tbd,tbd,3,,,,wizard,earth,,70
-tbd,tbd,4,1,,,brute,darkness,"CON, MAG",15
-tbd,tbd,4,1,,,duelist,fire,,15
-tbd,tbd,4,1,,,duelist,fire,,15
-tbd,tbd,4,1,,,archmage,water,,20
-tbd,tbd,4,1,,,archmage,water,,20
-tbd,tbd,4,1,,,wizard,earth,,60
-tbd,tbd,4,,,,tank,darkness,,70
-tbd,tbd,4,,,,wizard,earth,,70
-tbd,tbd,4,,,,balanced,darkness,,80
-tbd,tbd,4,,,,balanced,darkness,,80
-tbd,tbd,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"STR, MAG",20
-tbd,tbd,5,1,,,brute,earth,,20
-tbd,tbd,5,1,,,tank,water,,20
-tbd,tbd,5,1,,,duelist,darkness,,60
-tbd,tbd,5,1,,,duelist,darkness,,60
-tbd,tbd,5,1,,,archmage,darkness,,70
-tbd,tbd,5,1,,,archmage,darkness,,70
-tbd,tbd,5,1,,,balanced,darkness,,80
-tbd,tbd,5,,,,wizard,darkness,,80
-tbd,tbd,5,,,,wizard,darkness,,80
+code,name,tier,humanoid,items,weapons,profile,element,boost,elite
+monster_1,name_1,1,,,,brute,earth,STR,5
+monster_2,name_2,1,1,"DEX, STR",STR,duelist,earth,DEX,5
+monster_3,name_3,1,,,,tank,water,CON,5
+monster_4,name_4,1,1,MAG,MAG,archmage,fire,,10
+monster_5,name_5,1,1,"DEX, CON","STR, MAG",archmage,fire,,10
+monster_6,name_6,1,1,,"STR, MAG",wizard,water,MAG,10
+monster_7,name_7,1,,,,balanced,water,,15
+monster_8,name_8,1,,,,duelist,earth,,15
+monster_9,name_9,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
+monster_10,name_10,1,,,,brute,darkness,,15
+monster_11,name_11,2,1,,,archmage,fire,,10
+monster_12,name_12,2,1,,,brute,fire,STR,10
+monster_13,name_13,2,1,,,brute,fire,,10
+monster_14,name_14,2,1,,,archmage,water,,15
+monster_15,name_15,2,1,,,wizard,water,,15
+monster_16,name_16,2,,,,wizard,water,,15
+monster_17,name_17,2,,,,duelist,earth,,20
+monster_18,name_18,2,,,,duelist,earth,,20
+monster_19,name_19,2,,,,balanced,earth,,70
+monster_20,name_20,2,,,,tank,darkness,,70
+monster_21,name_21,3,1,"MAG, LCK",MAG,archmage,darkness,MAG,15
+monster_22,name_22,3,,,,balanced,fire,,15
+monster_23,name_23,3,1,"MAG, DEX, LCK","STR, MAG",wizard,darkness,,15
+monster_24,name_24,3,1,,,brute,fire,,20
+monster_25,name_25,3,1,,,duelist,water,,20
+monster_26,name_26,3,1,,,duelist,water,,20
+monster_27,name_27,3,1,,,tank,fire,,20
+monster_28,name_28,3,,,,archmage,earth,,70
+monster_29,name_29,3,,,,balanced,earth,,70
+monster_30,name_30,3,,,,wizard,earth,,70
+monster_31,name_31,4,1,,,brute,darkness,"CON, MAG",15
+monster_32,name_32,4,1,,,duelist,fire,,15
+monster_33,name_33,4,1,,,duelist,fire,,15
+monster_34,name_34,4,1,,,archmage,water,,20
+monster_35,name_35,4,1,,,archmage,water,,20
+monster_36,name_36,4,1,,,wizard,earth,,60
+monster_37,name_37,4,,,,tank,darkness,,70
+monster_38,name_38,4,,,,wizard,earth,,70
+monster_39,name_39,4,,,,balanced,darkness,,80
+monster_40,name_40,4,,,,balanced,darkness,,80
+monster_41,name_41,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"STR, MAG",20
+monster_42,name_42,5,1,,,brute,earth,,20
+monster_43,name_43,5,1,,,tank,water,,20
+monster_44,name_44,5,1,,,duelist,darkness,,60
+monster_45,name_45,5,1,,,duelist,darkness,,60
+monster_46,name_46,5,1,,,archmage,darkness,,70
+monster_47,name_47,5,1,,,archmage,darkness,,70
+monster_48,name_48,5,1,,,balanced,darkness,,80
+monster_49,name_49,5,,,,wizard,darkness,,80
+monster_50,name_50,5,,,,wizard,darkness,,80

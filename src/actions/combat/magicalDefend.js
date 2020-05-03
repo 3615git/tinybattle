@@ -30,14 +30,12 @@ const magicalDefend = (data) => {
     }
   }
 
-  const nextState = {
-    player: game.playerTurn ? activePlayer : targetPlayer,
-    opponent: !game.playerTurn ? activePlayer : targetPlayer,
-    game,
-    log
-  } 
+  // Apply changes
+  data.player = game.playerTurn ? activePlayer : targetPlayer
+  data.opponent = !game.playerTurn ? activePlayer : targetPlayer
+  data.log = log
 
-  return nextState 
+  return data 
 }
 
 export { magicalDefend }

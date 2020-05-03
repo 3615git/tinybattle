@@ -40,8 +40,6 @@ const Items = ({ data, opponent, forceData }) => {
     return effect
   }
 
-  console.log(data)
-
   // Display component
   return (
     <div className={itemClasses}>

@@ -6,7 +6,17 @@ import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 
 const battleIntro = (data) => {
   // Prepare opponent data from level
-  data.opponent = getMonsterFromLevel(data.game.level)
+  const level = data.game.level
+  const monsterTiers = data.monsterTiers
+  const monsters = data.monsters
+
+  console.log(`---`)
+  console.log(level)
+  console.log(monsterTiers)
+  console.log(monsters)
+  console.log(`---`)
+  
+  data.opponent = getMonsterFromLevel(level, monsterTiers, monsters)
   // Get initiative and playerTurn value
   data.game.playerTurn = true
   // Reset log
