@@ -1,0 +1,51 @@
+Code,Names,Tier,Humanoid,Items,Weapons,Profile,Element,Boost,Elite
+tbd,tbd,1,,,,brute,earth,STR,5
+tbd,tbd,1,1,"DEX, STR",STR,duelist,earth,DEX,5
+tbd,tbd,1,,,,tank,water,CON,5
+tbd,tbd,1,1,MAG,MAG,archmage,fire,,10
+tbd,tbd,1,1,"DEX, CON","STR, MAG",archmage,fire,,10
+tbd,tbd,1,1,,"STR, MAG",wizard,water,MAG,10
+tbd,tbd,1,,,,balanced,water,,15
+tbd,tbd,1,,,,duelist,earth,,15
+tbd,tbd,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
+tbd,tbd,1,,,,brute,darkness,,15
+tbd,tbd,2,1,,,archmage,fire,,10
+tbd,tbd,2,1,,,brute,fire,STR,10
+tbd,tbd,2,1,,,brute,fire,,10
+tbd,tbd,2,1,,,archmage,water,,15
+tbd,tbd,2,1,,,wizard,water,,15
+tbd,tbd,2,,,,wizard,water,,15
+tbd,tbd,2,,,,duelist,earth,,20
+tbd,tbd,2,,,,duelist,earth,,20
+tbd,tbd,2,,,,balanced,earth,,70
+tbd,tbd,2,,,,tank,darkness,,70
+tbd,tbd,3,1,"MAG, LCK",MAG,archmage,darkness,MAG,15
+tbd,tbd,3,,,,balanced,fire,,15
+tbd,tbd,3,1,"MAG, DEX, LCK","STR, MAG",wizard,darkness,,15
+tbd,tbd,3,1,,,brute,fire,,20
+tbd,tbd,3,1,,,duelist,water,,20
+tbd,tbd,3,1,,,duelist,water,,20
+tbd,tbd,3,1,,,tank,fire,,20
+tbd,tbd,3,,,,archmage,earth,,70
+tbd,tbd,3,,,,balanced,earth,,70
+tbd,tbd,3,,,,wizard,earth,,70
+tbd,tbd,4,1,,,brute,darkness,"CON, MAG",15
+tbd,tbd,4,1,,,duelist,fire,,15
+tbd,tbd,4,1,,,duelist,fire,,15
+tbd,tbd,4,1,,,archmage,water,,20
+tbd,tbd,4,1,,,archmage,water,,20
+tbd,tbd,4,1,,,wizard,earth,,60
+tbd,tbd,4,,,,tank,darkness,,70
+tbd,tbd,4,,,,wizard,earth,,70
+tbd,tbd,4,,,,balanced,darkness,,80
+tbd,tbd,4,,,,balanced,darkness,,80
+tbd,tbd,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"STR, MAG",20
+tbd,tbd,5,1,,,brute,earth,,20
+tbd,tbd,5,1,,,tank,water,,20
+tbd,tbd,5,1,,,duelist,darkness,,60
+tbd,tbd,5,1,,,duelist,darkness,,60
+tbd,tbd,5,1,,,archmage,darkness,,70
+tbd,tbd,5,1,,,archmage,darkness,,70
+tbd,tbd,5,1,,,balanced,darkness,,80
+tbd,tbd,5,,,,wizard,darkness,,80
+tbd,tbd,5,,,,wizard,darkness,,80

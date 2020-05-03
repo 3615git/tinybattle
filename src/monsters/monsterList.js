@@ -1,5 +1,5 @@
 import demon from '../pics/opponents/demon.png'
-import leviathan from '../pics/opponents/leviathan.png'
+import firedrake from '../pics/opponents/firedrake.png'
 import thanatos from '../pics/opponents/thanatos.png'
 import gazer from '../pics/opponents/gazer.png'
 import arcanegolem from '../pics/opponents/arcanegolem.png'
@@ -30,9 +30,24 @@ import behemoth from '../pics/opponents/behemoth.png'
 import warlock from '../pics/opponents/warlock.png'
 import lamprey from '../pics/opponents/lamprey.png'
 
+// Get CSV master file
+import Papa from 'papaparse'
+import monsterData from '../monsters/monsterdata.csv'
+
+fetch(monsterData)
+  .then((data) => {
+    console.log('data:', data);
+  })
+
+Papa.parse(monsterData, {
+  complete: function (results) {
+    console.log(results.data);
+  }
+});
+
 const monsterTiers = {
   1: [`gazer`, `arcanegolem`, `dryad`, `blindworm`, `eldritchslime`, `garuda`, `lamprey`],
-  2: [`thanatos`, `leviathan`, `astrallich`, `giantfish`, `caveworm`, `behemoth`],
+  2: [`thanatos`, `firedrake`, `astrallich`, `giantfish`, `caveworm`, `behemoth`],
   3: [`gladius`, `feralbeast`, `stonegolem`, `golddragon`, `crow`, `tenteye`],
   4: [`bloodmage`, `automaton`, `excelsios`, `radulac`, `drakenvamp`, `warlock`],
   5: [`demon`, `dragonemperor`, `hades`, `tiamat`, `voidgargoyle`],
@@ -112,14 +127,14 @@ const monsterList = {
     elite: 70,
     pic: [gazer]
   },
-  leviathan: {
+  firedrake: {
     name: [`Fire Wyvern`, `Fire Drake`, `Fire Worm`],
     element: `fire`,
     profile: `brute`,
     boost: [`CON`],
     fumble: 4,
     elite: 30,
-    pic: [leviathan]
+    pic: [firedrake]
   },
   thanatos: {
     name: [`Thanatos`],
