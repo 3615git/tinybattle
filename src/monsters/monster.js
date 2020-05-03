@@ -1,5 +1,5 @@
 import { gameSettings } from '../conf/settings'
-import { monsterList, monsterProfiles } from './monsterList'
+import { monsterProfiles, monsterPics } from './monsterList'
 import { getMonsterItems } from './getMonsterItems'
 import { getMonsterWeapons } from './getMonsterWeapons'
 import { getMonsterReward } from './getMonsterReward'
@@ -9,8 +9,10 @@ function monsterName(monsterData) {
   return monsterData.name[Math.floor(Math.random() * monsterData.name.length)]
 }
 
-function monsterPic(monsterData) {
-  return monsterData.pic[Math.floor(Math.random() * monsterData.pic.length)]
+function monsterPic(type) {
+  // Try to find pic in pics array
+  if (monsterPics[type]) return monsterPics[type]
+  else return monsterPics[`demon`]
 }
 
 // Check if current monster is elite level
@@ -80,8 +82,8 @@ function monsterStats(monsterData, level, elite) {
   }
 }
 
-function monsterInfo(type, level) {
-  const monsterData = monsterList[type]
+function monsterInfo(type, level, monsters) {
+  const monsterData = monsters[type]
   const elite = monsterElite(monsterData)
   const monsterSpecs = monsterStats(monsterData, level, elite)
 
@@ -92,7 +94,7 @@ function monsterInfo(type, level) {
     element: monsterData.element,
     elite: elite,
     humanoid: monsterData.humanoid ? true : false,
-    pic: monsterPic(monsterData),
+    pic: monsterPic(type),
     STR: monsterSpecs[`STR`],
     DEX: monsterSpecs[`DEX`],
     CON: monsterSpecs[`CON`],

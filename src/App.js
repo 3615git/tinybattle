@@ -2,6 +2,15 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 import { CSSTransition, SwitchTransition } from "react-transition-group"
 
+// Get CSV master file for monsters list
+import Papa from 'papaparse'
+import monsterData from './monsters/monsterdata.csv'
+
+ // Import redux actions
+import { settings } from './redux/actions/index'
+
+
+// Import views
 import Welcome from './views/Welcome'
 import GameCreate from './views/GameCreate'
 import GameSelect from './views/GameSelect'
@@ -14,11 +23,14 @@ import Shop from './views/Shop'
 import HallOfFame from './views/HallOfFame'
 import MonstersDemo from './views/MonstersDemo'
 
+// Import UI utils
 import Modal from './ui/general/Modal'
 
-import settings from './pics/ui/settings.svg'
+// Import pictures
+import settingsPic from './pics/ui/settings.svg'
 import help from './pics/ui/help.svg'
 
+// Import style
 import './css/app.scss'
 import './css/buttons.scss'
 import './css/animations.scss'
@@ -35,6 +47,12 @@ import './css/items.scss'
 const mapStateToProps = state => {
   return {
     game: state.game.state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    settings: payload => dispatch(settings(payload))
   }
 }
 
@@ -60,6 +78,18 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    const { settings } = this.props
+    // Send raw csv to reducer
+    Papa.parse(monsterData, {
+      header: true,
+      dynamicTyping: true,
+      complete: function (results) {
+        settings({ setting: `createMonsters`, data: results.data })
+      }
+    })
+  }
+
   render() {
 
     const { game } = this.props
@@ -75,14 +105,14 @@ class App extends Component {
     let options
     let fullOptions = (
       <div className="optionsWrapper" key="options">
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settings} alt="Settings" /></button>
+        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
         <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
       </div>
     )
 
     let smallOptions = (
       <div className="optionsWrapper" key="options">
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settings} alt="Settings" /></button>
+        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
       </div>
     )
 
@@ -158,4 +188,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

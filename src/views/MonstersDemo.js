@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
-import { monsterList } from '../monsters/monsterList'
 import Monster from '../ui/battle/Monster'
 import { monsterInfo } from '../monsters/monster'
 
@@ -11,7 +10,8 @@ const mapStateToProps = state => {
     player: state.player,
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
-    log: state.log
+    log: state.log, 
+    monsterList: state.monsters
   }
 }
 
@@ -25,7 +25,7 @@ class MonstersDemo extends Component {
 
   render() {
 
-    const { setGameState } = this.props
+    const { setGameState, monsterList } = this.props
 
     let monsters = []
 
@@ -36,7 +36,7 @@ class MonstersDemo extends Component {
           key={`monster_${property}`}
           type={property} 
           level={1}
-          data={monsterInfo(property, 1)}
+          data={monsterInfo(property, 1, monsterList)}
         />
       )
     }
