@@ -69,7 +69,7 @@ class Monster extends Component {
     const { mode, portraitReady, color } = this.state
 
     // Get colors from scene
-    const monstercolor = color.vibrant
+    // const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
 
     // Component styling

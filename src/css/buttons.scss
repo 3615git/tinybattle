@@ -20,8 +20,11 @@
 button {
   color: white;
   position: relative;
-  height: 46px;
-  flex-basis: 25%;
+  height: 54px;
+  flex-basis: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   text-align: center;
   cursor: pointer;
@@ -41,8 +44,8 @@ button {
   .note {
     position: absolute;
     top: 5px;
-    right: 5px;
-    font-size: 9px;
+    right: 3px;
+    font-size: 8px;
   }
   
   // Special buttons
@@ -66,13 +69,8 @@ button {
     img {
       position: relative;
       top: 1px;
+      width: 100%;
     }
-  }
-
-  &.attack {
-    flex-basis: 50%;
-    margin-left: 10px;
-    padding: 0px 8px 0px 44px;
   }
 
   &.physical {
@@ -92,29 +90,34 @@ button {
 
 .buttons {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.buttons button.special {
-  margin-left: 10px;
-}
-
-.buttons button .weapon {
-  width: 42px;
-  height: 44px;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
 
+.buttons button {
+  margin: 3px;
+}
+
+.buttons button .item {
+  // position: relative;
+  // top: -1px;
+  filter: drop-shadow(0px 0px 2px #252624);
+}
+
+// Small bar for mana/stamina/etc
 .buttons button .bar {
-  background-color: rgba(0, 0, 0, 0.28);
-  margin-top: 5px;
-  filter: drop-shadow(0px 0px 2px rgba(0,0,0,.5));
+  width: 36px;
+  border-radius: 4px 4px 0px 0px;
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.71);
+  overflow: hidden;
+  border: 1px solid #260204;
+  border-bottom: none;
+
+  .indicator {
+    height: 5px;
+    border-radius: 0;
+  }
 }
 
 .opponentButtonWrapper {

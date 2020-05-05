@@ -2,7 +2,7 @@
 const gameSettings = {
   maxLevel: 25, // Highest level of the game
   zones: 5, // Number of sections in levels (should be 5)
-  monsterCharPointsRange: [20, 100], // Range of monsters points, from level 1 to last level
+  monsterCharPointsRange: [10, 100], // Range of monsters points, from level 1 to last level
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings

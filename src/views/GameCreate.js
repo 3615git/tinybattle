@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 
 import { setGameState, settings } from '../redux/actions/index'
 import Item from '../ui/battle/Item'
+import ItemVisual from '../ui/battle/ItemVisual'
 import Stats from '../ui/battle/Stats'
 import Items from '../ui/battle/Items'
 import { clog } from '../utils/utils'
@@ -70,14 +71,19 @@ class GameCreate extends Component {
 
     const { player } = this.props
     const { name, baseStyle } = this.state
+
+    const goldIcon = {
+      id: 6,
+      score: player.gold,
+      type: "coins"
+    }
     
     return (
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
-          <div className="presentationArea highIndex">
+          <div className="presentationArea shopWrapper highIndex">
             <label>Your name</label>
             <input type="text" name="name" value={name} onChange={this.handleChange} autoComplete="off" />
-            <label>Base stats</label>
             <div className="profileSelector">
               <button onClick={() => this.setStyle(`warrior`)} className={baseStyle !== `warrior` ? `third-transparent` : ``}>Warrior</button>
               <button onClick={() => this.setStyle(`mage`)} className={baseStyle !== `mage` ? `third-transparent` : ``}>Mage</button>
@@ -89,7 +95,6 @@ class GameCreate extends Component {
               <Items />
             </div>
             <div className="profileWeapons">
-              <label>Weapons</label>
               {player &&
                 <div className="weapons">
                   <div className="weapon">
@@ -110,6 +115,10 @@ class GameCreate extends Component {
                   </div>
                 </div>
               }
+            </div>
+            <label><span className="legacyColor">Legacy</span> gold</label>
+            <div className="goldLoot">
+              <Item item={goldIcon} effect="new" animateNumber noPlus />
             </div>
           </div>
           <div className="actionArea">

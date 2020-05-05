@@ -9,12 +9,6 @@ const battleIntro = (data) => {
   const level = data.game.level
   const monsterTiers = data.monsterTiers
   const monsters = data.monsters
-
-  console.log(`---`)
-  console.log(level)
-  console.log(monsterTiers)
-  console.log(monsters)
-  console.log(`---`)
   
   data.opponent = getMonsterFromLevel(level, monsterTiers, monsters)
   // Get initiative and playerTurn value

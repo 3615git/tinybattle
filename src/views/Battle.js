@@ -162,7 +162,6 @@ class Battle extends Component {
           <Logs color={uicolor} />
           <VibrationWrapper condition={game.playerHit}>
             <div className={playerAreaClass}>
-              {/* <Infos /> */}
               <Bars />
               <StatsAndItems />
               <Actions />

@@ -1,21 +1,21 @@
 code,name,tier,humanoid,items,weapons,profile,element,boost,elite
-monster_1,name_1,1,,,,brute,earth,STR,5
-monster_2,name_2,1,1,"DEX, STR",STR,duelist,earth,DEX,5
-monster_3,name_3,1,,,,tank,water,CON,5
-monster_4,name_4,1,1,MAG,MAG,archmage,fire,,10
-monster_5,name_5,1,1,"DEX, CON","STR, MAG",archmage,fire,,10
-monster_6,name_6,1,1,,"STR, MAG",wizard,water,MAG,10
-monster_7,name_7,1,,,,balanced,water,,15
-monster_8,name_8,1,,,,duelist,earth,,15
-monster_9,name_9,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
-monster_10,name_10,1,,,,brute,darkness,,15
+blindworm,"Blind Worm, Cave Worm, Giant Worm",1,,,,brute,earth,STR,5
+dryad,"Dryad, Sylve Dryad, Dryad Swordmaster",1,1,"DEX, STR, LCK",STR,duelist,earth,DEX,5
+giantfish,"Giant Fish, River Monster, Giant Carp",1,,,,tank,water,,5
+fireimp,"Fire Imp, Fire Djinn, Fire Elemental",1,1,MAG,MAG,archmage,fire,,10
+bloodmage,"Blood Mage, Blood Warlock, Crimson Mage",1,1,"DEX, CON, MAG","STR, MAG",archmage,fire,,10
+lamprey,"Psychic Lamprey, Psionic Worm, Mana Leech",1,,,,wizard,water,MAG,10
+waterspirit,"Water Spirit, Water Djinn, Ocean Djinn",1,1,"STR, MAG","STR, MAG",balanced,water,,15
+crow,"Giant Crow, High Raven, Black Raven",1,,,,duelist,earth,"DEX, STR",15
+firewitch,"Fire Witch, Fire Angel, Fire Sorceress",1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
+gazer,"Eldritch Gazer, Abomination, Abyss Gazer",1,,,,brute,darkness,"STR, DEX",15
 monster_11,name_11,2,1,,,archmage,fire,,10
 monster_12,name_12,2,1,,,brute,fire,STR,10
 monster_13,name_13,2,1,,,brute,fire,,10
 monster_14,name_14,2,1,,,archmage,water,,15
-monster_15,name_15,2,1,,,wizard,water,,15
+monster_15,name_15,2,,,,wizard,water,,15
 monster_16,name_16,2,,,,wizard,water,,15
-monster_17,name_17,2,,,,duelist,earth,,20
+koboldarcher,"Kobold Archer, Kobold Marksman, Kobold Sniper",2,1,"DEX, LCK, STR",STR,duelist,earth,DEX,20
 monster_18,name_18,2,,,,duelist,earth,,20
 monster_19,name_19,2,,,,balanced,earth,,70
 monster_20,name_20,2,,,,tank,darkness,,70

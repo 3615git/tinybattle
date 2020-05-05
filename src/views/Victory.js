@@ -33,7 +33,7 @@ class Victory extends Component {
       moveditems: [],
       solditems: [],
       soldMonsterParts: [],
-      gold: this.props.opponent.reward,
+      lootedGold: this.props.opponent.reward,
       monsterLoot: opponent.humanoid ? null : getMonsterLoot(game.level, opponent.elite)
     }
   }
@@ -56,7 +56,7 @@ class Victory extends Component {
 
   sellLoot = (type, char, item) => {
     const { opponent, settings } = this.props
-    const { solditems, gold } = this.state
+    const { solditems, lootedGold } = this.state
     let updatedSoldItems = solditems ? solditems : []
 
     clog(`sellLoot`, `function`)
@@ -66,13 +66,13 @@ class Victory extends Component {
     // Update UI
     updatedSoldItems.push({ type: type, char: char })
     this.setState({
-      gold: gold + opponent[type][char].reward
+      lootedGold: lootedGold + opponent[type][char].reward
     })
   }
 
   sellMonsterPart = (index, reward) => {
     const { settings } = this.props
-    const { soldMonsterParts, gold } = this.state
+    const { soldMonsterParts, lootedGold } = this.state
     let updatedSoldMonsterParts = soldMonsterParts ? soldMonsterParts : []
 
     clog(`sellMonsterPart`, `function`)
@@ -82,7 +82,7 @@ class Victory extends Component {
     // Update UI
     updatedSoldMonsterParts.push(index)
     this.setState({
-      gold: gold + reward
+      lootedGold: lootedGold + reward
     })
   }
 
@@ -186,14 +186,14 @@ class Victory extends Component {
   }
 
   render() {
-    const { setGameState, opponent } = this.props
-    const { gold } = this.state
+    const { setGameState, opponent, player } = this.props
+    const { lootedGold } = this.state
     
     clog(`Victory render`, `location`)
 
     const goldIcon = {
       id: 6,
-      score: gold,
+      score: player.gold,
       type: "coins"
     }
 
@@ -206,7 +206,8 @@ class Victory extends Component {
             <div className={shopClasses}>
               <span className="title">Loot</span>
               <div className="goldLoot">
-                <Item item={goldIcon} effect="new" animateNumber />
+                <div><ItemVisual item="coins" level={3} /></div>
+                +{lootedGold}
               </div>
               {opponent.humanoid ?
                 <>
@@ -227,6 +228,9 @@ class Victory extends Component {
                   </div>
                 </>
               }
+              <div className="goldLoot total">
+                <Item item={goldIcon} effect="new" animateNumber noPlus />
+              </div>
               <img src={opponent.pic} alt={opponent.name} />
             </div>
           </div>

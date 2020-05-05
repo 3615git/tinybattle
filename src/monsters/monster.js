@@ -12,7 +12,7 @@ function monsterName(monsterData) {
 function monsterPic(type) {
   // Try to find pic in pics array
   if (monsterPics[type]) return monsterPics[type]
-  else return monsterPics[`demon`]
+  else return monsterPics[`mimic`]
 }
 
 // Check if current monster is elite level

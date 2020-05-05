@@ -29,7 +29,7 @@ const ItemVisual = ({ item, level, small }) => {
 
   // Display component
   if (item && level) return (
-    <div className={itemClasses} />
+    <span className={itemClasses} />
   ) 
   else return null
 }

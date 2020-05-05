@@ -59,8 +59,8 @@ const Action = ({ type, player, opponent, turn, attack }) => {
 
 
   if (type === `physical`) {
-    w_Defend = `Defend`
-    w_Special = `Special`
+    w_Defend = <ItemVisual item="skill" level={7} />
+    w_Special = <ItemVisual item="skill" level={4} />
     w_Attack = `Attack`
 
     buttonAttack = attackPhysical ? type + " attack" : type + " attack disabled"
@@ -70,16 +70,11 @@ const Action = ({ type, player, opponent, turn, attack }) => {
 
     hitRatio = physicalHitChance
 
-    weapon = (
-      <div className="weapon">
-        {/* <div className="itemCost physical">{player.weapons.STR.cost}</div> */}
-        <ItemVisual item={player.weapons.STR.type} level={player.weapons.STR.id} />
-      </div>
-    )
+    weapon = <ItemVisual item={player.weapons.STR.type} level={player.weapons.STR.id} />
   } 
   else {
-    w_Defend = `Focus`
-    w_Special = `Special`
+    w_Defend = <ItemVisual item="skill" level={3} />
+    w_Special = <ItemVisual item="skill" level={1} />
     w_Attack = `Spell`
 
     buttonAttack = attackMagical ? type + " attack" : type + " attack disabled"
@@ -89,12 +84,7 @@ const Action = ({ type, player, opponent, turn, attack }) => {
 
     hitRatio = limitValue(magicalHitChance, 0, 100)
 
-    weapon = (
-      <div className="weapon">
-        {/* <div className="itemCost magical">{player.weapons.MAG.cost}</div> */}
-        <ItemVisual item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
-      </div>
-    )
+    weapon = <ItemVisual item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
   }
 
   // Display component
@@ -105,7 +95,7 @@ const Action = ({ type, player, opponent, turn, attack }) => {
       </button>
       <button className={buttonAttack} onClick={() => actionAttack({ type: type, mode: `attack` })}>
         <span className="note">{hitRatio}%</span>
-        {w_Attack}
+        {/* {w_Attack} */}
         {weapon}
         <Bar type={type === `physical` ? "stamina" : "magicPoints"} />
       </button>

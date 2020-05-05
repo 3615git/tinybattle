@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import Item from '../ui/battle/Item'
+import ItemVisual from '../ui/battle/ItemVisual'
 import { setGameState, settings  } from '../redux/actions/index'
 import { clog } from '../utils/utils'
 import { legacyItemsCount } from '../conf/settings'
@@ -100,7 +101,7 @@ class Defeat extends Component {
   }
 
   render() {
-    const { setGameState, game } = this.props
+    const { setGameState, game, player } = this.props
     const { movedItems } = this.state
 
     clog(`Defeat render`, `location`)
@@ -112,10 +113,9 @@ class Defeat extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
-            @todo : gold is legacy
             <div className="shopWrapper shop legacy">
-              <div className="legacyTitle">You may pass <span className="legacyCount">{itemCountLabel}</span><br />to your next game : choose wisely !</div>
-              <div className="lootBoxes">
+              <div className="legacyTitle">Pass <span className="legacyCount">{player.gold} <ItemVisual item="coins" level={6} small /></span> and <span className="legacyCount">{itemCountLabel}</span><br />to your next game : choose wisely !</div>
+              <div className="lootBoxes"> 
                 {this.parseLoot(`items`)}
                 {this.parseLoot(`weapons`)}
               </div>

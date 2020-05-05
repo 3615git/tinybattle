@@ -30,6 +30,11 @@
   .goldLoot {
     padding: 7px;
     margin-bottom: 5px;
+    text-align: center;
+
+    &.total {
+      margin: 5px 0px 0px 0px;
+    }
 
     .item_wrapper {
       width: 120px;

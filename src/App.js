@@ -135,7 +135,7 @@ class App extends Component {
         break;
       case `battleIntro`:
         view = <BattleIntro />
-        options = smallOptions
+        options = []
         break;
       case `battle`:
         view = <Battle />

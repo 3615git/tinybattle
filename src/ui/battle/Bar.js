@@ -36,14 +36,17 @@ const Bar = ({ connectedData, type, opponent, color }) => {
     case `hitPoints`:
       value = data.hitPoints
       maxValue = data.maxHitPoints
+      size = `big`
       break
     case `magicPoints`:
       value = data.magicPoints
       maxValue = data.maxMagicPoints
+      size = `small`
       break
     case `stamina`:
       value = data.stamina
       maxValue = data.maxStamina
+      size = `small`
       break
     case `physicalRage`:
       value = data.physicalRage
@@ -53,11 +56,6 @@ const Bar = ({ connectedData, type, opponent, color }) => {
     case `magicalRage`:
       value = data.magicalRage
       maxValue = data.maxMagicalRage
-      size = `small`
-      break
-    case `xp`:
-      value = data.xp
-      maxValue = `trouze`
       size = `small`
       break
     default :
@@ -78,9 +76,7 @@ const Bar = ({ connectedData, type, opponent, color }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      {size !== `tiny` &&
-        <div className="value">{value}/{maxValue}</div>
-      }
+      {size === `big` && <div className="value">{value}/{maxValue}</div>}
       <div className="indicator" style={indicatorStyle} />
     </div>
   )

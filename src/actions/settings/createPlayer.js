@@ -8,13 +8,13 @@ import { getMonsterItems } from '../../monsters/getMonsterItems'
 const createPlayer = (data, style) => {
 
   let previousName = data.player ? data.player.name : ``
+  let previousGold = data.player ? data.player.gold : 0
 
   // Set basic player info
   data.player = {
-    xp: 0,
     name: previousName,
     level: 1,
-    gold: 0,
+    gold: previousGold,
     items: {},
     weapons: {},
   }
