@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from "react-redux"
 
 // import Skills from './Skills'
-import Action from './Action'
+import ActionButton from './ActionButton'
 import OpponentAction from './OpponentAction'
 
 import { attack } from '../../redux/actions/index'
@@ -35,9 +35,26 @@ const Actions = ({ player, opponent, playerTurn, attack }) => {
       {!playerTurn && <OpponentAction type="physical" />}
       <div className={playerTurn ? `` : `transparent`}>
           {/* <Skills /> */}
-          <div className="actionWrapper">
-            <Action type="physical" />
-            <Action type="magical" />
+          <div className="buttons">
+            {/* Skills */}
+            <ActionButton type="skill" />
+            <ActionButton type="skill" />
+            <ActionButton type="skill" />
+            <ActionButton type="skill" />
+            <ActionButton type="skill" />
+            <ActionButton type="skill" />
+            {/* Physical */}
+            <ActionButton type="block" />
+            <ActionButton type="attack" />
+            <ActionButton type="specialattack" />
+            <ActionButton type="stun" />
+            <ActionButton type="break" />
+            {/* Magic */}
+            <ActionButton type="focus" />
+            <ActionButton type="cast" />
+            <ActionButton type="specialcast" />
+            <ActionButton type="psyblast" />
+            <ActionButton type="curse" />
           </div>
         </div>
     </div>

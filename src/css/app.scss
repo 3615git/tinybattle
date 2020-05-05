@@ -68,6 +68,7 @@ html, body, #root {
   margin: 0;
   text-shadow: 1px 1px black;
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
   background-color: $color_body;
 }
 
@@ -224,7 +225,7 @@ html, body, #root {
   margin: 10px;
   flex: 1;
   overflow: hidden;
-  min-height: 230px;
+  min-height: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -454,11 +455,6 @@ html, body, #root {
 .actionsWrapper {
   position: relative;
   z-index: 1;
-}
-
-.actionWrapper {
-  position: relative;
-  margin-top: 10px;
 }
 
 /** Turn indicator in the background */

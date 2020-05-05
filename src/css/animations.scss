@@ -104,22 +104,22 @@
 @keyframes monsterIntro {
   from {
     opacity: 0;
-    transform: translateY(300%) scale3d(.1, .1, .1);
+    transform: translateY(300%) scale3d(.1, .1, .1) scaleX(-1);
     animation-timing-function: ease-out;
   }
   30% {
     opacity: .5;
-    transform: translateY(-100%) scale3d(.2, .2, .2);
+    transform: translateY(-100%) scale3d(.2, .2, .2) scaleX(-1);
     animation-timing-function: ease-in-out;
   }
   60% {
     opacity: 1;
-    transform: translateY(0%) scale3d(2, 2, 2);
+    transform: translateY(0%) scale3d(2, 2, 2) scaleX(-1);
     animation-timing-function: ease-in-out;
   }
   90% {
     transform: translateY(-50%) scale3d(.9, .9, .9);
-    transform: translateY(-50%) scale3d(.9, .9, .9) scaleX(-1);
+    transform: translateY(-50%) scale3d(.9, .9, .9);
     animation-timing-function: ease-in-out;
   }
   to {

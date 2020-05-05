@@ -35,7 +35,6 @@ import firewitch from '../pics/opponents/firewitch.png'
 
 const monsterPics = {
   mimic, blindworm, dryad, giantfish, fireimp, bloodmage, lamprey, waterspirit, crow, firewitch, gazer,
-
 }
 
 const monsterProfiles = {

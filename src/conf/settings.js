@@ -2,6 +2,7 @@
 const gameSettings = {
   maxLevel: 25, // Highest level of the game
   zones: 5, // Number of sections in levels (should be 5)
+  combatSpeed: 2000,
   monsterCharPointsRange: [10, 100], // Range of monsters points, from level 1 to last level
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
@@ -13,7 +14,7 @@ const initialState = {
   game: {
     state: `welcome`,
     settings: {
-      combatSpeed: 1500
+      combatSpeed: gameSettings.combatSpeed
     }
   }
 }

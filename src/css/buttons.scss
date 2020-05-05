@@ -22,6 +22,7 @@ button {
   position: relative;
   height: 54px;
   flex-basis: 54px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,32 +91,63 @@ button {
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .buttons button {
   margin: 3px;
+
+  // double size attack button
+  &.attack {
+    flex-basis: 112px;
+  }
+
+  // Embellishments
+  &:before {
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: -2px;
+    width: 4px;
+    height: 4px;
+    content:url("../pics/ui/rivet.png")
+  }
+  &:after {
+    display: block;
+    position: absolute;
+    right: 4px;
+    bottom: 11px;
+    width: 4px;
+    height: 4px;
+    content:url("../pics/ui/rivet.png")
+  }
+
+  &.attack:before, &.special:before { top: auto; bottom: 11px; left: 2px }
+  &.attack:after, &.special:after { right: 2px }
+
 }
 
 .buttons button .item {
   // position: relative;
   // top: -1px;
-  filter: drop-shadow(0px 0px 2px #252624);
+  filter: drop-shadow(0px 0px 2px rgba(0,0,0,.4));
 }
 
 // Small bar for mana/stamina/etc
 .buttons button .bar {
-  width: 36px;
+  box-sizing: border-box;
+  width: calc(100% - 12px);
   border-radius: 4px 4px 0px 0px;
   position: absolute;
-  bottom: 0px;
+  bottom: -1px;
   background-color: rgba(0, 0, 0, 0.71);
   overflow: hidden;
   border: 1px solid #260204;
   border-bottom: none;
 
   .indicator {
-    height: 5px;
+    height: 6px;
     border-radius: 0;
   }
 }

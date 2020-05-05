@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 
 import { setGameState, settings } from '../redux/actions/index'
 import Item from '../ui/battle/Item'
-import ItemVisual from '../ui/battle/ItemVisual'
 import Stats from '../ui/battle/Stats'
 import Items from '../ui/battle/Items'
 import { clog } from '../utils/utils'

@@ -42,8 +42,8 @@ const Logs = ({ log, playerTurn, color }) => {
 
   // Log styling
   const logStyle = playerTurn 
-    ? { background: chroma(color.darkVibrant).alpha(0.5) }
-    : {  }
+    ? { background: chroma(color.darkVibrant).alpha(0.9) }
+    : { background: `rgba(0,0,0,.8)` }
 
   switch (type) {
     case `battleStart`:
@@ -194,33 +194,39 @@ const Logs = ({ log, playerTurn, color }) => {
       break;
 
     default:
-        break;
+      display = false
+      break;
   }
 
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses, wrapperStyling].filter(val => val).join(` `)
 
-  let logContent = (
-    <div className={itemClasses}>
-      <div className="log" style={logStyle}>
-        {display}
+  let logContent 
+  if (display) {
+    logContent = (
+      <div className={itemClasses}>
+        <div className="log" style={logStyle}>
+          {display}
+        </div>
       </div>
-    </div>
-  )
-
-  return (
-    <div className="LogsContainer">
-      <TransitionGroup component={null}>
-        <CSSTransition
-          key={+new Date()}
-          timeout={600}
-          classNames={playerTurn ? "playerLog" : "opponentLog"}
-        >
-          {logContent}
-        </CSSTransition>
-      </TransitionGroup>
-    </div>
-  )
+    )
+  } else {
+    logContent = <span/>
+  }
+  
+    return (
+      <div className="LogsContainer">
+        <TransitionGroup component={null}>
+          <CSSTransition
+            key={+new Date()}
+            timeout={600}
+            classNames={playerTurn ? "playerLog" : "opponentLog"}
+          >
+            {logContent}
+          </CSSTransition>
+        </TransitionGroup>
+      </div>
+    )
 }
 
 // Exporting as default

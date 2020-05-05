@@ -7,6 +7,7 @@ import StatsAndItems from '../ui/battle/StatsAndItems'
 import Bars from '../ui/battle/Bars'
 import Actions from '../ui/battle/Actions'
 import Logs from '../ui/battle/Logs'
+import DataLogs from '../ui/battle/DataLogs'
 import VibrationWrapper from '../ui/battle/VibrationWrapper'
 import { toHit, hitChance } from '../actions/combat/hit'
 import { getRandomInt, clog } from "../utils/utils"
@@ -159,6 +160,7 @@ class Battle extends Component {
           <VibrationWrapper condition={game.opponentHit}>
             <Opponent color={uicolor} turn={playerTurnUI} />
           </VibrationWrapper>
+          <DataLogs />
           <Logs color={uicolor} />
           <VibrationWrapper condition={game.playerHit}>
             <div className={playerAreaClass}>

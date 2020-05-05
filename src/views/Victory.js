@@ -211,11 +211,9 @@ class Victory extends Component {
               </div>
               {opponent.humanoid ?
                 <>
-                  <span className="subtitle">Items</span>
                   <div className="lootBoxes">
                     {this.parseLoot(`items`)}
                   </div>
-                  <span className="subtitle">Weapons</span>
                   <div className="lootBoxes weapons">
                     {this.parseLoot(`weapons`)}
                   </div>
