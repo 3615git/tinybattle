@@ -1,10 +1,10 @@
 // Rage management
 const rage = (type, player, value) => {
   let rage 
-  if (type === `physicalAttack`) {
+  if (type === `attack`) {
     rage = (player.physicalRage + value > player.maxPhysicalRage) ? player.maxPhysicalRage : player.physicalRage + value
   }
-  if (type === `magicalAttack`) {
+  if (type === `cast`) {
     rage = (player.magicalRage + value > player.maxMagicalRage) ? player.maxMagicalRage : player.magicalRage + value
   }
 

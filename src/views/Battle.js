@@ -42,6 +42,36 @@ class Battle extends Component {
     }
   }
 
+  // Alternate turn UI and battle mode
+  changeTurn = () => {
+    const { game, attack, setGameState } = this.props
+    console.log(game)
+
+    if (game.playerTurn) {
+      // Display player's attack UI
+      this.setState({
+        playerTurnUI: true
+      })
+      // Reset log to "your turn" state
+      setGameState({ state: `playerTurn` })
+      
+    } else {
+      // Enemy's attack after reflexion delay
+      attack({ type: this.opponentAttackChoice(), mode: `attack` })
+      // Display enemy's attack UI
+      this.setState({
+        playerTurnUI: false
+      })
+    }
+  }
+
+  // Skip timer
+  skipTurnChange = () => {
+    clearTimeout(this.opponentTurn)
+    clearTimeout(this.playerTurn)
+    this.changeTurn()
+  }
+ 
   opponentAttackChoice = () => {
     const { opponent, player } = this.props
     let attackType
@@ -70,16 +100,20 @@ class Battle extends Component {
   }
 
   launchOpponentTurn = () => {
-    const { attack, settings } = this.props
+    const { settings, log } = this.props
+
+    // Slow logs needs more time
+    let waitTime
+    if (log.delay === `long`) {
+      waitTime = settings.combatSpeed * 1.5
+    } else {
+      waitTime = settings.combatSpeed
+    }
+
     clearTimeout(this.opponentTurn)
     this.opponentTurn = setTimeout(function() { 
-      // Enemy's attack after reflexion delay
-      attack({ type: this.opponentAttackChoice(), mode: `attack` }) 
-      // Display enemy's attack UI
-      this.setState({
-        playerTurnUI: false
-      })
-    }.bind(this), settings.combatSpeed)
+      this.changeTurn()
+    }.bind(this), waitTime)
   }
 
   componentDidUpdate(prevProps) {
@@ -117,19 +151,14 @@ class Battle extends Component {
 
     // If turn changed, and it's opponent turn
     if (prevProps.playerTurn !== playerTurn && playerTurn === false) {
-      this.launchOpponentTurn();
+      this.launchOpponentTurn()
     }
 
     // If turn changed and it's player's turn
     if (prevProps.playerTurn !== playerTurn && playerTurn === true) {
       clearTimeout(this.playerTurn)
       this.playerTurn = setTimeout(function () {
-        // Display player's attack UI
-        this.setState({
-          playerTurnUI: true
-        })
-        // Reset log to "your turn" state
-        setGameState({ state: `playerTurn` })
+        this.changeTurn()
       }.bind(this), settings.combatSpeed)
     }
   }
@@ -161,7 +190,7 @@ class Battle extends Component {
             <Opponent color={uicolor} turn={playerTurnUI} />
           </VibrationWrapper>
           <DataLogs />
-          <Logs color={uicolor} />
+          <Logs color={uicolor} skip={this.skipTurnChange} />
           <VibrationWrapper condition={game.playerHit}>
             <div className={playerAreaClass}>
               <Bars />

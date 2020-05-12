@@ -204,7 +204,6 @@ class Victory extends Component {
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className={shopClasses}>
-              <span className="title">Loot</span>
               <div className="goldLoot">
                 <div><ItemVisual item="coins" level={3} /></div>
                 +{lootedGold}

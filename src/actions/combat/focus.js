@@ -1,10 +1,11 @@
 import { pushBuff } from './stats'
+import { formatDataLog } from '../../utils/utils'
 
 /**
   * @desc Computing the results of magical defense
 */
 
-const magicalDefend = (data) => {
+const focus = (data) => {
   let { player, opponent, game } = data
 
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
@@ -14,13 +15,13 @@ const magicalDefend = (data) => {
   const MAGbonus = Math.ceil(activePlayer.MAG * 2)
   const DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
   const STRmalus = -Math.abs(Math.ceil(targetPlayer.STR / 2))
-  pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, 1)
-  pushBuff(activePlayer, `temporary`, `STR`, STRmalus, 1)
-  pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, 2)
+  pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `focus`, 2)
+  pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `focus`, 2)
+  pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, `focus`, 2)
 
   // Build log
   let log = {
-    type: `magicalDefend`,
+    type: `focus`,
     activePlayer,
     targetPlayer,
     data: {
@@ -29,13 +30,15 @@ const magicalDefend = (data) => {
       magBonus: MAGbonus
     }
   }
+  log.display = formatDataLog(`focus`, log, game)
 
   // Apply changes
   data.player = game.playerTurn ? activePlayer : targetPlayer
   data.opponent = !game.playerTurn ? activePlayer : targetPlayer
   data.log = log
+  data.dataLogs.push(formatDataLog(`focus`, log, game))
 
   return data 
 }
 
-export { magicalDefend }
+export { focus }

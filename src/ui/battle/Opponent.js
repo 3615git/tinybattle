@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import chroma from "chroma-js"
 
 import Bar from './Bar'
 import StatsAndItems from './StatsAndItems'
+import Alterations from './Alterations'
 import EliteBackground from './EliteBackground'
 
 /**
@@ -54,7 +56,8 @@ class Opponent extends Component {
     // Get colors from scene
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
-    const appbackground = color.darkMuted // color.darkMuted
+    const appbackground = chroma(color.darkMuted).darken(1).desaturate(.4); // color.darkMuted
+    // const appbackground = color.darkMuted; // color.darkMuted
 
     // Component styling
     const defaultClasses = `opponentWrapper`
@@ -99,6 +102,9 @@ class Opponent extends Component {
               ? <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span><span className="eliteMarker">Elite</span></div></div>
               : <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span></div></div>
             }
+            <div className="status">
+              <Alterations />
+            </div>
           </div>
         </div>
         <StatsAndItems opponent humanoid={data.humanoid} />

@@ -2,11 +2,26 @@
 const gameSettings = {
   maxLevel: 25, // Highest level of the game
   zones: 5, // Number of sections in levels (should be 5)
-  combatSpeed: 2000,
+  combatSpeed: 2500,
   monsterCharPointsRange: [10, 100], // Range of monsters points, from level 1 to last level
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
+  icons: {
+    battleStart: [`book`, 1],
+    block: [`skill`, 7],
+    focus: [`skill`, 3],
+    specialattack: [`skill`, 4],
+    specialcast: [`skill`, 1],
+    stun: [`skill`, 8],
+    itembreak: [`skill`, 6],
+    psyblast: [`skill`, 5],
+    curse: [`skill`, 2],
+    attackfumble: [`skill`, 9],
+    castfumble: [`skill`, 9],
+    critical: [`skill`, 10],
+    fumble: [`skill`, 11],
+  }
 }
 
 // Initial game state

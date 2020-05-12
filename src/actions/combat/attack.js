@@ -3,12 +3,13 @@ import { rage } from './rage'
 import { physicalHit, physicalDamage } from './hit'
 import { pushBuff } from './stats'
 import { energyBurn } from './energy'
+import { formatDataLog } from '../../utils/utils'
 
 /**
   * @desc Computing the basic physical attack results
 */
 
-const physicalAttack = (data) => {
+const attack = (data) => {
   let { player, opponent, game } = data
 
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
@@ -29,7 +30,7 @@ const physicalAttack = (data) => {
   // Critical hit
   if (hitResult.hit && hitResult.critical) {
     damageResult = physicalDamage(activePlayer, targetPlayer, true)
-    rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
+    rageResult = rage(`attack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
     if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
@@ -39,7 +40,7 @@ const physicalAttack = (data) => {
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
     damageResult = physicalDamage(activePlayer, targetPlayer, false)
-    rageResult = rage(`physicalAttack`, targetPlayer, damageResult.damage)
+    rageResult = rage(`attack`, targetPlayer, damageResult.damage)
     // Applying damage
     targetPlayer.hitPoints -= damageResult.damage
     if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
@@ -49,7 +50,7 @@ const physicalAttack = (data) => {
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
     // Give LCK bonus to opponent 
-    pushBuff(targetPlayer, `temporary`, `LCK`, 1, 5)
+    pushBuff(targetPlayer, `temporary`, `LCK`, 1, `attackfumble`, 5)
     // Reset rage because of the fumble
     activePlayer.physicalRage = 0
   }
@@ -60,7 +61,7 @@ const physicalAttack = (data) => {
 
   // Build log
   let log = {
-    type: `physicalAttack`,
+    type: `attack`,
     activePlayer,
     targetPlayer,
     data: {
@@ -69,13 +70,15 @@ const physicalAttack = (data) => {
       damage: damageResult
     }
   }
+  log.display = formatDataLog(`attack`, log, game)
 
   // Apply changes
   data.player = game.playerTurn ? activePlayer : targetPlayer
   data.opponent = !game.playerTurn ? activePlayer : targetPlayer
   data.log = log
+  data.dataLogs.push(formatDataLog(`attack`, log, game))
 
   return data 
 }
 
-export { physicalAttack }
+export { attack }

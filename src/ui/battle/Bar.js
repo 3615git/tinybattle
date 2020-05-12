@@ -8,9 +8,11 @@ import { connect } from "react-redux"
 */
 
 const propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   opponent: PropTypes.bool,
-  color: PropTypes.string
+  color: PropTypes.string,
+  current: PropTypes.number,
+  ready: PropTypes.number,
 }
 
 const defaultProps = {
@@ -23,7 +25,7 @@ const mapStateToProps = state => {
   }
 }
 
-const Bar = ({ connectedData, type, opponent, color }) => {
+const Bar = ({ connectedData, type, opponent, color, current, ready }) => {
   // Current player
   const data = opponent ? connectedData.opponent : connectedData.player
 
@@ -58,7 +60,10 @@ const Bar = ({ connectedData, type, opponent, color }) => {
       maxValue = data.maxMagicalRage
       size = `small`
       break
-    default :
+    default:
+      value = current
+      maxValue = ready
+      size = `small`
       break
   }
 

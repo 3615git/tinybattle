@@ -3,11 +3,10 @@ import { connect } from "react-redux"
 import { CSSTransition, TransitionGroup } from "react-transition-group"
 import chroma from "chroma-js"
 
-import shield from '../../pics/ui/shield.png'
-// import sword from '../pics/ui/sword.png'
-import book from '../../pics/ui/book.png'
-import skullPic from '../../pics/ui/hitBar_fumble.png'
+import { gameSettings } from "../../conf/settings"
 
+import ItemVisual from './ItemVisual'
+import Wheel from './Wheel'
 import HitBar from './HitBar'
 import ValueBar from './ValueBar'
 
@@ -28,205 +27,132 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Logs = ({ log, playerTurn, color }) => {
+const Logs = ({ log, playerTurn, color, skip }) => {
 
-  const { type, activePlayer, data } = log
+  const { type, data } = log
 
   // Component styling
   const defaultClasses = `LogsWrapper ${type}`
 
   // Build log message
-  let display
-  let title, damage
-  let wrapperStyling, iconStyling
+  let effect, widget
+  let wrapperStyling
 
-  // Log styling
+  // Color styling
   const logStyle = playerTurn 
-    ? { background: chroma(color.darkVibrant).alpha(0.9) }
-    : { background: `rgba(0,0,0,.8)` }
+    ? { 
+      background: chroma(color.darkMuted).alpha(0.96),
+      borderColor: color.darkVibrant
+     }
+    : { }
+  const eyeColor = { backgroundColor: color.vibrant }
 
+  // Display special effects
+  if (data && data.hit && (data.hit === `critical` || data.hit.critical)) effect = playerTurn ? <div className="effect_critical" /> : <div className="effect_critical_opponent" />
+  if (data && data.hit && (data.hit === `fumble` || data.hit.fumble)) effect = playerTurn ? <div className="effect_fumble" /> : <div className="effect_fumble_opponent" />
+
+  // Big switch for various cases
   switch (type) {
-    case `battleStart`:
-      title = `Battle starts !`
-      display = (
-        <div>
-          {title && <div className="title">{title}</div>}
-        </div>
-      )
+
+    case `block`:
+      widget = <ValueBar type={type} value={data.healRoll} maxValue={data.maxHeal} />
       break;
 
-    case `playerTurn`:
-      title = `Your turn !`
-      display = (
-        <div>
-          {title && <div className="title">{title}</div>}
-        </div>
-      )
+    case `focus`:
       break;
 
-    case `physicalAttack`:
-      title = activePlayer.name + ` attacks !`
-      damage = data.damage ? `<span class="damage">` + data.damage.damage + `</span> damage!` : `<span>No damage.</span>`
-      
-      // Hit text
-      let hit
-
-      if (data.hit.critical) { 
-        hit = `Critical hit!`
-        // wrapperStyling = playerTurn ? `animation-critical` : `opponent-animation-critical`
-      } 
-      else if (data.hit.fumble) {
-        hit = `Fail !`
-        // wrapperStyling = playerTurn ? `animation-fumble` : `opponent-animation-fumble`
-      }
-      else if (data.hit.hit) {
-        hit = `Hit!` 
-        // wrapperStyling = playerTurn ? `animation-hit` : `opponent-animation-hit`
-      }
-      else {
-        hit = `Missed.`
-        // wrapperStyling = playerTurn ? `animation-missed` : `opponent-animation-missed`
-      }
-
-      display = (
-        <div className="log_attack">
-          {/* <img src={sword} alt="Attack!" /> */}
-          <div>
-            { title && <div className="title">{title}</div>}
-            <HitBar type={type} hit={data.hit} color={color} />
-            {hit && <div className="title">{data.hit.roll} : {hit}</div>}
-            { damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} /> }
-          </div>
-        </div>
-      )
+    case `attack`:
+      widget = <HitBar type={type} hit={data.hit} color={color} />
       break;
 
-    case `physicalDefend`:
-      title = `Defence !`
-      
-      const shieldStyling = {
-        marginRight: `15px`
-      }
-
-      iconStyling = {
-        position: `relative`,
-        top: `-1px`,
-        marginRight: `3px`
-      }
-
-      display = (
-        <div className="log_defend">
-          <img src={shield} style={shieldStyling} alt="Defence!" />
-          <div>
-            {title && <div className="title">{title}</div>}
-            <div className="smallMessage">HP <span className="logvalue bonusColor">+{data.healValue}</span></div>
-            <ValueBar type={type} value={data.healRoll} maxValue={data.maxHeal} />
-            <div className="tinyMessage">
-              DEX <span className="logvalue bonusColor">+{data.dexBonus}</span>&nbsp;-&nbsp;
-              <img src={skullPic} style={iconStyling} alt="Opponent bonus" />STR<span className="logvalue malusColor">+{data.strBonus}</span>
-            </div>
-          </div>
-        </div>
-      )
-      break;
-    
-    case `magicalAttack`:
-      title = activePlayer.name + ` casts a spell !`
-      damage = data.damage ? `<span class="damage">` + data.damage.damage + `</span> damage!` : `<span>No damage.</span>`
-
-      // Hit text
-      let magicalHit
-
-      if (data.hit.critical) {
-        magicalHit = `Perfect cast !`
-        // wrapperStyling = playerTurn ? `animation-critical` : `opponent-animation-critical`
-      }
-      else if (data.hit.fumble) {
-        magicalHit = `Disaster !`
-        // wrapperStyling = playerTurn ? `animation-fumble` : `opponent-animation-fumble`
-      }
-      else if (data.hit.hit) {
-        magicalHit = `Success !`
-        // wrapperStyling = playerTurn ? `animation-hit` : `opponent-animation-hit`
-      }
-      else {
-        magicalHit = `Spell failed.`
-        // wrapperStyling = playerTurn ? `animation-missed` : `opponent-animation-missed`
-      }
-
-      display = (
-        <div className="log_attack">
-          {title && <div className="title">{title}</div>}
-          <HitBar type={type} hit={data.hit} color={color} />
-          {magicalHit && <div className="title">{data.hit.roll} : {magicalHit}</div>}
-          {damage && <div className="message" dangerouslySetInnerHTML={{ __html: damage }} />}
-        </div>
-      )
+    case `cast`:
+      widget = <HitBar type={type} hit={data.hit} color={color} />
       break;
 
-    case `magicalDefend`:
-      title = `Focus !`
-
-      const focusStyling = {
-        marginRight: `15px`
-      }
-
-      iconStyling = {
-        position: `relative`,
-        top: `-1px`,
-        marginRight: `3px`
-      }
-
-      display = (
-        <div className="log_defend">
-          <img src={book} style={focusStyling} alt="Defence!" />
-          <div>
-            {title && <div className="title">{title}</div>}
-            <div className="smallMessage">MAG <span className="logvalue bonusColor">+{data.magBonus}</span></div>
-            <div className="tinyMessage">
-              <img src={skullPic} style={iconStyling} alt="Malus" />STR<span className="logvalue malusColor">{data.strMalus}</span>
-              &nbsp;
-              <img src={skullPic} style={iconStyling} alt="Malus" />DEX<span className="logvalue malusColor">{data.dexMalus}</span>
-              </div>
-          </div>
-        </div>
-      )
+    case `psyblast`:
+      widget = <Wheel type="psyblast" position={data.wheelPosition} />
       break;
 
     default:
-      display = false
       break;
   }
 
-  // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, wrapperStyling].filter(val => val).join(` `)
+  // Turn related stuff
+  const turnClasses = !playerTurn ? `player` : `opponent`
 
-  let logContent 
-  if (display) {
+  // Action icon
+  let actionType, actionLevel
+  if (type === `attack`) {
+    actionType = log.activePlayer.weapons.STR && log.activePlayer.weapons.STR.type
+    actionLevel = log.activePlayer.weapons.STR && log.activePlayer.weapons.STR.id
+  }
+  else if (type === `cast`) {
+    actionType = log.activePlayer.weapons.MAG && log.activePlayer.weapons.MAG.type
+    actionLevel = log.activePlayer.weapons.MAG && log.activePlayer.weapons.MAG.id
+  }
+  else {
+    actionType = gameSettings.icons[type] && gameSettings.icons[type][0]
+    actionLevel = gameSettings.icons[type] && gameSettings.icons[type][1]
+  }
+
+  // Action headers
+  const turnTag = playerTurn 
+  ? [
+    <div key="montser_turnTag" className="turnTag" />,
+    <div key="monster_turnColor" className="turnColor" style={eyeColor} />
+  ]
+  : [
+      <div key="player_turnTag" className="turnTag" />,
+      <div key="player_turnAction" className={`turnAction ${type}`}>
+        <ItemVisual small item={actionType} level={actionLevel} />
+      </div>
+  ]
+
+  // Add custom classes to defined classes
+  const itemClasses = [defaultClasses, turnClasses, wrapperStyling].filter(val => val).join(` `)
+
+  let logContent, containerStyle
+
+  // Final display
+  if (type) {
+    containerStyle = {
+      zIndex: 100,
+      background: playerTurn ? chroma(color.darkMuted).alpha(0.5) : `rgba(33,53,38,.5)`
+    }
+
     logContent = (
-      <div className={itemClasses}>
+      <div className={itemClasses} onClick={()=>skip()}>
         <div className="log" style={logStyle}>
-          {display}
+          {turnTag}
+          <div className="title" dangerouslySetInnerHTML={{ __html: log.display.title }} />
+          <div className="message" dangerouslySetInnerHTML={{ __html: log.display.message }} />
+          {widget}
+          <div className="note" dangerouslySetInnerHTML={{ __html: log.display.note }} />
         </div>
       </div>
     )
   } else {
+    containerStyle = {
+      zIndex: 0,
+      background: `none`
+    }
     logContent = <span/>
   }
   
-    return (
-      <div className="LogsContainer">
-        <TransitionGroup component={null}>
-          <CSSTransition
-            key={+new Date()}
-            timeout={600}
-            classNames={playerTurn ? "playerLog" : "opponentLog"}
-          >
-            {logContent}
-          </CSSTransition>
-        </TransitionGroup>
-      </div>
-    )
+  return (
+    <div className="LogsContainer" style={containerStyle}>
+      <TransitionGroup component={null}>
+        <CSSTransition
+          key={+new Date()}
+          timeout={600}
+          classNames={playerTurn ? "playerLog" : "opponentLog"}
+        >
+          {logContent}
+        </CSSTransition>
+      </TransitionGroup>
+      {effect}
+    </div>
+  )
 }
 
 // Exporting as default

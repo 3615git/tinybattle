@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 
 // import Skills from './Skills'
 import ActionButton from './ActionButton'
-import OpponentAction from './OpponentAction'
+import SkillButton from './SkillButton'
 
 import { attack } from '../../redux/actions/index'
 
@@ -17,7 +17,6 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     opponent: state.opponent,
-    playerTurn: state.game.playerTurn
   }
 }
 
@@ -27,13 +26,18 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const Actions = ({ player, opponent, playerTurn, attack }) => {
+const Actions = ({ player, opponent }) => {
+
+  // Prepare skills
+  let skillButtons = []
+  for (let [key, value] of Object.entries(player.skills)) {
+    skillButtons.push(<SkillButton type={key} current={value.current} ready={value.ready} />)
+  }
 
   // Display component
   return (
     <div className="actionsWrapper">
-      {!playerTurn && <OpponentAction type="physical" />}
-      <div className={playerTurn ? `` : `transparent`}>
+      <div>
           {/* <Skills /> */}
           <div className="buttons">
             {/* Skills */}
@@ -47,14 +51,14 @@ const Actions = ({ player, opponent, playerTurn, attack }) => {
             <ActionButton type="block" />
             <ActionButton type="attack" />
             <ActionButton type="specialattack" />
-            <ActionButton type="stun" />
-            <ActionButton type="break" />
+            {skillButtons[0]}
+            {skillButtons[1]}
             {/* Magic */}
             <ActionButton type="focus" />
             <ActionButton type="cast" />
             <ActionButton type="specialcast" />
-            <ActionButton type="psyblast" />
-            <ActionButton type="curse" />
+            {skillButtons[2]}
+            {skillButtons[3]}
           </div>
         </div>
     </div>

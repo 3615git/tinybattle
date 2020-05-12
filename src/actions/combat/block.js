@@ -1,12 +1,13 @@
 import { pushBuff } from './stats'
 import { energyRestore } from './energy'
 import rpgDice from "rpgdicejs"
+import { formatDataLog } from '../../utils/utils'
 
 /**
   * @desc Computing the basic physical attack results
 */
 
-const physicalDefend = (data) => {
+const block = (data) => {
   let { player, opponent, game } = data
 
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
@@ -15,8 +16,8 @@ const physicalDefend = (data) => {
   // Defends gives temporary DEX2 and healt restore but opponent will strike harder
   const DEXbonus = Math.ceil(activePlayer.DEX / 2)
   const STRbonus = Math.ceil(targetPlayer.STR / 2)
-  pushBuff(activePlayer, `temporary`, `DEX`, DEXbonus)
-  pushBuff(targetPlayer, `temporary`, `STR`, STRbonus)
+  pushBuff(activePlayer, `temporary`, `DEX`, DEXbonus, `block`)
+  pushBuff(targetPlayer, `temporary`, `STR`, STRbonus, `block`)
   // Defends restores CON/2 + 1dCON life
   let healRoll = rpgDice.eval(`d`+activePlayer.CON)
   let healValue = Math.ceil(activePlayer.CON / 2) + healRoll.value
@@ -24,9 +25,9 @@ const physicalDefend = (data) => {
   // Defends also restore CON stamina
   activePlayer = energyRestore(activePlayer, activePlayer.CON, `stamina`)
 
-  // Build log
+  // Build logs
   let log = {
-    type: `physicalDefend`,
+    type: `block`,
     activePlayer,
     targetPlayer,
     data: {
@@ -37,13 +38,15 @@ const physicalDefend = (data) => {
       maxHeal: activePlayer.CON
     }
   }
+  log.display = formatDataLog(`block`, log, game)
 
   // Apply changes
   data.player = game.playerTurn ? activePlayer : targetPlayer
   data.opponent = !game.playerTurn ? activePlayer : targetPlayer
   data.log = log
+  data.dataLogs.push(formatDataLog(`block`, log, game))
 
   return data 
 }
 
-export { physicalDefend }
+export { block }

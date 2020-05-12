@@ -1,3 +1,5 @@
+@import 'variables';
+
 .shopWrapper {
   position: relative;
   display: flex;
@@ -7,14 +9,12 @@
   margin-bottom: 10px;
 
   span.title {
-    font-size: 16px;
     display: block;
     margin-bottom: 10px;
     z-index: 2;
   }
 
   span.subtitle {
-    font-size: 12px;
     display: block;
     margin: 10px 0px;
   }
@@ -39,7 +39,7 @@
     .item_wrapper {
       width: 120px;
       flex-direction: row;
-      font-size: 16px;
+      font-size: $font_big;
 
       .item {
         margin-right: 10px
@@ -71,8 +71,8 @@
     }
 
     .characName {
-      font-size: 11px;
-      opacity: .5;
+      font-size: $font_small;
+      opacity: .7;
       width: 30px;
       text-align: right;
     }
@@ -86,6 +86,10 @@
         flex-basis: 50%;
         margin-left: 5px;
         text-align: center;
+
+        .item {
+          margin-right: 10px;
+        }
 
         div {
           display: inline-block;

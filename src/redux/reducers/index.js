@@ -24,14 +24,21 @@ import { defeat } from '../../actions/game/defeat'
 import { hallOfFame } from '../../actions/game/hallOfFame'
 import { openShop } from '../../actions/game/openShop'
 import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
-// Combat system
-import { physicalAttack } from '../../actions/combat/physicalAttack'
-import { physicalDefend } from '../../actions/combat/physicalDefend'
-import { physicalSpecial } from '../../actions/combat/physicalSpecial'
-import { magicalAttack } from '../../actions/combat/magicalAttack'
-import { magicalDefend } from '../../actions/combat/magicalDefend'
-import { magicalSpecial } from '../../actions/combat/magicalSpecial'
-import { autoResetBuff } from '../../actions/combat/stats'
+/** Combat system */
+// Attacks
+import { attack } from '../../actions/combat/attack'
+import { block } from '../../actions/combat/block'
+import { specialattack } from '../../actions/combat/specialattack'
+import { cast } from '../../actions/combat/cast'
+import { focus } from '../../actions/combat/focus'
+import { specialcast } from '../../actions/combat/specialcast'
+// Skills
+import { stun } from '../../actions/combat/stun'
+import { itembreak } from '../../actions/combat/itembreak'
+import { psyblast } from '../../actions/combat/psyblast'
+import { curse } from '../../actions/combat/curse'
+// Utils
+import { autoResetBuff, incrementSkillCount } from '../../actions/combat/stats'
 import { energyRefresh } from '../../actions/combat/energy'
 import { displayHits } from '../../actions/combat/hit'
 // Private views (tests, WIP, etc)
@@ -168,15 +175,15 @@ function rootReducer(state = initialState, action) {
       switch (action.payload.mode) {
         case `attack`:
           clog(`attack`, `reducer`)
-          nextState = physicalAttack(nextState)
+          nextState = attack(nextState)
           break;
         case `defend`:
           clog(`defend`, `reducer`)
-          nextState = physicalDefend(nextState)
+          nextState = block(nextState)
           break;
         case `special`:
           clog(`special`, `reducer`)
-          nextState = physicalSpecial(nextState)
+          nextState = specialattack(nextState)
           break;
         default:
           break;
@@ -187,15 +194,38 @@ function rootReducer(state = initialState, action) {
       switch (action.payload.mode) {
         case `attack`:
           clog(`attack`, `reducer`)
-          nextState = magicalAttack(nextState)
+          nextState = cast(nextState)
           break;
         case `defend`:
           clog(`defend`, `reducer`)
-          nextState = magicalDefend(nextState)
+          nextState = focus(nextState)
           break;
         case `special`:
           clog(`special`, `reducer`)
-          nextState = magicalSpecial(nextState)
+          nextState = specialcast(nextState)
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (action.payload.type === `skill`) {
+      switch (action.payload.mode) {
+        case `stun`:
+          clog(`attack`, `stun`)
+          nextState = stun(nextState)
+          break;
+        case `itembreak`:
+          clog(`itembreak`, `reducer`)
+          nextState = itembreak(nextState)
+          break;
+        case `psyblast`:
+          clog(`psyblast`, `reducer`)
+          nextState = psyblast(nextState)
+          break;
+        case `curse`:
+          clog(`curse`, `reducer`)
+          nextState = curse(nextState)
           break;
         default:
           break;
@@ -205,13 +235,12 @@ function rootReducer(state = initialState, action) {
     // Mana reloads
     nextState = energyRefresh(nextState, `magical`)
     nextState = energyRefresh(nextState, `physical`)
-
     // Reset temporary buffs
     nextState = autoResetBuff(nextState)
-
+    // Increment skill counters
+    nextState = incrementSkillCount(nextState)
     // Compute hits for UI display
     nextState = displayHits(prevState, nextState)
-
     // Switch player turn
     nextState.game.playerTurn = !nextState.game.playerTurn
   }

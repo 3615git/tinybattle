@@ -7,9 +7,7 @@
   width: 100%;
   height: 100%;
   flex: 1;
-  z-index: 100;
-  // background-color: rgba(0,0,0,.3);
-  pointer-events: none;
+  z-index: 10;
 
   .LogsWrapper {
     width: 100%;
@@ -17,7 +15,7 @@
     height: 100%;
     padding: 0px 20px;
     position: absolute;
-    flex:1;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +29,106 @@
 
     .log {
       padding: 20px;
-      border-radius: 10px;
+      border-radius: 6px;
+      background-color: rgba(33, 52, 58, 0.96);
+      // border: 2px solid #132227;
+      position: relative;
+      box-shadow: 0px 0px 19px 6px #00000061;
+
+      .up {
+        color: $color_bonus;
+        &:before { content: "+"}
+      }
+  
+      .down {
+        color: $color_malus;
+      }
+
+      // Embellishments
+      &:before {
+        display: block;
+        position: absolute;
+        left: 3px;
+        top: -5px;
+        width: 4px;
+        height: 4px;
+        content:url("../pics/ui/rivet.png")
+      }
+      &:after {
+        display: block;
+        position: absolute;
+        right: 4px;
+        bottom: 15px;
+        width: 4px;
+        height: 4px;
+        content:url("../pics/ui/rivet.png")
+      }
+    }
+
+    &.opponent .turnTag {
+      position: absolute;
+      width: 92px;
+      height: 32px;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: -21px;
+      background-image: url("../pics/ui/attackskull.png");
+      z-index: 11;
+    }
+
+    &.player .turnTag {
+      position: absolute;
+      width: 84px;
+      height: 33px;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: -18px;
+      background-image: url("../pics/ui/attacksword.png");
+      z-index: 11;
+    }
+
+    &.opponent .turnColor {
+      position: absolute;
+      width: 20px;
+      height: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: -10px;
+      background-color: red;
+    }
+
+    &.player .turnAction {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      top: -16px;
+      background-color: #22353a;
+
+      &.attack { background-color: $color_STR;}
+      &.block { 
+        background-color: $color_STR;
+        .item { top: 2px; left: 1px; }
+      }
+      &.cast { background-color: $color_MAG;}
+      &.focus { background-color: $color_MAG;}
+
+      .item {
+        position: relative;
+      }
     }
 
     &.battleStart .log,
@@ -39,40 +136,63 @@
       background: none !important;
     }
 
+    .logvalue {
+      margin-left: 5px;
+    }
+
     .title {
-      margin-bottom: 10px;
+      font-size: $font_small;
+      margin-bottom: 15px;
+
+      .roll {
+        &:before {
+          display: inline-block;
+          position: relative;
+          top: 1px;
+          margin-right: 4px;
+          content:url("../pics/ui/d6.png")
+        }
+        &:after {
+          content: " : "
+        }
+      }
     }
 
     .message {
-      font-size: 26px;
-    }
-
-    .logvalue {
-      padding: 0px 5px;
-    } 
-
-    .smallMessage {
-      font-size: 18px;
+      font-size: $font_verybig;
       margin-bottom: 5px;
     }
 
-    .tinyMessage {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .special {
-      font-size: 16px;
-      margin-bottom: 20px;
+    .note {
+      font-size: $font_small;
+      text-align: center;
     }
   }
 
-  .log_defend {
+
+  .effect_fumble, .effect_fumble_opponent,
+  .effect_critical, .effect_critical_opponent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: url('../pics/ui/fumble.png') no-repeat center center;
+    background-size: contain;
+    animation: effect 1.3s normal forwards ease-in-out;
+    z-index: 100;
   }
+
+  .effect_critical, .effect_critical_opponent {
+    background: url('../pics/ui/critical.png') no-repeat center center;
+    background-size: contain;
+  }
+
+  .effect_fumble_opponent, .effect_critical_opponent  {
+    animation: effect-opponent 1.3s normal forwards ease-in-out;
+  }
+
 }
 
 .bonusColor {
@@ -83,10 +203,90 @@
   color: $color_malus;
 }
 
+.physicaldamage {
+  color: $color_STR;
+}
+
+.magicaldamage {
+  color: $color_MAG;
+}
+
+.critical {
+  color: $color_legacy;
+  &:before {
+    position: relative;
+    top: 3px;
+    margin-right: 4px;
+    content:url("../pics/ui/critical.png")
+  }
+}
+
+.fumble {
+  color: grey;
+  &:before {
+    position: relative;
+    top: 3px;
+    margin-right: 4px;
+    content:url("../pics/ui/fumble.png")
+  }
+}
+
 /** Data Logs **/
-.DataLogsWrapper {
+.dataLogsWrapper {
   flex: 1;
-  padding: 10px;
-  font-size: 9px;
+  font-size: $font_tiny;
   overflow-y: auto;
+  z-index: 1;
+  position: relative;
+  margin: 0px 10px 10px 10px;
+
+  .dataLogShadow {
+    position: absolute;
+    width: 100%;
+    height: 70px;
+    z-index: 1;
+  }
+
+  .dataLogs {
+    position: absolute;
+    left: 0;
+    padding: 0px;
+    margin: 0px;
+    bottom: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      line-height: 12px;
+      margin-top: 5px;
+      color: #a5a5a5;
+  
+      .item {
+        margin-right: 10px;
+      }
+  
+      .up {
+        color: $color_bonus;
+        &:before { content: "+"}
+      }
+  
+      .down {
+        color: $color_malus;
+      }
+
+      .roll {
+        color: white;
+        &:before {
+          display: inline-block;
+          position: relative;
+          top: 3px;
+          margin-right: 4px;
+          content:url("../pics/ui/d6.png")
+        }
+        &:after {
+          content: " -> "
+        }
+      }
+    }
+  }
 }

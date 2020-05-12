@@ -15,7 +15,7 @@
   position: relative;
   width: 50px;
   height: 50px;
-  font-size: 9px;
+  font-size: $font_tiny;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,7 +65,7 @@
   top: 0px;
   right: 0px;
   padding: 4px;
-  font-size: 8px;
+  font-size: $font_tiny;
 }
 
 .itemCost.magical {
@@ -118,7 +118,7 @@ $forge: (
   "sceptre": 22,
   "shield": 145,
   "shoe": 44,
-  "skill": 8,
+  "skill": 11,
   "sword": 162,
   "vial": 8,
   "wand": 18

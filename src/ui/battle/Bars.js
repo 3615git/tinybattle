@@ -10,9 +10,7 @@ const Bars = () => {
   
   // Display component
   return (
-    <div className="barsWrapper">
-      <Bar type="hitPoints" />
-    </div>
+    <Bar type="hitPoints" />
   )
 }
 

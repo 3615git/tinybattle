@@ -17,6 +17,7 @@ const createPlayer = (data, style) => {
     gold: previousGold,
     items: {},
     weapons: {},
+    skills : {},
   }
 
   // Define characs
@@ -50,6 +51,12 @@ const createPlayer = (data, style) => {
   data.player.maxPhysicalRage = Math.round(data.player.maxHitPoints * 50 / 100)
   data.player.magicalRage = 0
   data.player.maxMagicalRage = Math.round(data.player.maxMagicPoints * 50 / 100)
+
+  // Create secondary attacks counters
+  data.player.skills.stun = { current: 3, ready: 3 }
+  data.player.skills.itembreak = { current: 3, ready: 3 }
+  data.player.skills.psyblast = { current: 5, ready: 5 }
+  data.player.skills.curse = { current: 3, ready: 3 }
   
   // Overwrite with legacy items
   if (data.game && data.game.legacy) {

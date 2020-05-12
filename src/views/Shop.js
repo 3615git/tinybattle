@@ -169,11 +169,11 @@ class Shop extends Component {
               <div className="goldLoot">
                 <Item item={goldIcon} noPlus animateNumber />
               </div>
-              <span className="subtitle">Items</span>
+              {/* <span className="subtitle">Items</span> */}
               <div className="lootBoxes">
                 {this.parseLoot(`items`)}
               </div>
-              <span className="subtitle">Weapons</span>
+              {/* <span className="subtitle">Weapons</span> */}
               <div className="lootBoxes weapons">
                 {this.parseLoot(`weapons`)}
               </div>

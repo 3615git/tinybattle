@@ -5,7 +5,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin: 10px auto;
   z-index: 1;
   margin-bottom: 10px;
 
@@ -30,7 +30,7 @@
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: $font_big;
     text-align: center;
 
     &:first-child { margin-left: 0px; }
@@ -50,7 +50,7 @@
   }
 
   span.char {
-    font-size: 8px;
+    font-size: $font_tiny;
     opacity: .6;
     margin-bottom: 3px;
   }

@@ -39,7 +39,7 @@ const findBuff = (player, type, stat) => {
 }
 
 // Push buff
-const pushBuff = (player, type, stat, value, rounds = 1) => {
+const pushBuff = (player, type, stat, value, origin, rounds = 1) => {
 
   // Create buff object if not existing
   if (!player.buff) player.buff = {
@@ -50,6 +50,7 @@ const pushBuff = (player, type, stat, value, rounds = 1) => {
   const buff = {
     stat: stat,
     value: value,
+    origin: origin,
     rounds: rounds
   }
   
@@ -114,9 +115,22 @@ const decreaseBuffCounters = (player) => {
   return player
 }
 
+const incrementSkillCount = (data) => {
+  let { game } = data
+
+  // Parse all skills
+  if (!game.playerTurn) {
+    for (let [key, value] of Object.entries(data.player.skills)) {
+      if (value.current < value.ready) data.player.skills[key].current++
+    }
+  }
+  return data
+}
+
 export {
   getStat,
   pushBuff, 
   resetBuff,
-  autoResetBuff
+  autoResetBuff,
+  incrementSkillCount
 }

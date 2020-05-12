@@ -43,6 +43,7 @@ import './css/battle_stats.scss'
 import './css/victory.scss'
 import './css/defeat.scss'
 import './css/items.scss'
+import './css/wheel.scss'
 
 const mapStateToProps = state => {
   return {

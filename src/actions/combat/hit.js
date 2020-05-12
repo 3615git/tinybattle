@@ -1,4 +1,4 @@
-import { diceRoll } from '../../utils/utils'
+import { diceRoll, getRandomInt, randomValue } from '../../utils/utils'
 import { getStat } from './stats'
 import rpgDice from "rpgdicejs"
 
@@ -25,6 +25,7 @@ const hitChance = (toHit) => {
 }
 
 // Physical hit chance
+// @todo : merge both
 const physicalHit = (activePlayer, targetPlayer) => {
   const roll = diceRoll(20)
   const hit = roll >= toHit(activePlayer, targetPlayer, `physical`)
@@ -41,6 +42,7 @@ const physicalHit = (activePlayer, targetPlayer) => {
 }
 
 // Magical hit chance
+// @todo : merge both
 const magicalHit = (activePlayer, targetPlayer) => {
   const roll = diceRoll(20)
   const hit = roll >= toHit(activePlayer, targetPlayer, `magical`)
@@ -195,6 +197,25 @@ const displayHits = (prevState, nextState) => {
   return nextState
 }
 
+// Roll dice on the skill wheel
+const skillWheelRoll = () => {
+  // roll d8
+  const roll = getRandomInt(0,7)
+  // random arc positions
+  const positions = [`success`, `critical`, `success`, `fumble`, `success`, `fumble`, `success`, `critical` ]
+  const wheelVariations = {
+    success: [1,3,5,7],
+    critical: [2,8],
+    fumble: [4,6]
+  }
+
+  // return value and position
+  return {
+    result: positions[roll],
+    position: randomValue(wheelVariations[positions[roll]])
+  }
+}
+
 export {
   toHit,
   hitChance,
@@ -204,5 +225,6 @@ export {
   magicalDamage,
   criticalChance,
   fumbleChance,
-  displayHits
+  displayHits,
+  skillWheelRoll
 }

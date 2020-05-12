@@ -5,6 +5,8 @@ $color_STR: #e7323b;
 $color_MAG: #0494ab;
 $color_stamina: adjust-hue($color_STR, 30); //#ce6d0a
 $color_mana: adjust-hue($color_MAG, -30); //#01a972
+$color_skill: #5e9273; //#01a972
+$color_skill_energy: adjust-hue($color_skill, -80); //#01a972
 // Elements
 $element_fire: red;
 $element_earth: #004e00;
@@ -20,3 +22,11 @@ $color_itemMagic: #125fa7;
 $color_itemRare: #9c3db3;
 $color_itemLegendary: #de5e05;
 $color_legacy: #FFD700;
+
+// Font sizes
+$font_huge: 50px;
+$font_verybig: 26px;
+$font_big: 22px;
+$font_base: 18px;
+$font_small: 14px;
+$font_tiny: 10px;
