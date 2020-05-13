@@ -198,21 +198,35 @@ const displayHits = (prevState, nextState) => {
 }
 
 // Roll dice on the skill wheel
-const skillWheelRoll = () => {
+const skillWheelRoll = (items) => {
   // roll d8
   const roll = getRandomInt(0,7)
-  // random arc positions
-  const positions = [`success`, `critical`, `success`, `fumble`, `success`, `fumble`, `success`, `critical` ]
-  const wheelVariations = {
-    success: [1,3,5,7],
-    critical: [2,8],
-    fumble: [4,6]
-  }
+  let positions, wheelVariations
 
-  // return value and position
-  return {
-    result: positions[roll],
-    position: randomValue(wheelVariations[positions[roll]])
+  // Wheel with prizes
+  if (items) {
+    positions = [items[0], items[1], items[2], `fumble`, items[3], items[4], items[5], `fumble`]
+    // return value and position
+    return {
+      result: positions[roll],
+      positions: positions,
+      position: roll
+    }
+  } 
+  // Wheel with skill
+  else {
+    positions = [`success`, `critical`, `success`, `fumble`, `success`, `fumble`, `success`, `critical` ]
+    wheelVariations = {
+      success: [0,2,4,6],
+      critical: [1,7],
+      fumble: [3,5]
+    }
+    // return value and position
+    return {
+      result: positions[roll],
+      positions: positions,
+      position: randomValue(wheelVariations[positions[roll]])
+    }
   }
 }
 

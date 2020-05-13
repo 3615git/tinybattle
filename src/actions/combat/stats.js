@@ -130,6 +130,7 @@ const incrementSkillCount = (data) => {
 export {
   getStat,
   pushBuff, 
+  findBuff,
   resetBuff,
   autoResetBuff,
   incrementSkillCount

@@ -75,16 +75,6 @@ const ActionButton = ({ type, player, opponent, attack }) => {
       bar = <Bar type={"physicalRage"} />
       buttonClass = specialPhysicalReady ? `physical special` : `physical special disabled`
       break;
-    case `stun`:
-      onClick = notready
-      icon = <ItemVisual item={gameSettings.icons.stun[0]} level={gameSettings.icons.stun[1]} />
-      buttonClass = "physical stun"
-      break;
-    case `break`:
-      onClick = notready
-      icon = <ItemVisual item={gameSettings.icons.break[0]} level={gameSettings.icons.break[1]} />
-      buttonClass = "physical break"
-      break;
     case `cast`:
       onClick = castReady ? () => attack({ type: `magical`, mode: `attack` }) : notready
       icon = <ItemVisual item={player.weapons.MAG.type} level={player.weapons.MAG.id} />
@@ -98,17 +88,6 @@ const ActionButton = ({ type, player, opponent, attack }) => {
       bar = <Bar type={"magicalRage"} />
       buttonClass = specialMagicalReady ? `magical special` : `magical special disabled`
       break;
-    case `psyblast`:
-      onClick = notready
-      icon = <ItemVisual item={gameSettings.icons.psyblast[0]} level={gameSettings.icons.psyblast[1]} />
-      buttonClass = "magical psyblast"
-      break;
-    case `curse`:
-      onClick = notready
-      icon = <ItemVisual item={gameSettings.icons.curse[0]} level={gameSettings.icons.curse[1]} />
-      buttonClass = "magical curse"
-      break;
-  
     default:
       break;
   }

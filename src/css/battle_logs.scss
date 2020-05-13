@@ -182,6 +182,7 @@
     background-size: contain;
     animation: effect 1.3s normal forwards ease-in-out;
     z-index: 100;
+    pointer-events: none;
   }
 
   .effect_critical, .effect_critical_opponent {

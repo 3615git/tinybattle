@@ -16,6 +16,7 @@
     width:  $item-size;
     height: $item-size;
     margin: -($item-size / 2);
+    z-index: 2;
   
     $angle: (360 / $item-count);
     $rot: 0;
@@ -66,6 +67,7 @@
   overflow: hidden;
   transition: transform 1.5s cubic-bezier(0,.01,0,1.29);
   transform: rotate(22.5deg);
+  z-index: 1;
 
   li {
     overflow: hidden;

@@ -110,6 +110,14 @@ function formatDataLog(type, fightLog, game) {
       icon = gameSettings.icons.battleStart
       break;
 
+    case `skip`:
+      title = `Nothing!`
+      message = `Skip!`
+      note = `${playerDisplay} skips turn!`
+      log = `${playerDisplay} skips turn!`
+      icon = gameSettings.icons.skip
+      break;
+
     case `block`:
       title = `${playerDisplay} blocks!`
       message = `<span class="up">${fightLog.data.dexBonus}</span> DEX and <span class="up">${fightLog.data.healValue}</span> HP`
@@ -145,7 +153,7 @@ function formatDataLog(type, fightLog, game) {
 
       // Elemental hit
       if (fightLog.data.damage && fightLog.data.damage.elemental > 0) {
-        attackResult += `<span class="elemental">Elemental bonus!</span>`
+        attackResult += `&nbsp;<span class="elemental">Elemental bonus!</span>&nbsp;`
       }
 
       // Damage
@@ -216,6 +224,45 @@ function formatDataLog(type, fightLog, game) {
       note = damage
       log = `${playerDisplay} uses psychic blast! ${attackResult} ${damage}`
       icon = gameSettings.icons.psyblast
+      break;
+
+    case `stun`:
+      // Hit
+      if (fightLog.data.hit === `success`) {
+        attackResult = `BAM!`
+        damage = `${opponentDisplay} is stunned and skip ${fightLog.data.rounds} turn.`
+      }
+      if (fightLog.data.hit === `critical`) {
+        attackResult = `<span class="critical">Head shot!</span>`
+        damage = `${opponentDisplay} is knocked out and skip ${fightLog.data.rounds} turns.`
+      }
+      if (fightLog.data.hit === `fumble`) {
+        attackResult = `<span class="fumble">Missed!</span>`
+        damage = `${playerDisplay} slips! <span class="down">${fightLog.data.dexMalus}</span> DEX and <span class="down">${fightLog.data.strMalus}</span>.`
+      }
+
+      title = `${playerDisplay} tries a stunning blast!`
+      message = `${attackResult}`
+      note = damage
+      log = `${title} ${attackResult} ${damage}`
+      icon = gameSettings.icons.stun
+      break;
+
+    case `itembreak`:
+      // Hit
+      if (fightLog.data.hit === `fumble`) {
+        attackResult = `<span class="fumble">Missed!</span>`
+        damage = `${playerDisplay} slips! <span class="down">${fightLog.data.dexMalus}</span> DEX. ${opponentDisplay} gains LCK bonus.`
+      } else {
+        attackResult = `Item broken!`
+        damage = `${opponentDisplay} loses an item.`
+      }
+
+      title = `${playerDisplay} tries to break enemy's item!`
+      message = `${attackResult}`
+      note = damage
+      log = `${title} ${attackResult} ${damage}`
+      icon = gameSettings.icons.itembreak
       break;
 
     default:

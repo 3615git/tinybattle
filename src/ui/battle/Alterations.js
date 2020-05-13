@@ -29,7 +29,7 @@ const Alterations = ({ opponent }) => {
     for (let index = 0; index < opponent.buff.temporary.length; index++) {
       const element = opponent.buff.temporary[index]
       alterations.push(
-        <div className="alteration">
+        <div key={`alteration_${index}`} className="alteration">
           <span className="counter">{element.rounds + 1}</span>
           <ItemVisual item={gameSettings.icons[element.origin][0]} level={gameSettings.icons[element.origin][1]} />
         </div>

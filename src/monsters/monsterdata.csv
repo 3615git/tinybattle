@@ -1,14 +1,6 @@
 code,name,tier,humanoid,items,weapons,profile,element,boost,elite
-blindworm,"Blind Worm, Cave Worm, Giant Worm",1,,,,brute,earth,STR,5
-dryad,"Dryad, Sylve Dryad, Dryad Swordmaster",1,1,"DEX, STR, LCK",STR,duelist,earth,DEX,5
-giantfish,"Giant Fish, River Monster, Giant Carp",1,,,,tank,water,,5
-fireimp,"Fire Imp, Fire Djinn, Fire Elemental",1,1,MAG,MAG,archmage,fire,,10
-bloodmage,"Blood Mage, Blood Warlock, Crimson Mage",1,1,"DEX, CON, MAG","STR, MAG",archmage,fire,,10
-lamprey,"Psychic Lamprey, Psionic Worm, Mana Leech",1,,,,wizard,water,MAG,10
-waterspirit,"Water Spirit, Water Djinn, Ocean Djinn",1,1,"STR, MAG","STR, MAG",balanced,water,,15
-crow,"Giant Crow, High Raven, Black Raven",1,,,,duelist,earth,"DEX, STR",15
 firewitch,"Fire Witch, Fire Angel, Fire Sorceress",1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
-gazer,"Eldritch Gazer, Abomination, Abyss Gazer",1,,,,brute,darkness,"STR, DEX",15
+dryad,"Dryad, Sylve Dryad, Dryad Swordmaster",1,1,"DEX, STR, LCK",STR,duelist,earth,DEX,5
 monster_11,name_11,2,1,,,archmage,fire,,10
 monster_12,name_12,2,1,,,brute,fire,STR,10
 monster_13,name_13,2,1,,,brute,fire,,10

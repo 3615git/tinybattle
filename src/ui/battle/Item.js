@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 import AnimatedNumber from "animated-number-react"
 
+import { gameSettings } from "../../conf/settings"
 import ItemVisual from './ItemVisual'
 
 /**
@@ -21,48 +22,83 @@ const mapStateToProps = state => {
     data: state
   }
 }
+class Item extends Component {
 
-const Item = ({ item, effect, noPlus, animateNumber }) => {
-  // Plus sign for bonus items
-  const plusSign = ((item && item.cost) || noPlus) ? `` : `+`
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
 
-  // Weapon cost type
-  let costType
-  if (item && item.char && item.char === `STR`) costType = `physical`
-  if (item && item.char && item.char === `MAG`) costType = `magical`
+  componentDidUpdate(prevProps) {
+    // if (
+    //   (prevProps.item.char !== this.props.item.char) &&
+    //   (prevProps.item.id !== this.props.item.id) &&
+    //   (prevProps.item.price !== this.props.item.price) &&
+    //   (prevProps.item.quality !== this.props.item.quality) &&
+    //   (prevProps.item.reward !== this.props.item.reward) &&
+    //   (prevProps.item.score !== this.props.item.char) &&
+    //   (prevProps.item.type !== this.props.item.type)
+    // ) {
+    //   this.itemChange()
+    // }
+    if (prevProps.item && !this.props.item) {
+      this.itemDeleted()
+    }
+  }
 
-  // Elemental glow
-  const defaultClasses = `item_wrapper`
-  const glowClasses = item && item.element ? 'glow_' + item.element : ``
-  const qualityClasses = item && item.quality ? item.quality : ``
-  const effectClasses = effect ? `animation-`+effect : ``
-  const itemClasses = [defaultClasses, qualityClasses, glowClasses, effectClasses].filter(val => val).join(` `)
+  itemDeleted = () => {
+    this.rollDelay = setTimeout(() => {
+      this.setState({ itemState: "deleted" })
+    }, gameSettings.itemStateDelay)
+  }
 
-  if (item && item.type && item.id) return (
-    <div className={itemClasses}>
-      {item.cost &&
-        <>
-          <div className={`itemCost ${costType}`}>{item.cost}</div>
-          {item.element !== `none` && <div className={`element ${item.element}`} /> }
-        </>
-      }
-      <ItemVisual item={item.type} level={item.id} />
-      <span>
-        {plusSign}
-        {animateNumber 
-          ? (<AnimatedNumber
-            formatValue={value => value.toFixed(0)}
-            value={item.score}
-          />)
-          : item.score
+  render() {
+    const { item, effect, noPlus, animateNumber } = this.props
+    const { itemState } = this.state
+
+    // Plus sign for bonus items
+    const plusSign = ((item && item.cost) || noPlus) ? `` : `+`
+
+    // Weapon cost type
+    let costType
+    if (item && item.char && item.char === `STR`) costType = `physical`
+    if (item && item.char && item.char === `MAG`) costType = `magical`
+
+    // Elemental glow
+    const defaultClasses = `item_wrapper`
+    const glowClasses = item && item.element ? 'glow_' + item.element : ``
+    const qualityClasses = item && item.quality ? item.quality : ``
+    const effectClasses = effect ? `animation-` + effect : ``
+    const updateClasses = itemState ? `animation-` + itemState : ``
+    const itemClasses = [defaultClasses, qualityClasses, glowClasses, effectClasses, updateClasses].filter(val => val).join(` `)
+    const emptyItemClasses = [defaultClasses, updateClasses].filter(val => val).join(` `)
+
+    if (item && item.type && item.id) return (
+      <div className={itemClasses}>
+        {item.cost &&
+          <>
+            <div className={`itemCost ${costType}`}>{item.cost}</div>
+            {item.element !== `none` && <div className={`element ${item.element}`} /> }
+          </>
         }
-        
-      </span>
-    </div>
-  )
-  else return (
-    <div className="item_wrapper" />
-  )
+        <ItemVisual item={item.type} level={item.id} />
+        <span>
+          {plusSign}
+          {animateNumber 
+            ? (<AnimatedNumber
+              formatValue={value => value.toFixed(0)}
+              value={item.score}
+            />)
+            : item.score
+          }
+          
+        </span>
+      </div>
+    )
+    else return (
+      <div className={emptyItemClasses} />
+    )
+  }
 }
 
 // Applying propTypes definition and default values

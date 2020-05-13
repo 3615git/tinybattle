@@ -32,6 +32,7 @@ import { specialattack } from '../../actions/combat/specialattack'
 import { cast } from '../../actions/combat/cast'
 import { focus } from '../../actions/combat/focus'
 import { specialcast } from '../../actions/combat/specialcast'
+import { skip } from '../../actions/combat/skip'
 // Skills
 import { stun } from '../../actions/combat/stun'
 import { itembreak } from '../../actions/combat/itembreak'
@@ -169,6 +170,12 @@ function rootReducer(state = initialState, action) {
   } 
 
   if (action.type === ATTACK) {
+
+    // Skip turn
+    if (action.payload.type === `skip`) {
+      clog(`skip`, `reducer`)
+      nextState = skip(nextState)
+    }
   
     // Switch attack type
     if (action.payload.type === `physical`) {
@@ -212,7 +219,7 @@ function rootReducer(state = initialState, action) {
     if (action.payload.type === `skill`) {
       switch (action.payload.mode) {
         case `stun`:
-          clog(`attack`, `stun`)
+          clog(`stun`, `reducer`)
           nextState = stun(nextState)
           break;
         case `itembreak`:

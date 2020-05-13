@@ -1,43 +1,92 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/utils'
+import { skillWheelRoll } from '../../actions/combat/hit'
 
 /**
-  * @desc Computing the results of break skill
+  * @desc Computing the results of itembreak skill
 */
 
 const itembreak = (data) => {
   let { player, opponent, game } = data
 
-  let activePlayer = game.playerTurn ? {...player} : {...opponent}
-  let targetPlayer = game.playerTurn ? {...opponent} : {...player}
+  let activePlayer = game.playerTurn ? { ...player } : { ...opponent }
+  let targetPlayer = game.playerTurn ? { ...opponent } : { ...player }
 
-  // Defends gives temporary MAGx2, lasts 2 turns, but decreases DEX and STR by half
-  const MAGbonus = Math.ceil(activePlayer.MAG * 2)
-  const DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
-  const STRmalus = -Math.abs(Math.ceil(targetPlayer.STR / 2))
-  pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `itembreak`,  2)
-  pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `itembreak`,  2)
-  pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, `itembreak`,  2)
+  // Itembreak can break some of the enemy's item
+
+  // Select enemy items
+  let items = []
+  for (let [key, value] of Object.entries(opponent.items)) {
+    items.push({ category: `items`, char: key, item: value})
+  } 
+  for (let [key, value] of Object.entries(opponent.weapons)) {
+    items.push({ category: `weapons`, char: key, item: value })
+  }
+
+  // Shuffle results
+  items = items
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value)
+
+  // Build a 6 items array
+  let wheelItems = []
+  let j = 0
+  for (let i = 0; i < 20; i++) {
+    if (items[j]) {
+      wheelItems.push(items[j])
+      j++
+    } else {
+      j=0
+    }
+    if (wheelItems.length === 6) break
+  }
+  
+  // Pass to skillWheel
+  const hit = skillWheelRoll(wheelItems)
+  let DEXmalus
+  switch (hit.result) {
+    case `fumble`:
+      // If fumble, LCK malus
+      DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
+      pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `stun`, 2)
+      // Give LCK bonus to opponent 
+      pushBuff(targetPlayer, `temporary`, `LCK`, 3, `attackfumble`, 5)
+      break;
+
+    default:
+      // Destroy one or more items
+      delete targetPlayer[hit.result.category][hit.result.char]
+      break;
+  }
+
+  // Reset skill energy
+  activePlayer.skills.itembreak.current = 0
+
+  console.log(hit.result)
 
   // Build log
   let log = {
-    type: `focus`,
+    type: `itembreak`,
+    delay: `long`,
     activePlayer,
     targetPlayer,
     data: {
-      dexMalus: DEXmalus,
-      strMalus: STRmalus,
-      magBonus: MAGbonus
+      hit: hit.result,
+      wheelPositions: hit.positions,
+      wheelPosition: hit.position,
+      dexMalus: DEXmalus
     }
   }
+  log.display = formatDataLog(`itembreak`, log, game)
 
   // Apply changes
   data.player = game.playerTurn ? activePlayer : targetPlayer
   data.opponent = !game.playerTurn ? activePlayer : targetPlayer
   data.log = log
-  data.dataLogs.push(formatDataLog(`focus`, log, game))
+  data.dataLogs.push(formatDataLog(`itembreak`, log, game))
 
-  return data 
+  return data
 }
 
 export { itembreak }

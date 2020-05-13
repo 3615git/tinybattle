@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 
 import { gameSettings } from "../../conf/settings"
 import ItemVisual from './ItemVisual'
+
 /**
-  * @todo Wheel for "random" results
+  * Wheel for "random" results
 */
 
 const propTypes = {
@@ -29,9 +30,9 @@ class Wheel extends Component {
     const { position } = this.props
     this.rollDelay = setTimeout(() => {
       this.setState({
-        rollPosition: (position * 45) + (16 * 45) + 22.5 - 45
+        rollPosition: (position * 45) + (16 * 45) + 112.5
       })
-    }, 600)
+    }, gameSettings.widgetDelay)
   }
 
   componentWillUnmount() {
@@ -39,10 +40,43 @@ class Wheel extends Component {
   }
 
   render() {
-    const { type } = this.props
+    const { type, items, position } = this.props
     const { rollPosition } = this.state
     const wheelStyle = {
       transform: `rotate(${rollPosition}deg)`
+    } 
+
+    console.log(position)
+    console.log(items)
+
+    // Type or item wheel
+    let wheelItems
+    if (items) {
+      wheelItems = (
+        <>
+          <li><ItemVisual item={items[0].item.type} level={items[0].item.id} /></li>
+          <li><ItemVisual item={items[1].item.type} level={items[1].item.id} /></li>
+          <li><ItemVisual item={items[2].item.type} level={items[2].item.id} /></li>
+          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={items[4].item.type} level={items[4].item.id} /></li>
+          <li><ItemVisual item={items[5].item.type} level={items[5].item.id} /></li>
+          <li><ItemVisual item={items[6].item.type} level={items[6].item.id} /></li>
+          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+        </>
+      )
+    } else {
+      wheelItems = (
+        <>
+          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
+          <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
+        </>
+      )
     }
 
     // Display component
@@ -53,14 +87,7 @@ class Wheel extends Component {
         </ul>
 
         <ul className='circle-container'>
-          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
+          {wheelItems}
         </ul>
       </div>
     )

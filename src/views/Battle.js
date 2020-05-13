@@ -11,6 +11,7 @@ import DataLogs from '../ui/battle/DataLogs'
 import VibrationWrapper from '../ui/battle/VibrationWrapper'
 import { toHit, hitChance } from '../actions/combat/hit'
 import { getRandomInt, clog } from "../utils/utils"
+import { findBuff } from '../actions/combat/stats'
 
 import { setGameState, attack } from '../redux/actions/index'
 
@@ -44,7 +45,7 @@ class Battle extends Component {
 
   // Alternate turn UI and battle mode
   changeTurn = () => {
-    const { game, attack, setGameState } = this.props
+    const { opponent, game, attack, setGameState } = this.props
     console.log(game)
 
     if (game.playerTurn) {
@@ -56,8 +57,13 @@ class Battle extends Component {
       setGameState({ state: `playerTurn` })
       
     } else {
-      // Enemy's attack after reflexion delay
-      attack({ type: this.opponentAttackChoice(), mode: `attack` })
+      // Enemy's attack after reflexion delay, if not stunned
+      if (findBuff(opponent, `temporary`, `STUN`)) {
+        attack({ type: `skip` })
+      }
+      else {
+        attack({ type: this.opponentAttackChoice(), mode: `attack` })
+      }
       // Display enemy's attack UI
       this.setState({
         playerTurnUI: false
@@ -75,6 +81,7 @@ class Battle extends Component {
   opponentAttackChoice = () => {
     const { opponent, player } = this.props
     let attackType
+    
     // Opponent is humanoid or beast ?
     if (opponent.humanoid) {
       let physicalHitChance = hitChance(toHit(opponent, player, `physical`))

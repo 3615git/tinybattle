@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
 import { criticalChance, fumbleChance } from '../../actions/combat/hit'
+import { gameSettings } from '../../conf/settings'
 
 /**
   * @desc Display an animated hit bar
@@ -41,7 +42,7 @@ class HitBar extends Component {
       this.setState({
         rollPosition: hit.roll
       })
-    }, 600)
+    }, gameSettings.widgetDelay)
   }
 
   componentWillUnmount() {

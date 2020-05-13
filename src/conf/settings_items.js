@@ -113,7 +113,7 @@ const itemRanges = {
   "sceptre": 22,
   "shield": 145,
   "shoe": 44,
-  "skill": 11,
+  "skill": 12,
   "sword": 162,
   "vial": 8,
   "wand": 18

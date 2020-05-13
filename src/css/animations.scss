@@ -5,6 +5,11 @@
   animation: new (1s);
 }
 
+// Deleted item
+.animation-deleted {
+  animation: delete (2s);
+}
+
 /* Fumble background anim */
 @keyframes effect {
   0% {
@@ -160,6 +165,18 @@
     }
     50% { 
       filter: drop-shadow(0px 0px 20px #ffc4a2) drop-shadow(0px 0px 10px #ffc4a2);
+     }
+    100% {} 
+}
+
+@keyframes delete {
+    0% { 
+      filter: drop-shadow(0px 0px 1px red) drop-shadow(0px 0px 1px red);
+      transform: scale(1.4);
+    }
+    50% { 
+      filter: drop-shadow(0px 0px 20px red) drop-shadow(0px 0px 10px red);
+      background: red;
      }
     100% {} 
 }

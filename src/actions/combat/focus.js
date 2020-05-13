@@ -22,6 +22,7 @@ const focus = (data) => {
   // Build log
   let log = {
     type: `focus`,
+    delay: `immediate`,
     activePlayer,
     targetPlayer,
     data: {
