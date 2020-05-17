@@ -71,18 +71,38 @@ const Bar = ({ connectedData, type, opponent, color, current, ready }) => {
   const itemClasses = [defaultClasses, type, size].filter(val => val).join(` `)
 
   // Compute gauge width
-  const indicatorStyle = color ? {
+  let indicatorStyle = color ? {
     background: color,
     width: (value*100)/maxValue + `%`,
   } : {
     width: (value * 100) / maxValue + `%`,
   }
 
+  // Small numbers are displayeds a blocks
+  let indicator
+
+  if (maxValue <= 5) {
+    let blocks = []
+    let blockWidth = 100 / maxValue + `%`
+    for (let index = 0; index < maxValue; index++) {
+      indicatorStyle = {
+        background: index < value ? color : `none`,
+        width: blockWidth
+      }
+      blocks.push(
+        <div key={`barb_block_${index}`} className="indicator" style={indicatorStyle} />
+      )
+    }
+    indicator = blocks
+  } else {
+    indicator = <div className="indicator" style={indicatorStyle} />
+  }
+
   // Display component
   return (
     <div className={itemClasses}>
       {size === `big` && <div className="value">{value}/{maxValue}</div>}
-      <div className="indicator" style={indicatorStyle} />
+      {indicator}
     </div>
   )
 }

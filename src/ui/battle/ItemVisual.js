@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Item visual
 */
 
 const propTypes = {

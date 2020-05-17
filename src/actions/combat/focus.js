@@ -1,5 +1,5 @@
 import { pushBuff } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 
 /**
   * @desc Computing the results of magical defense

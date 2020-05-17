@@ -9,10 +9,12 @@ import Item from './Item'
 */
 
 const propTypes = {
+  animations: PropTypes.bool,
   opponent: PropTypes.bool
 }
 
 const defaultProps = {
+  animations: true,
   opponent: false
 }
 
@@ -22,7 +24,7 @@ const mapStateToProps = state => {
   }
 }
 
-const Items = ({ data, opponent, forceData }) => {
+const Items = ({ data, opponent, forceData, animations }) => {
 
   let activePlayer = opponent ? data.opponent : data.player
 
@@ -43,11 +45,11 @@ const Items = ({ data, opponent, forceData }) => {
   // Display component
   return (
     <div className={itemClasses}>
-      <Item item={activePlayer.items.STR} effect={checkLegacy(`items`, `STR`, data.game.legacy)} />
-      <Item item={activePlayer.items.DEX} effect={checkLegacy(`items`, `DEX`, data.game.legacy)} />
-      <Item item={activePlayer.items.CON} effect={checkLegacy(`items`, `CON`, data.game.legacy)} />
-      <Item item={activePlayer.items.MAG} effect={checkLegacy(`items`, `MAG`, data.game.legacy)} />
-      <Item item={activePlayer.items.LCK} effect={checkLegacy(`items`, `LCK`, data.game.legacy)} />
+      <Item item={activePlayer.items.STR} effect={checkLegacy(`items`, `STR`, data.game.legacy)} animations={animations} />
+      <Item item={activePlayer.items.DEX} effect={checkLegacy(`items`, `DEX`, data.game.legacy)} animations={animations} />
+      <Item item={activePlayer.items.CON} effect={checkLegacy(`items`, `CON`, data.game.legacy)} animations={animations} />
+      <Item item={activePlayer.items.MAG} effect={checkLegacy(`items`, `MAG`, data.game.legacy)} animations={animations} />
+      <Item item={activePlayer.items.LCK} effect={checkLegacy(`items`, `LCK`, data.game.legacy)} animations={animations} />
     </div>
   )
 }

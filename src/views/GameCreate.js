@@ -91,7 +91,7 @@ class GameCreate extends Component {
             <label>Stats and <span className="legacyColor">legacy</span> items</label>
             <div className="profileStats">
               <Stats />
-              <Items />
+              <Items animations={false} />
             </div>
             <div className="profileWeapons">
               {player &&

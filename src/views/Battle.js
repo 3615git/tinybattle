@@ -46,7 +46,6 @@ class Battle extends Component {
   // Alternate turn UI and battle mode
   changeTurn = () => {
     const { opponent, game, attack, setGameState } = this.props
-    console.log(game)
 
     if (game.playerTurn) {
       // Display player's attack UI
@@ -124,7 +123,7 @@ class Battle extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { opponent, player, playerTurn, settings, setGameState } = this.props
+    const { opponent, player, playerTurn, settings } = this.props
     const { battleEnd } = this.state
 
     // If opponent or player is dead, clear timer
@@ -133,24 +132,11 @@ class Battle extends Component {
       clearTimeout(this.playerTurn)
 
       if (!battleEnd) {
-        this.setState({
-          battleEnd: true
-        })
-      }
-
-      // If player is dead
-      if (player.hitPoints === 0 && !battleEnd) {
-        setTimeout(function () {
-          setGameState({ state: `defeat` })
-        }, 4000)
-      }
-
-      // If opponent is dead
-      if (opponent.hitPoints === 0 && !battleEnd) {
-        clog(`setting timeout`, `stop`)
-        setTimeout(function () {
-          setGameState({ state: `victory` })
-        }, 4000)
+        this.endGame = setTimeout(function () {
+          this.setState({
+            battleEnd: true
+          })
+        }.bind(this), 2000)
       }
 
       return false
@@ -171,15 +157,15 @@ class Battle extends Component {
   }
 
   componentWillUnmount() {
-    // Clear opponent's turn timer
-    if (this.opponentTurn) {
-      clearTimeout(this.opponentTurn)
-      clearTimeout(this.playerTurn)
-    }
+    // Clear timers
+    clearTimeout(this.opponentTurn)
+    clearTimeout(this.playerTurn)
+    clearTimeout(this.endGame)
+
   }
 
   render() {
-    const { playerTurnUI } = this.state
+    const { playerTurnUI, battleEnd } = this.state
     const { game, player, uicolor } = this.props
 
     clog(`Battle render`, `location`)
@@ -192,7 +178,7 @@ class Battle extends Component {
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
-          <EndGame />
+          <EndGame display={battleEnd} />
           <VibrationWrapper condition={game.opponentHit}>
             <Opponent color={uicolor} turn={playerTurnUI} />
           </VibrationWrapper>

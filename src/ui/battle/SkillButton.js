@@ -51,13 +51,22 @@ const SkillButton = ({ type, current, ready, player, opponent, attack }) => {
       onClick = skillReady ? () => attack({ type: `skill`, mode: `stun` }) : notready
       break;
     case `itembreak`:
-      onClick = skillReady ? () => attack({ type: `skill`, mode: `itembreak` }) : notready
+      // Any items to break ?
+      let itemsReady = (Object.keys(opponent.items).length > 0) || (Object.keys(opponent.weapons).length > 0)
+      buttonClass = skillReady && itemsReady ? `skill ${type}` : `skill ${type} disabled`
+      onClick = skillReady && itemsReady ? () => attack({ type: `skill`, mode: `itembreak` }) : notready
       break;
     case `psyblast`:
       onClick = skillReady ? () => attack({ type: `skill`, mode: `psyblast` }) : notready
       break;
     case `curse`:
       onClick = skillReady ? () => attack({ type: `skill`, mode: `curse` }) : notready
+      break;
+    case `heal`:
+      onClick = skillReady ? () => attack({ type: `skill`, mode: `heal` }) : notready
+      break;
+    case `reflect`:
+      onClick = skillReady ? () => attack({ type: `skill`, mode: `reflect` }) : notready
       break;
   
     default:

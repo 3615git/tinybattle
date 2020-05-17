@@ -96,6 +96,16 @@ max-width: 570px;
     .logo2 {
       animation: glow (30s) infinite;
     }
+    span {
+      text-align: center;
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      font-size: 60px;
+      padding-top: 90px;
+    }
   }
 }
 

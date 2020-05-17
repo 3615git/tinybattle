@@ -1,5 +1,5 @@
 import { pushBuff } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 
 /**

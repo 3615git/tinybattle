@@ -222,6 +222,14 @@
   }
 }
 
+span.reflect {
+  color: $color_MAG;
+}
+
+span.boost {
+  color: $color_STR;
+}
+
 .fumble {
   color: grey;
   &:before {
@@ -239,7 +247,7 @@
   overflow-y: auto;
   z-index: 1;
   position: relative;
-  margin: 0px 10px 10px 10px;
+  margin: 0px 10px 5px 20px;
 
   .dataLogShadow {
     position: absolute;

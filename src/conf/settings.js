@@ -9,6 +9,19 @@ const gameSettings = {
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
+  maxEnergyMultiplyer: {
+    STR: 10,
+    MAG: 10,
+    CON: 10
+  },
+  skillsRecharge: {
+    heal: 3,
+    stun: 3,
+    itembreak: 3,
+    reflect: 3,
+    psyblast: 3,
+    curse: 3,
+  },
   icons: {
     battleStart: [`book`, 1],
     block: [`skill`, 7],
@@ -24,6 +37,10 @@ const gameSettings = {
     critical: [`skill`, 10],
     fumble: [`skill`, 11],
     skip: [`skill`, 12],
+    heal: [`skill`, 13],
+    reflect: [`skill`, 14],
+    defending: [`skill`, 15],
+    boost: [`skill`, 16],
   }
 }
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 // import Skills from './Skills'
 import ActionButton from './ActionButton'
 import SkillButton from './SkillButton'
+import InstantButton from './InstantButton'
 
 import { attack } from '../../redux/actions/index'
 
@@ -34,33 +35,40 @@ const Actions = ({ player, opponent }) => {
     skillButtons.push(<SkillButton type={key} current={value.current} ready={value.ready} />)
   }
 
+  // Prepare instants
+  let instantButtons = []
+  for (let [key, value] of Object.entries(player.instants)) {
+    instantButtons.push(<InstantButton type={key} data={value} />)
+  }
+  // 6 items grid
+  if (instantButtons.length < 6) {
+    for (let index = 0; index < 6 - instantButtons.length; index++) {
+      instantButtons.push(<InstantButton />)
+    }
+  }
+
   // Display component
   return (
     <div className="actionsWrapper">
-      <div>
-          {/* <Skills /> */}
-          <div className="buttons">
-            {/* Skills */}
-            <ActionButton type="skill" />
-            <ActionButton type="skill" />
-            <ActionButton type="skill" />
-            <ActionButton type="skill" />
-            <ActionButton type="skill" />
-            <ActionButton type="skill" />
-            {/* Physical */}
-            <ActionButton type="block" />
-            <ActionButton type="attack" />
-            <ActionButton type="specialattack" />
-            {skillButtons[0]}
-            {skillButtons[1]}
-            {/* Magic */}
-            <ActionButton type="focus" />
-            <ActionButton type="cast" />
-            <ActionButton type="specialcast" />
-            {skillButtons[2]}
-            {skillButtons[3]}
-          </div>
-        </div>
+      {/* <Skills /> */}
+      <div className="buttons">
+        {/* Skills */}
+        {instantButtons}
+        {/* Physical */}
+        <ActionButton type="block" />
+        <ActionButton type="attack" />
+        <ActionButton type="specialattack" />
+        {skillButtons[0]}
+        {skillButtons[1]}
+        {skillButtons[2]}
+        {/* Magic */}
+        <ActionButton type="focus" />
+        <ActionButton type="cast" />
+        <ActionButton type="specialcast" />
+        {skillButtons[3]}
+        {skillButtons[4]}
+        {skillButtons[5]}
+      </div>
     </div>
   )
 }

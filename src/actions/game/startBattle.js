@@ -1,4 +1,4 @@
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 
 /**
   * @desc Starting a new battle

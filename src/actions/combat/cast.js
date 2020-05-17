@@ -1,21 +1,21 @@
-// import { diceRoll } from '../utils/utils'
 import { magicalHit, magicalDamage } from './hit'
 import { rage } from './rage'
 import { energyBurn } from './energy'
 import { pushBuff } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
+import { findBuff } from '../../actions/combat/stats'
 
 /**
   * @desc Computing the basic magical attack results
 */
 
-const cast = (data) => {
+const cast = (data, manaResest = false) => {
   let { player, opponent, game } = data
 
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
   let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
-  let damageResult, rageResult, rageResultDamage
+  let damageResult, rageResult, rageResultDamage, displayEffect
 
   // Hit ?
   const hitResult = magicalHit(activePlayer, targetPlayer)
@@ -29,12 +29,29 @@ const cast = (data) => {
 
   /* Compute damages */
 
+  // Special effects
+  const reflect = findBuff(activePlayer, `temporary`, `reflect`) > 0
+  const boost = findBuff(activePlayer, `temporary`, `boost`) > 0
+
+  if (reflect) displayEffect = "reflectEffect"
+  if (boost) displayEffect = "boostEffect"
+
   // Critical hit
   if (hitResult.hit && hitResult.critical) {
     damageResult = magicalDamage(activePlayer, targetPlayer, true)
+
     // Applying damage
-    targetPlayer.hitPoints -= damageResult.damage
-    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    if (boost) damageResult.damage = Math.round(damageResult.damage * 1.5)
+
+    if (reflect) {
+      activePlayer.hitPoints -= damageResult.damage
+      if (activePlayer.hitPoints < 0) activePlayer.hitPoints = 0
+    }
+    else {
+      targetPlayer.hitPoints -= damageResult.damage
+      if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    }
+
     // Applying physical rage to target player
     rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
     targetPlayer.physicalRage = rageResultDamage
@@ -42,12 +59,21 @@ const cast = (data) => {
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
     damageResult = magicalDamage(activePlayer, targetPlayer, false)
+    
     // Applying damage
-    targetPlayer.hitPoints -= damageResult.damage
-    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
-    // Applying physical rage to target player
-    rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
-    targetPlayer.physicalRage = rageResultDamage
+    if (boost) damageResult.damage = Math.round(damageResult.damage * 1.5)
+
+    if (reflect) {
+      activePlayer.hitPoints -= damageResult.damage
+      if (activePlayer.hitPoints < 0) activePlayer.hitPoints = 0
+    }
+    else {
+      targetPlayer.hitPoints -= damageResult.damage
+      if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+      // Applying physical rage to target player
+      rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
+      targetPlayer.physicalRage = rageResultDamage
+    }
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
@@ -61,6 +87,9 @@ const cast = (data) => {
     // nothing to do
   }
 
+  // Reset rage because of the special cast
+  if (manaResest) activePlayer.magicalRage = 0
+
   // Build log
   let log = {
     type: `cast`,
@@ -68,6 +97,9 @@ const cast = (data) => {
     targetPlayer,
     data: {
       hit: hitResult,
+      reflect: reflect,
+      boost: boost,
+      displayEffect: displayEffect,
       damage: damageResult
     }
   }

@@ -2,7 +2,7 @@ import { resetRage } from './rage'
 import { pushBuff } from './stats'
 import { cast } from './cast'
 import { getStat } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 
 /**
   * @desc Computing the special magical attack results
@@ -40,7 +40,7 @@ const specialcast = (data) => {
   data.dataLogs.push(formatDataLog(`specialcast`, log, game))
 
   // Returns updated magical attack
-  return cast(data)
+  return cast(data, true)
 }
 
 export { specialcast }

@@ -1,6 +1,8 @@
 import { defaultChars } from "../../conf/settings"
 import { getMonsterWeapons } from '../../monsters/getMonsterWeapons'
 import { getMonsterItems } from '../../monsters/getMonsterItems'
+import { gameSettings } from "../../conf/settings"
+
 /**
   * @desc Create initial player
 */
@@ -53,11 +55,22 @@ const createPlayer = (data, style) => {
   data.player.maxMagicalRage = Math.round(data.player.maxMagicPoints * 50 / 100)
 
   // Create secondary attacks counters
-  data.player.skills.stun = { current: 3, ready: 3 }
-  data.player.skills.itembreak = { current: 3, ready: 3 }
-  data.player.skills.psyblast = { current: 5, ready: 5 }
-  data.player.skills.curse = { current: 3, ready: 3 }
+  data.player.skills.heal = { current: gameSettings.skillsRecharge.heal, ready: gameSettings.skillsRecharge.heal }
+  data.player.skills.stun = { current: gameSettings.skillsRecharge.stun, ready: gameSettings.skillsRecharge.stun }
+  data.player.skills.itembreak = { current: gameSettings.skillsRecharge.itembreak, ready: gameSettings.skillsRecharge.itembreak }
+  data.player.skills.reflect = { current: gameSettings.skillsRecharge.reflect, ready: gameSettings.skillsRecharge.reflect }
+  data.player.skills.psyblast = { current: gameSettings.skillsRecharge.psyblast, ready: gameSettings.skillsRecharge.psyblast }
+  data.player.skills.curse = { current: gameSettings.skillsRecharge.curse, ready: gameSettings.skillsRecharge.curse }
   
+  // Temporary instant items
+  data.player.instants = [
+    { type: `potion`, id: 10, price: 20, effect: `heal`, value: 60, label: `60HP`, charges: 1 },
+    { type: `vial`, id: 10, price: 20, effect: `heal`, value: 40, label: `40HP`, charges: 3 },
+    { type: `food`, id: 10, price: 20, effect: `heal`, value: 20, label: `20HP`, charges: 2 },
+    { type: `spell`, id: 7, price: 20, effect: `curse`, charges: 2 },
+    { type: `spell`, id: 11, price: 20, effect: `itembreak`, charges: 1 },
+  ]
+
   // Overwrite with legacy items
   if (data.game && data.game.legacy) {
     for (let [key] of Object.entries(data.game.legacy)) {

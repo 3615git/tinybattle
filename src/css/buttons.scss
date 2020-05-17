@@ -21,7 +21,7 @@ button {
   color: white;
   position: relative;
   height: 54px;
-  flex-basis: 54px;
+  width: 54px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -70,6 +70,35 @@ button {
     right: 3px;
     font-size: $font_tiny;
   }
+
+  .counter {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.71);
+    font-size: $font_tiny;
+    border-radius: 0px 4px 0px 4px;
+    border: 1px solid #260204;
+    border-top: none;
+    border-right: none;
+  }
+
+  .power {
+    position: absolute;
+    bottom: 5px;
+    // left: 0;
+    z-index: 1;
+    font-size: $font_tiny;
+    padding: 2px 4px;
+    background-color: rgba(0, 0, 0, 0.51);
+    border-radius: 4px;
+
+  }
   
   // Special buttons
   &.navigation {
@@ -116,22 +145,20 @@ button {
       @include buttonStyle(desaturate(darken($color_skill, 20),40));
     }
   }
+
+  &.instant {
+    @include buttonStyle($color_instant);
+    &.disabled {
+      @include buttonStyle(desaturate(darken($color_instant, 20),40));
+    }
+  }
 }
 
 .buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.buttons button {
-  margin: 3px;
-
-  // double size attack button
-  &.attack {
-    flex-basis: 112px;
-  }
-
+  display: grid;
+  grid-template-columns: 54px 54px 54px 54px 54px 54px;
+  grid-gap: 5px;
+  margin: auto;
 }
 
 .buttons button .item {

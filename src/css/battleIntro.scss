@@ -22,15 +22,72 @@
       display: inline-block;
       margin: 0 3px;
     }
+  }
+}
 
-    .eliteMarker {
-      color: $color_elite;
-    }
+.elementWrapper {
+  display: inline-block;
+  margin: 0 3px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-size: 32px;
+  background-position: center center;
 
-    .element {
-      &.fire { color: $element_fire; }
-      &.earth { color: $element_earth; }
-      &.water { color: $element_water; }
+  border: 2px solid rgba(0,0,0, 1);
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.1);
+
+  &.fire { 
+    background-image: url('../pics/ui/element_fire.gif'); 
+    filter: drop-shadow(0px 0px 4px darken(rgba($element_fire, 1),30));
+  }
+  &.earth { 
+    background-image: url('../pics/ui/element_earth.gif'); 
+    filter: drop-shadow(0px 0px 2px darken(rgba($element_earth, 1),30));
+  }
+  &.water { 
+    background-image: url('../pics/ui/element_water.gif'); 
+    filter: drop-shadow(0px 0px 2px darken(rgba($element_water, 1),30));
+  }
+  &.darkness { 
+    background-image: url('../pics/ui/element_darkness.gif'); 
+    filter: drop-shadow(0px 0px 2px darken(rgba($element_darkness, 1),30));
+  }
+  &.elite { 
+    background-image: url('../pics/ui/element_elite.gif'); 
+    filter: drop-shadow(0px 0px 2px darken(rgba($element_elite, 1),30));
+  }
+}
+
+.levelTiersWrapper {
+  display: flex;
+
+  .levelTiers {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    border-radius: 50%;
+    border: 2px solid #00000073;
+    position: relative;
+
+    &.legacy_1 { background: url('../pics/ui/loot_tier_1.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_legacy, 40%);}
+    &.legacy_2 { background: url('../pics/ui/loot_tier_2.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_legacy, 40%);}
+    &.legacy_3 { background: url('../pics/ui/loot_tier_3.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_legacy, 40%);}
+    &.legacy_4 { background: url('../pics/ui/loot_tier_4.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_legacy, 40%);}
+    &.legacy_5 { background: url('../pics/ui/loot_tier_5.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_legacy, 40%);}
+    &.monsters_1 { background: url('../pics/ui/monster_tier_1.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_STR, 40%);}
+    &.monsters_2 { background: url('../pics/ui/monster_tier_2.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_STR, 40%);}
+    &.monsters_3 { background: url('../pics/ui/monster_tier_3.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_STR, 40%);}
+    &.monsters_4 { background: url('../pics/ui/monster_tier_4.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_STR, 40%);}
+    &.monsters_5 { background: url('../pics/ui/monster_tier_5.png') center center no-repeat; background-size: 64px; box-shadow: 0px 0px 30px 1px darken($color_STR, 40%);}
+
+    .legend {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: -40px;
+      font-size: 13px;
+      line-height: 15px;
     }
   }
 }

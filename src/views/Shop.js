@@ -68,7 +68,7 @@ class Shop extends Component {
 
     if (catalog === `items`) {
       // randomize selection
-      numberOfitems = getRandomInt(1,3)
+      numberOfitems = getRandomInt(2,4)
       itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))

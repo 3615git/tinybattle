@@ -1,43 +1,64 @@
 import { pushBuff } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
+import { skillWheelRoll } from '../../actions/combat/hit'
+import { getRandomInt } from '../../utils/utils'
 
 /**
-  * @desc Computing the results of curse skill
+  * @desc Computing the results of psyblast skill
 */
 
 const curse = (data) => {
   let { player, opponent, game } = data
 
-  let activePlayer = game.playerTurn ? {...player} : {...opponent}
-  let targetPlayer = game.playerTurn ? {...opponent} : {...player}
+  let activePlayer = game.playerTurn ? { ...player } : { ...opponent }
+  let targetPlayer = game.playerTurn ? { ...opponent } : { ...player }
 
-  // Defends gives temporary MAGx2, lasts 2 turns, but decreases DEX and STR by half
-  const MAGbonus = Math.ceil(activePlayer.MAG * 2)
-  const DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
-  const STRmalus = -Math.abs(Math.ceil(targetPlayer.STR / 2))
-  pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `curse`, 2)
-  pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `curse`, 2)
-  pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, `curse`, 2)
+  // Fumble can raise fumble rate
+  const hit = skillWheelRoll()
+  let FUMBLEmalus
+
+  switch (hit.result) {
+    case `success`:
+      FUMBLEmalus = getRandomInt(5, 7)
+      pushBuff(targetPlayer, `temporary`, `fumble`, FUMBLEmalus, `curse`, 4)
+      break;
+    case `critical`:
+      FUMBLEmalus = getRandomInt(7, 9)
+      pushBuff(targetPlayer, `temporary`, `fumble`, FUMBLEmalus, `curse`, 4)
+      break;
+    case `fumble`:
+      FUMBLEmalus = getRandomInt(3, 5)
+      pushBuff(activePlayer, `temporary`, `fumble`, FUMBLEmalus, `curse`, 2)
+      break;
+
+    default:
+      break;
+  }
+
+  // Reset skill energy
+  activePlayer.skills.curse.current = 0
 
   // Build log
   let log = {
-    type: `focus`,
+    type: `curse`,
+    delay: `long`,
     activePlayer,
     targetPlayer,
     data: {
-      dexMalus: DEXmalus,
-      strMalus: STRmalus,
-      magBonus: MAGbonus
+      hit: hit.result,
+      wheelPosition: hit.position,
+      fumbleMalus: FUMBLEmalus
     }
   }
+  log.display = formatDataLog(`curse`, log, game)
 
   // Apply changes
   data.player = game.playerTurn ? activePlayer : targetPlayer
   data.opponent = !game.playerTurn ? activePlayer : targetPlayer
   data.log = log
-  data.dataLogs.push(formatDataLog(`focus`, log, game))
+  data.dataLogs.push(formatDataLog(`curse`, log, game))
 
-  return data 
+  return data
 }
 
 export { curse }

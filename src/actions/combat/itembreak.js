@@ -1,5 +1,5 @@
 import { pushBuff } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 
 /**
@@ -62,8 +62,6 @@ const itembreak = (data) => {
 
   // Reset skill energy
   activePlayer.skills.itembreak.current = 0
-
-  console.log(hit.result)
 
   // Build log
   let log = {

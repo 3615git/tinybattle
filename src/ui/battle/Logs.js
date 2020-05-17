@@ -8,8 +8,8 @@ import { gameSettings } from "../../conf/settings"
 import ItemVisual from './ItemVisual'
 import Wheel from './Wheel'
 import HitBar from './HitBar'
-import ValueBar from './ValueBar'
 import Delayed from '../general/Delayed'
+
 
 /**
   * @desc Display what happened in the last battle action
@@ -78,7 +78,6 @@ class Logs extends Component {
     switch (type) {
 
       case `block`:
-        widget = <ValueBar type={type} value={data.healRoll} maxValue={data.maxHeal} />
         break;
 
       case `focus`:
@@ -102,6 +101,18 @@ class Logs extends Component {
 
       case `itembreak`:
         widget = <Wheel type="itembreak" items={data.wheelPositions} position={data.wheelPosition} />
+        break;
+
+      case `curse`:
+        widget = <Wheel type="curse" position={data.wheelPosition} />
+        break;
+
+      case `heal`:
+        widget = <Wheel type="heal" items={data.wheelPositions} position={data.wheelPosition} customFumble={["potion", 14]} />
+        break;
+
+      case `reflect`:
+        widget = <Wheel type="heal" items={data.wheelPositions} position={data.wheelPosition} customFumble={["skill", 17]} />
         break;
 
       default:
@@ -129,7 +140,7 @@ class Logs extends Component {
     // Action headers
     const turnTag = playerTurn 
     ? [
-      <div key="montser_turnTag" className="turnTag" />,
+      <div key="monster_turnTag" className="turnTag" />,
       <div key="monster_turnColor" className="turnColor" style={eyeColor} />
     ]
     : [
@@ -139,8 +150,12 @@ class Logs extends Component {
         </div>
     ]
 
+    // Attack effects (get form opponent buffs list)
+    const displayEffect = (log.data && log.data.displayEffect) ? log.data.displayEffect : ``
+
     // Add custom classes to defined classes
     const itemClasses = [defaultClasses, turnClasses, wrapperStyling].filter(val => val).join(` `)
+    const logClasses = ["log", displayEffect].filter(val => val).join(` `)
 
     let logContent, containerStyle
 
@@ -163,7 +178,7 @@ class Logs extends Component {
 
       logContent = (
         <div className={itemClasses} onClick={()=>skip()}>
-          <div className="log" style={logStyle}>
+          <div className={logClasses} style={logStyle}>
             {turnTag}
             <div className="title" dangerouslySetInnerHTML={{ __html: log.display.title }} />
             {displayMessage}

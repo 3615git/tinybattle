@@ -6,6 +6,7 @@ import Bar from './Bar'
 import StatsAndItems from './StatsAndItems'
 import Alterations from './Alterations'
 import EliteBackground from './EliteBackground'
+import Element from './Element'
 
 /**
   * @desc Main opponent block
@@ -98,10 +99,13 @@ class Opponent extends Component {
         <div className="infos">
           <div className="level">Level {level}</div>
           <div className="name">
-            {data.elite 
-              ? <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span><span className="eliteMarker">Elite</span></div></div>
-              : <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span></div></div>
-            }
+            <div>
+              {data.name}
+              <div className="details">
+                {data.elite && <Element element="elite" />}
+                {data.element && <Element element={data.element} />}
+              </div>
+            </div>
             <div className="status">
               <Alterations />
             </div>

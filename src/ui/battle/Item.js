@@ -14,7 +14,8 @@ const propTypes = {
   item: PropTypes.object,
   effect: PropTypes.string,
   animateNumber: PropTypes.bool,
-  noPlus: PropTypes.bool
+  noPlus: PropTypes.bool,
+  animations: PropTypes.bool
 }
 
 const mapStateToProps = state => {
@@ -30,19 +31,12 @@ class Item extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (
-    //   (prevProps.item.char !== this.props.item.char) &&
-    //   (prevProps.item.id !== this.props.item.id) &&
-    //   (prevProps.item.price !== this.props.item.price) &&
-    //   (prevProps.item.quality !== this.props.item.quality) &&
-    //   (prevProps.item.reward !== this.props.item.reward) &&
-    //   (prevProps.item.score !== this.props.item.char) &&
-    //   (prevProps.item.type !== this.props.item.type)
-    // ) {
-    //   this.itemChange()
-    // }
-    if (prevProps.item && !this.props.item) {
-      this.itemDeleted()
+    const { animations } = this.props
+
+    if (animations) {
+      if (prevProps.item && !this.props.item) {
+        this.itemDeleted()
+      }
     }
   }
 

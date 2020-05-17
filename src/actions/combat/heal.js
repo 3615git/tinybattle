@@ -1,0 +1,79 @@
+import { pushBuff } from './stats'
+import { formatDataLog } from '../../utils/formatDataLog'
+import { skillWheelRoll } from '../../actions/combat/hit'
+import { energyRestore } from './energy'
+import { getRandomInt, capitalizeFirstLetter } from '../../utils/utils'
+
+/**
+  * @desc Computing the results of heal skill
+*/
+
+const heal = (data) => {
+  let { player, opponent, game } = data
+
+  let activePlayer = game.playerTurn ? { ...player } : { ...opponent }
+  let targetPlayer = game.playerTurn ? { ...opponent } : { ...player }
+
+  // Fumble can raise fumble rate
+  let wheelItems = [
+    { item: { type: "potion", id: 57, healCapacity: "small" } },
+    { item: { type: "potion", id: 2, healCapacity: "medium" } },
+    { item: { type: "potion", id: 57, healCapacity: "small" } },
+    { item: { type: "potion", id: 2, healCapacity: "medium" } },
+    { item: { type: "potion", id: 43, healCapacity: "large" } },
+    { item: { type: "potion", id: 57, healCapacity: "small" } },
+  ]
+
+  let healRanges = {
+    small: [5,20],
+    medium: [15,30],
+    large: [20,50]
+  }
+
+  const hit = skillWheelRoll(wheelItems)
+  let FUMBLEmalus, healValue, healCapacity
+
+  switch (hit.result) {
+    case `fumble`:
+      FUMBLEmalus = getRandomInt(3, 5)
+      pushBuff(activePlayer, `temporary`, `fumble`, FUMBLEmalus, `curse`, 4)
+      break;
+
+    default:
+      // Test potion size
+      healCapacity = hit.result.item.healCapacity
+      healValue = getRandomInt(healRanges[healCapacity][0], healRanges[healCapacity][1])
+      activePlayer = energyRestore(activePlayer, healValue, `hitPoints`)
+      break;
+  }
+
+  // Reset skill energy
+  activePlayer.skills.heal.current = 0
+
+  // Build log
+  let log = {
+    type: `heal`,
+    delay: `long`,
+    activePlayer,
+    targetPlayer,
+    data: {
+      hit: hit.result,
+      wheelPositions: hit.positions,
+      wheelPosition: hit.position,
+      fumbleMalus: FUMBLEmalus,
+      healCapacity: healCapacity && capitalizeFirstLetter(healCapacity),
+      healValue: healValue
+    }
+  }
+  log.display = formatDataLog(`heal`, log, game)
+
+  // Apply changes
+  data.player = game.playerTurn ? activePlayer : targetPlayer
+  data.opponent = !game.playerTurn ? activePlayer : targetPlayer
+  data.log = log
+  data.dataLogs.push(formatDataLog(`heal`, log, game))
+
+  return data
+}
+
+export { heal }

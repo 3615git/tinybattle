@@ -3,7 +3,8 @@ import { rage } from './rage'
 import { physicalHit, physicalDamage } from './hit'
 import { pushBuff } from './stats'
 import { energyBurn } from './energy'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
+import { findBuff } from '../../actions/combat/stats'
 
 /**
   * @desc Computing the basic physical attack results
@@ -15,7 +16,7 @@ const attack = (data) => {
   let activePlayer = game.playerTurn ? {...player} : {...opponent}
   let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
-  let damageResult, rageResult
+  let damageResult, rageResult, displayEffect
 
   // Hit ?
   const hitResult = physicalHit(activePlayer, targetPlayer)
@@ -27,23 +28,49 @@ const attack = (data) => {
 
   /* Compute damages */
 
+  // Special effects
+  const reflect = findBuff(activePlayer, `temporary`, `reflect`) > 0
+  const boost = findBuff(activePlayer, `temporary`, `boost`) > 0
+
+  if (reflect) displayEffect = "reflectEffect"
+  if (boost) displayEffect = "boostEffect"
+
   // Critical hit
   if (hitResult.hit && hitResult.critical) {
     damageResult = physicalDamage(activePlayer, targetPlayer, true)
     rageResult = rage(`attack`, targetPlayer, damageResult.damage)
+
     // Applying damage
-    targetPlayer.hitPoints -= damageResult.damage
-    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
-    // Applying rage
-    targetPlayer.physicalRage = rageResult
+    if (boost) damageResult.damage = Math.round(damageResult.damage * 1.5)
+
+    if (reflect) {
+      activePlayer.hitPoints -= damageResult.damage
+      if (activePlayer.hitPoints < 0) activePlayer.hitPoints = 0
+    }
+    else {
+      targetPlayer.hitPoints -= damageResult.damage
+      if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+      // Applying rage
+      targetPlayer.physicalRage = rageResult
+    }
   }
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
     damageResult = physicalDamage(activePlayer, targetPlayer, false)
     rageResult = rage(`attack`, targetPlayer, damageResult.damage)
+
     // Applying damage
-    targetPlayer.hitPoints -= damageResult.damage
-    if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    if (boost) damageResult.damage = Math.round(damageResult.damage * 1.5)
+
+    if (reflect) {
+      activePlayer.hitPoints -= damageResult.damage
+      if (activePlayer.hitPoints < 0) activePlayer.hitPoints = 0
+    }
+    else {
+      targetPlayer.hitPoints -= damageResult.damage
+      if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+    }
+
     // Applying rage
     targetPlayer.physicalRage = rageResult
   }
@@ -67,6 +94,9 @@ const attack = (data) => {
     data: {
       hit: hitResult,
       critical: false,
+      reflect: reflect,
+      boost: boost,
+      displayEffect: displayEffect,
       damage: damageResult
     }
   }

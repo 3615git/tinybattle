@@ -1,4 +1,34 @@
 import { getStat } from './stats'
+import { gameSettings } from "../../conf/settings"
+
+// Refesh max energy values
+const maxEnergyRefresh = (data) => {
+  let { player } = data
+  let activePlayer = { ...player } 
+
+  if (Object.keys(activePlayer).length !== 0) {
+    // Compute maxHitPoints
+    const playerCON = getStat(activePlayer, `CON`)
+    const maxHitPoints = playerCON.static * gameSettings.maxEnergyMultiplyer.CON
+    activePlayer.maxHitPoints = maxHitPoints
+    // Compute maxMagicPoints
+    const playerMAG = getStat(activePlayer, `MAG`)
+    const maxMagicPoints = playerMAG.static * gameSettings.maxEnergyMultiplyer.MAG
+    activePlayer.maxMagicPoints = maxMagicPoints
+    // Compute maxStamina
+    const playerSTR = getStat(activePlayer, `STR`)
+    activePlayer.maxStamina = playerSTR.static * gameSettings.maxEnergyMultiplyer.STR
+    // Compute maxPhysicalRage
+    activePlayer.maxPhysicalRage = Math.round(maxHitPoints * 50 / 100)
+    // Compute maxMagicalRage
+    activePlayer.maxMagicalRage = Math.round(maxMagicPoints * 50 / 100)
+
+    // Update data
+    data.player = activePlayer
+  }
+
+  return data
+}
 
 // Refesh energy
 const energyRefresh = (data, type) => {
@@ -67,6 +97,7 @@ const energyRestore = (player, value, type) => {
 }
 
 export {
+  maxEnergyRefresh,
   energyRefresh, 
   energyBurn,
   energyRestore

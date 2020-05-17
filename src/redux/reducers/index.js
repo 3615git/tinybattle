@@ -38,9 +38,11 @@ import { stun } from '../../actions/combat/stun'
 import { itembreak } from '../../actions/combat/itembreak'
 import { psyblast } from '../../actions/combat/psyblast'
 import { curse } from '../../actions/combat/curse'
+import { heal } from '../../actions/combat/heal'
+import { reflect } from '../../actions/combat/reflect'
 // Utils
 import { autoResetBuff, incrementSkillCount } from '../../actions/combat/stats'
-import { energyRefresh } from '../../actions/combat/energy'
+import { energyRefresh, maxEnergyRefresh } from '../../actions/combat/energy'
 import { displayHits } from '../../actions/combat/hit'
 // Private views (tests, WIP, etc)
 import { monstersDemo } from '../../actions/private/monstersDemo'
@@ -234,6 +236,14 @@ function rootReducer(state = initialState, action) {
           clog(`curse`, `reducer`)
           nextState = curse(nextState)
           break;
+        case `heal`:
+          clog(`heal`, `reducer`)
+          nextState = heal(nextState)
+          break;
+        case `reflect`:
+          clog(`reflect`, `reducer`)
+          nextState = reflect(nextState)
+          break;
         default:
           break;
       }
@@ -254,6 +264,10 @@ function rootReducer(state = initialState, action) {
 
   // console.log(nextState)
 
+  // In every case, compute Max values
+  nextState = maxEnergyRefresh(nextState)
+
+  // Return updated state
   return nextState
 }
 

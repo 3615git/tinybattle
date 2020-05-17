@@ -146,7 +146,7 @@ html, body, #root {
 
 .levelTransition .title {
   font-size: $font_huge;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .levelTransition .subTitle {
@@ -301,19 +301,10 @@ html, body, #root {
     &::first-letter {
       text-transform: uppercase;
     }
-
-    .fire { color: $element_fire; }
-    .water { color: $element_water; }
-    .earth { color: $element_earth; }
-
-    .eliteMarker {
-      margin-left: 7px;
-      color: $color_elite;
-    }
   }
 
   .status {
-    margin-top: 10px;
+    margin-top: 3px;
     display: flex;
     justify-content: flex-end;
 
@@ -321,7 +312,7 @@ html, body, #root {
       position: relative;
       height: 32px;
       width: 32px;
-      margin-left: 5px;
+      margin: 0 3px;
 
       .counter {
         position: absolute;
@@ -501,6 +492,7 @@ html, body, #root {
 .actionsWrapper {
   position: relative;
   z-index: 1;
+  display: flex;
 }
 
 /** Turn indicator in the background */
@@ -531,9 +523,51 @@ html, body, #root {
   opacity: 0;
   background: rgba(0, 0, 0, 0.9);
 
+  flex-direction: column;
+
   &.active {
     z-index: 200;
     opacity: 1;
     transition: opacity 3s;
+  }
+
+  .title {
+    color: $color_legacy;
+    font-size: $font_huge;
+
+    &.defeat {
+      color: $color_itemNormal;
+    }
+  }
+
+  .subtitle {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .crackedImage {
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: block;
+      content: url(/static/media/cracks.e34b88b0.png);
+      z-index: 1;
+    }
+  }
+
+  img {
+    z-index: 1;
+    mix-blend-mode: luminosity;
+    height: 300px;
+    opacity: 1;
+
+    &.death {
+      width: 250px;
+      height: auto;
+    }
   }
 }

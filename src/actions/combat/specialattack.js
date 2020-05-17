@@ -2,7 +2,7 @@ import { resetRage } from './rage'
 import { pushBuff } from './stats'
 import { attack } from './attack'
 import { getStat } from './stats'
-import { formatDataLog } from '../../utils/utils'
+import { formatDataLog } from '../../utils/formatDataLog'
 
 /**
   * @desc Computing the special physical attack results

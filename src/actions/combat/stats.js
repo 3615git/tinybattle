@@ -15,6 +15,7 @@ const getStat = (player, stat) => {
     natural: baseStat + permanentBuff,
     items: itemBuff,
     temporary: temporaryBuff,
+    static: baseStat + permanentBuff + itemBuff,
     total: baseStat + permanentBuff + itemBuff + temporaryBuff
   }
 }

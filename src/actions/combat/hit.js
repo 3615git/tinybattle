@@ -104,7 +104,9 @@ const criticalChance = (activePlayer) => {
 
 // Fumble chance
 const fumbleChance = (activePlayer) => {
-  return activePlayer.fumble
+  const playerFumble = getStat(activePlayer, `fumble`)
+
+  return playerFumble.total
 }
 
 // Physical damage count

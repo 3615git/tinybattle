@@ -10,7 +10,8 @@ import ItemVisual from './ItemVisual'
 
 const propTypes = {
   position: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  customFumble: PropTypes.array
 }
 
 const defaultProps = {
@@ -40,14 +41,19 @@ class Wheel extends Component {
   }
 
   render() {
-    const { type, items, position } = this.props
+    const { type, items, customFumble } = this.props
     const { rollPosition } = this.state
     const wheelStyle = {
       transform: `rotate(${rollPosition}deg)`
     } 
 
-    console.log(position)
-    console.log(items)
+    // Fumble icon
+    let fumbleIcon
+    if (customFumble) {
+      fumbleIcon = customFumble
+    } else {
+      fumbleIcon = [gameSettings.icons[`fumble`][0], gameSettings.icons[`fumble`][1]]
+    }
 
     // Type or item wheel
     let wheelItems
@@ -57,11 +63,11 @@ class Wheel extends Component {
           <li><ItemVisual item={items[0].item.type} level={items[0].item.id} /></li>
           <li><ItemVisual item={items[1].item.type} level={items[1].item.id} /></li>
           <li><ItemVisual item={items[2].item.type} level={items[2].item.id} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
           <li><ItemVisual item={items[4].item.type} level={items[4].item.id} /></li>
           <li><ItemVisual item={items[5].item.type} level={items[5].item.id} /></li>
           <li><ItemVisual item={items[6].item.type} level={items[6].item.id} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
         </>
       )
     } else {
@@ -70,9 +76,9 @@ class Wheel extends Component {
           <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
           <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
           <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
           <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
-          <li><ItemVisual item={gameSettings.icons[`fumble`][0]} level={gameSettings.icons[`fumble`][1]} /></li>
+          <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
           <li><ItemVisual item={gameSettings.icons[type][0]} level={gameSettings.icons[type][1]} /></li>
           <li><ItemVisual item={gameSettings.icons[`critical`][0]} level={gameSettings.icons[`critical`][1]} /></li>
         </>
