@@ -203,6 +203,18 @@ function formatDataLog(type, fightLog, game) {
       icon = gameSettings.icons.heal
       break;
 
+    case `quickheal`:
+      // Hit
+      attackResult = `${fightLog.data.healValue} health recovery!`
+      damage = `${playerDisplay} recovers ${fightLog.data.healValue} HP.`
+
+      title = `${playerDisplay} uses healing item!`
+      message = `${attackResult}`
+      note = damage
+      log = `${title} ${attackResult} ${damage}`
+      icon = fightLog.data.icon
+      break;
+
     case `curse`:
       // Hit
       if (fightLog.data.hit === `success`) {

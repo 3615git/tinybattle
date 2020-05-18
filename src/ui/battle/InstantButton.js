@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const InstantButton = ({ type, player, opponent, attack, data }) => {
+const InstantButton = ({ attack, data }) => {
 
   // Component styling
   let onClick, icon, buttonClass, charges, label
@@ -38,18 +38,29 @@ const InstantButton = ({ type, player, opponent, attack, data }) => {
     icon = <ItemVisual item={data.type} level={data.id} />
     charges = data.charges
     label = data.label
+
+    // Switch different buttons
+    switch (data.effect) {
+      case `quickheal`:
+        onClick = () => attack({ type: `skill`, mode: `quickheal`, item: data })
+        break;
+      case `restore`:
+        onClick = () => attack({ type: `skill`, mode: `quickheal`, item: data })
+        break;
+      case `upgrade`:
+        onClick = () => attack({ type: `skill`, mode: `upgrade`, item: data })
+        break;
+      case `damage`:
+        onClick = () => attack({ type: `skill`, mode: `damage`, item: data })
+        break;
+      case `sharpen`:
+        onClick = () => attack({ type: `skill`, mode: `sharpen`, item: data })
+        break;
+      default:
+        break;
+    }
   } else {
     buttonClass = "disabled"
-  }
-
-  // Switch different buttons
-  switch (type) {
-    case `block`:
-      onClick = () => attack({ type: `physical`, mode: `defend` })
-      buttonClass = ""
-      break;
-    default:
-      break;
   }
 
   const actionClass = [`instant`, buttonClass].filter(val => val).join(` `)

@@ -46,15 +46,14 @@ class Battle extends Component {
   // Alternate turn UI and battle mode
   changeTurn = () => {
     const { opponent, game, attack, setGameState } = this.props
-
-    if (game.playerTurn) {
+    
+    if (game.playerTurn || game.skipTurn) {
       // Display player's attack UI
       this.setState({
         playerTurnUI: true
       })
       // Reset log to "your turn" state
       setGameState({ state: `playerTurn` })
-      
     } else {
       // Enemy's attack after reflexion delay, if not stunned
       if (findBuff(opponent, `temporary`, `STUN`)) {
@@ -123,7 +122,7 @@ class Battle extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { opponent, player, playerTurn, settings } = this.props
+    const { opponent, player, playerTurn, settings, game } = this.props
     const { battleEnd } = this.state
 
     // If opponent or player is dead, clear timer
@@ -143,7 +142,7 @@ class Battle extends Component {
     }
 
     // If turn changed, and it's opponent turn
-    if (prevProps.playerTurn !== playerTurn && playerTurn === false) {
+    if (prevProps.playerTurn !== playerTurn && playerTurn === false && !game.skipTurn) {
       this.launchOpponentTurn()
     }
 

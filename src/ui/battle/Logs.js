@@ -18,6 +18,7 @@ import Delayed from '../general/Delayed'
 const mapStateToProps = state => {
   return {
     log: state.log,
+    game: state.game,
     playerTurn: state.game.playerTurn
   }
 }
@@ -50,7 +51,7 @@ class Logs extends Component {
   }
 
   render() {
-    const { log, playerTurn, color, skip } = this.props
+    const { log, playerTurn, color, skip, game } = this.props
     const { message, note } = this.state
     const { type, data } = log
 
@@ -62,7 +63,7 @@ class Logs extends Component {
     let wrapperStyling
 
     // Color styling
-    const logStyle = playerTurn 
+    const logStyle = playerTurn && !game.skipTurn
       ? { 
         background: chroma(color.darkMuted).alpha(0.96),
         borderColor: color.darkVibrant
@@ -115,12 +116,16 @@ class Logs extends Component {
         widget = <Wheel type="heal" items={data.wheelPositions} position={data.wheelPosition} customFumble={["skill", 17]} />
         break;
 
+      case `quickheal`:
+        widget = <ItemVisual big item={log.data.icon[0]} level={log.data.icon[1]} />
+        break;
+
       default:
         break;
     }
 
     // Turn related stuff
-    const turnClasses = !playerTurn ? `player` : `opponent`
+    const turnClasses = !playerTurn || game.skipTurn ? `player` : `opponent`
 
     // Action icon
     let actionType, actionLevel
@@ -132,13 +137,17 @@ class Logs extends Component {
       actionType = log.activePlayer.weapons.MAG && log.activePlayer.weapons.MAG.type
       actionLevel = log.activePlayer.weapons.MAG && log.activePlayer.weapons.MAG.id
     }
+    else if (log.data && log.data.icon) {
+      actionType = log.data.icon[0]
+      actionLevel = log.data.icon[1]
+    }
     else {
       actionType = gameSettings.icons[type] && gameSettings.icons[type][0]
       actionLevel = gameSettings.icons[type] && gameSettings.icons[type][1]
     }
 
     // Action headers
-    const turnTag = playerTurn 
+    const turnTag = playerTurn && !game.skipTurn
     ? [
       <div key="monster_turnTag" className="turnTag" />,
       <div key="monster_turnColor" className="turnColor" style={eyeColor} />
@@ -163,7 +172,7 @@ class Logs extends Component {
     if (type) {
       containerStyle = {
         zIndex: 100,
-        background: playerTurn ? chroma(color.darkMuted).alpha(0.5) : `rgba(33,53,38,.5)`
+        background: playerTurn && !game.skipTurn ? chroma(color.darkMuted).alpha(0.5) : `rgba(33,53,38,.5)`
       }
 
       // Delayed or immediate display
@@ -201,7 +210,7 @@ class Logs extends Component {
           <CSSTransition
             key={+new Date()}
             timeout={600}
-            classNames={playerTurn ? "playerLog" : "opponentLog"}
+            classNames={playerTurn && !game.skipTurn ? "playerLog" : "opponentLog"}
           >
             {logContent}
           </CSSTransition>

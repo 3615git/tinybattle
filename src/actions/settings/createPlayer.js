@@ -64,9 +64,9 @@ const createPlayer = (data, style) => {
   
   // Temporary instant items
   data.player.instants = [
-    { type: `potion`, id: 10, price: 20, effect: `heal`, value: 60, label: `60HP`, charges: 1 },
-    { type: `vial`, id: 10, price: 20, effect: `heal`, value: 40, label: `40HP`, charges: 3 },
-    { type: `food`, id: 10, price: 20, effect: `heal`, value: 20, label: `20HP`, charges: 2 },
+    { type: `potion`, id: 10, price: 20, effect: `quickheal`, value: 60, label: `60HP`, charges: 1 },
+    { type: `vial`, id: 5, price: 20, effect: `quickheal`, value: 40, label: `40HP`, charges: 3 },
+    { type: `food`, id: 10, price: 20, effect: `quickheal`, value: 20, label: `20HP`, charges: 2 },
     { type: `spell`, id: 7, price: 20, effect: `curse`, charges: 2 },
     { type: `spell`, id: 11, price: 20, effect: `itembreak`, charges: 1 },
   ]

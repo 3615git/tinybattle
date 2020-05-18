@@ -8,14 +8,16 @@ import PropTypes from 'prop-types'
 const propTypes = {
   item: PropTypes.string,
   level: PropTypes.number,
-  small: PropTypes.bool
+  small: PropTypes.bool,
+  big: PropTypes.bool
 }
 
 const defaultProps = {
-  small: false
+  small: false,
+  big: false
 }
 
-const ItemVisual = ({ item, level, small }) => {
+const ItemVisual = ({ item, level, small, big }) => {
 
   // Component styling
   const defaultClasses = `item`
@@ -23,8 +25,9 @@ const ItemVisual = ({ item, level, small }) => {
   const itemReference = item+'_'+level
   // Size
   const itemSize = small ? `small` : ``
+  const itemSizeBig = big ? `big` : ``
   // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, itemReference, itemSize].filter(val => val).join(` `)
+  const itemClasses = [defaultClasses, itemReference, itemSize, itemSizeBig].filter(val => val).join(` `)
 
   // Display component
   if (item && level) return (

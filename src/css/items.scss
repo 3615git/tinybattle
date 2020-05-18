@@ -90,6 +90,14 @@
     background-repeat: no-repeat;
     background-size: 16px;
   }
+
+  &.big {
+    width: 64px;
+    height: 64px;
+    margin: 10px;
+    background-repeat: no-repeat;
+    background-size: 64px;
+  }
 }
 
 /** Items lists **/

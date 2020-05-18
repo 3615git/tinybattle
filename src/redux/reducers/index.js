@@ -39,6 +39,7 @@ import { itembreak } from '../../actions/combat/itembreak'
 import { psyblast } from '../../actions/combat/psyblast'
 import { curse } from '../../actions/combat/curse'
 import { heal } from '../../actions/combat/heal'
+import { quickheal } from '../../actions/combat/quickheal'
 import { reflect } from '../../actions/combat/reflect'
 // Utils
 import { autoResetBuff, incrementSkillCount } from '../../actions/combat/stats'
@@ -57,6 +58,9 @@ function rootReducer(state = initialState, action) {
   let prevState = { ...state }
   // Spread operator only shallow copy, needs deep copy
   let nextState = JSON.parse(JSON.stringify(state))
+
+  // Switch to next player turn
+  let turnSwitch = true
 
   clog(action.type, `action`)
 
@@ -240,6 +244,11 @@ function rootReducer(state = initialState, action) {
           clog(`heal`, `reducer`)
           nextState = heal(nextState)
           break;
+        case `quickheal`:
+          clog(`quickheal`, `reducer`)
+          turnSwitch = false
+          nextState = quickheal(nextState, action.payload.item)
+          break;
         case `reflect`:
           clog(`reflect`, `reducer`)
           nextState = reflect(nextState)
@@ -249,17 +258,26 @@ function rootReducer(state = initialState, action) {
       }
     }
 
-    // Mana reloads
-    nextState = energyRefresh(nextState, `magical`)
-    nextState = energyRefresh(nextState, `physical`)
-    // Reset temporary buffs
-    nextState = autoResetBuff(nextState)
-    // Increment skill counters
-    nextState = incrementSkillCount(nextState)
-    // Compute hits for UI display
-    nextState = displayHits(prevState, nextState)
-    // Switch player turn
-    nextState.game.playerTurn = !nextState.game.playerTurn
+    if (turnSwitch) {
+      // Mana reloads
+      nextState = energyRefresh(nextState, `magical`)
+      nextState = energyRefresh(nextState, `physical`)
+      // Reset temporary buffs
+      nextState = autoResetBuff(nextState)
+      // Increment skill counters
+      nextState = incrementSkillCount(nextState)
+      // Compute hits for UI display
+      nextState = displayHits(prevState, nextState)
+      // Switch player turn
+      nextState.game.playerTurn = !nextState.game.playerTurn
+      // Opponent can play
+      nextState.game.skipTurn = false
+    } else {
+      // Switch player turn
+      nextState.game.playerTurn = true
+      // But prevent opponent from playing
+      nextState.game.skipTurn = true
+    }
   }
 
   // console.log(nextState)
