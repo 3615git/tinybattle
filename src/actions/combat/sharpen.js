@@ -23,7 +23,6 @@ const sharpen = (data, item, id) => {
   weapon.score = weaponScore.join('d')
   // Give random element
   let element = randomValue(weaponElements.elementsonly)
-  console.log(element)
   weapon.element = element
 
   // Update weapon

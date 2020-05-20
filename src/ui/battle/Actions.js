@@ -3,8 +3,8 @@ import { connect } from "react-redux"
 
 // import Skills from './Skills'
 import ActionButton from './ActionButton'
+import InstantButtons from './InstantButtons'
 import SkillButton from './SkillButton'
-import InstantButton from './InstantButton'
 
 import { attack } from '../../redux/actions/index'
 
@@ -35,25 +35,13 @@ const Actions = ({ player, opponent }) => {
     skillButtons.push(<SkillButton type={key} current={value.current} ready={value.ready} />)
   }
 
-  // Prepare instants
-  let instantButtons = []
-  for (let [key, value] of Object.entries(player.instants)) {
-    instantButtons.push(<InstantButton key={`instant_${key}`} id={parseInt(key)} data={value} />)
-  }
-  // 6 items grid
-  if (instantButtons.length < 6) {
-    for (let index = instantButtons.length; index < 6 ; index++) {
-      instantButtons.push(<InstantButton key={`empty_${index}`} />)
-    }
-  }
-
   // Display component
   return (
     <div className="actionsWrapper">
       {/* <Skills /> */}
       <div className="buttons">
         {/* Skills */}
-        {instantButtons}
+        <InstantButtons />
         {/* Physical */}
         <ActionButton type="block" />
         <ActionButton type="attack" />

@@ -188,7 +188,7 @@ class Logs extends Component {
 
       // Delayed or immediate display
       let displayMessage, displayNote
-      console.log(note)
+
       if (log.delay === `immediate`) {
         displayMessage = <div className="message" dangerouslySetInnerHTML={{ __html: message }} />
         displayNote = <div className="note" dangerouslySetInnerHTML={{ __html: note }} />

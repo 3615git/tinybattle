@@ -255,7 +255,6 @@ function formatDataLog(type, fightLog, game) {
       // Hit
       attackResult = `Sharpen weapon!`
       damage = `<span class="up">1D</span> damage!`
-      console.log(fightLog.data.element)
       title = `${playerDisplay} sharpens a weapon!`
       message = damage
       note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `

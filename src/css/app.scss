@@ -160,7 +160,7 @@ html, body, #root {
 }
 
 .actionArea {
-  height: 180px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,6 +181,11 @@ html, body, #root {
   margin: 10px;
   background: #192c32;
   border-radius: 6px;
+
+  &.shop {
+    flex: 0;
+    padding-top: 0px;
+  }
 
   &:after {
     content: '';

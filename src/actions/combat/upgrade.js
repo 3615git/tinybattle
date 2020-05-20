@@ -14,7 +14,7 @@ const upgrade = (data, item, id) => {
 
   let buffValue = item.value
   let buffChar = item.char
-  let buffType = item.quality
+  let buffType = item.permancence
 
   // Push bugff
   pushBuff(activePlayer, buffType, buffChar, buffValue, `instant`, 10)

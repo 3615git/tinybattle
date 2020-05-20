@@ -1,0 +1,31 @@
+
+/**
+  * @desc Set item or weapon
+*/
+
+const buyInstant = (data, item) => {
+  // Set item
+  let position = false
+  for (let index = 0; index < data.player.instants.length; index++) {
+    if (!data.player.instants[index]) {
+      position = index
+      break;
+    }  
+  }
+
+  if (position !== false) {
+    // Overwriting a null
+    data.player.instants[position] = item
+  }
+  else {
+    // Pushing at the end
+    data.player.instants.push(item)
+  }
+  
+  // Pay item price
+  data.player.gold -= item.price
+
+  return data
+}
+
+export { buyInstant}

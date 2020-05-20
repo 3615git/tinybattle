@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { attack } from '../../redux/actions/index'
+import { attack, settings } from '../../redux/actions/index'
 import ItemVisual from './ItemVisual'
 
 /**
@@ -24,11 +24,12 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    attack: payload => dispatch(attack(payload))
+    attack: payload => dispatch(attack(payload)),
+    settings: payload => dispatch(settings(payload))
   }
 }
 
-const InstantButton = ({ id, attack, data }) => {
+const InstantButton = ({ id, attack, settings, data, onSell }) => {
 
   // Component styling
   let onClick, icon, buttonClass, charges, label
@@ -58,6 +59,10 @@ const InstantButton = ({ id, attack, data }) => {
       default:
         break;
     }
+    // Shop mode override
+    if (onSell) {
+      onClick = () => onSell(id, data)
+    }
   } else {
     buttonClass = "disabled"
   }
@@ -65,13 +70,26 @@ const InstantButton = ({ id, attack, data }) => {
   const actionClass = [`instant`, buttonClass].filter(val => val).join(` `)
   
   // Display component
-  return (
-    <button className={actionClass} onClick={onClick}>
-      {charges > 0 && <span className="counter">{charges}</span>}
-      {label && <span className="power">{label}</span>}
-      {icon}
-    </button>
-  )
+  if (onSell && data) {
+    return (
+      <div className="storeItemWrapper">
+        <button className={actionClass} onClick={onClick}>
+          {charges > 0 && <span className="counter">{charges}</span>}
+          {label && <span className="power">{label}</span>}
+          {icon}
+        </button>
+        <span className="itemPrice"><ItemVisual item="coins" level={5} small />{data.reward}</span>
+      </div>
+    )
+  } else {
+    return (
+      <button className={actionClass} onClick={onClick}>
+        {charges > 0 && <span className="counter">{charges}</span>}
+        {label && <span className="power">{label}</span>}
+        {icon}
+      </button>
+    )
+  }
 }
 
 // Applying propTypes definition and default values

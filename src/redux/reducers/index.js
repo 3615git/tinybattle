@@ -7,7 +7,9 @@ import { setItem } from '../../actions/settings/setItem'
 import { setGold } from '../../actions/settings/setGold'
 import { keepItem } from '../../actions/settings/keepItem'
 import { buyItem } from '../../actions/settings/buyItem'
+import { buyInstant } from '../../actions/settings/buyInstant'
 import { sellItem } from '../../actions/settings/sellItem'
+import { sellInstant } from '../../actions/settings/sellInstant'
 import { deleteLegacy } from '../../actions/settings/deleteLegacy'
 import { moveItem } from '../../actions/settings/moveItem'
 import { setUIColor } from '../../actions/settings/setUIColor'
@@ -102,9 +104,17 @@ function rootReducer(state = initialState, action) {
         clog(`buyItem`, `reducer`)
         nextState = buyItem(nextState, action.payload.type, action.payload.char, action.payload.item)
         break;
+      case `buyInstant`:
+        clog(`buyInstant`, `reducer`)
+        nextState = buyInstant(nextState, action.payload.item)
+        break;
       case `sellItem`:
         clog(`sellItem`, `reducer`)
         nextState = sellItem(nextState, action.payload.type, action.payload.char, action.payload.item)
+        break;
+      case `sellInstant`:
+        clog(`sellInstant`, `reducer`)
+        nextState = sellInstant(nextState, action.payload.index, action.payload.item)
         break;
       case `deleteLegacy`:
         clog(`deleteLegacy`, `reducer`)

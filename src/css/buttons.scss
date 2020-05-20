@@ -53,7 +53,7 @@ button {
     content:url("../pics/ui/rivet.png")
   }
 
-  &.attack:before, &.special:before { top: auto; bottom: 15px; left: 2px }
+  &.attack:before, &.special:before, &.storeItem:before { top: auto; bottom: 15px; left: 2px }
   &.attack:after, &.special:after { right: 2px }
 
   &.disabled, &:disabled {

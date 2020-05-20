@@ -86,7 +86,7 @@ function getWeaponElement() {
 function getInstant(itemType, itemQuality, level, option = false) {
 
   // quality: [`normal`, `magic`, `rare`, `legendary`]
-  let effect, value, type, id, label, quality, char
+  let effect, value, type, id, label, permanence, char
   let charges = 1
   let charColors
 
@@ -96,7 +96,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
       id = instantSpecs[itemType][itemQuality].id
-      label = `${value}HP`
+      label = `${value} HP`
       break;
 
     case `restore`:
@@ -110,35 +110,35 @@ function getInstant(itemType, itemQuality, level, option = false) {
 
     case `temporaryupgrade`:
       effect = `upgrade`
-      quality = `temporary`
+      permanence = `temporary`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
       charColors = { STR: 3, MAG: 5, DEX: 7, CON: 6 }
       id = charColors[option]
       char = option
-      label = `+${value}${option}`
+      label = `+${value} ${option}`
       break;
 
     case `temporaryluckupgrade`:
       effect = `upgrade`
-      quality = `temporary`
+      permanence = `temporary`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
       id = instantSpecs[itemType][itemQuality].id
       charges = instantSpecs[itemType][itemQuality].charges
       char = `LCK`
-      label = `+${value}${char}`
+      label = `+${value} ${char}`
       break;
 
     case `permanentupgrade`:
       effect = `upgrade`
-      quality = `permanent`
+      permanence = `permanent`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
       charColors = { STR: 25, MAG: 30, DEX: 29, CON: 33 }
       id = charColors[option]
       char = option
-      label = `+${value}${option}`
+      label = `+${value} ${option}`
       break;
 
     case `damage`:
@@ -146,7 +146,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
       id = instantSpecs[itemType][itemQuality].id
-      label = `${value}DMG`
+      label = `${value} DMG`
       break;
 
     case `sharpenphysical`:
@@ -176,7 +176,8 @@ function getInstant(itemType, itemQuality, level, option = false) {
     id: id,
     effect: effect,
     char: char,
-    quality: quality,
+    quality: itemQuality,
+    permancence: permanence,
     value: value,
     label: label,
     charges: charges,

@@ -63,13 +63,8 @@ const createPlayer = (data, style) => {
   data.player.skills.psyblast = { current: gameSettings.skillsRecharge.psyblast, ready: gameSettings.skillsRecharge.psyblast }
   data.player.skills.curse = { current: gameSettings.skillsRecharge.curse, ready: gameSettings.skillsRecharge.curse }
   
-  // Temporary instant items
-  data.player.instants = [
-    getInstant(`sharpenphysical`, `normal`, 1),
-    getInstant(`sharpenphysical`, `magic`, 1),
-    getInstant(`sharpenphysical`, `rare`, 1),
-    getInstant(`sharpenphysical`, `legendary`, 1)
-  ]
+  // Instant items
+  data.player.instants = []
 
   // Overwrite with legacy items
   if (data.game && data.game.legacy) {

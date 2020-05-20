@@ -15,6 +15,7 @@ const propTypes = {
   effect: PropTypes.string,
   animateNumber: PropTypes.bool,
   noPlus: PropTypes.bool,
+  displayChar: PropTypes.bool,
   animations: PropTypes.bool
 }
 
@@ -47,7 +48,7 @@ class Item extends Component {
   }
 
   render() {
-    const { item, effect, noPlus, animateNumber } = this.props
+    const { item, effect, noPlus, animateNumber, displayChar } = this.props
     const { itemState } = this.state
 
     // Plus sign for bonus items
@@ -75,8 +76,14 @@ class Item extends Component {
             {item.element !== `none` && <div className={`element ${item.element}`} /> }
           </>
         }
+        {item.charges &&
+          <>
+            <div className={`itemCost charge`}>{item.charges}</div>
+          </>
+        }
         <ItemVisual item={item.type} level={item.id} />
         <span>
+          {displayChar && item.char}
           {plusSign}
           {animateNumber 
             ? (<AnimatedNumber
@@ -85,7 +92,7 @@ class Item extends Component {
             />)
             : item.score
           }
-          
+          {item.label}
         </span>
       </div>
     )
