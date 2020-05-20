@@ -93,6 +93,27 @@ const energyRestore = (player, value, type) => {
     player.stamina += value
     if (player.stamina > player.maxStamina) player.stamina = player.maxStamina
   }
+  // Restore mana
+  if (type === `magicPoints`) {
+    player.magicPoints += value
+    if (player.magicPoints > player.maxMagicPoints) player.magicPoints = player.maxMagicPoints
+  }
+  // Restore skills
+  if (type === `skills`) {
+    for (let [key] of Object.entries(player.skills)) {
+      player.skills[key].current = player.skills[key].ready
+    }
+  }
+  return player
+}
+
+// Use instant items
+const instantUse = (player, id) => {
+  // Remove 1 counter
+  player.instants[id].charges--
+  // If zero, destroy item
+  if (player.instants[id].charges === 0) player.instants[id] = null
+
   return player
 }
 
@@ -100,5 +121,6 @@ export {
   maxEnergyRefresh,
   energyRefresh, 
   energyBurn,
-  energyRestore
+  energyRestore,
+  instantUse
 }

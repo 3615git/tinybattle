@@ -60,6 +60,7 @@ const pushBuff = (player, type, stat, value, origin, rounds = 1) => {
 
   // Pushing buff
   if (type === `temporary`) player.buff.temporary.push(buff)
+  if (type === `permanent`) player.buff.permanent.push(buff)
 
   return player
 }

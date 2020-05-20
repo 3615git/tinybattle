@@ -28,10 +28,10 @@
   max-width: 560px;
   opacity: .1;
   top: 20%;
-  transform: translateY(-34%);
+  transform: translateY(-34%) translate3d(0, 0, 0);
 
   img {
-    animation: spin 30s linear infinite;
+    animation: spin 15s linear infinite;
   }
 }
 
@@ -44,30 +44,52 @@
   background: linear-gradient(transparent 10%, #03181f 100% );
 }
 
-.fog {
+.fogWrapper {
   width: 100%;
-  height: 300px;
-  z-index: 13;
-  position: absolute;
+  height: 100%;
+  z-index: 12;
+  position: relative; 
   bottom: 0;
-  background: url('../pics/ui/fog.png') repeat-x left bottom;
-  background-size: cover;
-  opacity: 1;
-  animation: bg-slide 50s linear infinite;
+  overflow: hidden;
+
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  animation: flash 7s linear infinite;
+  animation-delay: 10s;
+
+  .fog {
+    z-index: 13;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 300px;
+    width: 4050px;
+
+    background: url('../pics/ui/fog.png') repeat-x left bottom;
+    background-size: cover;
+    opacity: .9;
+    animation: moveSlideshow 45s linear infinite;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .smoke {
+    width: 6750px;
+    height: 500px;
+    z-index: 12;
+    position: absolute;
+    bottom: 0;
+    background: url('../pics/ui/smoke.png') repeat-x left bottom;
+    background-size: cover;
+    opacity: .7;
+    animation: moveSlideshowLong 100s linear infinite;
+    // mix-blend-mode: color-dodge;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
-.smoke {
-  width: 100%;
-  height: 500px;
-  z-index: 12;
-  position: absolute;
-  bottom: 0;
-  background: url('../pics/ui/smoke.png') repeat-x left bottom;
-  background-size: cover;
-  opacity: 1;
-  animation: bg-slide-wide 200s linear infinite;
-  mix-blend-mode: color-dodge;
-}
 
 .coverArt {
 max-width: 570px;

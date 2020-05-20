@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { gameSettings } from "../../conf/settings"
 import { attack } from '../../redux/actions/index'
 import ItemVisual from './ItemVisual'
 
@@ -11,7 +10,7 @@ import ItemVisual from './ItemVisual'
 */
 
 const propTypes = {
-  type: PropTypes.string
+  id: PropTypes.number
 }
 
 const defaultProps = {}
@@ -29,7 +28,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const InstantButton = ({ attack, data }) => {
+const InstantButton = ({ id, attack, data }) => {
 
   // Component styling
   let onClick, icon, buttonClass, charges, label
@@ -42,19 +41,19 @@ const InstantButton = ({ attack, data }) => {
     // Switch different buttons
     switch (data.effect) {
       case `quickheal`:
-        onClick = () => attack({ type: `skill`, mode: `quickheal`, item: data })
-        break;
-      case `restore`:
-        onClick = () => attack({ type: `skill`, mode: `quickheal`, item: data })
+        onClick = () => attack({ type: `skill`, mode: `quickheal`, item: data, id: id })
         break;
       case `upgrade`:
-        onClick = () => attack({ type: `skill`, mode: `upgrade`, item: data })
+        onClick = () => attack({ type: `skill`, mode: `upgrade`, item: data, id: id })
+        break;
+      case `restore`:
+        onClick = () => attack({ type: `skill`, mode: `restore`, item: data, id: id })
         break;
       case `damage`:
-        onClick = () => attack({ type: `skill`, mode: `damage`, item: data })
+        onClick = () => attack({ type: `skill`, mode: `damage`, item: data, id: id })
         break;
       case `sharpen`:
-        onClick = () => attack({ type: `skill`, mode: `sharpen`, item: data })
+        onClick = () => attack({ type: `skill`, mode: `sharpen`, item: data, id: id })
         break;
       default:
         break;
@@ -68,7 +67,7 @@ const InstantButton = ({ attack, data }) => {
   // Display component
   return (
     <button className={actionClass} onClick={onClick}>
-      {charges && <span className="counter">{charges}</span>}
+      {charges > 0 && <span className="counter">{charges}</span>}
       {label && <span className="power">{label}</span>}
       {icon}
     </button>

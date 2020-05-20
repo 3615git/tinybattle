@@ -38,12 +38,12 @@ const Actions = ({ player, opponent }) => {
   // Prepare instants
   let instantButtons = []
   for (let [key, value] of Object.entries(player.instants)) {
-    instantButtons.push(<InstantButton type={key} data={value} />)
+    instantButtons.push(<InstantButton key={`instant_${key}`} id={parseInt(key)} data={value} />)
   }
   // 6 items grid
   if (instantButtons.length < 6) {
-    for (let index = 0; index < 6 - instantButtons.length; index++) {
-      instantButtons.push(<InstantButton />)
+    for (let index = instantButtons.length; index < 6 ; index++) {
+      instantButtons.push(<InstantButton key={`empty_${index}`} />)
     }
   }
 

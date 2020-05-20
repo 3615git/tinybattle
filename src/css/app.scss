@@ -90,7 +90,12 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
+  max-width: 800px;
   height: 100%;
 }
 
@@ -115,6 +120,7 @@ html, body, #root {
   max-height: 750px; */
   padding: 0px;
   overflow: hidden; /* Prevents side scrolling for overflowing pictures */
+  // box-shadow: inset 0px 30px 50px 70px $color_body;
 }
 
 .vibrationWrapper {

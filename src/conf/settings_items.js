@@ -1,3 +1,5 @@
+import { getRandomInt } from '../utils/utils'
+
 // Type of items for each char
 const charItems = {
   humanoid: {
@@ -37,8 +39,9 @@ const itemQuality = {
 }
 
 const weaponElements = {
+  elementsonly: [`fire`, `water`, `earth`],
   elements: [`none`, `fire`, `water`, `earth`],
-  basicWeight: [20, 1, 1, 1]
+  basicWeight: [10, 1, 1, 1]
 }
 
 const itemQualityBonus = {
@@ -87,6 +90,160 @@ const weaponCost = {
   }
 }
 
+const instantSpecs = {
+  quickheal: {
+    normal: {
+      value: 20,
+      type: `food`,
+      id: getRandomInt(1, 35)
+    },
+    magic: {
+      value: 40,
+      type: `food`,
+      id: getRandomInt(36, 45)
+    },
+    rare: {
+      value: 60,
+      type: `potion`,
+      id: 15
+    },
+    legendary: {
+      value: 100,
+      type: `potion`,
+      id: 43
+    }
+  },
+  restore: {
+    normal: {
+      type: `spell`,
+      id: 1,
+      charges: 1
+    },
+    magic: {
+      type: `spell`,
+      id: 1,
+      charges: 2
+    },
+    rare: {
+      type: `spell`,
+      id: 1,
+      charges: 3
+    },
+    legendary: {
+      type: `spell`,
+      id: 1,
+      charges: 4
+    }
+  },
+  temporaryupgrade: {
+    normal: {
+      value: 5,
+      type: `vial`
+    },
+    magic: {
+      value: 10,
+      type: `vial`
+    },
+    rare: {
+      value: 20,
+      type: `vial`
+    },
+    legendary: {
+      value: 30,
+      type: `vial`
+    }
+  },
+  temporaryluckupgrade: {
+    normal: {
+      value: 2,
+      type: `skill`,
+      id: 9,
+      charges: 1
+    },
+    magic: {
+      value: 4,
+      type: `skill`,
+      id: 9,
+      charges: 1
+    },
+    rare: {
+      value: 6,
+      type: `skill`,
+      id: 9,
+      charges: 2
+    },
+    legendary: {
+      value: 10,
+      type: `skill`,
+      id: 9,
+      charges: 3
+    }
+  },
+  permanentupgrade: {
+    normal: {
+      value: 2,
+      type: `spell`
+    },
+    magic: {
+      value: 4,
+      type: `spell`
+    },
+    rare: {
+      value: 6,
+      type: `spell`
+    },
+    legendary: {
+      value: 10,
+      type: `spell`
+    }
+  },
+  damage: {
+    normal: {
+      value: 20,
+      type: `throw`,
+      id: getRandomInt(1, 14)
+    },
+    magic: {
+      value: 30,
+      type: `throw`,
+      id: getRandomInt(1, 14)
+    },
+    rare: {
+      value: 60,
+      type: `throw`,
+      id: getRandomInt(15, 34)
+    },
+    legendary: {
+      value: 100,
+      type: `throw`,
+      id: getRandomInt(15, 34)
+    }
+  },
+  sharpenphysical: {
+    normal: {
+      type: `tool`,
+      id: getRandomInt(1, 4),
+      charges: 1
+    },
+    magic: {
+      type: `tool`,
+      id: getRandomInt(5, 8),
+      charges: 1
+    },
+    rare: {
+      type: `tool`,
+      id: getRandomInt(9, 12),
+      charges: 2
+    },
+    legendary: {
+      type: `tool`,
+      id: getRandomInt(9, 12),
+      charges: 2
+    }
+  },
+}
+
+
 // @todo : share variables https://itnext.io/sharing-variables-between-js-and-sass-using-webpack-sass-loader-713f51fa7fa0
 const itemRanges = {
   "amulet": 43,
@@ -102,7 +259,7 @@ const itemRanges = {
   "crystal": 12,
   "drops": 21,
   "flail": 26,
-  "food": 72,
+  "food": 45,
   "gem": 13,
   "glove": 11,
   "hammer": 36,
@@ -117,6 +274,8 @@ const itemRanges = {
   "skill": 17,
   "spell": 48,
   "sword": 162,
+  "throw": 34,
+  "tool": 12,
   "vial": 8,
   "wand": 18
 }
@@ -131,5 +290,6 @@ export {
   weaponMultiplicator, 
   weaponBonus,
   weaponCost,
-  weaponElements
+  weaponElements,
+  instantSpecs
 }

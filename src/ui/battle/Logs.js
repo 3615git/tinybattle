@@ -39,7 +39,8 @@ class Logs extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.log.display && (prevState.message !== nextProps.log.display.message)) {
+    if (
+      (nextProps.log.display && (prevState.message !== nextProps.log.display.message)) || (nextProps.log.display && (prevState.note !== nextProps.log.display.note))) {
       return {
         message: nextProps.log.display.message,
         note: nextProps.log.display.note
@@ -117,7 +118,17 @@ class Logs extends Component {
         break;
 
       case `quickheal`:
+      case `upgrade`:
+      case `restore`:
+      case `damage`:
         widget = <ItemVisual big item={log.data.icon[0]} level={log.data.icon[1]} />
+        break;
+
+      case `sharpen`:
+        widget = [
+          <ItemVisual key="item_enhancer" big item={log.data.icon[0]} level={log.data.icon[1]} />,
+          <ItemVisual key="item_enhanced" big item={log.data.icon[2]} level={log.data.icon[3]} />
+        ]
         break;
 
       default:
@@ -177,6 +188,7 @@ class Logs extends Component {
 
       // Delayed or immediate display
       let displayMessage, displayNote
+      console.log(note)
       if (log.delay === `immediate`) {
         displayMessage = <div className="message" dangerouslySetInnerHTML={{ __html: message }} />
         displayNote = <div className="note" dangerouslySetInnerHTML={{ __html: note }} />

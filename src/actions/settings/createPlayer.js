@@ -2,6 +2,7 @@ import { defaultChars } from "../../conf/settings"
 import { getMonsterWeapons } from '../../monsters/getMonsterWeapons'
 import { getMonsterItems } from '../../monsters/getMonsterItems'
 import { gameSettings } from "../../conf/settings"
+import { getInstant } from '../../utils/forge'
 
 /**
   * @desc Create initial player
@@ -64,11 +65,10 @@ const createPlayer = (data, style) => {
   
   // Temporary instant items
   data.player.instants = [
-    { type: `potion`, id: 10, price: 20, effect: `quickheal`, value: 60, label: `60HP`, charges: 1 },
-    { type: `vial`, id: 5, price: 20, effect: `quickheal`, value: 40, label: `40HP`, charges: 3 },
-    { type: `food`, id: 10, price: 20, effect: `quickheal`, value: 20, label: `20HP`, charges: 2 },
-    { type: `spell`, id: 7, price: 20, effect: `curse`, charges: 2 },
-    { type: `spell`, id: 11, price: 20, effect: `itembreak`, charges: 1 },
+    getInstant(`sharpenphysical`, `normal`, 1),
+    getInstant(`sharpenphysical`, `magic`, 1),
+    getInstant(`sharpenphysical`, `rare`, 1),
+    getInstant(`sharpenphysical`, `legendary`, 1)
   ]
 
   // Overwrite with legacy items

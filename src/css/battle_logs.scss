@@ -166,6 +166,9 @@
     .note {
       font-size: $font_small;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -210,6 +213,22 @@
 
 .magicaldamage {
   color: $color_MAG;
+}
+
+.element_fire {
+  color: $element_fire
+}
+
+.element_earth {
+  color: $element_earth
+}
+
+.element_water {
+  color: $element_water
+}
+
+.element_darkness {
+  color: $element_darkness
 }
 
 .critical {

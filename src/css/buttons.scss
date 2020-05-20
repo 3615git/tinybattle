@@ -90,14 +90,12 @@ button {
 
   .power {
     position: absolute;
-    bottom: 5px;
-    // left: 0;
+    bottom: 3px;
     z-index: 1;
     font-size: $font_tiny;
     padding: 2px 4px;
-    background-color: rgba(0, 0, 0, 0.51);
+    background-color: rgba(0, 0, 0, 0.32);
     border-radius: 4px;
-
   }
   
   // Special buttons

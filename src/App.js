@@ -97,11 +97,12 @@ class App extends Component {
     const { openModal } = this.state
 
     let view
-    let ambiantFog = [
-      <div className="smoke" key="smoke" />,
-      <div className="fog" key="fog" />,
-      // <div className="gradient" />
-    ]
+    let ambiantFog = (
+      <div className="fogWrapper">
+        <div className="smoke" key="smoke" />
+        <div className="fog" key="fog" />
+      </div>
+    )
 
     let options
     let fullOptions = (

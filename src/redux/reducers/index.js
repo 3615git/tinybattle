@@ -40,6 +40,10 @@ import { psyblast } from '../../actions/combat/psyblast'
 import { curse } from '../../actions/combat/curse'
 import { heal } from '../../actions/combat/heal'
 import { quickheal } from '../../actions/combat/quickheal'
+import { upgrade } from '../../actions/combat/upgrade'
+import { restore } from '../../actions/combat/restore'
+import { damage } from '../../actions/combat/damage'
+import { sharpen } from '../../actions/combat/sharpen'
 import { reflect } from '../../actions/combat/reflect'
 // Utils
 import { autoResetBuff, incrementSkillCount } from '../../actions/combat/stats'
@@ -244,14 +248,35 @@ function rootReducer(state = initialState, action) {
           clog(`heal`, `reducer`)
           nextState = heal(nextState)
           break;
+        case `reflect`:
+            clog(`reflect`, `reducer`)
+            nextState = reflect(nextState)
+            break;
+        // Instants
         case `quickheal`:
           clog(`quickheal`, `reducer`)
           turnSwitch = false
-          nextState = quickheal(nextState, action.payload.item)
+          nextState = quickheal(nextState, action.payload.item, action.payload.id)
           break;
-        case `reflect`:
-          clog(`reflect`, `reducer`)
-          nextState = reflect(nextState)
+        case `upgrade`:
+          clog(`upgrade`, `reducer`)
+          turnSwitch = false
+          nextState = upgrade(nextState, action.payload.item, action.payload.id)
+          break;
+        case `restore`:
+          clog(`restore`, `reducer`)
+          turnSwitch = false
+          nextState = restore(nextState, action.payload.item, action.payload.id)
+          break;
+        case `damage`:
+          clog(`damage`, `reducer`)
+          turnSwitch = false
+          nextState = damage(nextState, action.payload.item, action.payload.id)
+          break;
+        case `sharpen`:
+          clog(`sharpen`, `reducer`)
+          turnSwitch = false
+          nextState = sharpen(nextState, action.payload.item, action.payload.id)
           break;
         default:
           break;

@@ -118,10 +118,10 @@
 
 @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform:rotate3d(0, 0, 0, 0deg);;
     }
     to {
-        transform:rotate(360deg);
+        transform:rotate3d(0, 1, 1, 359deg);;
     }
 }
 
@@ -139,22 +139,25 @@
   animation: rumble 0.40s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-@keyframes bg-slide {
-    from {
-        background-position: 0 0
-    }
-    to { 
-        background-position: -1487px 0
-    }
+@keyframes moveSlideshow {  
+  100% { 
+    -webkit-transform: translateX(-1350px);  
+  }
+}
+@keyframes moveSlideshowLong {  
+  100% { 
+    -webkit-transform: translateX(-2250px);  
+  }
 }
 
-@keyframes bg-slide-wide {
-    from {
-        background-position: 0 0
-    }
-    to { 
-        background-position: -2479px 0
-    }
+@keyframes flash {
+  from {  } 
+  92% {  }
+  93% { filter: brightness(2) }
+  94% { filter: brightness(1.5) }
+  95% { filter: brightness(3) } 
+  96% {  }
+  to {  }
 }
 
 @keyframes glow {

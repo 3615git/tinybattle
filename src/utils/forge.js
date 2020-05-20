@@ -1,6 +1,7 @@
 import { gameSettings } from "../conf/settings"
-import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost, weaponElements } from "../conf/settings_items"
+import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost, weaponElements, instantSpecs } from "../conf/settings_items"
 import { getRandomInt, randomValue, generateWeight } from "../utils/utils"
+import { getItemPrice } from '../monsters/getMonsterReward'
 
 // Item utils
 function getItemFromChar(CHAR, humanoid) {
@@ -81,6 +82,111 @@ function getWeaponElement() {
   return randomValue(heavyElements)
 }
 
+// Forge instants
+function getInstant(itemType, itemQuality, level, option = false) {
+
+  // quality: [`normal`, `magic`, `rare`, `legendary`]
+  let effect, value, type, id, label, quality, char
+  let charges = 1
+  let charColors
+
+  switch (itemType) {
+    case `quickheal`:
+      effect = `quickheal`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      label = `${value}HP`
+      break;
+
+    case `restore`:
+      effect = `restore`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      charges = instantSpecs[itemType][itemQuality].charges
+      label = `Energy`
+      break;
+
+    case `temporaryupgrade`:
+      effect = `upgrade`
+      quality = `temporary`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      charColors = { STR: 3, MAG: 5, DEX: 7, CON: 6 }
+      id = charColors[option]
+      char = option
+      label = `+${value}${option}`
+      break;
+
+    case `temporaryluckupgrade`:
+      effect = `upgrade`
+      quality = `temporary`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      charges = instantSpecs[itemType][itemQuality].charges
+      char = `LCK`
+      label = `+${value}${char}`
+      break;
+
+    case `permanentupgrade`:
+      effect = `upgrade`
+      quality = `permanent`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      charColors = { STR: 25, MAG: 30, DEX: 29, CON: 33 }
+      id = charColors[option]
+      char = option
+      label = `+${value}${option}`
+      break;
+
+    case `damage`:
+      effect = `damage`
+      value = instantSpecs[itemType][itemQuality].value
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      label = `${value}DMG`
+      break;
+
+    case `sharpenphysical`:
+      effect = `sharpen`
+      value = `STR`
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      charges = instantSpecs[itemType][itemQuality].charges
+      label = `Sharpen`
+      break;
+
+    case `sharpenmagical`:
+      effect = `sharpen`
+      value = `MAG`
+      type = instantSpecs[itemType][itemQuality].type
+      id = instantSpecs[itemType][itemQuality].id
+      charges = instantSpecs[itemType][itemQuality].charges
+      label = `Enchant`
+      break;
+  
+    default:
+      break;
+  }
+
+  return {
+    type: type, 
+    id: id,
+    effect: effect,
+    char: char,
+    quality: quality,
+    value: value,
+    label: label,
+    charges: charges,
+    reward: getItemPrice(level, itemQuality),
+    price: getItemPrice(level, itemQuality, `buy`)
+  }
+}
+
+// { type: `tool`, id: 6, price: 20, effect: `sharpen`, value: `STR`, label: `Sharpen`, charges: 4 },
+
 export {
   getItemFromChar,
   getItemIdFromLevel,
@@ -89,5 +195,6 @@ export {
   getWeaponType,
   getWeaponDamage, 
   getWeaponCost,
-  getWeaponElement
+  getWeaponElement, 
+  getInstant
 }

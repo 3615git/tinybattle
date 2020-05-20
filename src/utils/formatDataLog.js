@@ -73,7 +73,7 @@ function formatDataLog(type, fightLog, game) {
 
       // Elemental hit
       if (fightLog.data.damage && fightLog.data.damage.elemental > 0) {
-        attackResult += `&nbsp;<span class="elemental">Elemental bonus!</span>&nbsp;`
+        attackResult += `<br /><span class="elemental">Elemental bonus!</span>&nbsp;`
       }
 
       // Damage
@@ -104,7 +104,7 @@ function formatDataLog(type, fightLog, game) {
 
       // Elemental hit
       if (fightLog.data.damage && fightLog.data.damage.elemental > 0) {
-        attackResult += `&nbsp;<span class="elemental">Elemental bonus!</span>&nbsp;`
+        attackResult += `<br /><span class="elemental">Elemental bonus!</span>&nbsp;`
       }
 
       // Damage
@@ -206,12 +206,60 @@ function formatDataLog(type, fightLog, game) {
     case `quickheal`:
       // Hit
       attackResult = `${fightLog.data.healValue} health recovery!`
-      damage = `${playerDisplay} recovers ${fightLog.data.healValue} HP.`
+      damage = `${playerDisplay}&nbsp;recovers&nbsp;${fightLog.data.healValue} HP.`
 
       title = `${playerDisplay} uses healing item!`
       message = `${attackResult}`
       note = damage
       log = `${title} ${attackResult} ${damage}`
+      icon = fightLog.data.icon
+      break;
+
+    case `upgrade`:
+      // Hit
+      attackResult = `${fightLog.data.buffChar} boost!`
+      damage = `<span class="up">${fightLog.data.buffValue}</span> ${fightLog.data.buffChar}`
+
+      title = `${playerDisplay} uses boost item!`
+      message = damage
+      note = `${fightLog.data.buffType} boost`
+      log = `${title} ${damage} (${note})`
+      icon = fightLog.data.icon
+      break;
+
+    case `restore`:
+      // Hit
+      attackResult = `Energy restore!`
+      damage = `Fully restored!`
+
+      title = `${playerDisplay} restores energy!`
+      message = damage
+      note = `Stamina, mana and skills energy restored.`
+      log = `${title} ${note}`
+      icon = fightLog.data.icon
+      break;
+
+    case `damage`:
+      // Hit
+      attackResult = `Weapon throw!`
+      damage = `${fightLog.data.damage} damage!`
+
+      title = `${playerDisplay} throws weapon!`
+      message = damage
+      note = ``
+      log = `${title} ${damage}`
+      icon = fightLog.data.icon
+      break;
+
+    case `sharpen`:
+      // Hit
+      attackResult = `Sharpen weapon!`
+      damage = `<span class="up">1D</span> damage!`
+      console.log(fightLog.data.element)
+      title = `${playerDisplay} sharpens a weapon!`
+      message = damage
+      note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `
+      log = `${title} ${damage} ${note}`
       icon = fightLog.data.icon
       break;
 
