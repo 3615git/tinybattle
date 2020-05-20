@@ -59,7 +59,11 @@
 /* Player items */
 .playerItems {
   display: flex;
-  width: 100%;
+  // width: 100%;
+
+  &.marginTop {
+    margin-top: 10px;
+  }
 
   .item_wrapper {
     margin: 0px 4px;

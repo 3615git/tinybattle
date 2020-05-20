@@ -95,7 +95,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       effect = `quickheal`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
-      id = instantSpecs[itemType][itemQuality].id
+      id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       label = `${value} HP`
       break;
 
@@ -145,7 +145,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       effect = `damage`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
-      id = instantSpecs[itemType][itemQuality].id
+      id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       label = `${value} DMG`
       break;
 
@@ -153,7 +153,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       effect = `sharpen`
       value = `STR`
       type = instantSpecs[itemType][itemQuality].type
-      id = instantSpecs[itemType][itemQuality].id
+      id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       charges = instantSpecs[itemType][itemQuality].charges
       label = `Sharpen`
       break;
@@ -162,7 +162,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       effect = `sharpen`
       value = `MAG`
       type = instantSpecs[itemType][itemQuality].type
-      id = instantSpecs[itemType][itemQuality].id
+      id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       charges = instantSpecs[itemType][itemQuality].charges
       label = `Enchant`
       break;
@@ -185,8 +185,6 @@ function getInstant(itemType, itemQuality, level, option = false) {
     price: getItemPrice(level, itemQuality, `buy`)
   }
 }
-
-// { type: `tool`, id: 6, price: 20, effect: `sharpen`, value: `STR`, label: `Sharpen`, charges: 4 },
 
 export {
   getItemFromChar,

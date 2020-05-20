@@ -1,8 +1,8 @@
-import { defaultChars } from "../../conf/settings"
+import { defaultChars, defaultInstants } from "../../conf/settings"
 import { getMonsterWeapons } from '../../monsters/getMonsterWeapons'
 import { getMonsterItems } from '../../monsters/getMonsterItems'
 import { gameSettings } from "../../conf/settings"
-import { getInstant } from '../../utils/forge'
+import { getShopInstants } from '../../monsters/getShopInstants'
 
 /**
   * @desc Create initial player
@@ -65,6 +65,12 @@ const createPlayer = (data, style) => {
   
   // Instant items
   data.player.instants = []
+  let catalog = defaultInstants[style]
+  let startInstants = getShopInstants(catalog, 1, `normal`)
+  // eslint-disable-next-line no-unused-vars
+  for (let [key, value] of Object.entries(startInstants)) {
+    data.player.instants.push(value)
+  }
 
   // Overwrite with legacy items
   if (data.game && data.game.legacy) {

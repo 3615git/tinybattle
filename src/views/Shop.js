@@ -114,8 +114,7 @@ class Shop extends Component {
     else if (catalog === `instants_weapon`) {
       // randomize selection
       numberOfitems = 2
-      // itemsRange = [`damage`, `sharpenphysical`, `sharpenmagical`]
-      itemsRange = [`damage`]
+      itemsRange = [`damage`, `sharpenphysical`, `sharpenmagical`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))
       }
@@ -173,7 +172,7 @@ class Shop extends Component {
 
       // Overburden
       let overburden
-      if (player.instants.filter(Boolean).length === 6 && (type === `instants` || type === `instants_weapon`)) {
+      if (player.instants && player.instants.filter(Boolean).length === 6 && (type === `instants` || type === `instants_weapon`)) {
         overburden = <div className="overburden"><ItemVisual item="bag" level={12} /><span>Full bag!</span></div>
       }
 

@@ -85,6 +85,13 @@ const defaultChars = {
   }
 }
 
+// Default consumables
+const defaultInstants = {
+  warrior: [`quickheal`, `damage`, `sharpenphysical`],
+  mage: [`quickheal`, `temporaryupgrade`, `sharpenmagical`],
+  thief: [`quickheal`, `temporaryluckupgrade`, `restore`]
+}
+
 const legacyItemsCount = (level) => {
   // Gain 1 legacy item every x level
   return Math.ceil(level/(gameSettings.maxLevel/gameSettings.zones))
@@ -94,5 +101,6 @@ export {
   initialState,
   gameSettings,
   defaultChars,
+  defaultInstants,
   legacyItemsCount
 }

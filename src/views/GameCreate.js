@@ -76,6 +76,19 @@ class GameCreate extends Component {
       score: player.gold,
       type: "coins"
     }
+
+    // Starting items
+    let instants = []
+    for (let index = 0; index < player.instants.length; index++) {
+      const value = player.instants[index]
+      instants.push(
+        <Item
+          item={value}
+          displayChar={false}
+          noPlus
+        />
+      )
+    }
     
     return (
       <div className="mainWrapper wideScreen">
@@ -88,35 +101,19 @@ class GameCreate extends Component {
               <button onClick={() => this.setStyle(`mage`)} className={baseStyle !== `mage` ? `third-transparent` : ``}>Mage</button>
               <button onClick={() => this.setStyle(`thief`)} className={baseStyle !== `thief` ? `third-transparent` : ``}>Thief</button>
             </div>
-            <label>Stats and <span className="legacyColor">legacy</span> items</label>
+            <label>Stats and <span className="legacyColor">legacy</span> gear</label>
             <div className="profileStats">
               <Stats />
               <Items animations={false} />
             </div>
-            <div className="profileWeapons">
-              {player &&
-                <div className="weapons">
-                  <div className="weapon">
-                    <div>
-                      <div className="physicalColor">Physical</div>
-                      <div className="info">{player.weapons[`STR`].cost} stamina</div>
-                      <div className="info">STR + {player.weapons[`STR`].score}</div>
-                    </div>
-                    <Item item={player.weapons[`STR`]} effect={this.checkLegacy(`weapons`, `STR`)} />
-                  </div>
-                  <div className="weapon">
-                    <Item item={player.weapons[`MAG`]} effect={this.checkLegacy(`weapons`, `MAG`)} />
-                    <div>
-                      <div className="magicalColor">Magical </div>
-                      <div className="info">{player.weapons[`MAG`].cost} mana</div>
-                      <div className="info">MAG + {player.weapons[`MAG`].score}</div>
-                    </div>
-                  </div>
-                </div>
-              }
+            <span className="subtitle">Items & Weapons</span>
+            <div className="playerItems">
+              {instants}
+              <Item item={player.weapons[`STR`]} effect={this.checkLegacy(`weapons`, `STR`)} />
+              <Item item={player.weapons[`MAG`]} effect={this.checkLegacy(`weapons`, `MAG`)} />
             </div>
             <label><span className="legacyColor">Legacy</span> gold</label>
-            <div className="goldLoot">
+            <div className="goldLoot noMargin">
               <Item item={goldIcon} effect="new" animateNumber noPlus />
             </div>
           </div>

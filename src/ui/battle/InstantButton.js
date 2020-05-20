@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
-import { attack, settings } from '../../redux/actions/index'
+import { attack } from '../../redux/actions/index'
 import ItemVisual from './ItemVisual'
 
 /**
@@ -24,12 +24,11 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    attack: payload => dispatch(attack(payload)),
-    settings: payload => dispatch(settings(payload))
+    attack: payload => dispatch(attack(payload))
   }
 }
 
-const InstantButton = ({ id, attack, settings, data, onSell }) => {
+const InstantButton = ({ id, attack, data, onSell }) => {
 
   // Component styling
   let onClick, icon, buttonClass, charges, label

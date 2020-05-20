@@ -10,8 +10,6 @@ function getShopInstant(effect, level, forceQuality = false) {
   // Check if item is special
   const itemQuality = forceQuality ? forceQuality : getItemQuality(level, false) // Get item rank
 
-  // function getInstant(itemType, itemQuality, level, option = false) {
-
   // Ranges
   let charRange = [`STR`, `DEX`, `CON`, `MAG`]
   if (effect === `temporaryupgrade` || effect === `permanentupgrade`) option = randomValue(charRange)

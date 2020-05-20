@@ -6,11 +6,15 @@
 const buyInstant = (data, item) => {
   // Set item
   let position = false
-  for (let index = 0; index < data.player.instants.length; index++) {
-    if (!data.player.instants[index]) {
-      position = index
-      break;
-    }  
+  if (data.player.instants) {
+    for (let index = 0; index < data.player.instants.length; index++) {
+      if (!data.player.instants[index]) {
+        position = index
+        break;
+      }  
+    }
+  } else {
+    data.player.instants = []
   }
 
   if (position !== false) {

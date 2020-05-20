@@ -95,22 +95,22 @@ const instantSpecs = {
     normal: {
       value: 20,
       type: `food`,
-      id: getRandomInt(1, 35)
+      id: [1, 35]
     },
     magic: {
       value: 40,
       type: `food`,
-      id: getRandomInt(36, 45)
+      id: [36, 45]
     },
     rare: {
       value: 60,
       type: `potion`,
-      id: 15
+      id: [15, 15]
     },
     legendary: {
       value: 100,
       type: `potion`,
-      id: 43
+      id: [43,43]
     }
   },
   restore: {
@@ -201,43 +201,65 @@ const instantSpecs = {
     normal: {
       value: 20,
       type: `throw`,
-      id: getRandomInt(1, 14)
+      id: [1, 14]
     },
     magic: {
       value: 30,
       type: `throw`,
-      id: getRandomInt(1, 14)
+      id: [1, 14]
     },
     rare: {
       value: 60,
       type: `throw`,
-      id: getRandomInt(15, 34)
+      id: [15, 34]
     },
     legendary: {
       value: 100,
       type: `throw`,
-      id: getRandomInt(15, 34)
+      id: [15, 34]
     }
   },
   sharpenphysical: {
     normal: {
       type: `tool`,
-      id: getRandomInt(1, 4),
+      id: [1, 4],
       charges: 1
     },
     magic: {
       type: `tool`,
-      id: getRandomInt(5, 8),
+      id: [5, 8],
       charges: 1
     },
     rare: {
       type: `tool`,
-      id: getRandomInt(9, 12),
+      id: [9, 12],
       charges: 2
     },
     legendary: {
       type: `tool`,
-      id: getRandomInt(9, 12),
+      id: [9, 12],
+      charges: 2
+    }
+  },
+  sharpenmagical: {
+    normal: {
+      type: `tool`,
+      id: [1, 4],
+      charges: 1
+    },
+    magic: {
+      type: `tool`,
+      id: [5, 8],
+      charges: 1
+    },
+    rare: {
+      type: `tool`,
+      id: [9, 12],
+      charges: 2
+    },
+    legendary: {
+      type: `tool`,
+      id: [9, 12],
       charges: 2
     }
   },

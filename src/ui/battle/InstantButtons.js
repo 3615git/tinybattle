@@ -23,8 +23,12 @@ const InstantButtons = ({ player, onSell }) => {
 
   // Prepare instants
   let instantButtons = []
-  for (let [key, value] of Object.entries(player.instants)) {
-    instantButtons.push(<InstantButton onSell={onSell} key={`instant_${key}`} id={parseInt(key)} data={value} />)
+  if (player.instants) {
+    for (let index = 0; index < player.instants.length; index++) {
+      const value = player.instants[index]
+      console.log(value)
+      instantButtons.push(<InstantButton onSell={onSell} key={`instant_${index}`} id={parseInt(index)} data={value} />)
+    }
   }
   // 6 items grid
   if (instantButtons.length < 6) {
