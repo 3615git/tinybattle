@@ -40,7 +40,7 @@ function formatDataLog(type, fightLog, game) {
 
     case `block`:
       title = `${playerDisplay} blocks!`
-      message = `<span class="up">${fightLog.data.dexBonus}</span> DEX and <span class="up">${fightLog.data.conBonus}</span> CON.`
+      message = `<span class="up">${fightLog.data.dexBonus}</span> DEX, <span class="up">${fightLog.data.conBonus}</span> CON, <span class="up">${fightLog.data.rageBonus}</span> rage`
       note = `<span class="down">${fightLog.data.magMalus}</span> MAG, ${opponentDisplay} <span class="up">${fightLog.data.strBonus}</span> STR`
       log = `${playerDisplay} ${message} ${note}`
       icon = gameSettings.icons.block

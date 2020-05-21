@@ -109,7 +109,6 @@ const energyRestore = (player, value, type) => {
 
 // Use instant items
 const instantUse = (player, id) => {
-  console.log(id)
   // Remove 1 counter
   player.instants[id].charges--
   // If zero, destroy item

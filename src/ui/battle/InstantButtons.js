@@ -26,7 +26,6 @@ const InstantButtons = ({ player, onSell }) => {
   if (player.instants) {
     for (let index = 0; index < player.instants.length; index++) {
       const value = player.instants[index]
-      console.log(value)
       instantButtons.push(<InstantButton onSell={onSell} key={`instant_${index}`} id={parseInt(index)} data={value} />)
     }
   }

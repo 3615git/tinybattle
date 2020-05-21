@@ -13,7 +13,6 @@ import { settings } from './redux/actions/index'
 // Import views
 import Welcome from './views/Welcome'
 import GameCreate from './views/GameCreate'
-import GameSelect from './views/GameSelect'
 import LevelTransition from './views/LevelTransition'
 import BattleIntro from './views/BattleIntro'
 import Battle from './views/Battle'
@@ -125,10 +124,6 @@ class App extends Component {
         break;
       case `gameCreate`:
         view = <GameCreate />
-        options = smallOptions
-        break;
-      case `gameSelect`:
-        view = <GameSelect />
         options = smallOptions
         break;
       case `levelTransition`: 

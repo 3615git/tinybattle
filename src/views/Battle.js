@@ -143,7 +143,7 @@ class Battle extends Component {
 
     // If turn changed, and it's opponent turn
     if (prevProps.playerTurn !== playerTurn && playerTurn === false && !game.skipTurn) {
-      this.launchOpponentTurn()
+      // this.launchOpponentTurn()
     }
 
     // If turn changed and it's player's turn

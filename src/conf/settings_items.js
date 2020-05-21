@@ -1,5 +1,3 @@
-import { getRandomInt } from '../utils/utils'
-
 // Type of items for each char
 const charItems = {
   humanoid: {

@@ -17,7 +17,6 @@ import { preference } from '../../actions/settings/preference'
 // Game system
 import { welcome } from '../../actions/game/welcome'
 import { gameCreate } from '../../actions/game/gameCreate'
-import { gameSelect } from '../../actions/game/gameSelect'
 import { levelTransition } from '../../actions/game/levelTransition'
 import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
@@ -57,6 +56,7 @@ import { monstersDemo } from '../../actions/private/monstersDemo'
 import { clog } from '../../utils/utils'
 // Initial state
 import { initialState } from '../../conf/settings'
+import { saveState } from '../../redux/localStorage'
 
 function rootReducer(state = initialState, action) {
 
@@ -142,10 +142,6 @@ function rootReducer(state = initialState, action) {
       case `gameCreate`:
         clog(`gameCreate`, `reducer`)
         nextState = gameCreate(nextState)
-        break;
-      case `gameSelect`:
-        clog(`gameSelect`, `reducer`)
-        nextState = gameSelect(nextState)
         break;
       case `levelTransition`:
         clog(`levelTransition`, `reducer`)
@@ -319,6 +315,9 @@ function rootReducer(state = initialState, action) {
 
   // In every case, compute Max values
   nextState = maxEnergyRefresh(nextState)
+
+  // Save state to LocalStorage
+  saveState(nextState)
 
   // Return updated state
   return nextState

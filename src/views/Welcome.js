@@ -67,7 +67,6 @@ class Welcome extends Component {
           </div>
           <div className="actionArea">
             <button className="navigation" onClick={() => this.newGame()}>New game</button>
-            <button className="navigation" onClick={() => setGameState({ state: `gameSelect` })} disabled>Continue</button>
             <div className="version">0.0.0 alpha</div>
           </div>
         </div>
