@@ -240,7 +240,7 @@ class Shop extends Component {
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Enter next battle</button>
+            <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Next battle</button>
           </div>
         </div>
       </div>

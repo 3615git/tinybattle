@@ -11,6 +11,7 @@ import logo2 from '../pics/ui/logo2.png'
 
 const mapStateToProps = state => {
   return {
+    game: state.game,
     player: state.player,
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
@@ -41,7 +42,15 @@ class Welcome extends Component {
 
   render() {
 
-    const { setGameState } = this.props
+    const { setGameState, game, player } = this.props
+
+    // Start button
+    let startButton
+    if (game.quitState) {
+      startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - lvl. {game.level}</span></button>
+    } else {
+      startButton = <button className="navigation" onClick={() => this.newGame()}>New game</button>
+    }
     
     return [
       <div key="mainWrapper" className="mainWrapper wideScreen">
@@ -62,11 +71,12 @@ class Welcome extends Component {
             <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Defeat demo</button> 
             <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
             <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Enter shop</button>
+            <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>
             */}
             
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => this.newGame()}>New game</button>
+            {startButton}
             <div className="version">0.0.0 alpha</div>
           </div>
         </div>

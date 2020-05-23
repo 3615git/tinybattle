@@ -16,10 +16,7 @@
     padding: 10px;
     z-index: 40;
     display: flex;
-    flex-direction: row-reverse;
-    button {
-      margin-left: 10px;
-    }
+    flex-direction: row;
 }
 
 .homeSigil {
@@ -31,7 +28,8 @@
   transform: translateY(-34%) translate3d(0, 0, 0);
 
   img {
-    animation: spin 15s linear infinite;
+    will-change: transform;
+    animation: spin 30s linear infinite;
   }
 }
 
@@ -128,6 +126,30 @@ max-width: 570px;
       font-size: 60px;
       padding-top: 90px;
     }
+  }
+}
+
+.credits {
+  p {
+    a {
+      color: white;
+    }
+  }
+
+  .separator {
+    width: 92px;
+    height: 32px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("../pics/ui/attackskull.png");
+  }
+
+  .title {
+    font-size: $font_big;
+    margin: 30px 0px 0px 0px;
+    opacity: .7;
+    color: $element_elite;
   }
 }
 

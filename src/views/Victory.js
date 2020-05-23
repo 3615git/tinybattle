@@ -232,8 +232,8 @@ class Victory extends Component {
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Enter shop</button>
-            <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Enter next round</button>
+            <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Shop</button>
+            {/* <button className="navigation" onClick={() => setGameState({ state: `levelTransition` })}>Enter next round</button> */}
           </div>
         </div>
       </div>

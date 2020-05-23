@@ -25,7 +25,8 @@ const createMonsters = (data, monsters) => {
       weapons: monster.weapons && monster.weapons.split(",").map(item => item.trim()),
       humanoid: monster.humanoid,
       elite: monster.elite,
-      fumble: 1
+      fumble: 1,
+      verticalPosition: monster.verticalPosition
     }
   }
 

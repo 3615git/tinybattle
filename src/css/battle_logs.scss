@@ -8,9 +8,12 @@
   height: 100%;
   flex: 1;
   z-index: 10;
+  display: flex;
+  justify-content: center;
 
   .LogsWrapper {
     width: 100%;
+    max-width: 500px;
     min-height: 200px;
     height: 100%;
     padding: 0px 20px;
@@ -266,11 +269,12 @@ span.boost {
 /** Data Logs **/
 .dataLogsWrapper {
   flex: 1;
+  width: 100%;
+  max-width: 420px;
   font-size: $font_tiny;
   overflow-y: auto;
   z-index: 1;
   position: relative;
-  margin: 0px 10px 5px 20px;
 
   .dataLogShadow {
     position: absolute;
@@ -283,7 +287,7 @@ span.boost {
     position: absolute;
     left: 0;
     padding: 0px;
-    margin: 0px;
+    margin: 0px 10px;
     bottom: 0;
 
     li {

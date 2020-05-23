@@ -58,7 +58,6 @@ class Opponent extends Component {
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
     const appbackground = chroma(color.darkMuted).darken(1).desaturate(.4); // color.darkMuted
-    // const appbackground = color.darkMuted; // color.darkMuted
 
     // Component styling
     const defaultClasses = `opponentWrapper`
@@ -84,10 +83,13 @@ class Opponent extends Component {
 
     // Monster portrait size
     const portraitStyling = mode === `portrait` ? {
-      width: `400px`
+      width: `400px`,
+      top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     } : {
-      width: `500px`
+      width: `500px`,
+      top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     }
+
 
     // Monster display
     const portraitClasses = portraitReady ? `portrait ready` : `portrait`

@@ -95,6 +95,7 @@ function monsterInfo(type, level, monsters) {
     elite: elite,
     humanoid: monsterData.humanoid ? true : false,
     pic: monsterPic(type),
+    verticalPosition: monsterData.verticalPosition,
     STR: monsterSpecs[`STR`],
     DEX: monsterSpecs[`DEX`],
     CON: monsterSpecs[`CON`],

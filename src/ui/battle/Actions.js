@@ -9,8 +9,7 @@ import SkillButton from './SkillButton'
 import { attack } from '../../redux/actions/index'
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Wrapper for all the possible action
 */
 
 

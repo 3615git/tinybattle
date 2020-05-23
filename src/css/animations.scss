@@ -5,6 +5,12 @@
   animation: new (1s);
 }
 
+.animation-legacy {
+  animation: new (1s);
+  border: 2px solid $color_legacy !important;
+  background: darken(rgba($color_legacy, .2),10) !important;
+}
+
 // Deleted item
 .animation-deleted {
   animation: delete (2s);
@@ -118,10 +124,10 @@
 
 @keyframes spin {
     from {
-        transform:rotate3d(0, 0, 0, 0deg);;
+        transform:rotate(0deg) translateZ(0);
     }
     to {
-        transform:rotate3d(0, 1, 1, 359deg);;
+        transform:rotate(360deg) translateZ(0);
     }
 }
 

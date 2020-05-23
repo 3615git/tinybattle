@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import EndGame from '../ui/battle/EndGame'
 import Opponent from '../ui/battle/Opponent'
 import StatsAndItems from '../ui/battle/StatsAndItems'
-import Bars from '../ui/battle/Bars'
+import Bar from '../ui/battle/Bar'
 import Actions from '../ui/battle/Actions'
 import Logs from '../ui/battle/Logs'
 import DataLogs from '../ui/battle/DataLogs'
@@ -143,7 +143,7 @@ class Battle extends Component {
 
     // If turn changed, and it's opponent turn
     if (prevProps.playerTurn !== playerTurn && playerTurn === false && !game.skipTurn) {
-      // this.launchOpponentTurn()
+      this.launchOpponentTurn()
     }
 
     // If turn changed and it's player's turn
@@ -185,7 +185,7 @@ class Battle extends Component {
           <Logs color={uicolor} skip={this.skipTurnChange} />
           <VibrationWrapper condition={game.playerHit}>
             <div className={playerAreaClass}>
-              <Bars />
+              <Bar type="hitPoints" />
               <StatsAndItems />
               <Actions />
             </div>

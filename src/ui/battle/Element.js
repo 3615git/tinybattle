@@ -12,12 +12,13 @@ const propTypes = {
 const defaultProps = {
 }
 
-const Element = ({ element }) => {
+const Element = ({ element, big }) => {
 
   // Component styling
   const defaultClasses = `elementWrapper`
+  const bigClasses = big ? "big" : ""
   // Add custom classes to defined classes
-  const itemClasses = [defaultClasses, element].filter(val => val).join(` `)
+  const itemClasses = [defaultClasses, bigClasses, element].filter(val => val).join(` `)
 
   // Display component
   return (

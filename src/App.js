@@ -7,8 +7,7 @@ import Papa from 'papaparse'
 import monsterData from './monsters/monsterdata.csv'
 
  // Import redux actions
-import { settings } from './redux/actions/index'
-
+import { settings, setGameState } from './redux/actions/index'
 
 // Import views
 import Welcome from './views/Welcome'
@@ -28,6 +27,7 @@ import Modal from './ui/general/Modal'
 // Import pictures
 import settingsPic from './pics/ui/settings.svg'
 import help from './pics/ui/help.svg'
+import close from './pics/ui/close.svg'
 
 // Import style
 import './css/app.scss'
@@ -52,7 +52,8 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    settings: payload => dispatch(settings(payload))
+    settings: payload => dispatch(settings(payload)),
+    setGameState: payload => dispatch(setGameState(payload))
   }
 }
 
@@ -92,7 +93,7 @@ class App extends Component {
 
   render() {
 
-    const { game } = this.props
+    const { game, setGameState } = this.props
     const { openModal } = this.state
 
     let view
@@ -114,6 +115,7 @@ class App extends Component {
     let smallOptions = (
       <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
+        <button className="option" onClick={() => setGameState({ state: `quit` })}><img src={close} alt="Quit" /></button>
       </div>
     )
 

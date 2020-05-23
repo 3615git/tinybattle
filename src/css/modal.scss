@@ -17,9 +17,7 @@
     height: 100%;
     max-height: 650px;
     max-width: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow-y: auto;
     text-align: center;
     position: relative;
     width: 100%;
@@ -29,7 +27,7 @@
     border: 2px solid rgba($color_body, 1);
 
     #closeModal {
-      position: absolute;
+      position: fixed;
       top: 15px;
       right: 15px;
     }

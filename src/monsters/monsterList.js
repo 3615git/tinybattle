@@ -1,49 +1,79 @@
-import mimic from '../pics/opponents/mimic.png'
-import dryad from '../pics/opponents/dryad.png'
+import alfadriel from '../pics/opponents/alfadriel.png'
+import ansellus from '../pics/opponents/ansellus.png'
+import arcanegolem from '../pics/opponents/arcanegolem.png'
+import astrallich from '../pics/opponents/astrallich.png'
+import behemoth from '../pics/opponents/behemoth.png'
 import blindworm from '../pics/opponents/blindworm.png'
-import fireimp from '../pics/opponents/fireimp.png'
-import giantfish from '../pics/opponents/giantfish.png'
-import gazer from '../pics/opponents/gazer.png'
 import bloodmage from '../pics/opponents/bloodmage.png'
-import waterspirit from '../pics/opponents/waterspirit.png'
+import bulldragon from '../pics/opponents/bulldragon.png'
+import chimera from '../pics/opponents/chimera.png'
+import crocodilerogue from '../pics/opponents/crocodilerogue.png'
 import crow from '../pics/opponents/crow.png'
-import lamprey from '../pics/opponents/lamprey.png'
+import crystalmage from '../pics/opponents/crystalmage.png'
+import cthulhu from '../pics/opponents/cthulhu.png'
+import cultist from '../pics/opponents/cultist.png'
+import darknesstitan from '../pics/opponents/darknesstitan.png'
+import demon from '../pics/opponents/demon.png'
+import dragonemperor from '../pics/opponents/dragonemperor.png'
+import dryad from '../pics/opponents/dryad.png'
+import dryadqueen from '../pics/opponents/dryadqueen.png'
+import dynamo from '../pics/opponents/dynamo.png'
+import elvenking from '../pics/opponents/elvenking.png'
+import elvenmage from '../pics/opponents/elvenmage.png'
+import excelsios from '../pics/opponents/excelsios.png'
+import feralbeast from '../pics/opponents/feralbeast.png'
+import fireangel from '../pics/opponents/fireangel.png'
+import fireimp from '../pics/opponents/fireimp.png'
+import firelord from '../pics/opponents/firelord.png'
 import firewitch from '../pics/opponents/firewitch.png'
-// import firedrake from '../pics/opponents/firedrake.png'
-// import thanatos from '../pics/opponents/thanatos.png'
-// import arcanegolem from '../pics/opponents/arcanegolem.png'
-// import dragonemperor from '../pics/opponents/dragonemperor.png'
-// import gladius from '../pics/opponents/gladius.png'
-// import feralbeast from '../pics/opponents/feralbeast.png'
-// import feralbeast2 from '../pics/opponents/feralbeast2.png'
-// import automaton from '../pics/opponents/automaton.png'
-// import astrallich from '../pics/opponents/astrallich.png'
-// import stonegolem from '../pics/opponents/stonegolem.png'
-// import excelsios from '../pics/opponents/excelsios.png'
-// import golddragon from '../pics/opponents/golddragon.png'
-// import eldritchslime from '../pics/opponents/eldritchslime.png'
-// import hades from '../pics/opponents/hades.png'
-// import radulac from '../pics/opponents/radulac.png'
-// import tiamat from '../pics/opponents/tiamat.png'
-// import caveworm from '../pics/opponents/caveworm.png'
-// import drakenvamp from '../pics/opponents/drakenvamp.png'
-// import garuda from '../pics/opponents/garuda.png'
-// import tenteye from '../pics/opponents/tenteye.png'
-// import voidgargoyle from '../pics/opponents/voidgargoyle.png'
-// import behemoth from '../pics/opponents/behemoth.png'
-// import warlock from '../pics/opponents/warlock.png'
+import forestgolem from '../pics/opponents/forestgolem.png'
+import gazer from '../pics/opponents/gazer.png'
+import ghostknight from '../pics/opponents/ghostknight.png'
+import giantfish from '../pics/opponents/giantfish.png'
+import goblinmage from '../pics/opponents/goblinmage.png'
+import golddragon from '../pics/opponents/golddragon.png'
+import iceelemental from '../pics/opponents/iceelemental.png'
+import harbinger from '../pics/opponents/harbinger.png'
+import ignis from '../pics/opponents/ignis.png'
+import imp from '../pics/opponents/imp.png'
+import knightking from '../pics/opponents/knightking.png'
+import koboldarcher from '../pics/opponents/koboldarcher.png'
+import lamprey from '../pics/opponents/lamprey.png'
+import mage from '../pics/opponents/mage.png'
+import minordemon from '../pics/opponents/minordemon.png'
+import myrdin from '../pics/opponents/myrdin.png'
+import radulac from '../pics/opponents/radulac.png'
+import runicgolem from '../pics/opponents/runicgolem.png'
+import scarletwyrm from '../pics/opponents/scarletwyrm.png'
+import sparkdragon from '../pics/opponents/sparkdragon.png'
+import stonegolem from '../pics/opponents/stonegolem.png'
+import succubus from '../pics/opponents/succubus.png'
+import sunwarrior from '../pics/opponents/sunwarrior.png'
+import thanatos from '../pics/opponents/thanatos.png'
+import vampire from '../pics/opponents/vampire.png'
+import voidgargoyle from '../pics/opponents/voidgargoyle.png'
+import waterspirit from '../pics/opponents/waterspirit.png'
+import windpriest from '../pics/opponents/windpriest.png'
+import yoggoth from '../pics/opponents/yoggoth.png'
+
 
 const monsterPics = {
-  mimic, blindworm, dryad, giantfish, fireimp, bloodmage, lamprey, waterspirit, crow, firewitch, gazer,
+  alfadriel, ansellus, arcanegolem, astrallich, behemoth, blindworm, bloodmage, bulldragon, chimera, 
+  crocodilerogue, crow, crystalmage, cthulhu, cultist, darknesstitan, demon, dragonemperor, dryad, dryadqueen, 
+  dynamo, elvenking, elvenmage, excelsios, feralbeast, fireangel, fireimp, firelord, firewitch, forestgolem, 
+  gazer, ghostknight, giantfish, goblinmage, golddragon, harbinger, iceelemental, ignis, imp, knightking, koboldarcher, 
+  lamprey, mage, minordemon, myrdin, radulac, runicgolem, scarletwyrm, sparkdragon, stonegolem, succubus, sunwarrior, thanatos, vampire, voidgargoyle, waterspirit, 
+  windpriest, yoggoth
 }
 
 const monsterProfiles = {
-  brute: { STR: 10, DEX: 4, CON: 5, MAG: 1, LCK: 1 },     // High STR
+  brute: { STR: 10, DEX: 6, CON: 4, MAG: 1, LCK: 1 },     // High STR
   tank: { STR: 5, DEX: 4, CON: 11, MAG: 1, LCK: 1 },      // High CON
   duelist: { STR: 8, DEX: 9, CON: 2, MAG: 1, LCK: 4 },    // Hit strong, high luck, low HP
   archmage: { STR: 1, DEX: 1, CON: 3, MAG: 15, LCK: 2 },  // Ultra high MAG
   wizard: { STR: 2, DEX: 2, CON: 5, MAG: 11, LCK: 1 },    // High MAG
   balanced: { STR: 5, DEX: 5, CON: 5, MAG: 5, LCK: 2 },   // Full random
+  // Todo : mimic (same as player but a bit better)
 }
 
 export {

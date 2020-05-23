@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from "react-redux"
 
 /**
-  * @desc description of the component
-  * @todo Use a todo tag to store future changes
+  * @desc Bar UI component (HP, etc)
 */
 
 const propTypes = {

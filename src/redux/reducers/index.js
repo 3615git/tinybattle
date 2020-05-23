@@ -16,6 +16,7 @@ import { setUIColor } from '../../actions/settings/setUIColor'
 import { preference } from '../../actions/settings/preference'
 // Game system
 import { welcome } from '../../actions/game/welcome'
+import { quit } from '../../actions/game/quit'
 import { gameCreate } from '../../actions/game/gameCreate'
 import { levelTransition } from '../../actions/game/levelTransition'
 import { battleIntro } from '../../actions/game/battleIntro'
@@ -138,6 +139,10 @@ function rootReducer(state = initialState, action) {
       case `welcome`:
         clog(`welcome`, `reducer`)
         nextState = welcome(nextState)
+        break;
+      case `quit`:
+        clog(`quit`, `reducer`)
+        nextState = quit(nextState)
         break;
       case `gameCreate`:
         clog(`gameCreate`, `reducer`)
@@ -316,7 +321,7 @@ function rootReducer(state = initialState, action) {
   // In every case, compute Max values
   nextState = maxEnergyRefresh(nextState)
 
-  // Save state to LocalStorage
+  // Update LocalStorage
   saveState(nextState)
 
   // Return updated state

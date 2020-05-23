@@ -122,7 +122,7 @@ class Defeat extends Component {
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })} disabled={movedItems.length !== itemCount}>Enter hall of fame</button>
+            {/* <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })} disabled={movedItems.length !== itemCount}>Enter hall of fame</button> */}
             <button className="navigation" onClick={() => setGameState({ state: `welcome` })} disabled={movedItems.length !== itemCount}>Start again !</button>
           </div>
         </div>

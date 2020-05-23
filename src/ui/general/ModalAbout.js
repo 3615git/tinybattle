@@ -23,19 +23,26 @@ function mapDispatchToProps(dispatch) {
 const ModalAbout = () => {
 
   const logoStyle = {
-    width: `200px`,
     imageRendering: `optimizeQuality`
   }
 
   // Display component
   return (
-    <div>
+    <div className="credits">
       <img src={logo} className="logo" alt="Logo" style={logoStyle} />
-      <div>Credits</div>
-      <p>Monsters design</p>
-      <a href="http://www.akashics.moe/" target="_blank">Ækashics Librarium</a>
-      <p>Third party libs</p>
-      <a href="https://github.com/Vibrant-Colors/node-vibrant" target="_blank">Node Vibrant</a>
+      <p>A game about killing monsters<br />and killing phone batteries.</p>
+      <div className="separator" />
+      <div className="title">Game dev & design</div>
+      <p>Rémi</p>
+      <div className="title">Monsters design</div>
+      <p><a href="http://www.akashics.moe/" target="_blank">Ækashics Librarium</a></p>
+      <div className="title">Pixel art assets</div>
+      <p><a href="https://www.deviantart.com/7soul1" target="_blank">7 Soul</a></p>
+      <div className="title">Nice third party libs</div>
+      <p><a href="https://github.com/Vibrant-Colors/node-vibrant" target="_blank">Node Vibrant</a></p >
+      <p><a href="https://www.papaparse.com/" target="_blank">Papa Parse</a></p >
+      <div className="separator" />
+      <p>Thank you for playing!</p>
     </div>
   )
 }

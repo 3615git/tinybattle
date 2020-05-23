@@ -15,10 +15,19 @@ function getLevelInfo(level, monsterTiers) {
   return levelInfo
 }
 
-function getMonsterFromLevel(level, monsterTiers, monsters) {
+function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents) {
   const levelInfo = getLevelInfo(level, monsterTiers)
-  // Todo : remove alredy played monsters from array
-  const monster = randomValue(levelInfo.monsters)
+  // Remove alredy played monsters from array
+  let availableOpponents
+  if (pastOpponents) {
+    availableOpponents = levelInfo.monsters.filter(function (el) {
+      return pastOpponents.indexOf(el) < 0
+    })
+  } else {
+    availableOpponents = levelInfo.monsters
+  }
+
+  const monster = randomValue(availableOpponents)
   
   return monsterInfo(monster, level, monsters)
 }

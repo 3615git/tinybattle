@@ -28,7 +28,7 @@ class GameCreate extends Component {
     const { player } = this.props
 
     this.state = { 
-      name: player && player.name ? player.name : `Adventurer`,
+      name: player && player.name ? player.name : ``,
       baseStyle: 'warrior'
     }
   }
@@ -83,6 +83,7 @@ class GameCreate extends Component {
       const value = player.instants[index]
       instants.push(
         <Item
+          key={`instant_${index}`}
           item={value}
           displayChar={false}
           noPlus

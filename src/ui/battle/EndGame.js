@@ -13,7 +13,8 @@ const mapStateToProps = state => {
     player: state.player,
     opponent: state.opponent,
     game: state.game,
-    playerTurn: state.game.playerTurn
+    playerTurn: state.game.playerTurn,
+    dataLogs: state.dataLogs
   }
 }
 
@@ -23,7 +24,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const EndGame = ({ player, opponent, game, display, setGameState }) => {
+const EndGame = ({ player, opponent, game, display, setGameState, dataLogs }) => {
 
   // Component styling
   const defaultClasses = `endGame`
@@ -44,7 +45,14 @@ const EndGame = ({ player, opponent, game, display, setGameState }) => {
             <div className="title defeat">Defeat !</div>
             <div className="subtitle">
               <span style={opponentNameStyle}>{opponent.name}</span> won.<br />
-              You're dead</div>
+              You're dead
+            </div>
+            <div className="subtitle">
+              {dataLogs.length - 1 > 1
+                ? <span>{`${dataLogs.length - 1} rounds`}</span>
+                : <span>{`${dataLogs.length - 1} round !`}</span>
+              }
+            </div>
             <img className="death" src={death} alt="You're dead" />
           </div>
           <div className="actionArea">
@@ -60,6 +68,12 @@ const EndGame = ({ player, opponent, game, display, setGameState }) => {
           <div className="presentationArea">
             <div className="title">Victory !</div>
             <div className="subtitle"><span style={opponentNameStyle}>{opponent.name}</span><br />is dead</div>
+            <div className="subtitle">
+              {dataLogs.length - 1 > 1
+                ? <span>{`${dataLogs.length - 1} rounds`}</span>
+                : <span>{`${dataLogs.length - 1} round !`}</span>
+              }
+            </div>
             <div className="crackedImage">
               <img src={opponent.pic} alt={opponent.name} />
             </div>

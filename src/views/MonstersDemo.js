@@ -35,7 +35,7 @@ class MonstersDemo extends Component {
         <Monster 
           key={`monster_${property}`}
           type={property} 
-          level={1}
+          level={20}
           data={monsterInfo(property, 1, monsterList)}
         />
       )

@@ -73,11 +73,12 @@ class BattleIntro extends Component {
           <Opponent color={monstercolor} intro="intro" />
           <div className="opponentIntro">
             <div className="name">
+              {opponent.elite && <span>Elite&nbsp;</span>}
               {opponent.name}
             </div>
             <div className="details">
-              {opponent.elite && <Element element="elite" />}
-              {opponent.element && <Element element={opponent.element} />}
+              {opponent.elite && <Element big element="elite" />}
+              {opponent.element && <Element big element={opponent.element} />}
             </div>
           </div>
           <div className="actionArea">

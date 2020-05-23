@@ -32,7 +32,8 @@ class Monster extends Component {
     }
   }
 
-  fetchPalette = (imgSrc) => {
+  fetchPalette = (imgSrc, data) => {
+    if (!imgSrc) console.log(data)
     Vibrant.from(imgSrc).getPalette()
       .then(palette => {
         this.setState({
@@ -48,7 +49,7 @@ class Monster extends Component {
   componentDidMount() {
     const { type, data } = this.props
     // Fetch colors
-    this.fetchPalette(data.pic)
+    this.fetchPalette(data.pic, data)
 
     // Defining portrait or landscape mode for portraits
     var portrait = document.getElementById('portrait_'+type)
@@ -73,7 +74,7 @@ class Monster extends Component {
     const monsterbackground = color.darkVibrant
 
     // Component styling
-    const defaultClasses = `opponentWrapper small`
+    const defaultClasses = `opponentWrapper small` // removed "small" for offset testing
   
     // Add custom classes to defined classes
     const itemClasses = [defaultClasses].filter(val => val).join(` `)
@@ -85,9 +86,11 @@ class Monster extends Component {
 
     // Monster portrait size
     const portraitStyling = mode === `portrait` ? {
-      width: `400px`
+      width: `400px`,
+      top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     } : {
-      width: `500px`
+      width: `500px`,
+      top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     }
 
     // Monster display
