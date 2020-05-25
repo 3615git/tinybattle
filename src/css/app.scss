@@ -263,6 +263,15 @@ html, body, #root {
   transition: all 500ms;
   z-index: 2;
 
+  // background-blend-mode: hard-light;
+
+  &.fire { background-image: url("../pics/ui/cover_fire.png"); }
+  &.earth { background-image: url("../pics/ui/cover_earth.png"); }
+  &.water { background-image: url("../pics/ui/cover_water.png"); }
+  &.darkness { background-image: url("../pics/ui/cover_darkness.png"); }
+
+  background-position: left top;
+
   &.small {
     margin: 20px auto;
     

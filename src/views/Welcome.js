@@ -71,8 +71,8 @@ class Welcome extends Component {
             <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Defeat demo</button> 
             <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
             <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Enter shop</button>
-            <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>
-            */}
+            <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>   
+          */}
             
           </div>
           <div className="actionArea">

@@ -65,14 +65,14 @@ class Opponent extends Component {
     const introClasses = intro ? intro : ``
   
     const wrapperStyle = !turn ? {
-      background: monsterbackground,
+      backgroundColor: monsterbackground,
       boxShadow: `rgba(0, 0, 0, 0.59) 0px 0px 11px 0px, 0px 0px 40px ${monstercolor}`
     } : {
-      background: monsterbackground,
+      backgroundColor: monsterbackground,
     }
   
     // Add custom classes to defined classes
-    const itemClasses = [defaultClasses, turnClasses, introClasses].filter(val => val).join(` `)
+    const itemClasses = [defaultClasses, turnClasses, introClasses, data.element].filter(val => val).join(` `)
 
     // Monster bg styling
     const bgStyling = appbackground ? {

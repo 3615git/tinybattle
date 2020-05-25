@@ -74,14 +74,14 @@ class Monster extends Component {
     const monsterbackground = color.darkVibrant
 
     // Component styling
-    const defaultClasses = `opponentWrapper small` // removed "small" for offset testing
+    const defaultClasses = `opponentWrapper` // removed "small" for offset testing
   
     // Add custom classes to defined classes
-    const itemClasses = [defaultClasses].filter(val => val).join(` `)
+    const itemClasses = [defaultClasses, data.element].filter(val => val).join(` `)
 
     // Monster bg styling
     const wrapperStyle = {
-      background: monsterbackground
+      backgroundColor: monsterbackground
     }
 
     // Monster portrait size
