@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.monster.hunter.d20",
+               "sha256_cert_fingerprints": ["B0:7A:EA:A9:8E:EF:C2:BE:22:D1:92:C3:1A:7E:8F:D6:10:6A:62:33:94:9E:33:23:FC:15:38:5E:BA:C6:D4:EA"] }
+}]
