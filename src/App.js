@@ -107,15 +107,15 @@ class App extends Component {
     let options
     let fullOptions = (
       <div className="optionsWrapper" key="options">
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
         <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
+        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
       </div>
     )
 
     let smallOptions = (
       <div className="optionsWrapper" key="options">
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
         <button className="option" onClick={() => setGameState({ state: `quit` })}><img src={close} alt="Quit" /></button>
+        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
       </div>
     )
 

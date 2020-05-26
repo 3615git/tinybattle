@@ -18,7 +18,7 @@ const gameSettings = {
     heal: 3,
     stun: 3,
     itembreak: 3,
-    reflect: 3,
+    reflect: 4,
     psyblast: 3,
     curse: 3,
   },
