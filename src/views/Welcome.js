@@ -77,7 +77,7 @@ class Welcome extends Component {
           </div>
           <div className="actionArea">
             {startButton}
-            <div className="version">0.0.3</div>
+            <div className="version">0.0.4</div>
           </div>
         </div>
       </div>
