@@ -2,7 +2,7 @@ name: Deployment
 on:
   push:
     branches:
-      - mopemaster
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
