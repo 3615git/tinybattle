@@ -15,10 +15,8 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install and Test
-        run: |
-          yarn
-          yarn test
+      - name: Install
+        run: npm install
         env:
           CI: true
 
@@ -32,6 +30,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: build
           FOLDER: build
-          BUILD_SCRIPT: yarn && yarn build
+          BUILD_SCRIPT: npm run build
