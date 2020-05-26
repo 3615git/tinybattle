@@ -26,7 +26,7 @@ const charPower = {
   DEX: 20,
   CON: 20,
   MAG: 20,
-  LCK: 5
+  LCK: 3
 }
 
 // Repartition of item quality
@@ -43,10 +43,36 @@ const weaponElements = {
 }
 
 const itemQualityBonus = {
-  normal: [0,0],
-  magic: [1,3],
-  rare: [4,6],
-  legendary: [7,10]
+  STR: {
+    normal: [0, 0],
+    magic: [1, 3],
+    rare: [4, 6],
+    legendary: [7, 10]
+  },
+  DEX: {
+    normal: [0, 0],
+    magic: [1, 3],
+    rare: [4, 6],
+    legendary: [7, 10]
+  },
+  CON: {
+    normal: [0, 0],
+    magic: [1, 3],
+    rare: [4, 6],
+    legendary: [7, 10]
+  },
+  MAG: {
+    normal: [0, 0],
+    magic: [1, 3],
+    rare: [4, 6],
+    legendary: [7, 10]
+  },
+  LCK: {
+    normal: [0, 0],
+    magic: [1, 1],
+    rare: [1, 2],
+    legendary: [2, 3]
+  },
 }
 
 const weaponDamage = {

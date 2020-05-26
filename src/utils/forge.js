@@ -23,6 +23,7 @@ function getItemIdFromLevel(itemType, level) {
 }
 
 function getItemPowerFromLevel(CHAR, level) {
+  /** This was crap
   // Cut power range into level segments
   const powerRange = charPower[CHAR]
   const lowTier = Math.floor(powerRange / gameSettings.maxLevel)
@@ -30,6 +31,17 @@ function getItemPowerFromLevel(CHAR, level) {
   // Get low and high points of the range
   const possiblePowerLow = lowTier * (level - 1) < 1 ? 1 : lowTier * (level - 1)
   const possiblePowerHigh = hightTier * level > powerRange ? powerRange : hightTier * level
+  */
+
+  // Cut power range into level segments
+  const maxPower = charPower[CHAR]
+  const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
+  const tierPower = Math.ceil(maxPower / gameSettings.zones)
+
+  let possiblePowerLow = ((tier - 1) * tierPower === 0) ? 1 : (tier - 1) * tierPower
+  let possiblePowerHigh = tier * tierPower
+
+  console.log(CHAR, possiblePowerLow, possiblePowerHigh)
 
   return getRandomInt(possiblePowerLow, possiblePowerHigh)
 }
