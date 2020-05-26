@@ -119,6 +119,28 @@ html, body, #root {
   // max-width: 450px;
   height: 100%;
   overflow: hidden; /* Prevents side scrolling for overflowing pictures */
+
+  &.battle {
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      z-index: 1;
+      mix-blend-mode: screen;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      background: linear-gradient(0deg, #ef0505, transparent);
+      pointer-events: none;
+    }
+    &.danger_6:before { @include animation-danger(6); }
+    &.danger_7:before { @include animation-danger(7); }
+    &.danger_8:before { @include animation-danger(8); }
+    &.danger_9:before { @include animation-danger(9); }
+    &.danger_10:before { @include animation-danger(9); }
+  }
 }
 
 .vibrationWrapper {
@@ -193,23 +215,6 @@ html, body, #root {
     display: flex;
     flex-direction: column;
   }
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    box-shadow: inset 0 0 15px 13px rgba(255, 0, 0, 0.22);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  &.danger_6:after { @include animation-danger(6); opacity: .2; }
-  &.danger_7:after { @include animation-danger(7); opacity: .4; }
-  &.danger_8:after { @include animation-danger(8); opacity: .6; }
-  &.danger_9:after { @include animation-danger(9); opacity: .8; }
-  &.danger_10:after { @include animation-danger(9); opacity: .9; }
 }
 
 .playerArea.playerTurn {
@@ -264,13 +269,15 @@ html, body, #root {
   z-index: 2;
 
   // background-blend-mode: hard-light;
+  // background-blend-mode: luminosity;
+  background-blend-mode: soft-light;
 
   &.fire { background-image: url("../pics/ui/cover_fire.png"); }
   &.earth { background-image: url("../pics/ui/cover_earth.png"); }
   &.water { background-image: url("../pics/ui/cover_water.png"); }
   &.darkness { background-image: url("../pics/ui/cover_darkness.png"); }
 
-  background-position: left top;
+  background-position: top center;
 
   &.small {
     margin: 20px auto;

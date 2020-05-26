@@ -19,6 +19,9 @@ const damage = (data, item, id) => {
   // Applying rage
   targetPlayer.physicalRage = damageResult
 
+  // Update rumble ui
+  data.game.opponentHit = true
+
   // Update instant counter
   activePlayer = instantUse(activePlayer, id)
 

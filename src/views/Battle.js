@@ -71,9 +71,13 @@ class Battle extends Component {
 
   // Skip timer
   skipTurnChange = () => {
-    clearTimeout(this.opponentTurn)
-    clearTimeout(this.playerTurn)
-    this.changeTurn()
+    const { opponent, player } = this.props
+    // Skip animations, only if nobody's dead
+    if (opponent.hitPoints !== 0 && player.hitPoints !== 0) {
+      clearTimeout(this.opponentTurn)
+      clearTimeout(this.playerTurn)
+      this.changeTurn()
+    }
   }
  
   opponentAttackChoice = () => {
@@ -139,19 +143,19 @@ class Battle extends Component {
       }
 
       return false
-    }
-
-    // If turn changed, and it's opponent turn
-    if (prevProps.playerTurn !== playerTurn && playerTurn === false && !game.skipTurn) {
-      this.launchOpponentTurn()
-    }
-
-    // If turn changed and it's player's turn
-    if (prevProps.playerTurn !== playerTurn && playerTurn === true) {
-      clearTimeout(this.playerTurn)
-      this.playerTurn = setTimeout(function () {
-        this.changeTurn()
-      }.bind(this), settings.combatSpeed)
+    } else {
+      // If turn changed, and it's opponent turn
+      if (prevProps.playerTurn !== playerTurn && playerTurn === false && !game.skipTurn) {
+        this.launchOpponentTurn()
+      }
+  
+      // If turn changed and it's player's turn
+      if (prevProps.playerTurn !== playerTurn && playerTurn === true) {
+        clearTimeout(this.playerTurn)
+        this.playerTurn = setTimeout(function () {
+          this.changeTurn()
+        }.bind(this), settings.combatSpeed)
+      }
     }
   }
 
@@ -160,7 +164,6 @@ class Battle extends Component {
     clearTimeout(this.opponentTurn)
     clearTimeout(this.playerTurn)
     clearTimeout(this.endGame)
-
   }
 
   render() {
@@ -172,11 +175,11 @@ class Battle extends Component {
     // Low HP
     const hpRange = 10 - Math.round((player.hitPoints * 10) / player.maxHitPoints)
 
-    const playerAreaClass = playerTurnUI ? `playerArea playerTurn danger_${hpRange}` : `playerArea opponentTurn danger_${hpRange}`
+    const playerAreaClass = playerTurnUI ? `playerArea playerTurn` : `playerArea opponentTurn`
 
     return (
       <div className="mainWrapper">
-        <div className="appWrapper">
+        <div className={`appWrapper battle danger_${hpRange}`}>
           <EndGame display={battleEnd} />
           <VibrationWrapper condition={game.opponentHit}>
             <Opponent color={uicolor} turn={playerTurnUI} />

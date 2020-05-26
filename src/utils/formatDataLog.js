@@ -87,7 +87,7 @@ function formatDataLog(type, fightLog, game) {
       }
 
       title = `${playerDisplay} attacks!`
-      message = `${attackResult} ${reflectDisplay}${boostDisplay}<br />${damage}`
+      message = `${attackResult} ${reflectDisplay}${boostDisplay} ${damage}`
       note = `To hit : ${fightLog.data.hit.toHit}`
       log = `${playerDisplay} attacks! To hit : ${fightLog.data.hit.toHit} <span class="roll">${fightLog.data.hit.roll}</span>${attackResult} ${reflectDisplay}${boostDisplay} ${damage}`
       // Weapon icon

@@ -62,9 +62,11 @@ function monsterStats(monsterData, level, elite) {
   }
 
   // Compute mana & stamina
-  let hitPoints = monsterCHAR[`CON`] * 10
+  let CONItemBuff = monsterData.items && monsterData.items[`CON`] && monsterData.items[`CON`].score ? monsterData.items[`CON`].score : 0
+  let MAGItemBuff = monsterData.items && monsterData.items[`MAG`] && monsterData.items[`MAG`].score ? monsterData.items[`MAG`].score : 0
+  let hitPoints = (monsterCHAR[`CON`] + CONItemBuff) * 10
   if (!monsterData.humanoid) hitPoints += Math.round(hitPoints * getRandomInt(beastHealthBoostRange[0], beastHealthBoostRange[1]) / 100)
-  const magicPoints = monsterCHAR[`MAG`] * 10 // Useless ATM
+  const magicPoints = (monsterCHAR[`MAG`] + MAGItemBuff) * 10 // Useless ATM
 
   return {
     STR: monsterCHAR[`STR`] ? monsterCHAR[`STR`] : 1,

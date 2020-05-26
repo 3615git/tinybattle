@@ -40,7 +40,7 @@ const EndGame = ({ player, opponent, game, display, setGameState, dataLogs }) =>
 
     if (player.hitPoints === 0) {
       return (
-        <div className={`${itemClasses} active`} onClick={() => setGameState({ state: `defeat` })}>
+        <div className={`${itemClasses} active`}>
           <div className="presentationArea">
             <div className="title defeat">Defeat !</div>
             <div className="subtitle">
@@ -64,7 +64,7 @@ const EndGame = ({ player, opponent, game, display, setGameState, dataLogs }) =>
     // If opponent is dead
     else if (opponent.hitPoints === 0) {
       return (
-        <div className={`${itemClasses} active`} onClick={() => setGameState({ state: `victory` })}>
+        <div className={`${itemClasses} active`}>
           <div className="presentationArea">
             <div className="title">Victory !</div>
             <div className="subtitle"><span style={opponentNameStyle}>{opponent.name}</span><br />is dead</div>
