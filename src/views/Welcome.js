@@ -46,7 +46,7 @@ class Welcome extends Component {
 
     // Start button
     let startButton
-    if (game.quitState) {
+    if (game.quitState && player.name) {
       startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - lvl. {game.level}</span></button>
     } else {
       startButton = <button className="navigation" onClick={() => this.newGame()}>New game</button>
