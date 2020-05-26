@@ -87,8 +87,10 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^2.2.0",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "webpack-jarvis": "^0.3.2"
   },
   "jest": {
     "roots": [
