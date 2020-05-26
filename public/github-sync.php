@@ -1,1 +1,2 @@
-<?php `git checkout -f build`;
+<?php `git fetch origin`; ?>
+<?php `git reset --hard origin/build`; ?>
