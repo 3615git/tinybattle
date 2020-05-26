@@ -1,1 +1,1 @@
-<?php `git pull`;
+<?php `git checkout -f build`;
