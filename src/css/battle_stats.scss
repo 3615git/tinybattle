@@ -78,13 +78,13 @@
   flex: 0;
   margin-left: 16px;
 
-  :first-child {
+  .item_wrapper:first-child {
     // background-color: $color_STR;
     border-bottom: none !important;
     border-radius: 5px 5px 0 0;
   }
 
-  :last-child {
+  .item_wrapper:last-child {
     // background-color: $color_MAG;
     border-top: none !important;
     border-radius: 0 0 5px 5px;

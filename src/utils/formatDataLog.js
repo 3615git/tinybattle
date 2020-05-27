@@ -255,7 +255,7 @@ function formatDataLog(type, fightLog, game) {
       if (fightLog.data.hit === `fumble`) {
         attackResult = `This did not work`
         damage = `No effect.`
-        note = `Weapons has not changed.`
+        note = `Weapon has not changed.`
       } else {
         attackResult = `Weapon enhanced!`
         damage = `<span class="up">1D</span> damage!`

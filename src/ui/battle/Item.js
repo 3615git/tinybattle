@@ -68,6 +68,23 @@ class Item extends Component {
     const itemClasses = [defaultClasses, qualityClasses, glowClasses, effectClasses, updateClasses].filter(val => val).join(` `)
     const emptyItemClasses = [defaultClasses, updateClasses].filter(val => val).join(` `)
 
+    // Sharpen marks
+    let marks = []
+    if (item && item.sharpen) {
+      for (let index = 0; index < item.sharpen; index++) {
+        marks.push(<div className="markWrapper"><div className="mark" /></div>)
+      }
+    }
+
+    // Sharpened score
+    let itemScore
+    if (item && item.type && item.id) itemScore =  item.score
+
+    if (item && item.sharpen) {
+      let weaponScore = itemScore.split(`d`)
+      itemScore = <span dangerouslySetInnerHTML={{ __html: `<span class="legacyColor">${weaponScore[0]}</span>d${weaponScore[1]}` }} />
+    }
+
     if (item && item.type && item.id) return (
       <div className={itemClasses}>
         {item.cost &&
@@ -75,6 +92,9 @@ class Item extends Component {
             <div className={`itemCost ${costType}`}>{item.cost}</div>
             {item.element !== `none` && <div className={`element ${item.element}`} /> }
           </>
+        }
+        {item.sharpen &&
+          <div className={`itemAlteration`}>{marks}</div>
         }
         {item.charges &&
           <>
@@ -90,7 +110,7 @@ class Item extends Component {
               formatValue={value => value.toFixed(0)}
               value={item.score}
             />)
-            : item.score
+            : itemScore
           }
           {item.label}
         </span>
