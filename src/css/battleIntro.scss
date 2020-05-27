@@ -65,6 +65,13 @@
   }
 }
 
+.dataLogsWrapper .elementWrapper {
+  width: 16px;
+  height: 16px;
+  background-size: 16px;
+  border: 1px solid rgba(0,0,0, 1);
+}
+
 .levelTiersWrapper {
   display: flex;
 
