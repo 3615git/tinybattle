@@ -41,8 +41,6 @@ function getItemPowerFromLevel(CHAR, level) {
   let possiblePowerLow = ((tier - 1) * tierPower === 0) ? 1 : (tier - 1) * tierPower
   let possiblePowerHigh = tier * tierPower
 
-  console.log(CHAR, possiblePowerLow, possiblePowerHigh)
-
   return getRandomInt(possiblePowerLow, possiblePowerHigh)
 }
 
