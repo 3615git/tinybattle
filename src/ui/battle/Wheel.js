@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { gameSettings } from "../../conf/settings"
 import ItemVisual from './ItemVisual'
+import { getRandomInt } from '../../utils/utils'
 
 /**
   * Wheel for "random" results
@@ -30,8 +31,9 @@ class Wheel extends Component {
   componentDidMount() {
     const { position } = this.props
     this.rollDelay = setTimeout(() => {
+      let naturalRoll = getRandomInt(-3, 3)
       this.setState({
-        rollPosition: (position * 45) + (16 * 45) + 112.5
+        rollPosition: (position * 45) + (16 * 45) + 112.5 + 360 + naturalRoll
       })
     }, gameSettings.widgetDelay)
   }
@@ -43,8 +45,16 @@ class Wheel extends Component {
   render() {
     const { type, items, customFumble } = this.props
     const { rollPosition } = this.state
+
+    // More natural wheel roll
+    let bezier1 = getRandomInt(50, 58) / 100
+    let bezier2 = getRandomInt(-37, 18) / 100
+    let bezier3 = getRandomInt(39, 100) / 100
+    let bezier4 = getRandomInt(60, 140) / 100
+
     const wheelStyle = {
-      transform: `rotate(${rollPosition}deg)`
+      transform: `rotate(${rollPosition}deg)`,
+      transition: `transform 1.5s cubic-bezier(${bezier1},${bezier2},${bezier3},${bezier4})`
     } 
 
     // Fumble icon
