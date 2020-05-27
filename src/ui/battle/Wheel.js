@@ -67,16 +67,19 @@ class Wheel extends Component {
 
     // Type or item wheel
     let wheelItems
+
+    console.log(items)
+    
     if (items) {
       wheelItems = (
         <>
-          <li><ItemVisual item={items[0].item.type} level={items[0].item.id} /></li>
-          <li><ItemVisual item={items[1].item.type} level={items[1].item.id} /></li>
-          <li><ItemVisual item={items[2].item.type} level={items[2].item.id} /></li>
+          <li><ItemVisual item={items[0] === `fumble` ? fumbleIcon[0] : items[0].item.type} level={items[0] === `fumble` ? fumbleIcon[1] : items[0].item.id} /></li>
+          <li><ItemVisual item={items[1] === `fumble` ? fumbleIcon[0] : items[1].item.type} level={items[1] === `fumble` ? fumbleIcon[1] : items[1].item.id} /></li>
+          <li><ItemVisual item={items[2] === `fumble` ? fumbleIcon[0] : items[2].item.type} level={items[2] === `fumble` ? fumbleIcon[1] : items[2].item.id} /></li>
           <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
-          <li><ItemVisual item={items[4].item.type} level={items[4].item.id} /></li>
-          <li><ItemVisual item={items[5].item.type} level={items[5].item.id} /></li>
-          <li><ItemVisual item={items[6].item.type} level={items[6].item.id} /></li>
+          <li><ItemVisual item={items[4] === `fumble` ? fumbleIcon[0] : items[4].item.type} level={items[4] === `fumble` ? fumbleIcon[1] : items[4].item.id} /></li>
+          <li><ItemVisual item={items[5] === `fumble` ? fumbleIcon[0] : items[5].item.type} level={items[5] === `fumble` ? fumbleIcon[1] : items[5].item.id} /></li>
+          <li><ItemVisual item={items[6] === `fumble` ? fumbleIcon[0] : items[6].item.type} level={items[6] === `fumble` ? fumbleIcon[1] : items[6].item.id} /></li>
           <li><ItemVisual item={fumbleIcon[0]} level={fumbleIcon[1]} /></li>
         </>
       )

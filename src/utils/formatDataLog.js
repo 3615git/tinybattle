@@ -252,12 +252,19 @@ function formatDataLog(type, fightLog, game) {
       break;
 
     case `sharpen`:
+      if (fightLog.data.hit === `fumble`) {
+        attackResult = `This did not work`
+        damage = `No effect.`
+        note = `Weapons has not changed.`
+      } else {
+        attackResult = `Weapon enhanced!`
+        damage = `<span class="up">1D</span> damage!`
+        note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `
+      }
+
       // Hit
-      attackResult = `Sharpen weapon!`
-      damage = `<span class="up">1D</span> damage!`
       title = `${playerDisplay} sharpens a weapon!`
       message = damage
-      note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `
       log = `${title} ${damage} ${note}`
       icon = fightLog.data.icon
       break;
