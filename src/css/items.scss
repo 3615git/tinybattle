@@ -68,6 +68,32 @@
   font-size: $font_tiny;
 }
 
+.itemAlteration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 6px;
+  top: 0px;
+  right: -4px;
+
+  .markWrapper {
+    margin: 1px;
+
+    .mark {
+      width: 4px;
+      height: 4px;
+      transform: rotate(45deg);
+      background-color: $color_legacy !important;
+      @include itemStyle($color_itemNormal);
+      box-shadow: none;
+      border-width: 1px;;
+    }
+  }
+}
+
 .itemCost.magical {
   color: lighten($color_MAG, 20);
 }

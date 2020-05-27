@@ -252,17 +252,17 @@ const instantSpecs = {
     magic: {
       type: `tool`,
       id: [5, 8],
-      charges: 1
+      charges: 2
     },
     rare: {
       type: `tool`,
       id: [9, 12],
-      charges: 2
+      charges: 3
     },
     legendary: {
       type: `tool`,
       id: [9, 12],
-      charges: 2
+      charges: 4
     }
   },
   sharpenmagical: {
@@ -274,17 +274,17 @@ const instantSpecs = {
     magic: {
       type: `tool`,
       id: [5, 8],
-      charges: 1
+      charges: 2
     },
     rare: {
       type: `tool`,
       id: [9, 12],
-      charges: 2
+      charges: 3
     },
     legendary: {
       type: `tool`,
       id: [9, 12],
-      charges: 2
+      charges: 4
     }
   },
 }

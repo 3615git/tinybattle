@@ -206,6 +206,10 @@
 
 }
 
+.legacyColor {
+  color: $color_legacy;
+}
+
 .bonusColor {
   color: $color_bonus;
 }
@@ -296,6 +300,19 @@ span.boost {
       line-height: 12px;
       margin-top: 5px;
       color: #a5a5a5;
+
+      .dataLog {
+        display: flex;
+        align-items: center;
+
+        span {
+          margin: 0 3px;
+
+          &:first-child {
+            margin-left: 0px;
+          }
+        }
+      }
   
       .item {
         margin-right: 10px;

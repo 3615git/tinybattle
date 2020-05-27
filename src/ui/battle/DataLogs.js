@@ -32,7 +32,7 @@ const DataLogs = ({ dataLogs, game }) => {
   for (let index = 0; index < dataLogs.length; index++) {
     const log = dataLogs[index]
     logs.push(
-      <li key={`datalog_${index}`}><ItemVisual item={log.icon[0]} level={log.icon[1]} small /><span dangerouslySetInnerHTML={{ __html: log.log }} /></li>
+      <li key={`datalog_${index}`}><ItemVisual item={log.icon[0]} level={log.icon[1]} small /><span className="dataLog" dangerouslySetInnerHTML={{ __html: log.log }} /></li>
     )
   }
 
