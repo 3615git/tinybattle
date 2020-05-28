@@ -24,8 +24,10 @@
   .lootBoxes {
     z-index: 2;
 
-    &.weapons .characName {
-      opacity: 0;
+    &.itemBox {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 
@@ -61,6 +63,22 @@
       padding: 5px;
       text-align: center;
       cursor: pointer;
+    }
+  }
+
+  .goldLootWrapper {
+    display: flex;
+    margin: 10px 0px;
+
+    .goldLoot {
+      display: flex;
+      align-items: center;
+
+      .item { margin-right: 5px; }
+    }
+
+    .goldLoot, .goldLoot.total {
+      margin: 0px;
     }
   }
 
@@ -112,13 +130,6 @@
       background-color: rgba($color: white, $alpha: 0.1);
     }
 
-    .characName {
-      font-size: $font_small;
-      opacity: .7;
-      width: 30px;
-      text-align: right;
-    }
-
     .actions {
       display: flex;
       margin-left: 5px;
@@ -135,6 +146,29 @@
 
         div {
           display: inline-block;
+        }
+      }
+    }
+
+    &.lootItemWrapper {
+      flex-direction: column;
+      margin: 5px;
+      padding: 10px 5px 5px 5px;
+      background-color: #192c32;
+      border-radius: 6px;
+
+      .item_wrapper {
+        margin-bottom: 5px;
+      }
+
+      button {
+        width: 70px;
+        height: 40px;
+        font-size: $font_small;
+        margin-top: 5px;
+
+        span {
+          margin-right: 4px;
         }
       }
     }
