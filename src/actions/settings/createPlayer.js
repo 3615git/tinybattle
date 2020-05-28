@@ -3,6 +3,7 @@ import { getMonsterWeapons } from '../../monsters/getMonsterWeapons'
 import { getMonsterItems } from '../../monsters/getMonsterItems'
 import { gameSettings } from "../../conf/settings"
 import { getShopInstants } from '../../monsters/getShopInstants'
+import { maxEnergyRefresh } from '../../actions/combat/energy'
 
 /**
   * @desc Create initial player
@@ -42,18 +43,23 @@ const createPlayer = (data, style) => {
   if (item[defaultChars[style].startItem].score > 2) item[defaultChars[style].startItem].score = 2
   // Set data
   data.player.items[defaultChars[style].startItem] = item[defaultChars[style].startItem]
+  
+  // Overwrite with legacy items
+  if (data.game && data.game.legacy) {
+    for (let [key] of Object.entries(data.game.legacy)) {
+      for (let [itemKey, itemValue] of Object.entries(data.game.legacy[key])) {
+        data.player[key][itemKey] = itemValue
+      }
+    }
+  }
 
-  // Compute stamina + mana
-  data.player.hitPoints = data.player.CON * 10
-  data.player.maxHitPoints = data.player.CON * 10 
-  data.player.magicPoints = data.player.MAG * 10 
-  data.player.maxMagicPoints = data.player.MAG * 10 
-  data.player.stamina = data.player.STR * 10
-  data.player.maxStamina = data.player.STR * 10 
+  // Compute energies
+  data = maxEnergyRefresh(data)
+  data.player.hitPoints = data.player.maxHitPoints
+  data.player.magicPoints = data.player.maxMagicPoints
+  data.player.stamina = data.player.maxStamina
   data.player.physicalRage = 0
-  data.player.maxPhysicalRage = Math.round(data.player.maxHitPoints * 50 / 100)
   data.player.magicalRage = 0
-  data.player.maxMagicalRage = Math.round(data.player.maxMagicPoints * 50 / 100)
 
   // Create secondary attacks counters
   data.player.skills.heal = { current: gameSettings.skillsRecharge.heal, ready: gameSettings.skillsRecharge.heal }
@@ -70,15 +76,6 @@ const createPlayer = (data, style) => {
   // eslint-disable-next-line no-unused-vars
   for (let [key, value] of Object.entries(startInstants)) {
     data.player.instants.push(value)
-  }
-
-  // Overwrite with legacy items
-  if (data.game && data.game.legacy) {
-    for (let [key] of Object.entries(data.game.legacy)) {
-      for (let [itemKey, itemValue] of Object.entries(data.game.legacy[key])) {
-        data.player[key][itemKey] = itemValue
-      }
-    }
   }
 
   return data

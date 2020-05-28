@@ -180,7 +180,7 @@ class Shop extends Component {
         <div key={`lootbox_${type}_${key}`} className="storeItemWrapper">
           {overburden}
           <button 
-            className="storeItem"  
+            className={`storeItem ${type}`}
             onClick={() => this.buyLoot(type, index, value)} 
             disabled={looted || player.gold < value.price || overburden}
           >
@@ -188,6 +188,7 @@ class Shop extends Component {
               item={looted ? null : value} 
               displayChar={displayChar} 
               noPlus={type === `instants` || type === `instants_weapon`} 
+              shop={type === `items` && `items`}
             />
             {buyButton}
           </button>

@@ -132,7 +132,10 @@ class Victory extends Component {
         <div className="lootBox" key={`lootbox_${type}_${key}`}>
           <span className="characName">{key}</span>
           <div className="storeWrapper">
-            <Item item={opponent[type][key]} />
+            <Item 
+              item={opponent[type][key]}
+              shop={type === `items` && `items`}
+            />
           </div>
           <Item item={player[type][key]} effect={looted} />
           <div className="actions">

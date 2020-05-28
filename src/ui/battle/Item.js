@@ -15,13 +15,15 @@ const propTypes = {
   effect: PropTypes.string,
   animateNumber: PropTypes.bool,
   noPlus: PropTypes.bool,
+  shop: PropTypes.string,
   displayChar: PropTypes.bool,
   animations: PropTypes.bool
 }
 
 const mapStateToProps = state => {
   return {
-    data: state
+    data: state,
+    player: state.player
   }
 }
 class Item extends Component {
@@ -48,7 +50,7 @@ class Item extends Component {
   }
 
   render() {
-    const { item, effect, noPlus, animateNumber, displayChar } = this.props
+    const { player, item, effect, noPlus, shop, animateNumber, displayChar } = this.props
     const { itemState } = this.state
 
     // Plus sign for bonus items
@@ -85,6 +87,18 @@ class Item extends Component {
       itemScore = <span dangerouslySetInnerHTML={{ __html: `<span class="legacyColor">${weaponScore[0]}</span>d${weaponScore[1]}` }} />
     }
 
+    // Advantage hints
+    let advantage = "itemAdvantage"
+    if (item && shop) {
+      if (player[shop][item.char]) {
+        if (itemScore > player[shop][item.char].score) advantage = "itemAdvantage up"
+        if (itemScore < player[shop][item.char].score) advantage = "itemAdvantage down"
+      }
+      else {
+        advantage = "itemAdvantage up"
+      }
+    } 
+
     if (item && item.type && item.id) return (
       <div className={itemClasses}>
         {item.cost &&
@@ -93,13 +107,14 @@ class Item extends Component {
             {item.element !== `none` && <div className={`element ${item.element}`} /> }
           </>
         }
+        {shop &&
+          <div className={advantage} />
+        }
         {item.sharpen &&
           <div className={`itemAlteration`}>{marks}</div>
         }
         {item.charges &&
-          <>
-            <div className={`itemCost charge`}>{item.charges}</div>
-          </>
+          <div className={`itemCost charge`}>{item.charges}</div>
         }
         <ItemVisual item={item.type} level={item.id} />
         <span>

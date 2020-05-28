@@ -66,6 +66,7 @@
   right: 0px;
   padding: 4px;
   font-size: $font_tiny;
+  z-index: 1;
 }
 
 .itemAlteration {
@@ -92,6 +93,19 @@
       border-width: 1px;;
     }
   }
+}
+
+.itemAdvantage {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  z-index: 1;
+
+  &.up { background-color: $color_bonus; }
+  &.down { background-color: $color_malus; }
 }
 
 .itemCost.magical {
