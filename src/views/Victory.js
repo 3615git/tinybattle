@@ -5,6 +5,8 @@ import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
 import { getMonsterLoot } from '../monsters/getMonsterReward'
 import { clog } from '../utils/utils'
+import StatsAndItems from '../ui/battle/StatsAndItems'
+import InstantButtons from '../ui/battle/InstantButtons'
 
 import { setGameState, settings } from '../redux/actions/index'
 
@@ -129,23 +131,18 @@ class Victory extends Component {
       } 
 
       loot.push(
-        <div className="lootBox" key={`lootbox_${type}_${key}`}>
-          <span className="characName">{key}</span>
-          <div className="storeWrapper">
-            <Item 
-              item={opponent[type][key]}
-              shop={type === `items` && `items`}
-            />
-          </div>
-          <Item item={player[type][key]} effect={looted} />
-          <div className="actions">
-            <button onClick={() => this.getLoot(type, key, value)} disabled={looted}>
-              {equipButton}
-            </button>
-            <button onClick={() => this.sellLoot(type, key, value)} disabled={looted}>
-              {sellButton}
-            </button>
-          </div>
+        <div className="lootBox lootItemWrapper" key={`lootbox_${type}_${key}`}>
+          <Item 
+            item={opponent[type][key]}
+            shop={type === `items` && `items`}
+            displayChar={type === `items`} 
+          />
+          <button onClick={() => this.getLoot(type, key, value)} disabled={looted}>
+            {equipButton}
+          </button>
+          <button onClick={() => this.sellLoot(type, key, value)} disabled={looted}>
+            {sellButton}
+          </button>
         </div>
       )
     }
@@ -207,19 +204,12 @@ class Victory extends Component {
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className={shopClasses}>
-              <div className="goldLoot">
-                <div><ItemVisual item="coins" level={3} /></div>
-                +{lootedGold}
-              </div>
+              <span className="title">Loot</span>
               {opponent.humanoid ?
-                <>
-                  <div className="lootBoxes">
-                    {this.parseLoot(`items`)}
-                  </div>
-                  <div className="lootBoxes weapons">
-                    {this.parseLoot(`weapons`)}
-                  </div>
-                </>
+                <div className="lootBoxes itemBox">
+                  {this.parseLoot(`items`)}
+                  {this.parseLoot(`weapons`)}
+                </div>
                 :
                 <>
                   <span className="subtitle">Sell monster parts</span>
@@ -228,9 +218,25 @@ class Victory extends Component {
                   </div>
                 </>
               }
-              <div className="goldLoot total">
-                <Item item={goldIcon} effect="new" animateNumber noPlus />
+
+              <div className="goldLootWrapper">
+                <div className="goldLoot">
+                  <div><ItemVisual item="coins" level={3} /></div>
+                  +{lootedGold}
+                </div>
+
+                <div className="goldLoot total">
+                  <Item item={goldIcon} effect="new" animateNumber noPlus />
+                </div>
               </div>
+
+              <div className="playerArea shop">
+                <StatsAndItems />
+                <div className="buttons">
+                  <InstantButtons onSell={this.sellInstant} />
+                </div>
+              </div>
+
               <img src={opponent.pic} alt={opponent.name} />
             </div>
           </div>

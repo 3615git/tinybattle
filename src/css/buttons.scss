@@ -15,7 +15,7 @@ button {
   cursor: pointer;
   border: 2px solid rgba(0, 0, 0, 0.85);
   border-radius: 8px;
-  @include buttonStyle(#192c32);
+  @include buttonStyle($color_button);
   text-shadow: 1px 1px black;
 
   // Embellishments
