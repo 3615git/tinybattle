@@ -67,8 +67,6 @@ class Wheel extends Component {
 
     // Type or item wheel
     let wheelItems
-
-    console.log(items)
     
     if (items) {
       wheelItems = (

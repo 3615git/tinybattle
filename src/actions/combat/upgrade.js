@@ -1,13 +1,16 @@
 import { formatDataLog } from '../../utils/formatDataLog'
 import { pushBuff } from './stats'
 import { instantUse } from './energy'
+import { sideEffects } from '../../actions/settings/onNewItem'
 
 /**
   * @desc Computing the results of upgrade instant
 */
 
 const upgrade = (data, item, id) => {
-  let { player, opponent, game } = data
+  // Next state
+  let nextData = JSON.parse(JSON.stringify(data))
+  let { player, opponent, game } = nextData
 
   let activePlayer = game.playerTurn ? { ...player } : { ...opponent }
   let targetPlayer = game.playerTurn ? { ...opponent } : { ...player }
@@ -16,7 +19,7 @@ const upgrade = (data, item, id) => {
   let buffChar = item.char
   let buffType = item.permancence
 
-  // Push bugff
+  // Push buff
   pushBuff(activePlayer, buffType, buffChar, buffValue, `instant`, 10)
 
   // Update instant counter
@@ -38,12 +41,16 @@ const upgrade = (data, item, id) => {
   log.display = formatDataLog(`upgrade`, log, game)
 
   // Apply changes
-  data.player = game.playerTurn ? activePlayer : targetPlayer
-  data.opponent = !game.playerTurn ? activePlayer : targetPlayer
-  data.log = log
-  data.dataLogs.push(formatDataLog(`upgrade`, log, game))
+  nextData.player = game.playerTurn ? activePlayer : targetPlayer
+  nextData.opponent = !game.playerTurn ? activePlayer : targetPlayer
 
-  return data
+  // Compute side effects
+  nextData = sideEffects(data, nextData, `upgrade`, buffChar)
+
+  nextData.log = log
+  nextData.dataLogs.push(formatDataLog(`upgrade`, log, game))
+
+  return nextData
 }
 
 export { upgrade }

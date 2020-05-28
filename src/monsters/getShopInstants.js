@@ -11,8 +11,10 @@ function getShopInstant(effect, level, forceQuality = false) {
   const itemQuality = forceQuality ? forceQuality : getItemQuality(level, false) // Get item rank
 
   // Ranges
-  let charRange = [`STR`, `DEX`, `CON`, `MAG`]
-  if (effect === `temporaryupgrade` || effect === `permanentupgrade`) option = randomValue(charRange)
+  let tempCharRange = [`STR`, `DEX`, `MAG`]
+  let permCharRange = [`STR`, `DEX`, `CON`, `MAG`]
+  if (effect === `temporaryupgrade`) option = randomValue(tempCharRange)
+  if (effect === `permanentupgrade`) option = randomValue(permCharRange)
   if (effect === `temporaryluckupgrade`) option = `LCK`
 
   // Generate item conf

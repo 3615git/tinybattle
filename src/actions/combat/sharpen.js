@@ -19,8 +19,6 @@ const sharpen = (data, item, id) => {
   let weaponScore = weapon.score.split(`d`)
   let element
 
-  // Todo : nerf sharpen
-
   // Get current sharpen score
   let sharpenScore = weapon.sharpen ? weapon.sharpen : 0
   // Wheel roll, can be sharpen (+1D) or fail
@@ -31,8 +29,6 @@ const sharpen = (data, item, id) => {
   }
   // Succes ratio goes down with sharpen count (but can't be 0, still a 1/8 chance at worst)
   if (sharpenScore > 5) wheelItems[5] = { category: `items`, item: { type: item.type, id: item.id } }
-  
-  console.log(wheelItems)
   
   // Compute skill roll
   const hit = skillWheelRoll(wheelItems)
