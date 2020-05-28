@@ -84,9 +84,12 @@ class Defeat extends Component {
 
       loot.push(
         <div className={`lootBox ${type} ${looted}`} key={`lootbox_${type}_${key}`}>
-          <span className="characName">{key}</span>
           <div className="storeWrapper">
-            <Item item={player[type][key]} effect={looted} />
+            <Item 
+              item={player[type][key]} 
+              effect={looted} 
+              displayChar={type === `items`}
+            />
           </div>
           <div className="actions">
             <button onClick={() => this.keepLoot(type, key, value)} disabled={looted || movedItems.length === itemCount}>
