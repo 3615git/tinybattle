@@ -25,9 +25,9 @@ const heal = (data) => {
   ]
 
   let healRanges = {
-    small: [5,20],
-    medium: [15,30],
-    large: [20,50]
+    small: [10,20],
+    medium: [20,50],
+    large: [50,80]
   }
 
   const hit = skillWheelRoll(wheelItems)
@@ -42,7 +42,8 @@ const heal = (data) => {
     default:
       // Test potion size
       healCapacity = hit.result.item.healCapacity
-      healValue = getRandomInt(healRanges[healCapacity][0], healRanges[healCapacity][1])
+      // Value is a % of maxHitPoints
+      healValue = Math.round( getRandomInt(healRanges[healCapacity][0], healRanges[healCapacity][1]) * player.maxHitPoints / 100 )
       activePlayer = energyRestore(activePlayer, healValue, `hitPoints`)
       break;
   }
