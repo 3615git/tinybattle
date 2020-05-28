@@ -39,10 +39,18 @@ class Shop extends Component {
     }
 
     this.state = {
+      storeTab: `equipment`,
       soldItems: [],
       gold: this.props.player.gold,
       catalog: catalog
     }
+  }
+
+  changeTab = (tab) => {
+    // Update state
+    this.setState({
+      storeTab: tab
+    })
   }
 
   buyLoot = (type, index, item) => {
@@ -88,7 +96,7 @@ class Shop extends Component {
 
     if (catalog === `items`) {
       // randomize selection
-      numberOfitems = 5
+      numberOfitems = 10
       itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
       for (let index = 0; index < numberOfitems; index++) {
         let char = randomValue(itemsRange)
@@ -97,7 +105,7 @@ class Shop extends Component {
     } 
     else if(catalog === `weapons`) {
       // randomize selection
-      numberOfitems = 3
+      numberOfitems = 5
       itemsRange = [`STR`, `MAG`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))
@@ -105,7 +113,7 @@ class Shop extends Component {
     }
     else if (catalog === `instants`) {
       // randomize selection
-      numberOfitems = 5
+      numberOfitems = 6
       itemsRange = [`quickheal`, `temporaryupgrade`, `temporaryluckupgrade`, `permanentupgrade`, `restore`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))
@@ -113,7 +121,7 @@ class Shop extends Component {
     }
     else if (catalog === `instants_weapon`) {
       // randomize selection
-      numberOfitems = 2
+      numberOfitems = 4
       itemsRange = [`damage`, `sharpenphysical`, `sharpenmagical`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))
@@ -201,7 +209,7 @@ class Shop extends Component {
 
   render() {
     const { setGameState } = this.props
-    const { gold } = this.state
+    const { gold, storeTab } = this.state
 
     clog(`Shop render`, `location`)
 
@@ -215,22 +223,25 @@ class Shop extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
-            <div className="shopWrapper shop">
+            <div className="shopWrapper shop panelStore">
               <span className="title">Shop</span>
-              <div className="storeBox">
-                {this.parseLoot(`items`, true)}
+              <div className="panelStoreTabs">
+                <button className={storeTab !== `equipment` ? `off` : `on`} onClick={() => this.changeTab(`equipment`)}>Gear</button>
+                <button className={storeTab !== `items` ? `off` : `on`} onClick={() => this.changeTab(`items`)}>Items</button>
+                <button className={storeTab !== `weapons` ? `off` : `on`} onClick={() => this.changeTab(`weapons`)}>Weapons</button>
+                <button className={storeTab !== `antiques` ? `off` : `on`} onClick={() => this.changeTab(`antiques`)} disabled>Antiques</button>
               </div>
               <div className="storeBox">
-                {this.parseLoot(`instants`, false)}
+                {storeTab === `equipment` && this.parseLoot(`items`, true)}
+                {storeTab === `items` && this.parseLoot(`instants`, false)}
+                {storeTab === `items` && this.parseLoot(`instants_weapon`, false)}
+                {storeTab === `weapons` && this.parseLoot(`weapons`, false)}
+                {storeTab === `antiques` && this.parseLoot(`antiques`, false)}
               </div>
-              <div className="storeBox">
-                {this.parseLoot(`instants_weapon`, false)}
-                {this.parseLoot(`weapons`, false)}
-              </div>
+            </div>
 
-              <div className="goldLoot">
-                <Item item={goldIcon} noPlus animateNumber />
-              </div>
+            <div className="goldLoot">
+              <Item item={goldIcon} noPlus animateNumber />
             </div>
 
             <div className="playerArea shop">

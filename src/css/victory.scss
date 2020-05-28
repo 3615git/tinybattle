@@ -9,6 +9,30 @@
   justify-content: center;
   margin-top: 40px;
 
+  &.panelStore {
+    padding: 5px;
+    border-radius: 6px;
+    background: $color_button;
+    width: 100%;
+    max-width: 450px;
+
+    .panelStoreTabs {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      padding: 5px;
+
+      button {
+        font-size: $font_small;
+        flex-basis:calc(25% - 5px);
+        height: 40px;
+  
+        &.on { @include buttonStyle(lighten($color_button, 13)); }
+        &.off { @include buttonStyle(darken($color_button, 5)); }
+      }
+    }
+  }
+
   span.title {
     display: block;
     margin-bottom: 10px;
@@ -35,6 +59,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    min-height: 200px;
+    width: 100%;
 
     .storeItemWrapper {
       position: relative;
@@ -63,47 +89,6 @@
       padding: 5px;
       text-align: center;
       cursor: pointer;
-    }
-  }
-
-  .goldLootWrapper {
-    display: flex;
-    margin: 10px 0px;
-
-    .goldLoot {
-      display: flex;
-      align-items: center;
-
-      .item { margin-right: 5px; }
-    }
-
-    .goldLoot, .goldLoot.total {
-      margin: 0px;
-    }
-  }
-
-  .goldLoot {
-    padding: 7px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    text-align: center;
-
-    &.noMargin {
-      margin-top: 0px;
-    }
-
-    &.total {
-      margin: 5px 0px 0px 0px;
-    }
-
-    .item_wrapper {
-      width: 120px;
-      flex-direction: row;
-      font-size: $font_big;
-
-      .item {
-        margin-right: 10px
-      }
     }
   }
 
@@ -154,7 +139,7 @@
       flex-direction: column;
       margin: 5px;
       padding: 10px 5px 5px 5px;
-      background-color: #192c32;
+      background-color: $color_button;
       border-radius: 6px;
 
       .item_wrapper {
@@ -189,6 +174,47 @@
     }
   }
 }
+
+.goldLootWrapper {
+    display: flex;
+    margin: 10px 0px;
+
+    .goldLoot {
+      display: flex;
+      align-items: center;
+
+      .item { margin-right: 5px; }
+    }
+
+    .goldLoot, .goldLoot.total {
+      margin: 0px;
+    }
+  }
+
+  .goldLoot {
+    padding: 7px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: center;
+
+    &.noMargin {
+      margin-top: 0px;
+    }
+
+    &.total {
+      margin: 5px 0px 0px 0px;
+    }
+
+    .item_wrapper {
+      width: 120px;
+      flex-direction: row;
+      font-size: $font_big;
+
+      .item {
+        margin-right: 10px
+      }
+    }
+  }
 
 .itemPrice {
   display: flex;
