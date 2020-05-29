@@ -259,7 +259,7 @@ function formatDataLog(type, fightLog, game) {
       } else {
         attackResult = `Weapon enhanced!`
         damage = `<span class="up">1D</span> damage!`
-        note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `
+        if (fightLog.data.element) note = `New elemental bonus <span class="elementWrapper ${fightLog.data.element}" /> `
       }
 
       // Hit

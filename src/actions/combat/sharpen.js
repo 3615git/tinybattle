@@ -43,16 +43,18 @@ const sharpen = (data, item, id) => {
       if (Number.isInteger(parseInt(weaponScore[0]))) weaponScore[0]++
       else weaponScore[0] = 2
       weapon.score = weaponScore.join('d')
-      // Give random element
-      element = randomValue(weaponElements.elementsonly)
-      weapon.element = element
+      // Give random element to classic items
+      if (weapon.quality !== `unique`) {
+        element = randomValue(weaponElements.elementsonly)
+        console.log(item)
+        weapon.element = element
+      } else {
+        element = false
+      }
       // Add + 1 sharpen score
       activePlayer.weapons[item.value].sharpen = sharpenScore + 1
       break;
   }
-
-  // UI : add a diamond / dent for sharpening
-  // UI maxed weapons become unique
 
   // Update weapon
   activePlayer.weapons[item.value] = weapon
