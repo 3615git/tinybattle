@@ -9,14 +9,14 @@ waterspirit,"Water Spirit, Water Djinn, Ocean Djinn",40,,1,1,"STR, MAG","STR, MA
 crow,"Giant Crow, High Raven, Black Raven",30,,1,,,,duelist,earth,DEX,15
 firewitch,"Fire Witch, Fire Angel, Fire Sorceress",,,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,60
 succubus,"Succubus, Servant of Lilith, Void Demon",,,1,1,"STR, DEX, CON",STR,balanced,darkness,DEX,20
-scarletwyrm,"Scarlet Wyrm, Scaled Beast, Red Drake",,,1,,,,brute,earth,STR,20
-runicgolem,"Runic Golem, Ancient Golem, Razor Golem",,,1,1,"DEX, STR, LCK, MAG",STR,balanced,water,DEX,15
+scarletwyrm,"Scarlet Wyrm, Scaled Beast, Red Drake",20,,1,,,,brute,earth,STR,20
+runicgolem,"Runic Golem, Ancient Golem, Razor Golem",40,,1,1,"DEX, STR, LCK, MAG",STR,balanced,water,DEX,15
 gazer,"Eldritch Gazer, Abomination, Abyss Gazer",,,1,,,,brute,darkness,"STR, DEX",15
 sunwarrior,"Sun Sorceress, Sun Shaman, Sun Priestess",,,2,1,"MAG, DEX, CON","STR, MAG",archmage,fire,MAG,10
 vampire,"Count Solomon, Solomon Vampire Lord, Lord Solomon",70,,2,1,"STR, DEX, CON, MAG, LCK",STR,balanced,darkness,"DEX, MAG",20
 stonegolem,"Stone Golem, Rock Golem, Rock Spirit",60,,2,,,,brute,earth,STR,10
 arcanegolem,"Arcane Golem, Crystal Golem, Construct",60,,2,,,,brute,water,"MAG, DEX",10
-sparkdragon,"Spark Dragon, Yellow Drake, White Wyvern",,,2,,,,balanced,earth,"DEX, STR",10
+sparkdragon,"Spark Dragon, Yellow Drake, White Wyvern",40,,2,,,,balanced,earth,"DEX, STR",10
 ignis,"Ignis, Arcane Blaze, Infernis",,,2,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,fire,"MAG, DEX",70
 goblinmage,"Iron Mage, Iron Wizard, Iron Warlock",80,,2,1,"MAG, DEX",MAG,wizard,earth,MAG,15
 windpriest,"Wind Priest, Zephyr Wizard, Wind Mage",,,2,1,"DEX, MAG, LCK",MAG,wizard,water,,15
