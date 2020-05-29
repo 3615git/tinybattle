@@ -62,14 +62,16 @@ class Shop extends Component {
 
     clog(`buyLoot`, `function`)
 
-    // unique_weapons = weapons
+    // Update UI
+    updatedsoldItems.push({ type: type, char: index })
+    
+    // For store, unique_weapons = weapons
     if (type === `unique_weapons`) type = `weapons`
 
     // Update store
     if (type === `instants` || type === `instants_weapon`) settings({ setting: `buyInstant`, item: item })
     else settings({ setting: `buyItem`, type: type, char: item.char, item: item })
-    // Update UI
-    updatedsoldItems.push({ type: type, char: index })
+    
     // Update state
     this.setState({
       gold: gold - item.price,
@@ -191,6 +193,7 @@ class Shop extends Component {
 
       // Check if item has been looted
       const looted = this.checkLoot(type, key)
+      console.log(looted)
 
       // Button labels
       let buyButton = <span className="itemPrice"><ItemVisual item="coins" level={5} small />{value.price}</span>
