@@ -192,7 +192,7 @@ class Victory extends Component {
     clog(`Victory render`, `location`)
 
     const goldIcon = {
-      id: 6,
+      id: 5,
       score: player.gold,
       type: "coins"
     }
@@ -221,7 +221,7 @@ class Victory extends Component {
 
               <div className="goldLootWrapper">
                 <div className="goldLoot">
-                  <div><ItemVisual item="coins" level={3} /></div>
+                  <div><ItemVisual item="coins" level={2} /></div>
                   +{lootedGold}
                 </div>
 

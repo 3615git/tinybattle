@@ -80,7 +80,7 @@ class Item extends Component {
 
     // Sharpened score
     let itemScore
-    if (item && item.type && item.id) itemScore =  item.score
+    if (item && item.type && (typeof item.id === "number")) itemScore =  item.score
 
     if (item && item.sharpen) {
       let weaponScore = itemScore.split(`d`)
@@ -99,7 +99,7 @@ class Item extends Component {
       }
     } 
 
-    if (item && item.type && item.id) return (
+    if (item && item.type && (typeof item.id === "number")) return (
       <div className={itemClasses}>
         {item.cost &&
           <>

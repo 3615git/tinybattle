@@ -162,7 +162,6 @@ class Shop extends Component {
       }
     }
 
-    console.log(itemList)
     return itemList
   }
 
@@ -193,7 +192,6 @@ class Shop extends Component {
 
       // Check if item has been looted
       const looted = this.checkLoot(type, key)
-      console.log(looted)
 
       // Button labels
       let buyButton = <span className="itemPrice"><ItemVisual item="coins" level={5} small />{value.price}</span>
@@ -238,7 +236,7 @@ class Shop extends Component {
     clog(`Shop render`, `location`)
 
     const goldIcon = {
-      id: 6,
+      id: 5,
       score: gold,
       type: "coins"
     }

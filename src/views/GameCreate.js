@@ -74,7 +74,7 @@ class GameCreate extends Component {
     const { name, baseStyle } = this.state
 
     const goldIcon = {
-      id: 6,
+      id: 5,
       score: player.gold,
       type: "coins"
     }
