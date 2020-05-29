@@ -1,5 +1,5 @@
 import { gameSettings } from "../conf/settings"
-import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost, weaponElements, instantSpecs } from "../conf/settings_items"
+import { charItems, itemRanges, charPower, itemQuality, weaponDamage, weaponMultiplicator, weaponBonus, weaponCost, weaponElements, instantSpecs, uniqueItems } from "../conf/settings_items"
 import { getRandomInt, randomValue, generateWeight } from "../utils/utils"
 import { getItemPrice } from '../monsters/getMonsterReward'
 
@@ -23,16 +23,6 @@ function getItemIdFromLevel(itemType, level) {
 }
 
 function getItemPowerFromLevel(CHAR, level) {
-  /** This was crap
-  // Cut power range into level segments
-  const powerRange = charPower[CHAR]
-  const lowTier = Math.floor(powerRange / gameSettings.maxLevel)
-  const hightTier = Math.ceil(powerRange / gameSettings.maxLevel)
-  // Get low and high points of the range
-  const possiblePowerLow = lowTier * (level - 1) < 1 ? 1 : lowTier * (level - 1)
-  const possiblePowerHigh = hightTier * level > powerRange ? powerRange : hightTier * level
-  */
-
   // Cut power range into level segments
   const maxPower = charPower[CHAR]
   const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
@@ -90,6 +80,78 @@ function getWeaponElement() {
   const heavyElements = generateWeight(weaponElements.elements, weaponElements.basicWeight)
 
   return randomValue(heavyElements)
+}
+
+// Forge unique weapons
+function forgeUniqueItems() {
+
+  let uniques = {}
+  uniques["items"] = {}
+  uniques["weapons"] = {}
+
+  function uniquePrice() {
+    return getRandomInt(200,400)*10
+  }
+
+  function uniqueScore(type, char, profile) {
+    let score
+    // Weapons
+    if (type === `weapons`) {
+      switch (profile) {
+        case 0:
+          score = getRandomInt(10, 15) + `d` + randomValue([20])
+          break;
+
+        case 1:
+          score = getRandomInt(7, 9) + `d` + randomValue([4, 6]) + `+` + getRandomInt(5, 7)*10
+          break;
+
+        case 2:
+          score = `d4+` + getRandomInt(9, 13) * 10
+          break;
+
+        case 3:
+          score = getRandomInt(7, 9) + `d` + randomValue([10, 12]) + `+` + getRandomInt(3, 5)*10
+          break;
+      
+        default:
+          break;
+      }
+    }
+
+    return score
+  }
+
+  // Loop through uniqueItems array category
+  for (let [type, type_value] of Object.entries(uniqueItems)) {
+    // Loop CHAR
+    for (let [char, char_value] of Object.entries(type_value)) {
+      // Loop element
+      for (let [element, element_value] of Object.entries(char_value)) {
+        let profile = 0
+        // Loop items
+        for (let index = 0; index < element_value.length; index++) {
+          const id = element_value[index];
+          // Generate object values
+          uniques[type][id] = {
+            type: `unique`,
+            char: char,
+            id: id,
+            score: uniqueScore(type, char, profile),
+            element: element,
+            cost: type === `weapons` ? getWeaponCost(char, `legendary`) : 0,
+            quality: `unique`,
+            reward: 0,
+            price: uniquePrice()
+          }
+          if (profile === 3) profile = 0
+          else profile++
+        }
+      }
+    }
+  }
+
+  return uniques
 }
 
 // Forge instants
@@ -205,5 +267,6 @@ export {
   getWeaponDamage, 
   getWeaponCost,
   getWeaponElement, 
-  getInstant
+  getInstant,
+  forgeUniqueItems
 }

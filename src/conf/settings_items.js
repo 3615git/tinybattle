@@ -39,7 +39,7 @@ const itemQuality = {
 const weaponElements = {
   elementsonly: [`fire`, `water`, `earth`],
   elements: [`none`, `fire`, `water`, `earth`],
-  basicWeight: [10, 1, 1, 1]
+  basicWeight: [8, 1, 1, 1]
 }
 
 const itemQualityBonus = {
@@ -83,6 +83,7 @@ const weaponDamage = {
   legendary: [1, 5, 10, 40, 40, 15]
 }
 
+// @todo : balance this
 const weaponMultiplicator = {
   damage: [``, `2`, `3`, `4`, `5`],
   normal: [70, 20, 5, 1, 1],
@@ -289,6 +290,61 @@ const instantSpecs = {
   },
 }
 
+const uniqueItems = {
+  items: {
+    STR: {
+      fire: [],
+      water: [],
+      earth: [],
+      light: [],
+      darkness: []
+    },
+    DEX: {
+      fire: [],
+      water: [],
+      earth: [],
+      light: [],
+      darkness: []
+    },
+    CON: {
+      fire: [],
+      water: [],
+      earth: [],
+      light: [],
+      darkness: []
+    },
+    MAG: {
+      fire: [],
+      water: [],
+      earth: [],
+      light: [],
+      darkness: []
+    },
+    LCK: {
+      fire: [],
+      water: [],
+      earth: [],
+      light: [],
+      darkness: []
+    }
+  },
+  weapons: {
+    STR: {
+      fire: [0,1,2,3],
+      water: [8,9,10,11],
+      earth: [4,5,6,7],
+      light: [16,17,18,19],
+      darkness: [12,13,14,15]
+    },
+    MAG: {
+      fire: [20,21,22,23],
+      water: [28,29,30,31],
+      earth: [24,25,26,27],
+      light: [36,37,38,39],
+      darkness: [32,33,34,35]
+    }
+  }
+}
 
 // @todo : share variables https://itnext.io/sharing-variables-between-js-and-sass-using-webpack-sass-loader-713f51fa7fa0
 const itemRanges = {
@@ -322,6 +378,7 @@ const itemRanges = {
   "sword": 162,
   "throw": 34,
   "tool": 12,
+  "unique": 40,
   "vial": 8,
   "wand": 18
 }
@@ -337,5 +394,6 @@ export {
   weaponBonus,
   weaponCost,
   weaponElements,
-  instantSpecs
+  instantSpecs,
+  uniqueItems
 }

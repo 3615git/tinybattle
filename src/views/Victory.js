@@ -106,7 +106,7 @@ class Victory extends Component {
   }
 
   parseLoot = (type) => {
-    const { opponent, player } = this.props
+    const { opponent } = this.props
 
     clog(`parseLoot`, `function`)
 
