@@ -55,6 +55,8 @@ class GameCreate extends Component {
     // Reset legacy
     settings({ setting: `deleteLegacy` })
     settings({ setting: `resetLevel` })
+    // Forge uniques
+    settings({ setting: `forgeUniques` })
     // Move game state
     setGameState({ state: `levelTransition` })
   }

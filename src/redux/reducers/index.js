@@ -11,6 +11,7 @@ import { buyInstant } from '../../actions/settings/buyInstant'
 import { sellItem } from '../../actions/settings/sellItem'
 import { sellInstant } from '../../actions/settings/sellInstant'
 import { deleteLegacy } from '../../actions/settings/deleteLegacy'
+import { forgeUniques } from '../../actions/settings/forgeUniques'
 import { moveItem } from '../../actions/settings/moveItem'
 import { setUIColor } from '../../actions/settings/setUIColor'
 import { preference } from '../../actions/settings/preference'
@@ -121,6 +122,10 @@ function rootReducer(state = initialState, action) {
         clog(`deleteLegacy`, `reducer`)
         nextState = deleteLegacy(nextState)
         break;
+      case `forgeUniques`:
+        clog(`forgeUniques`, `reducer`)
+        nextState = forgeUniques(nextState)
+        break; 
       case `setUIColor`:
         clog(`setUIColor`, `reducer`)
         nextState = setUIColor(nextState, action.payload.color)

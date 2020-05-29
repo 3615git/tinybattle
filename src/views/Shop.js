@@ -15,6 +15,7 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     game: state.game,
+    uniques: state.uniques
   }
 }
 
@@ -36,6 +37,7 @@ class Shop extends Component {
       weapons: this.generateCatalog(`weapons`, this.props.game.level, false),
       instants: this.generateCatalog(`instants`, this.props.game.level, false),
       instants_weapon: this.generateCatalog(`instants_weapon`, this.props.game.level, false),
+      unique_weapons: this.generateCatalog(`unique_weapons`, this.props.game.level, false),
     }
 
     this.state = {
@@ -59,6 +61,9 @@ class Shop extends Component {
     let updatedsoldItems = soldItems ? soldItems : []
 
     clog(`buyLoot`, `function`)
+
+    // unique_weapons = weapons
+    if (type === `unique_weapons`) type = `weapons`
 
     // Update store
     if (type === `instants` || type === `instants_weapon`) settings({ setting: `buyInstant`, item: item })
@@ -87,6 +92,7 @@ class Shop extends Component {
   }
 
   generateCatalog = (catalog, level, elite) => {
+    const { uniques } = this.props
 
     clog(`generateCatalog`, `function`)
 
@@ -130,16 +136,31 @@ class Shop extends Component {
 
     let itemList = []
 
-    for (let index = 0; index < items.length; index++) {
-      let itemData
-      if (catalog === `items`) itemData = getMonsterItems([items[index]], level, true, elite)
-      else if (catalog === `weapons`) itemData = getMonsterWeapons([items[index]], level, true, elite)
-      else if (catalog === `instants`) itemData = getShopInstants([items[index]], level)
-      else if (catalog === `instants_weapon`) itemData = getShopInstants([items[index]], level)
+    // Return list of items
+    if (catalog === `unique_weapons`) {
+      // Get a weapon selection
+      let weaponKeys = Object.keys(uniques.weapons)
+      for (let index = 0; index < 4; index++) {
+        let selecteditemKey = weaponKeys[weaponKeys.length * Math.random() << 0]
+        itemList.push(uniques.weapons[selecteditemKey])
+      }
 
-      itemList.push(itemData[items[index]])
+      // @todo : Get an item selection also
+
+    } else {
+      // Classic items
+      for (let index = 0; index < items.length; index++) {
+        let itemData
+        if (catalog === `items`) itemData = getMonsterItems([items[index]], level, true, elite)
+        else if (catalog === `weapons`) itemData = getMonsterWeapons([items[index]], level, true, elite)
+        else if (catalog === `instants`) itemData = getShopInstants([items[index]], level)
+        else if (catalog === `instants_weapon`) itemData = getShopInstants([items[index]], level)
+  
+        itemList.push(itemData[items[index]])
+      }
     }
 
+    console.log(itemList)
     return itemList
   }
 
@@ -196,7 +217,7 @@ class Shop extends Component {
               item={looted ? null : value} 
               displayChar={displayChar} 
               noPlus={type === `instants` || type === `instants_weapon`} 
-              shop={type === `items` && `items`}
+              shop={type === `items` ? `items` : ``}
             />
             {buyButton}
           </button>
@@ -229,14 +250,14 @@ class Shop extends Component {
                 <button className={storeTab !== `equipment` ? `off` : `on`} onClick={() => this.changeTab(`equipment`)}>Gear</button>
                 <button className={storeTab !== `items` ? `off` : `on`} onClick={() => this.changeTab(`items`)}>Items</button>
                 <button className={storeTab !== `weapons` ? `off` : `on`} onClick={() => this.changeTab(`weapons`)}>Weapons</button>
-                <button className={storeTab !== `antiques` ? `off` : `on`} onClick={() => this.changeTab(`antiques`)} disabled>Antiques</button>
+                <button className={storeTab !== `uniques` ? `off` : `on`} onClick={() => this.changeTab(`uniques`)}>Antiques</button>
               </div>
               <div className="storeBox">
                 {storeTab === `equipment` && this.parseLoot(`items`, true)}
                 {storeTab === `items` && this.parseLoot(`instants`, false)}
                 {storeTab === `items` && this.parseLoot(`instants_weapon`, false)}
                 {storeTab === `weapons` && this.parseLoot(`weapons`, false)}
-                {storeTab === `antiques` && this.parseLoot(`antiques`, false)}
+                {storeTab === `uniques` && this.parseLoot(`unique_weapons`, false)}
               </div>
             </div>
 
