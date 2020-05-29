@@ -25,6 +25,12 @@
   animation: glowBoost (5s) infinite;
 }
 
+// .unique.glow_fire { animation: glow_fire (3s) infinite; }
+// .unique.glow_earth { animation: glow_earth (3s) infinite; }
+// .unique.glow_water { animation: glow_water (3s) infinite; }
+// .unique.glow_light { animation: glow_light (3s) infinite; }
+// .unique.glow_darkness { animation: glow_darkness (3s) infinite; }
+
 /* Fumble background anim */
 @keyframes effect {
   0% {
@@ -184,6 +190,36 @@
     64% { filter: drop-shadow(0px 0px 10px $color_STR); }
     82% { filter: drop-shadow(0px 0px 20px $color_STR); }
     100% { filter: drop-shadow(0px 0px 10px $color_STR); } 
+}
+
+@keyframes glow_fire {
+    0% { filter: drop-shadow(0px 0px 3px $element_fire); }
+    50% { filter: drop-shadow(0px 0px 6px saturate(lighten($element_fire, 10), 30)) brightness(1.1); }
+    100% { filter: drop-shadow(0px 0px 3px $element_fire); } 
+}
+
+@keyframes glow_earth {
+    0% { filter: drop-shadow(0px 0px 3px $element_earth); }
+    50% { filter: drop-shadow(0px 0px 6px saturate(lighten($element_earth, 10), 30)) brightness(1.1); }
+    100% { filter: drop-shadow(0px 0px 3px $element_earth); } 
+}
+
+@keyframes glow_water {
+    0% { filter: drop-shadow(0px 0px 3px $element_water); }
+    50% { filter: drop-shadow(0px 0px 6px saturate(lighten($element_water, 10), 30)) brightness(1.1); }
+    100% { filter: drop-shadow(0px 0px 3px $element_water); } 
+}
+
+@keyframes glow_light {
+    0% { filter: drop-shadow(0px 0px 3px $element_light); }
+    50% { filter: drop-shadow(0px 0px 6px saturate(lighten($element_light, 10), 30)) brightness(0.9); }
+    100% { filter: drop-shadow(0px 0px 3px $element_light); } 
+}
+
+@keyframes glow_darkness {
+    0% { filter: drop-shadow(0px 0px 3px $element_darkness); }
+    50% { filter: drop-shadow(0px 0px 6px saturate(lighten($element_darkness, 10), 30)) brightness(1.1); }
+    100% { filter: drop-shadow(0px 0px 3px $element_darkness); } 
 }
 
 @keyframes glowReflect {

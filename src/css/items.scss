@@ -2,7 +2,7 @@
 
 @mixin itemStyle($color) {
   border: 2px solid rgba($color, 1);
-  background-color: rgba($color, .6);
+  background-color: rgba($color, .4);
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.1);
   box-shadow: inset 0px 0px 5px darken(rgba($color, 1),30);
   .item {
@@ -42,6 +42,33 @@
       @include itemStyle($color_itemLegendary);
     }
   }
+  &.unique {
+    &.glow_fire { 
+      @include itemStyle($element_fire);
+      filter: drop-shadow(0px 0px 8px saturate(lighten($element_fire, 10), 30));
+      .element { @include itemStyle($element_fire); }
+    }
+    &.glow_water { 
+      @include itemStyle($element_water); 
+      filter: drop-shadow(0px 0px 8px saturate(lighten($element_water, 10), 30));
+      .element { @include itemStyle($element_water); }
+    }
+    &.glow_earth { 
+      @include itemStyle($element_earth); 
+      filter: drop-shadow(0px 0px 8px saturate(lighten($element_earth, 10), 30));
+      .element { @include itemStyle($element_earth); }
+    }
+    &.glow_light { 
+      @include itemStyle($element_light); 
+      filter: drop-shadow(0px 0px 8px saturate(lighten($element_light, 10), 30));
+      .element { @include itemStyle($element_light); }
+    }
+    &.glow_darkness { 
+      @include itemStyle($element_darkness); 
+      filter: drop-shadow(0px 0px 8px saturate(lighten($element_darkness, 10), 30));
+      .element { @include itemStyle($element_darkness); }
+    }
+  }
 
   .element {
     width: 12px;
@@ -57,6 +84,8 @@
     &.fire { background: radial-gradient(circle at 40% 25%, yellow 6%, $element_fire 60%) !important; }
     &.earth { background: radial-gradient(circle at 40% 25%, lightgreen 6%, $element_earth 60%) !important; }
     &.water { background: radial-gradient(circle at 40% 25%, #42cbff 6%, $element_water 60%) !important; }
+    &.light { background: radial-gradient(circle at 40% 25%, $element_light 6%, darken($element_light, 40) 60%) !important; }
+    &.darkness { background: radial-gradient(circle at 40% 25%, lighten($element_darkness, 30) 6%, $element_darkness 60%) !important; }
   }
 }
 
@@ -172,6 +201,7 @@ $forge: (
   "sword": 162,
   "throw": 34,
   "tool": 12,
+  "unique": 40,
   "vial": 8,
   "wand": 18
 );
