@@ -130,7 +130,7 @@ class App extends Component {
         break;
       case `levelTransition`: 
         view = <LevelTransition />
-        options = smallOptions
+        options = []
         break;
       case `battleIntro`:
         view = <BattleIntro />

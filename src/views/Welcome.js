@@ -76,6 +76,7 @@ class Welcome extends Component {
             
           </div>
           <div className="actionArea">
+            <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>
             {startButton}
             <div className="version">0.0.5</div>
           </div>
