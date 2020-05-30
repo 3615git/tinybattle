@@ -24,8 +24,14 @@
 
       button {
         font-size: $font_small;
+        flex-direction: column;
         flex-basis:calc(25% - 5px);
-        height: 40px;
+        height: 80px;
+
+        .item {
+          margin: 5px;
+          // filter: grayscale(1);
+        }
   
         &.on { @include buttonStyle(lighten($color_button, 13)); }
         &.off { @include buttonStyle(darken($color_button, 5)); }
