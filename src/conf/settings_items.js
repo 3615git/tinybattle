@@ -86,10 +86,10 @@ const weaponDamage = {
 // @todo : balance this
 const weaponMultiplicator = {
   damage: [``, `2`, `3`, `4`, `5`],
-  normal: [70, 20, 5, 1, 1],
-  magic: [40, 40, 10, 3, 3],
-  rare: [10, 50, 30, 8, 5],
-  legendary: [1, 20, 40, 15, 10]
+  normal: [70, 30, 0, 0, 0],
+  magic: [40, 40, 10, 3, 0],
+  rare: [0, 50, 30, 15, 5],
+  legendary: [0, 0, 40, 40, 20]
 }
 
 const weaponBonus = {
