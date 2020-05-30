@@ -67,15 +67,16 @@ const EndGame = ({ player, opponent, game, display, setGameState, dataLogs }) =>
         <div className={`${itemClasses} active`}>
           <div className="presentationArea">
             <div className="title">Victory !</div>
-            <div className="subtitle"><span style={opponentNameStyle}>{opponent.name}</span><br />is dead</div>
-            <div className="subtitle">
-              {dataLogs.length - 1 > 1
-                ? <span>{`${dataLogs.length - 1} rounds`}</span>
-                : <span>{`${dataLogs.length - 1} round !`}</span>
-              }
-            </div>
             <div className="crackedImage">
               <img src={opponent.pic} alt={opponent.name} />
+            </div>
+            <div className="subtitle">
+              You defeated
+              <div className="opponentName" style={opponentNameStyle}>{opponent.name}</div>
+              {dataLogs.length - 1 > 1
+                ? <span>in {`${dataLogs.length - 1} rounds`}</span>
+                : <span>in only {`${dataLogs.length - 1} round !`}</span>
+              }
             </div>
           </div>
           <div className="actionArea">

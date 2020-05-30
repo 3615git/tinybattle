@@ -162,7 +162,6 @@ class Shop extends Component {
       }
     }
 
-    console.log(itemList)
     return itemList
   }
 
@@ -193,7 +192,6 @@ class Shop extends Component {
 
       // Check if item has been looted
       const looted = this.checkLoot(type, key)
-      console.log(looted)
 
       // Button labels
       let buyButton = <span className="itemPrice"><ItemVisual item="coins" level={5} small />{value.price}</span>
@@ -238,7 +236,7 @@ class Shop extends Component {
     clog(`Shop render`, `location`)
 
     const goldIcon = {
-      id: 6,
+      id: 5,
       score: gold,
       type: "coins"
     }
@@ -248,7 +246,7 @@ class Shop extends Component {
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className="shopWrapper shop panelStore">
-              <span className="title">Shop</span>
+              {/* <span className="title">Shop</span> */}
               <div className="panelStoreTabs">
                 <button className={storeTab !== `equipment` ? `off` : `on`} onClick={() => this.changeTab(`equipment`)}>Gear</button>
                 <button className={storeTab !== `items` ? `off` : `on`} onClick={() => this.changeTab(`items`)}>Items</button>

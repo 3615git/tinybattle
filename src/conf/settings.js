@@ -24,14 +24,14 @@ const gameSettings = {
   },
   icons: {
     battleStart: [`book`, 1],
-    block: [`skill`, 7],
-    focus: [`skill`, 3],
-    specialattack: [`skill`, 4],
-    specialcast: [`skill`, 1],
+    block: [`skill`, 6],
+    focus: [`skill`, 2],
+    specialattack: [`skill`, 3],
+    specialcast: [`skill`, 0],
     stun: [`skill`, 8],
-    itembreak: [`skill`, 6],
-    psyblast: [`skill`, 5],
-    curse: [`skill`, 2],
+    itembreak: [`skill`, 5],
+    psyblast: [`skill`, 4],
+    curse: [`skill`, 1],
     attackfumble: [`skill`, 9],
     castfumble: [`skill`, 9],
     critical: [`skill`, 10],
@@ -41,6 +41,7 @@ const gameSettings = {
     reflect: [`skill`, 14],
     defending: [`skill`, 15],
     boost: [`skill`, 16],
+    reflectfail: [`skill`, 17],
   }
 }
 

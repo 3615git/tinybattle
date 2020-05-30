@@ -86,10 +86,10 @@ const weaponDamage = {
 // @todo : balance this
 const weaponMultiplicator = {
   damage: [``, `2`, `3`, `4`, `5`],
-  normal: [70, 20, 5, 1, 1],
-  magic: [40, 40, 10, 3, 3],
-  rare: [10, 50, 30, 8, 5],
-  legendary: [1, 20, 40, 15, 10]
+  normal: [70, 30, 0, 0, 0],
+  magic: [40, 40, 10, 3, 0],
+  rare: [0, 50, 30, 15, 5],
+  legendary: [0, 0, 40, 40, 20]
 }
 
 const weaponBonus = {
@@ -120,43 +120,43 @@ const instantSpecs = {
     normal: {
       value: 20,
       type: `food`,
-      id: [1, 35]
+      id: [0, 34]
     },
     magic: {
       value: 40,
       type: `food`,
-      id: [36, 45]
+      id: [35, 44]
     },
     rare: {
       value: 60,
       type: `potion`,
-      id: [15, 15]
+      id: [14, 14]
     },
     legendary: {
       value: 100,
       type: `potion`,
-      id: [43,43]
+      id: [42,42]
     }
   },
   restore: {
     normal: {
       type: `spell`,
-      id: 1,
+      id: 0,
       charges: 1
     },
     magic: {
       type: `spell`,
-      id: 1,
+      id: 0,
       charges: 2
     },
     rare: {
       type: `spell`,
-      id: 1,
+      id: 0,
       charges: 3
     },
     legendary: {
       type: `spell`,
-      id: 1,
+      id: 0,
       charges: 4
     }
   },
@@ -226,65 +226,65 @@ const instantSpecs = {
     normal: {
       value: 20,
       type: `throw`,
-      id: [1, 14]
+      id: [0, 13]
     },
     magic: {
       value: 30,
       type: `throw`,
-      id: [1, 14]
+      id: [0, 13]
     },
     rare: {
       value: 60,
       type: `throw`,
-      id: [15, 34]
+      id: [14, 33]
     },
     legendary: {
       value: 100,
       type: `throw`,
-      id: [15, 34]
+      id: [14, 33]
     }
   },
   sharpenphysical: {
     normal: {
       type: `tool`,
-      id: [1, 4],
+      id: [0, 3],
       charges: 1
     },
     magic: {
       type: `tool`,
-      id: [5, 8],
+      id: [4, 7],
       charges: 2
     },
     rare: {
       type: `tool`,
-      id: [9, 12],
+      id: [8, 11],
       charges: 3
     },
     legendary: {
       type: `tool`,
-      id: [9, 12],
+      id: [8, 11],
       charges: 4
     }
   },
   sharpenmagical: {
     normal: {
       type: `tool`,
-      id: [1, 4],
+      id: [0, 3],
       charges: 1
     },
     magic: {
       type: `tool`,
-      id: [5, 8],
+      id: [4, 7],
       charges: 2
     },
     rare: {
       type: `tool`,
-      id: [9, 12],
+      id: [8, 11],
       charges: 3
     },
     legendary: {
       type: `tool`,
-      id: [9, 12],
+      id: [8, 11],
       charges: 4
     }
   },
@@ -348,39 +348,39 @@ const uniqueItems = {
 
 // @todo : share variables https://itnext.io/sharing-variables-between-js-and-sass-using-webpack-sass-loader-713f51fa7fa0
 const itemRanges = {
-  "amulet": 43,
-  "armor": 194,
-  "axe": 120,
-  "bag": 12,
-  "belt": 2,
-  "book": 25,
-  "bow": 28,
-  "coin": 12,
-  "coins": 12,
-  "cross": 36,
-  "crystal": 12,
-  "drops": 21,
-  "flail": 26,
-  "food": 45,
-  "gem": 13,
-  "glove": 11,
-  "hammer": 36,
-  "helmet": 181,
-  "mace": 71,
-  "morningstar": 23,
-  "potion": 70,
-  "ring": 20,
-  "sceptre": 22,
-  "shield": 145,
-  "shoe": 44,
+  "amulet": 42,
+  "armor": 192,
+  "axe": 119,
+  "bag": 11,
+  "belt": 1,
+  "book": 24,
+  "bow": 27,
+  "coin": 11,
+  "coins": 11,
+  "cross": 35,
+  "crystal": 11,
+  "drops": 20,
+  "flail": 25,
+  "food": 44,
+  "gem": 12,
+  "glove": 10,
+  "hammer": 35,
+  "helmet": 180,
+  "mace": 70,
+  "morningstar": 22,
+  "potion": 69,
+  "ring": 19,
+  "sceptre": 21,
+  "shield": 144,
+  "shoe": 43,
   "skill": 17,
-  "spell": 48,
-  "sword": 162,
-  "throw": 34,
-  "tool": 12,
-  "unique": 40,
-  "vial": 8,
-  "wand": 18
+  "spell": 47,
+  "sword": 161,
+  "throw": 33,
+  "tool": 11,
+  "unique": 39,
+  "vial": 7,
+  "wand": 17
 }
 
 export {

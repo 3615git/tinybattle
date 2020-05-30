@@ -556,7 +556,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.85);
 
   flex-direction: column;
 
@@ -569,6 +569,7 @@ html, body, #root {
   .title {
     color: $color_legacy;
     font-size: $font_huge;
+    margin-top: 60px;
 
     &.defeat {
       color: $color_itemNormal;
@@ -578,6 +579,11 @@ html, body, #root {
   .subtitle {
     margin: 20px 0;
     text-align: center;
+
+    .opponentName {
+      font-size: $font_verybig;
+      margin: 7px;
+    }
   }
 
   .crackedImage {
@@ -596,7 +602,7 @@ html, body, #root {
 
   img {
     z-index: 1;
-    height: 400px;
+    height: 350px;
     opacity: 1;
 
     &.death {

@@ -30,6 +30,18 @@
       width: 100%;
     }
 
+    .elementalDamageLog {
+      display: inline-block;
+      width: 100%;
+      margin: 5px;
+      padding: 0px;
+      font-size: 80%;
+      text-shadow: 0px 0px 3px #ffffff73;
+      &:first-letter {
+        text-transform: uppercase;
+      }
+    }
+
     .log {
       padding: 20px;
       border-radius: 6px;
@@ -240,6 +252,10 @@
 
 .element_darkness {
   color: $element_darkness
+}
+
+.element_light {
+  color: $element_light
 }
 
 .critical {

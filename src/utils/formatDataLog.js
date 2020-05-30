@@ -73,12 +73,13 @@ function formatDataLog(type, fightLog, game) {
 
       // Elemental hit
       if (fightLog.data.damage && fightLog.data.damage.elemental > 0) {
-        attackResult += `<br /><span class="elemental">Elemental bonus!</span>&nbsp;`
+        // Find element of attacking weapon
+        let element = fightLog.activePlayer.weapons.STR.element
+        attackResult += `<span class="elementalDamageLog element_${element}">${element} bonus : ${fightLog.data.damage.elemental}</span>`
       }
 
       // Damage
       damage = ``
-      
 
       if (fightLog.data.damage && fightLog.data.damage.damage > 0) {
         damage = `Damage : <span class="physicaldamage">${fightLog.data.damage.damage}</span>`
@@ -104,7 +105,9 @@ function formatDataLog(type, fightLog, game) {
 
       // Elemental hit
       if (fightLog.data.damage && fightLog.data.damage.elemental > 0) {
-        attackResult += `<br /><span class="elemental">Elemental bonus!</span>&nbsp;`
+        // Find element of attacking weapon
+        let element = fightLog.activePlayer.weapons.MAG.element
+        attackResult += `<span class="elementalDamageLog element_${element}">${element} bonus : ${fightLog.data.damage.elemental}</span>`
       }
 
       // Damage

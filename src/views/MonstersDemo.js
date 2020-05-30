@@ -47,7 +47,6 @@ class MonstersDemo extends Component {
     // Parse uniques list
     let uniques = forgeUniqueItems()
     let museum = []
-    console.log(uniques)
 
     for (let [key, value] of Object.entries(uniques.weapons)) {
       museum.push(

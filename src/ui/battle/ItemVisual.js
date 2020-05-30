@@ -28,9 +28,8 @@ const ItemVisual = ({ item, level, small, big }) => {
   const itemSizeBig = big ? `big` : ``
   // Add custom classes to defined classes
   const itemClasses = [defaultClasses, itemReference, itemSize, itemSizeBig].filter(val => val).join(` `)
-
   // Display component
-  if (item && level) return (
+  if (item && (typeof level === "number")) return (
     <span className={itemClasses} />
   ) 
   else return null

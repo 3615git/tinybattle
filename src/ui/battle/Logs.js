@@ -110,7 +110,7 @@ class Logs extends Component {
         break;
 
       case `heal`:
-        widget = <Wheel type="heal" items={data.wheelPositions} position={data.wheelPosition} customFumble={["potion", 14]} />
+        widget = <Wheel type="heal" items={data.wheelPositions} position={data.wheelPosition} customFumble={["potion", 13]} />
         break;
 
       case `reflect`:

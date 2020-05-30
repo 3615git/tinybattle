@@ -89,8 +89,11 @@ function forgeUniqueItems() {
   uniques["items"] = {}
   uniques["weapons"] = {}
 
-  function uniquePrice() {
-    return getRandomInt(200,400)*10
+  function uniquePrice(type, element) {
+    let price = getRandomInt(200, 400) * 10
+    // Light weapons are more exepensive (endgame critics)
+    if (type === `weapons` && element === `light`) price = price * 2
+    return price
   }
 
   function uniqueScore(type, char, profile) {
@@ -142,7 +145,7 @@ function forgeUniqueItems() {
             cost: type === `weapons` ? getWeaponCost(char, `legendary`) : 0,
             quality: `unique`,
             reward: 0,
-            price: uniquePrice()
+            price: uniquePrice(type, element)
           }
           if (profile === 3) profile = 0
           else profile++
@@ -185,7 +188,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       permanence = `temporary`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
-      charColors = { STR: 3, MAG: 5, DEX: 7, CON: 6 }
+      charColors = { STR: 2, MAG: 4, DEX: 6, CON: 5 }
       id = charColors[option]
       char = option
       label = `+${value} ${option}`
@@ -207,7 +210,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       permanence = `permanent`
       value = instantSpecs[itemType][itemQuality].value
       type = instantSpecs[itemType][itemQuality].type
-      charColors = { STR: 25, MAG: 30, DEX: 29, CON: 33 }
+      charColors = { STR: 24, MAG: 29, DEX: 28, CON: 32 }
       id = charColors[option]
       char = option
       label = `+${value} ${option}`
