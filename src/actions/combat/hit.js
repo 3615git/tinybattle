@@ -76,6 +76,17 @@ const elementalRules = (a,b) => {
     if (b === `fire`) bonus = false
     if (b === `water`) bonus = true
     if (b === `earth`) bonus = false
+  } 
+  // Lights only crits against darkness
+  else if (a === `light`) {
+    if (b === `darkness`) bonus = true
+    else bonus = false
+  }
+  // Darkness crits against all, at random
+  else if (a === `darkness`) {
+    let roll = randomValue([1,2,3])
+    if (roll === 1) bonus = true
+    else bonus = false
   }
   return bonus
 }
@@ -89,7 +100,6 @@ const elementalDamage = (activePlayer, targetPlayer, CHAR, damage) => {
   // If element has ascendant
   if (weaponElement && targetElement) {
     if (elementalRules(weaponElement, targetElement)) {
-      // @todo random bonus ?
       return Math.round(damage*50/100)
     } else return false
   } else return false

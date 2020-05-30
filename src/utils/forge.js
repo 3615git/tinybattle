@@ -89,8 +89,11 @@ function forgeUniqueItems() {
   uniques["items"] = {}
   uniques["weapons"] = {}
 
-  function uniquePrice() {
-    return getRandomInt(200,400)*10
+  function uniquePrice(type, element) {
+    let price = getRandomInt(200, 400) * 10
+    // Light weapons are more exepensive (endgame critics)
+    if (type === `weapons` && element === `light`) price = price * 2
+    return price
   }
 
   function uniqueScore(type, char, profile) {
@@ -142,7 +145,7 @@ function forgeUniqueItems() {
             cost: type === `weapons` ? getWeaponCost(char, `legendary`) : 0,
             quality: `unique`,
             reward: 0,
-            price: uniquePrice()
+            price: uniquePrice(type, element)
           }
           if (profile === 3) profile = 0
           else profile++
