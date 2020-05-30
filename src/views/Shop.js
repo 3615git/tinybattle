@@ -248,10 +248,18 @@ class Shop extends Component {
             <div className="shopWrapper shop panelStore">
               {/* <span className="title">Shop</span> */}
               <div className="panelStoreTabs">
-                <button className={storeTab !== `equipment` ? `off` : `on`} onClick={() => this.changeTab(`equipment`)}>Gear</button>
-                <button className={storeTab !== `items` ? `off` : `on`} onClick={() => this.changeTab(`items`)}>Items</button>
-                <button className={storeTab !== `weapons` ? `off` : `on`} onClick={() => this.changeTab(`weapons`)}>Weapons</button>
-                <button className={storeTab !== `uniques` ? `off` : `on`} onClick={() => this.changeTab(`uniques`)}>Antiques</button>
+                <button className={storeTab !== `equipment` ? `off` : `on`} onClick={() => this.changeTab(`equipment`)}>
+                  <ItemVisual item="armor" level={70} />Gear
+                </button>
+                <button className={storeTab !== `items` ? `off` : `on`} onClick={() => this.changeTab(`items`)}>
+                  <ItemVisual item="potion" level={23} />Items
+                </button>
+                <button className={storeTab !== `weapons` ? `off` : `on`} onClick={() => this.changeTab(`weapons`)}>
+                  <ItemVisual item="sword" level={158} />Weapons
+                </button>
+                <button className={storeTab !== `uniques` ? `off` : `on`} onClick={() => this.changeTab(`uniques`)}>
+                  <ItemVisual item="unique" level={16} />Antiques
+                </button>
               </div>
               <div className="storeBox">
                 {storeTab === `equipment` && this.parseLoot(`items`, true)}
