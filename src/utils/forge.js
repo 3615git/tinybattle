@@ -121,6 +121,28 @@ function forgeUniqueItems() {
           break;
       }
     }
+    // Items
+    else if (type === `items`) {
+      if (char === `LCK`) {
+        score = getRandomInt(4,5)
+      }
+      else {
+        switch (profile) {
+          case 0:
+          case 2:
+            score = getRandomInt(25,40)
+            break;
+  
+          case 1:
+          case 3:
+            score = getRandomInt(25, 35)
+            break;
+  
+          default:
+            break;
+        }
+      }
+    }
 
     return score
   }
@@ -142,7 +164,7 @@ function forgeUniqueItems() {
             id: id,
             score: uniqueScore(type, char, profile),
             element: element,
-            cost: type === `weapons` ? getWeaponCost(char, `legendary`) : 0,
+            cost: type === `weapons` ? getWeaponCost(char, `legendary`) : null,
             quality: `unique`,
             reward: 0,
             price: uniquePrice(type, element)

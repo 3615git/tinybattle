@@ -12,7 +12,7 @@ import { maxEnergyRefresh } from '../../actions/combat/energy'
 const createPlayer = (data, style) => {
 
   let previousName = data.player ? data.player.name : ``
-  let previousGold = data.player ? data.player.gold : 1000000
+  let previousGold = data.player ? data.player.gold : 0
 
   // Set basic player info
   data.player = {
