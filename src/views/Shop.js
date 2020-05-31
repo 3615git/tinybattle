@@ -38,6 +38,7 @@ class Shop extends Component {
       instants: this.generateCatalog(`instants`, this.props.game.level, false),
       instants_weapon: this.generateCatalog(`instants_weapon`, this.props.game.level, false),
       unique_weapons: this.generateCatalog(`unique_weapons`, this.props.game.level, false),
+      unique_items: this.generateCatalog(`unique_items`, this.props.game.level, false),
     }
 
     this.state = {
@@ -67,6 +68,7 @@ class Shop extends Component {
     
     // For store, unique_weapons = weapons
     if (type === `unique_weapons`) type = `weapons`
+    if (type === `unique_items`) type = `items`
 
     // Update store
     if (type === `instants` || type === `instants_weapon`) settings({ setting: `buyInstant`, item: item })
@@ -138,19 +140,27 @@ class Shop extends Component {
 
     let itemList = []
 
-    // Return list of items
+    /** Return list of items */
+    // Unique weapons
     if (catalog === `unique_weapons`) {
       // Get a weapon selection
       let weaponKeys = Object.keys(uniques.weapons)
-      for (let index = 0; index < 4; index++) {
+      for (let index = 0; index < 2; index++) {
         let selecteditemKey = weaponKeys[weaponKeys.length * Math.random() << 0]
         itemList.push(uniques.weapons[selecteditemKey])
       }
-
-      // @todo : Get an item selection also
-
-    } else {
-      // Classic items
+    } 
+    // Unique gear
+    else if (catalog === `unique_items`) {
+      // Get an item selection
+      let itemKeys = Object.keys(uniques.items)
+      for (let index = 0; index < 3; index++) {
+        let selecteditemKey = itemKeys[itemKeys.length * Math.random() << 0]
+        itemList.push(uniques.items[selecteditemKey])
+      }
+    }
+    // Classic items
+    else {
       for (let index = 0; index < items.length; index++) {
         let itemData
         if (catalog === `items`) itemData = getMonsterItems([items[index]], level, true, elite)
@@ -218,7 +228,7 @@ class Shop extends Component {
               item={looted ? null : value} 
               displayChar={displayChar} 
               noPlus={type === `instants` || type === `instants_weapon`} 
-              shop={type === `items` ? `items` : ``}
+              shop={type === `items` || type === `unique_items` ? `items` : ``}
             />
             {buyButton}
           </button>
@@ -266,6 +276,7 @@ class Shop extends Component {
                 {storeTab === `items` && this.parseLoot(`instants`, false)}
                 {storeTab === `items` && this.parseLoot(`instants_weapon`, false)}
                 {storeTab === `weapons` && this.parseLoot(`weapons`, false)}
+                {storeTab === `uniques` && this.parseLoot(`unique_items`, true)}
                 {storeTab === `uniques` && this.parseLoot(`unique_weapons`, false)}
               </div>
             </div>

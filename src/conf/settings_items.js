@@ -293,39 +293,39 @@ const instantSpecs = {
 const uniqueItems = {
   items: {
     STR: {
-      fire: [],
-      water: [],
-      earth: [],
-      light: [],
-      darkness: []
+      fire: [70,71],
+      water: [74,75],
+      earth: [72,73],
+      light: [78,79],
+      darkness: [76,77]
     },
     DEX: {
-      fire: [],
-      water: [],
-      earth: [],
-      light: [],
-      darkness: []
+      fire: [60,61],
+      water: [64,65],
+      earth: [62,63],
+      light: [68,69],
+      darkness: [66,67]
     },
     CON: {
-      fire: [],
-      water: [],
-      earth: [],
-      light: [],
-      darkness: []
+      fire: [40,41],
+      water: [44,45],
+      earth: [42,43],
+      light: [48,49],
+      darkness: [46,47]
     },
     MAG: {
-      fire: [],
-      water: [],
-      earth: [],
-      light: [],
-      darkness: []
+      fire: [50,51],
+      water: [54,55],
+      earth: [52,53],
+      light: [58,59],
+      darkness: [56,57]
     },
     LCK: {
-      fire: [],
-      water: [],
-      earth: [],
-      light: [],
-      darkness: []
+      fire: [80],
+      water: [82],
+      earth: [81],
+      light: [84],
+      darkness: [83]
     }
   },
   weapons: {
@@ -378,7 +378,7 @@ const itemRanges = {
   "sword": 161,
   "throw": 33,
   "tool": 11,
-  "unique": 39,
+  "unique": 84,
   "vial": 7,
   "wand": 17
 }

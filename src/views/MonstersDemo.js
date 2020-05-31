@@ -48,6 +48,23 @@ class MonstersDemo extends Component {
     let uniques = forgeUniqueItems()
     let museum = []
 
+    for (let [key, value] of Object.entries(uniques.items)) {
+      museum.push(
+        <div key={`lootbox_${key}`} className="storeItemWrapper">
+          <button
+            className={`storeItem`}
+          >
+            <Item
+              item={value}
+              displayChar={true}
+            // shop={type === `items` && `items`}
+            />
+            <span className="itemPrice"><ItemVisual item="coins" level={5} small />{value.price}</span>
+          </button>
+        </div>
+      )
+    }
+
     for (let [key, value] of Object.entries(uniques.weapons)) {
       museum.push(
         <div key={`lootbox_${key}`} className="storeItemWrapper">
