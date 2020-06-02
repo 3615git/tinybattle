@@ -42,6 +42,12 @@ const weaponElements = {
   basicWeight: [8, 1, 1, 1]
 }
 
+const setElementsToChar = {
+  fire: `STR`,
+  earth: `CON`,
+  water: `MAG`
+}
+
 const itemQualityBonus = {
   STR: {
     normal: [0, 0],
@@ -395,5 +401,6 @@ export {
   weaponCost,
   weaponElements,
   instantSpecs,
-  uniqueItems
+  uniqueItems,
+  setElementsToChar
 }
