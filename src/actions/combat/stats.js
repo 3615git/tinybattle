@@ -80,6 +80,25 @@ const resetBuff = (data, player, type) => {
   return data
 }
 
+const resetBuffByOrigin = (data, player, type, origin) => {
+
+  // Create buff object if not existing
+  if (!data[player].buff || !data[player].buff[type]) data[player].buff = {
+    temporary: [],
+    permanent: []
+  } 
+  else {
+    let newBuffs = []
+    for (let index = 0; index < data[player].buff[type].length; index++) {
+      const buff = data[player].buff[type][index]
+      if (buff.origin !== origin) newBuffs.push(buff)
+    }
+    data[player].buff[type] = newBuffs
+  }
+
+  return data
+}
+
 // Alernate reset
 const autoResetBuff = (data) => {
 
@@ -135,5 +154,6 @@ export {
   findBuff,
   resetBuff,
   autoResetBuff,
-  incrementSkillCount
+  incrementSkillCount,
+  resetBuffByOrigin
 }
