@@ -41,8 +41,6 @@ const sideEffects = (data, nextData, type, char) => {
       }
     }
   }
-  console.log(nextData.player.buff[`permanent`])
-
 
   /** CON items upgrades current HP following ratio */
   if ((type === "items" || type === "upgrade") && char === `CON`) {
