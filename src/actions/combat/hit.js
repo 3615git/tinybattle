@@ -4,6 +4,7 @@ import rpgDice from "rpgdicejs"
 
 const toHit = (activePlayer, targetPlayer, type) => {
   const critChance = criticalChance(activePlayer)
+  const fumbChance = fumbleChance(activePlayer)
   let hitChance
 
   if (type === `physical`) {
@@ -22,6 +23,8 @@ const toHit = (activePlayer, targetPlayer, type) => {
 
   // hitChance can never be 0, always LCK hitChance
   if (hitChance > critChance) hitChance = critChance
+  // hitChance can never be negative, always fumble chance
+  if (hitChance < fumbChance) hitChance = fumbChance
 
   return hitChance
 }
@@ -146,6 +149,8 @@ const physicalDamage = (activePlayer, targetPlayer, critical) => {
   let elementalBonus = 0
 
   let baseDamage = activePlayerSTR.total - targetPlayerCON.total
+  // Negative damage fix
+  if (baseDamage < 0) baseDamage = 0
 
   if (activePlayerItem) {
     let itemDamageRoll = rpgDice.eval(activePlayerItem)
@@ -160,11 +165,11 @@ const physicalDamage = (activePlayer, targetPlayer, critical) => {
   let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
 
-  // console.log(`baseDamage`, baseDamage)
-  // console.log(`itemDamage`, itemDamage)
-  // console.log(`criticalBonus`, criticalBonus)
-  // console.log(`elementalBonus`, elementalBonus)
-  // console.log(`damage`, damage)
+  console.log(`baseDamage`, baseDamage)
+  console.log(`itemDamage`, itemDamage)
+  console.log(`criticalBonus`, criticalBonus)
+  console.log(`elementalBonus`, elementalBonus)
+  console.log(`damage`, damage)
   
   return {
     roll: itemDamageResults,
@@ -190,7 +195,8 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   let elementalBonus = 0
 
   let baseDamage = activePlayerMAG.total - targetPlayerMAG.total
-
+  // Negative damage fix
+  if (baseDamage < 0) baseDamage = 0
 
   if (activePlayerItem) {
     let itemDamageRoll = rpgDice.eval(activePlayerItem)
@@ -204,6 +210,12 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
 
   let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
+
+  console.log(`baseDamage`, baseDamage)
+  console.log(`itemDamage`, itemDamage)
+  console.log(`criticalBonus`, criticalBonus)
+  console.log(`elementalBonus`, elementalBonus)
+  console.log(`damage`, damage)
 
   return {
     roll: itemDamageResults,
