@@ -4,6 +4,7 @@ import { getMonsterItems } from '../../monsters/getMonsterItems'
 import { gameSettings } from "../../conf/settings"
 import { getShopInstants } from '../../monsters/getShopInstants'
 import { maxEnergyRefresh } from '../../actions/combat/energy'
+import { setBonus } from '../../actions/settings/onNewItem'
 
 /**
   * @desc Create initial player
@@ -12,7 +13,7 @@ import { maxEnergyRefresh } from '../../actions/combat/energy'
 const createPlayer = (data, style) => {
 
   let previousName = data.player ? data.player.name : ``
-  let previousGold = data.player ? data.player.gold : 0
+  let previousGold = data.player ? data.player.gold : 10000000
 
   // Set basic player info
   data.player = {
@@ -55,6 +56,9 @@ const createPlayer = (data, style) => {
 
   // Compute energies
   data = maxEnergyRefresh(data)
+  // Item sets bonus
+  data = setBonus(data)
+  // Basic stats
   data.player.hitPoints = data.player.maxHitPoints
   data.player.magicPoints = data.player.maxMagicPoints
   data.player.stamina = data.player.maxStamina
