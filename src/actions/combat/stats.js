@@ -20,7 +20,7 @@ const getStat = (player, stat) => {
   }
 }
 
-// Find buff
+// Find buff and return value
 const findBuff = (player, type, stat) => {
   let buff = 0
 
@@ -39,6 +39,26 @@ const findBuff = (player, type, stat) => {
   return buff
 }
 
+// List all active buff for a CHAR
+const listBuff = (stat, player) => {
+  let types = [`permanent`, `temporary`]
+  let buffs = []
+
+  for (let index = 0; index < types.length; index++) {
+    const type = types[index]
+    if (player.buff && player.buff[type] && player.buff[type].length > 0) {
+      // Find array of buffs for this stat
+      let activeBuffs = player.buff[type].filter(x => x.stat === stat)
+      // No value = emplty array, so push only if values
+      for (let buffIndex = 0; buffIndex < activeBuffs.length; buffIndex++) {
+        if (activeBuffs.length > 0) buffs.push(activeBuffs[buffIndex])
+      }
+    }
+  }
+
+  return buffs
+}
+
 // Push buff
 const pushBuff = (player, type, stat, value, origin, rounds = 1) => {
 
@@ -47,6 +67,9 @@ const pushBuff = (player, type, stat, value, origin, rounds = 1) => {
     temporary: [],
     permanent: []
   }
+  
+  if (type === `temporary` && !player.buff.temporary) player.buff.temporary = []
+  if (type === `permanent` && !player.buff.permanent) player.buff.permanent = []
 
   const buff = {
     stat: stat,
@@ -54,9 +77,6 @@ const pushBuff = (player, type, stat, value, origin, rounds = 1) => {
     origin: origin,
     rounds: rounds
   }
-  
-  if (type === `temporary` && !player.buff.temporary) player.buff.temporary = []
-  if (type === `permanent` && !player.buff.permanent) player.buff.permanent = []
 
   // Pushing buff
   if (type === `temporary`) player.buff.temporary.push(buff)
@@ -152,6 +172,7 @@ export {
   getStat,
   pushBuff, 
   findBuff,
+  listBuff,
   resetBuff,
   autoResetBuff,
   incrementSkillCount,

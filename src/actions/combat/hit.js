@@ -27,10 +27,14 @@ const hitChance = (toHit) => {
 // Physical hit chance
 // @todo : merge both
 const physicalHit = (activePlayer, targetPlayer) => {
-  const roll = diceRoll(20)
-  const hit = roll >= toHit(activePlayer, targetPlayer, `physical`)
+  // const roll = diceRoll(20)
+  const roll = 1
+  let hit = roll >= toHit(activePlayer, targetPlayer, `physical`)
   const critical = roll >= criticalChance(activePlayer)
   const fumble = roll <= fumbleChance(activePlayer)
+
+  // Fixing "always hit" bug fur super high scores
+  if (fumble) hit = false
 
   return {
     roll,
@@ -45,9 +49,12 @@ const physicalHit = (activePlayer, targetPlayer) => {
 // @todo : merge both
 const magicalHit = (activePlayer, targetPlayer) => {
   const roll = diceRoll(20)
-  const hit = roll >= toHit(activePlayer, targetPlayer, `magical`)
+  let hit = roll >= toHit(activePlayer, targetPlayer, `magical`)
   const critical = roll >= criticalChance(activePlayer)
   const fumble = roll <= fumbleChance(activePlayer)
+
+  // Fixing "always hit" bug fur super high scores
+  if (fumble) hit = false
 
   return {
     roll,

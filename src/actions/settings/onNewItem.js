@@ -28,16 +28,19 @@ const sideEffects = (data, nextData, type, char) => {
 
   /** Check for sets items */
   let setElements = {}
+  // eslint-disable-next-line no-unused-vars
   for (let [key, value] of Object.entries(nextData.player.items)) { 
     if (value.element) setElements[value.element] = (setElements[value.element] || 0) + 1; 
   } 
   // Remove set buffs
   resetBuffByOrigin(nextData, `player`, `permanent`, `setItems`)
+  nextData.player.setItems = {}
   // Update set buffs
   for (let [element, value] of Object.entries(setElements)) {
     if (value > 1) {
       for (let index = 1; index < value; index++) {
         if (setElementsToChar[element]) pushBuff(nextData.player, `permanent`, setElementsToChar[element], value*2, `setItems`)
+        nextData.player.setItems[element] = value
       }
     }
   }
