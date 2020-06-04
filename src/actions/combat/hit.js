@@ -3,20 +3,27 @@ import { getStat } from './stats'
 import rpgDice from "rpgdicejs"
 
 const toHit = (activePlayer, targetPlayer, type) => {
+  const critChance = criticalChance(activePlayer)
+  let hitChance
+
   if (type === `physical`) {
     // Get DEX from both players
     const activePlayerDEX = getStat(activePlayer, `DEX`)
     const targetPlayerDEX = getStat(targetPlayer, `DEX`)
-  
-    return 20 - (10 + activePlayerDEX.total - targetPlayerDEX.total)
+    hitChance = 20 - (10 + activePlayerDEX.total - targetPlayerDEX.total)
   }
+
   if (type === `magical`) {
     // Get MAG from both players
     const activePlayerMAG = getStat(activePlayer, `MAG`)
     const targetPlayerMAG = getStat(targetPlayer, `MAG`)
-
-    return 20 - (10 + activePlayerMAG.total - targetPlayerMAG.total)
+    hitChance = 20 - (10 + activePlayerMAG.total - targetPlayerMAG.total)
   }
+
+  // hitChance can never be 0, always LCK hitChance
+  if (hitChance > critChance) hitChance = critChance
+
+  return hitChance
 }
 
 // Turns D20 to hit into classic %
@@ -27,8 +34,7 @@ const hitChance = (toHit) => {
 // Physical hit chance
 // @todo : merge both
 const physicalHit = (activePlayer, targetPlayer) => {
-  // const roll = diceRoll(20)
-  const roll = 1
+  const roll = diceRoll(20)
   let hit = roll >= toHit(activePlayer, targetPlayer, `physical`)
   const critical = roll >= criticalChance(activePlayer)
   const fumble = roll <= fumbleChance(activePlayer)
