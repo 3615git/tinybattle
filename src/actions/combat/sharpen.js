@@ -46,7 +46,6 @@ const sharpen = (data, item, id) => {
       // Give random element to classic items
       if (weapon.quality !== `unique`) {
         element = randomValue(weaponElements.elementsonly)
-        console.log(item)
         weapon.element = element
       } else {
         element = false

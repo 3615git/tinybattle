@@ -1,8 +1,13 @@
 @import 'variables';
 
-@mixin itemStyle($color) {
+@mixin itemStyle($color, $type: null) {
   border: 2px solid rgba($color, 1);
-  background-color: rgba($color, .4);
+  @if $type == null {
+    background-color: rgba($color, .2);
+  }
+  @else {
+    background-color: rgba($color, .5);
+  }
   box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.1);
   box-shadow: inset 0px 0px 5px darken(rgba($color, 1),30);
   .item {
@@ -43,28 +48,43 @@
     }
   }
   &.unique {
+
+    &:after {
+      content: "";
+      background: url('../pics/ui/sigil.svg'); 
+      opacity: 0.3;
+      background-size: 70px;
+      background-position: center center;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;   
+    }
+
     &.glow_fire { 
-      @include itemStyle($element_fire);
+      @include itemStyle($element_fire, "unique");
       filter: drop-shadow(0px 0px 8px saturate(lighten($element_fire, 10), 30));
       .element { @include itemStyle($element_fire); }
     }
     &.glow_water { 
-      @include itemStyle($element_water); 
+      @include itemStyle($element_water, "unique"); 
       filter: drop-shadow(0px 0px 8px saturate(lighten($element_water, 10), 30));
       .element { @include itemStyle($element_water); }
     }
     &.glow_earth { 
-      @include itemStyle($element_earth); 
+      @include itemStyle($element_earth, "unique"); 
       filter: drop-shadow(0px 0px 8px saturate(lighten($element_earth, 10), 30));
       .element { @include itemStyle($element_earth); }
     }
     &.glow_light { 
-      @include itemStyle($element_light); 
+      @include itemStyle($element_light, "unique"); 
       filter: drop-shadow(0px 0px 8px saturate(lighten($element_light, 10), 30));
       .element { @include itemStyle($element_light); }
     }
     &.glow_darkness { 
-      @include itemStyle($element_darkness); 
+      @include itemStyle($element_darkness, "unique"); 
       filter: drop-shadow(0px 0px 8px saturate(lighten($element_darkness, 10), 30));
       .element { @include itemStyle($element_darkness); }
     }
