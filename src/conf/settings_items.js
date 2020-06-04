@@ -48,6 +48,12 @@ const setElementsToChar = {
   water: `MAG`
 }
 
+const setCharToElements = {
+  STR: `fire`,
+  CON: `earth`,
+  MAG: `water`
+}
+
 const itemQualityBonus = {
   STR: {
     normal: [0, 0],
@@ -402,5 +408,6 @@ export {
   weaponElements,
   instantSpecs,
   uniqueItems,
-  setElementsToChar
+  setElementsToChar,
+  setCharToElements
 }
