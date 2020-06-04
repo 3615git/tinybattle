@@ -134,7 +134,7 @@ class Victory extends Component {
         <div className="lootBox lootItemWrapper" key={`lootbox_${type}_${key}`}>
           <Item 
             item={opponent[type][key]}
-            shop={type === `items` && `items`}
+            shop={type === `items` ? `items` : ``}
             displayChar={type === `items`} 
           />
           <button onClick={() => this.getLoot(type, key, value)} disabled={looted}>
