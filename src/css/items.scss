@@ -145,6 +145,12 @@
   color: lighten($color_STR, 20);
 }
 
+.text_glow_fire { filter: drop-shadow(0px 0px 3px lighten($element_fire, 10)) drop-shadow(0px 0px 5px lighten($element_fire, 10)); }
+.text_glow_earth { filter: drop-shadow(0px 0px 3px lighten($element_earth, 10)) drop-shadow(0px 0px 5px lighten($element_earth, 10)); }
+.text_glow_water { filter: drop-shadow(0px 0px 3px lighten($element_water, 10)) drop-shadow(0px 0px 5px lighten($element_water, 10)); }
+.text_glow_light { filter: drop-shadow(0px 0px 3px lighten($element_light, 10)) drop-shadow(0px 0px 5px lighten($element_light, 10)); }
+.text_glow_darkness { filter: drop-shadow(0px 0px 3px lighten($element_darkness, 10)) drop-shadow(0px 0px 5px lighten($element_darkness, 10)); }
+
 .item {
   display: inline-block;
   width: 32px;

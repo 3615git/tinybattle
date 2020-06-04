@@ -37,23 +37,64 @@
     &:last-child { margin-right: 0px; }
   }
 
+  .statWrapper {
+    display: flex;
+    align-items: center;
+  }
+
   div.down {
     color: $color_malus;
-    padding-right: 16px;
-    background: url('../pics/ui/stat_down.png') right 2px no-repeat;
+    // padding-right: 16px;
+    // background: url('../pics/ui/stat_down.png') right 2px no-repeat;
   }
 
   div.up {
     color: $color_bonus;
-    padding-right: 16px;
-    background: url('../pics/ui/stat_up.png') right 1px no-repeat;
+    // padding-right: 16px;
+    // background: url('../pics/ui/stat_up.png') right 1px no-repeat;
   }
 
   span.char {
     font-size: $font_tiny;
-    opacity: .6;
+    color: rgba(255,255,255,.6);
     margin-bottom: 3px;
+    display: flex;
+    align-items: center;
   }
+
+  .statBuff {
+    display: block;
+    margin: 0px 0px 2px 2px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    
+    &.up { 
+      border-bottom: 6px solid $color_bonus;
+      &.instant { border-bottom: 6px solid $color_instant; }
+    }
+    &.down { 
+      border-top: 6px solid $color_malus; 
+    }
+  }
+
+  // statBuff indicator variations
+  .setBuff {
+    position: relative;
+    top: 1px;
+    width: 11px;
+    height: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    padding-top: 1px;
+    font-size: $font_tiny;
+    margin: 0px 0px 2px 3px;
+  }
+  .STR .setBuff { background-color: $element_fire; }
+  .CON .setBuff { background-color: $element_earth; }
+  .MAG .setBuff { background-color: $element_water; }
 }
 
 /* Player items */

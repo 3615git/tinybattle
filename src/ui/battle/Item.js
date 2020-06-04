@@ -78,6 +78,14 @@ class Item extends Component {
       }
     }
 
+    // Set marks
+    // if (item && item.element && !item.cost) {
+    //   // Count setItems bonus
+    //   for (let index = 0; index < player.setItems[item.element]; index++) {
+    //     marks.push(<div className="markWrapper"><div className="mark" /></div>)
+    //   }
+    // }
+
     // Sharpened score
     let itemScore
     if (item && item.type && (typeof item.id === "number")) itemScore =  item.score
@@ -110,9 +118,9 @@ class Item extends Component {
         {shop &&
           <div className={advantage} />
         }
-        {item.sharpen &&
-          <div className={`itemAlteration`}>{marks}</div>
-        }
+
+        <div className={`itemAlteration`}>{marks}</div>
+      
         {item.charges &&
           <div className={`itemCost charge`}>{item.charges}</div>
         }
