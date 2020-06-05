@@ -164,11 +164,11 @@
 
 @keyframes flash {
   from {  } 
-  92% {  }
+  92% { filter: brightness(1) }
   93% { filter: brightness(2) }
   94% { filter: brightness(1.5) }
   95% { filter: brightness(3) } 
-  96% {  }
+  96% { filter: brightness(1) }
   to {  }
 }
 
