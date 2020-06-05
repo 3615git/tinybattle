@@ -13,7 +13,7 @@ import { setBonus } from '../../actions/settings/onNewItem'
 const createPlayer = (data, style) => {
 
   let previousName = data.player ? data.player.name : ``
-  let previousGold = data.player ? data.player.gold : 10000000
+  let previousGold = data.player ? data.player.gold : 0
 
   // Set basic player info
   data.player = {
