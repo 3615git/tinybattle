@@ -4,6 +4,7 @@ import { pushBuff } from './stats'
 import { energyBurn } from './energy'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { findBuff } from '../../actions/combat/stats'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the basic physical attack results
@@ -52,6 +53,10 @@ const attack = (data) => {
       // Applying rage
       targetPlayer.physicalRage = rageResult
     }
+    // Score
+    data = score(data, `action/attack/critical`, `game`)
+    data = score(data, `action/attack/damage`, `game`, damageResult.damage)
+    data = score(data, `damage`, `game`, damageResult.damage)
   }
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
@@ -68,10 +73,14 @@ const attack = (data) => {
     else {
       targetPlayer.hitPoints -= damageResult.damage
       if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+      // Applying rage
+      targetPlayer.physicalRage = rageResult
     }
 
-    // Applying rage
-    targetPlayer.physicalRage = rageResult
+    // Score
+    data = score(data, `action/attack/hit`, `game`)
+    data = score(data, `action/attack/damage`, `game`, damageResult.damage)
+    data = score(data, `damage`, `game`, damageResult.damage)
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
@@ -79,11 +88,17 @@ const attack = (data) => {
     pushBuff(targetPlayer, `temporary`, `LCK`, 1, `attackfumble`, 5)
     // Reset rage because of the fumble
     activePlayer.physicalRage = 0
+    // Score
+    data = score(data, `action/attack/fumble`, `game`)
   }
   // Miss
   else if (!hitResult.hit && !hitResult.fumble) {
-    // nothing to do
+    // Score
+    data = score(data, `action/attack/miss`, `game`)
   }
+
+  // Score
+  data = score(data, `action/attack/total`, `game`)
 
   // Build log
   let log = {

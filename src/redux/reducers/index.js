@@ -27,6 +27,7 @@ import { defeat } from '../../actions/game/defeat'
 import { hallOfFame } from '../../actions/game/hallOfFame'
 import { openShop } from '../../actions/game/openShop'
 import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
+import { score } from '../../actions/score/score'
 /** Combat system */
 // Attacks
 import { attack } from '../../actions/combat/attack'
@@ -197,6 +198,9 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === ATTACK) {
 
+    // Add score
+    nextState = score(nextState, `round`, `run`)
+
     // Skip turn
     if (action.payload.type === `skip`) {
       clog(`skip`, `reducer`)
@@ -265,9 +269,9 @@ function rootReducer(state = initialState, action) {
           nextState = heal(nextState)
           break;
         case `reflect`:
-            clog(`reflect`, `reducer`)
-            nextState = reflect(nextState)
-            break;
+          clog(`reflect`, `reducer`)
+          nextState = reflect(nextState)
+          break;
         // Instants
         case `quickheal`:
           clog(`quickheal`, `reducer`)
@@ -324,6 +328,7 @@ function rootReducer(state = initialState, action) {
   // console.log(nextState)
 
   // In every case, compute Max values
+  // @todo : this probably should move to ATTACK only
   nextState = maxEnergyRefresh(nextState)
 
   // Update LocalStorage
