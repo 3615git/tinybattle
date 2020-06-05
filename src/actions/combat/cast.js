@@ -4,6 +4,7 @@ import { energyBurn } from './energy'
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { findBuff } from '../../actions/combat/stats'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the basic magical attack results
@@ -50,11 +51,14 @@ const cast = (data, manaResest = false) => {
     else {
       targetPlayer.hitPoints -= damageResult.damage
       if (targetPlayer.hitPoints < 0) targetPlayer.hitPoints = 0
+      // Applying physical rage to target player
+      rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
+      targetPlayer.physicalRage = rageResultDamage
     }
-
-    // Applying physical rage to target player
-    rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
-    targetPlayer.physicalRage = rageResultDamage
+    // Score
+    data = score(data, `action/cast/critical`, `game`)
+    data = score(data, `action/cast/damage`, `game`, damageResult.damage)
+    data = score(data, `damage`, `game`, damageResult.damage)
   }
   // Normal hit
   else if (hitResult.hit && !hitResult.critical) {
@@ -74,6 +78,11 @@ const cast = (data, manaResest = false) => {
       rageResultDamage = rage(`attack`, targetPlayer, damageResult.damage)
       targetPlayer.physicalRage = rageResultDamage
     }
+
+    // Score
+    data = score(data, `action/cast/hit`, `game`)
+    data = score(data, `action/cast/damage`, `game`, damageResult.damage)
+    data = score(data, `damage`, `game`, damageResult.damage)
   }
   // Fumble miss
   else if (!hitResult.hit && hitResult.fumble) {
@@ -81,14 +90,20 @@ const cast = (data, manaResest = false) => {
     pushBuff(targetPlayer, `temporary`, `LCK`, 1, `castfumble`, 5)
     // Reset rage because of the fumble
     activePlayer.magicalRage = 0
+    // Score
+    data = score(data, `action/cast/fumble`, `game`)
   }
   // Miss
   else if (!hitResult.hit && !hitResult.fumble) {
-    // nothing to do
+    // Score
+    data = score(data, `action/cast/miss`, `game`)
   }
 
   // Reset rage because of the special cast
   if (manaResest) activePlayer.magicalRage = 0
+
+  // Score
+  data = score(data, `action/cast/total`, `game`)
 
   // Build log
   let log = {
