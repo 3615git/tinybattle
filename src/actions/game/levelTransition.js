@@ -1,3 +1,4 @@
+import { bestScore } from '../../actions/score/score'
 
 /**
   * @desc Displaying next level number
@@ -11,6 +12,9 @@ const levelTransition = (data) => {
   data.game.level = previousLevel + 1
   // Set game state
   data.game.state = `levelTransition`
+
+  // Score
+  data = bestScore(data, `maxlevel`, `run`, previousLevel + 1)
 
   return data
 }

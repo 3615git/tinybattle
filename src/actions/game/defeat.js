@@ -1,14 +1,17 @@
-// import { createPlayer } from '../../actions/settings/createPlayer' // TO BE REMOVED
+import { forceScore } from '../../actions/score/score'
 
 /**
-  * @desc Selecting legacy items
+  * @desc Defeat, selecting legacy items
 */
 
 const defeat = (data) => {
-  // data = createPlayer(data, `warrior`) // TO BE REMOVED
-  // data.game.level = 1 // TO BE REMOVED
+
   // Set game state 
   data.game.state = `defeat`
+
+  // Score
+  data = forceScore(data, `battles/defeats`, `game`)
+  data = forceScore(data, `opponents/${data.opponent.job}/defeats`, `alltime`)
 
   return data
 }

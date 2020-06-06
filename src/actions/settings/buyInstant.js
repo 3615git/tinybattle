@@ -1,3 +1,4 @@
+import { forceScore } from '../../actions/score/score'
 
 /**
   * @desc Set item or weapon
@@ -28,6 +29,10 @@ const buyInstant = (data, item) => {
   
   // Pay item price
   data.player.gold -= item.price
+
+  // Score
+  data = forceScore(data, `shop/gold/spent`, `alltime`, item.price)
+  data = forceScore(data, `shop/items/purchased`, `alltime`)
 
   return data
 }
