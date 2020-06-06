@@ -2,6 +2,7 @@ import { formatDataLog } from '../../utils/formatDataLog'
 import { pushBuff } from './stats'
 import { instantUse } from './energy'
 import { sideEffects } from '../../actions/settings/onNewItem'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of upgrade instant
@@ -24,6 +25,9 @@ const upgrade = (data, item, id) => {
 
   // Update instant counter
   activePlayer = instantUse(activePlayer, id)
+
+  // Score
+  nextData = score(nextData, `instant/upgrade/${buffType}`, `game`)
 
   // Build log
   let log = {

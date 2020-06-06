@@ -2,6 +2,7 @@ import { pushBuff } from './stats'
 import { energyRestore } from './energy'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { rage } from './rage'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the basic physical attack results
@@ -29,6 +30,9 @@ const block = (data) => {
   let rageBonus = activePlayer.CON
   let rageResult = rage(`attack`, activePlayer, rageBonus)
   activePlayer.physicalRage = rageResult
+
+  // Score
+  data = score(data, `action/block/total`, `game`)
 
   // Build logs
   let log = {

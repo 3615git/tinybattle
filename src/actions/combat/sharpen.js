@@ -3,6 +3,7 @@ import { instantUse } from './energy'
 import { weaponElements } from "../../conf/settings_items"
 import { randomValue } from "../../utils/utils"
 import { skillWheelRoll } from '../../actions/combat/hit'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of sharpen instant
@@ -35,7 +36,8 @@ const sharpen = (data, item, id) => {
 
   switch (hit.result) {
     case `fumble`:
-      // Do nothing
+      // Score
+      data = score(data, `instant/sharpen/miss`, `game`)
       break;
 
     default:
@@ -52,6 +54,8 @@ const sharpen = (data, item, id) => {
       }
       // Add + 1 sharpen score
       activePlayer.weapons[item.value].sharpen = sharpenScore + 1
+      // Score
+      data = score(data, `instant/sharpen/success`, `game`)
       break;
   }
 
@@ -60,6 +64,9 @@ const sharpen = (data, item, id) => {
 
   // Update instant counter
   activePlayer = instantUse(activePlayer, id)
+
+  // Score
+  data = score(data, `instant/sharpen/total`, `game`)
 
   // Build log
   let log = {

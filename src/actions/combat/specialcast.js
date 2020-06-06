@@ -3,6 +3,7 @@ import { pushBuff } from './stats'
 import { cast } from './cast'
 import { getStat } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the special magical attack results
@@ -25,6 +26,9 @@ const specialcast = (data) => {
   activePlayer = resetRage(`magical`, activePlayer)
   // Update data
   data.player = activePlayer
+
+  // Score
+  data = score(data, `action/specialcast/total`, `game`)
 
   // Build log
   let log = {

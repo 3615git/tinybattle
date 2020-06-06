@@ -1,6 +1,7 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of reflect skill
@@ -29,21 +30,30 @@ const reflect = (data) => {
   switch (hit.result) {
     case `fumble`:
       reflect = `miss`
+      // Score
+      data = score(data, `action/reflect/miss`, `game`)
       break;
 
     default:
       if (hit.result.item.effect === `reflect`) {
         reflect = `success`
         pushBuff(targetPlayer, `temporary`, `reflect`, 1, `reflect`)
+        // Score
+        data = score(data, `action/reflect/success`, `game`)
       } else {
         reflect = `boost`
         pushBuff(targetPlayer, `temporary`, `boost`, 1, `boost`)
+        // Score
+        data = score(data, `action/reflect/fumble`, `game`)
       }
       break;
   }
 
   // Reset skill energy
   activePlayer.skills.reflect.current = 0
+
+  // Score
+  data = score(data, `action/reflect/total`, `game`)
 
   // Build log
   let log = {

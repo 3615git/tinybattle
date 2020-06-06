@@ -1,6 +1,7 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of psyblast skill
@@ -20,14 +21,20 @@ const psyblast = (data) => {
     case `success`:
       MAGmalus = -Math.abs(Math.ceil(targetPlayer.MAG))
       pushBuff(targetPlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 4)
+      // Score
+      data = score(data, `action/psyblast/success`, `game`)
       break;
     case `critical`:
       MAGmalus = -Math.abs(Math.ceil(targetPlayer.MAG * 2))
       pushBuff(targetPlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 4)
+      // Score
+      data = score(data, `action/psyblast/critical`, `game`)
       break;
     case `fumble`:
       MAGmalus = -Math.abs(Math.ceil(activePlayer.MAG / 2))
       pushBuff(activePlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 2)
+      // Score
+      data = score(data, `action/psyblast/fumble`, `game`)
       break;
   
     default:
@@ -36,6 +43,9 @@ const psyblast = (data) => {
 
   // Reset skill energy
   activePlayer.skills.psyblast.current = 0
+
+  // Score
+  data = score(data, `action/psyblast/total`, `game`)
 
   // Build log
   let log = {

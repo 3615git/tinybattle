@@ -3,6 +3,7 @@ import { pushBuff } from './stats'
 import { attack } from './attack'
 import { getStat } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the special physical attack results
@@ -29,6 +30,9 @@ const specialattack = (data) => {
   // Update data
   data.player = activePlayer
 
+  // Score
+  data = score(data, `action/specialattack/total`, `game`)
+
   // Build log
   let log = {
     type: `specialattack`,
@@ -42,7 +46,6 @@ const specialattack = (data) => {
 
   // Logs
   data.dataLogs.push(formatDataLog(`specialattack`, log, game))
-
 
   // Returns updated physical attack
   return attack(data)

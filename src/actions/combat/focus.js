@@ -1,5 +1,6 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of magical defense
@@ -18,6 +19,9 @@ const focus = (data) => {
   pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `focus`, 2)
   pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `focus`, 2)
   pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, `focus`, 2)
+
+  // Score
+  data = score(data, `action/focus/total`, `game`)
 
   // Build log
   let log = {

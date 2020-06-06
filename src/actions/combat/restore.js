@@ -1,5 +1,6 @@
 import { formatDataLog } from '../../utils/formatDataLog'
 import { instantUse, energyRestore } from './energy'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of restore instant
@@ -18,6 +19,9 @@ const restore = (data, item, id) => {
 
   // Update instant counter
   activePlayer = instantUse(activePlayer, id)
+
+  // Score
+  data = score(data, `instant/restore/total`, `game`)
 
   // Build log
   let log = {
