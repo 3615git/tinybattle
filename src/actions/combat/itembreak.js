@@ -1,6 +1,7 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of itembreak skill
@@ -52,16 +53,23 @@ const itembreak = (data) => {
       pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `stun`, 2)
       // Give LCK bonus to opponent 
       pushBuff(targetPlayer, `temporary`, `LCK`, 3, `attackfumble`, 5)
+      // Score
+      data = score(data, `action/itembreak/fumble`, `game`)
       break;
 
     default:
       // Destroy one or more items
       delete targetPlayer[hit.result.category][hit.result.char]
+      // Score
+      data = score(data, `action/itembreak/success`, `game`)
       break;
   }
 
   // Reset skill energy
   activePlayer.skills.itembreak.current = 0
+
+  // Score
+  data = score(data, `action/itembreak/total`, `game`)
 
   // Build log
   let log = {

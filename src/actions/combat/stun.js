@@ -1,6 +1,7 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of stun skill
@@ -20,16 +21,22 @@ const stun = (data) => {
     case `success`:
       rounds = 1
       pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 2)
+      // Score
+      data = score(data, `action/stun/success`, `game`)
       break;
     case `critical`:
       rounds = 2
       pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 4)
+      // Score
+      data = score(data, `action/stun/critical`, `game`)
       break;
     case `fumble`:
       DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
       STRmalus = -Math.abs(Math.ceil(activePlayer.STR / 2))
       pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `stun`, 2)
       pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `stun`, 2)
+      // Score
+      data = score(data, `action/stun/fumble`, `game`)
       break;
 
     default:
@@ -38,6 +45,9 @@ const stun = (data) => {
 
   // Reset skill energy
   activePlayer.skills.stun.current = 0
+
+  // Score
+  data = score(data, `action/stun/total`, `game`)
 
   // Build log
   let log = {

@@ -3,6 +3,7 @@ import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 import { energyRestore } from './energy'
 import { getRandomInt, capitalizeFirstLetter } from '../../utils/utils'
+import { score } from '../../actions/score/score'
 
 /**
   * @desc Computing the results of heal skill
@@ -37,6 +38,8 @@ const heal = (data) => {
     case `fumble`:
       FUMBLEmalus = getRandomInt(3, 5)
       pushBuff(activePlayer, `temporary`, `fumble`, FUMBLEmalus, `curse`, 4)
+      // Score
+      data = score(data, `action/heal/fumble`, `game`)
       break;
 
     default:
@@ -45,11 +48,18 @@ const heal = (data) => {
       // Value is a % of maxHitPoints
       healValue = Math.round( getRandomInt(healRanges[healCapacity][0], healRanges[healCapacity][1]) * player.maxHitPoints / 100 )
       activePlayer = energyRestore(activePlayer, healValue, `hitPoints`)
+      // Score
+      data = score(data, `action/heal/success`, `game`)
+      data = score(data, `action/heal/heal`, `game`, healValue)
+      data = score(data, `heal`, `game`, healValue)
       break;
   }
 
   // Reset skill energy
   activePlayer.skills.heal.current = 0
+
+  // Score
+  data = score(data, `action/heal/total`, `game`)
 
   // Build log
   let log = {
