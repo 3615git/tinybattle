@@ -26,6 +26,15 @@
   }
 }
 
+.encountersWrapper {
+  margin-top: 15px;
+  font-size: $font_small;
+
+  .title { font-size: $font_base; margin-bottom: 5px;}
+  .victory { color: $color_bonus }
+  .defeat { color: $color_malus }
+}
+
 .elementWrapper {
   display: inline-block;
   margin: 0 3px;
