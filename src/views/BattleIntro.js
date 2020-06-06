@@ -5,6 +5,7 @@ import * as Vibrant from 'node-vibrant'
 import { setGameState, settings } from '../redux/actions/index'
 import Opponent from '../ui/battle/Opponent'
 import Element from '../ui/battle/Element'
+import Encounter from '../ui/battle/Encounter'
 
 const mapStateToProps = state => {
   return {
@@ -79,6 +80,7 @@ class BattleIntro extends Component {
             <div className="details">
               {opponent.elite && <Element big element="elite" />}
               {opponent.element && <Element big element={opponent.element} />}
+              <Encounter type={opponent.job} />
             </div>
           </div>
           <div className="actionArea">
