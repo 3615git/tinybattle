@@ -18,7 +18,7 @@ const Encounter = ({ type, history }) => {
   console.log(type)
   console.log(history)
 
-  if (history[type]) { 
+  if (history && history[type]) { 
     title = `Encounters : ${history[type].total}` 
     victories = history[type].victories 
       ? history[type].victories > 1 ? `${history[type].victories} victories` : `1 victory`
