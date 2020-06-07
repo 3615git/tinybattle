@@ -102,7 +102,7 @@ class Welcome extends Component {
           </div>
           <div className="actionArea">
             {startButton}
-            {score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>Reset game</button>}
+            {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>Reset game</button>}
             <div className="version">0.0.6</div>
           </div>
         </div>
