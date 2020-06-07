@@ -73,7 +73,7 @@ class Welcome extends Component {
     if (game.quitState && player.name) {
       startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - Run #{score.game.runs} - lvl. {game.level}</span></button>
     } else {
-      startButton = <button className="navigation" onClick={() => this.newGame()}>{score.game.runs ? `New run (${score.game.runs})` : `Start new game`}</button>
+      startButton = <button className="navigation" onClick={() => this.newGame()}>{score && score.game && score.game.runs ? `New run (${score.game.runs})` : `Start new game`}</button>
     }
     
     return [
