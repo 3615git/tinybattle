@@ -1,0 +1,53 @@
+@import 'variables';
+
+.levelTransition {
+  .title {
+    font-size: $font_huge;
+    margin-bottom: 50px;
+  }
+  .subTitle {
+    margin-bottom: 10px;
+  } 
+}
+
+.roadmap {
+  position: fixed;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 50%;
+  padding: 300px 0px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+
+  > div {
+    display: flex;
+    justify-content: center;
+  }
+
+  .infoWrapper {
+    position: relative;
+  }
+
+  .leftInfo {
+    position: absolute;
+    top: 30%;
+    width: calc(50% - 60px);
+    left: 0;
+    text-align: right;
+  }
+
+  .rightInfo {
+    position: absolute;
+    top: 60%;
+    width: calc(50% - 55px);
+    right: 0;
+    text-align: left;
+  }
+}
+
+.deadMonster {
+  margin-top: 60px;
+}

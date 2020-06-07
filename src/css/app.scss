@@ -175,15 +175,6 @@ html, body, #root {
   }
 }
 
-.levelTransition .title {
-  font-size: $font_huge;
-  margin-bottom: 50px;
-}
-
-.levelTransition .subTitle {
-  margin-bottom: 10px;
-}
-
 .actionArea {
   height: 170px;
   display: flex;
@@ -191,6 +182,13 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   z-index: 30;
+
+  &.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
 
   button {
     margin: 5px !important;
@@ -268,6 +266,28 @@ html, body, #root {
   transition: all 500ms;
   z-index: 2;
 
+  &.round {
+    flex: 0;
+    width: 200px;
+    min-width: 200px;
+    height: 200px;
+    min-height: 200px;
+    border-radius: 50%;
+
+    .infos {
+      z-index: 101;
+      bottom: 20px;
+      top: auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .eliteIndicator {
+      width: 111%;
+      height: 111%;
+    }
+  }
+
   // background-blend-mode: hard-light;
   // background-blend-mode: luminosity;
   background-blend-mode: soft-light;
@@ -298,6 +318,14 @@ html, body, #root {
   transition: all 2000ms;
   filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5)) brightness(100%);
   animation: monsterAttack 1s cubic-bezier(.36,.07,.19,.97) both;
+  z-index: 100;
+}
+
+.opponentWrapper.turn.static .portrait.ready {
+  opacity: 1;
+  transition: none;
+  filter: drop-shadow(2px 4px 10px rgba(0,0,0,.5)) brightness(100%);
+  animation: none;
   z-index: 100;
 }
 
