@@ -59,6 +59,14 @@ textarea:focus, input:focus, button:focus{
   position: relative;
 }
 
+.smallText {
+  font-size: $font_small;
+}
+
+.margin-none {
+  margin: 0px !important;
+}
+
 /* Main app */
 html, body, #root, button {
   font-family: "alagard";

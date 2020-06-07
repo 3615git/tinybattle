@@ -9,13 +9,17 @@ import coverart from '../pics/ui/welcome.png'
 import logo from '../pics/ui/logo.png'
 import logo2 from '../pics/ui/logo2.png'
 
+// Import UI utils
+import Modal from '../ui/general/Modal'
+
 const mapStateToProps = state => {
   return {
     game: state.game,
     player: state.player,
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
-    log: state.log
+    log: state.log,
+    score: state.score
   }
 }
 
@@ -28,8 +32,28 @@ function mapDispatchToProps(dispatch) {
 
 class Welcome extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      openModal: false
+    }
+  }
+
   componentDidMount() {
 
+  }
+
+  openModal = (modal) => {
+    this.setState({
+      openModal: modal
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      openModal: false
+    })
   }
 
   newGame = () => {
@@ -41,18 +65,19 @@ class Welcome extends Component {
   }
 
   render() {
-
-    const { setGameState, game, player } = this.props
+    const { openModal } = this.state
+    const { setGameState, game, player, score } = this.props
 
     // Start button
     let startButton
     if (game.quitState && player.name) {
-      startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - lvl. {game.level}</span></button>
+      startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - Run #{score.game.runs} - lvl. {game.level}</span></button>
     } else {
-      startButton = <button className="navigation" onClick={() => this.newGame()}>New game</button>
+      startButton = <button className="navigation" onClick={() => this.newGame()}>{score.game.runs ? `New run (${score.game.runs})` : `Start new game`}</button>
     }
     
     return [
+      <Modal key="modalReset" content="reset" display={openModal === `reset`} close={this.closeModal} />,
       <div key="mainWrapper" className="mainWrapper wideScreen">
         <div className="appWrapper">
           <div className="presentationArea">
@@ -77,6 +102,7 @@ class Welcome extends Component {
           </div>
           <div className="actionArea">
             {startButton}
+            {score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>Reset game</button>}
             <div className="version">0.0.6</div>
           </div>
         </div>

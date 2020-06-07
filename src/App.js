@@ -11,6 +11,7 @@ import { settings, setGameState } from './redux/actions/index'
 
 // Import views
 import Welcome from './views/Welcome'
+import AllReset from './views/AllReset'
 import GameCreate from './views/GameCreate'
 import LevelTransition from './views/LevelTransition'
 import BattleIntro from './views/BattleIntro'
@@ -25,7 +26,6 @@ import MonstersDemo from './views/MonstersDemo'
 import Modal from './ui/general/Modal'
 
 // Import pictures
-import settingsPic from './pics/ui/settings.svg'
 import help from './pics/ui/help.svg'
 import close from './pics/ui/close.svg'
 
@@ -109,14 +109,14 @@ class App extends Component {
     let fullOptions = (
       <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
+        {/* <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button> */}
       </div>
     )
 
     let smallOptions = (
       <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => setGameState({ state: `quit` })}><img src={close} alt="Quit" /></button>
-        <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button>
+        {/* <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button> */}
       </div>
     )
 
@@ -124,6 +124,10 @@ class App extends Component {
       case `welcome`:
         view = <Welcome />
         options = fullOptions
+        break;
+      case `allReset`:
+        view = <AllReset />
+        options = []
         break;
       case `gameCreate`:
         view = <GameCreate />
