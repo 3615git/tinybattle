@@ -3,6 +3,7 @@ import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
 import { createMonsters } from '../../actions/settings/createMonsters'
 import { createPlayer } from '../../actions/settings/createPlayer'
 import { resetLevel } from '../../actions/settings/resetLevel'
+import { resetGame } from '../../actions/settings/resetGame'
 import { setItem } from '../../actions/settings/setItem'
 import { setGold } from '../../actions/settings/setGold'
 import { keepItem } from '../../actions/settings/keepItem'
@@ -86,6 +87,10 @@ function rootReducer(state = initialState, action) {
       case `resetLevel`:
         clog(`resetLevel`, `reducer`)
         nextState = resetLevel(nextState)
+        break;
+      case `resetGame`:
+        clog(`resetGame`, `reducer`)
+        nextState = resetGame(nextState)
         break;
       case `setItem`:
         clog(`setItem`, `reducer`)

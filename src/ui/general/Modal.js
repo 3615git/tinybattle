@@ -4,6 +4,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 
 import ModalAbout from './ModalAbout'
 import ModalSettings from './ModalSettings'
+import ModalReset from './ModalReset'
 
 import '../../css/modal.scss'
 import closeIcon from '../../pics/ui/close.svg'
@@ -30,6 +31,8 @@ const modalContent = (content) => {
       return <ModalAbout key="modalAbout" />
     case `settings`:
       return <ModalSettings key="modalSettings" />
+    case `reset`:
+      return <ModalReset key="modalReset" />
     default:
       break;
   }

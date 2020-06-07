@@ -49,6 +49,20 @@ button {
     opacity: .2;
   }
 
+  &.textOnly {
+    width: 250px;
+    border: none;
+    background: none;
+    box-shadow: none;
+    height: auto;
+    font-size: $font_small;
+    padding: 10px !important;
+
+    &:after, &:before {
+      display: none;
+    }
+  }
+
   .note {
     position: absolute;
     top: 5px;
