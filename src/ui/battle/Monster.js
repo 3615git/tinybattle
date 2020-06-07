@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import * as Vibrant from 'node-vibrant'
 
-import StatsAndItems from './StatsAndItems'
 import EliteBackground from './EliteBackground'
+import { monsterPic, monsterInfo } from '../../monsters/monster'
 
 /**
   * @desc Functional opponent block, also smaller
 */
 
 const propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  elite: PropTypes.bool.isRequired
 }
 
 const defaultProps = {
@@ -32,8 +34,7 @@ class Monster extends Component {
     }
   }
 
-  fetchPalette = (imgSrc, data) => {
-    if (!imgSrc) console.log(data)
+  fetchPalette = (imgSrc) => {
     Vibrant.from(imgSrc).getPalette()
       .then(palette => {
         this.setState({
@@ -47,9 +48,11 @@ class Monster extends Component {
   }
   
   componentDidMount() {
-    const { type, data } = this.props
+    const { type } = this.props
+    const pic = monsterPic(type)
+
     // Fetch colors
-    this.fetchPalette(data.pic, data)
+    this.fetchPalette(pic)
 
     // Defining portrait or landscape mode for portraits
     var portrait = document.getElementById('portrait_'+type)
@@ -66,18 +69,19 @@ class Monster extends Component {
 
   // Display component
   render() {
-    const { type, data, level } = this.props
+    const { type, name, elite, monsterList } = this.props
     const { mode, portraitReady, color } = this.state
+    const data = monsterInfo(type, 1, monsterList)
 
     // Get colors from scene
     // const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
 
     // Component styling
-    const defaultClasses = `opponentWrapper` // removed "small" for offset testing
+    const defaultClasses = `opponentWrapper round turn static` // removed "small" for offset testing
   
     // Add custom classes to defined classes
-    const itemClasses = [defaultClasses, data.element].filter(val => val).join(` `)
+    const itemClasses = [defaultClasses].filter(val => val).join(` `)
 
     // Monster bg styling
     const wrapperStyle = {
@@ -86,10 +90,10 @@ class Monster extends Component {
 
     // Monster portrait size
     const portraitStyling = mode === `portrait` ? {
-      width: `400px`,
+      width: `250px`,
       top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     } : {
-      width: `500px`,
+      width: `350px`,
       top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     }
 
@@ -98,18 +102,16 @@ class Monster extends Component {
 
     return (
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
-        {data.elite && <EliteBackground />}
+        {elite && <EliteBackground />}
         <div className="infos">
-          <div className="level">Level {level}</div>
           <div className="name">
-            {data.elite 
-              ? <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span><span className="eliteMarker">Elite</span></div></div>
-              : <div>{data.name}<div className="details"><span className={data.element}>{data.element}</span></div></div>
+            {elite 
+              ? <div>{name}<div className="details"><span className="eliteMarker">Elite</span></div></div>
+              : <div>{name}<div className="details"></div></div>
             }
           </div>
         </div>
-        <StatsAndItems opponent humanoid={data.humanoid} forceData={data} />
-        <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={data.name} />
+        <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={name} />
       </div>
     )
   }

@@ -114,5 +114,5 @@ function monsterInfo(type, level, monsters) {
 }
 
 export {
-  monsterInfo
+  monsterInfo, monsterPic
 }
