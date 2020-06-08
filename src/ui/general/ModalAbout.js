@@ -40,7 +40,7 @@ const ModalAbout = () => {
       <div className="title">Monsters design</div>
       <p><a href="http://www.akashics.moe/" target="_blank">Ækashics Librarium</a></p>
       <div className="title">Pixel art assets</div>
-      <p><a href="https://www.deviantart.com/7soul1" target="_blank">7 Soul</a></p>
+      <p><a href="https://www.deviantart.com/7soul1" target="_blank">7 Soul</a> / <a href="https://www.saschanaderer.com/pixel-art/" target="_blank">Pixeltier</a></p>
       <div className="separator" />
       <p>Thank you for playing!</p>
     </div>
