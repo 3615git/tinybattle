@@ -126,7 +126,7 @@ class Logs extends Component {
 
       case `sharpen`:
         widget = [
-          <Wheel type="itembreak" items={data.wheelPositions} position={data.wheelPosition} />,
+          <Wheel key="sharpenWheel" type="itembreak" items={data.wheelPositions} position={data.wheelPosition} />,
           // <ItemVisual key="item_enhancer" big item={log.data.icon[0]} level={log.data.icon[1]} />,
           // <ItemVisual key="item_enhanced" big item={log.data.icon[2]} level={log.data.icon[3]} />
         ]

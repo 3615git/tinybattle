@@ -211,11 +211,11 @@ const magicalDamage = (activePlayer, targetPlayer, critical) => {
   let damage = baseDamage + itemDamage + criticalBonus + elementalBonus
   if (damage < 0) damage = 0
 
-  console.log(`baseDamage`, baseDamage)
-  console.log(`itemDamage`, itemDamage)
-  console.log(`criticalBonus`, criticalBonus)
-  console.log(`elementalBonus`, elementalBonus)
-  console.log(`damage`, damage)
+  // console.log(`baseDamage`, baseDamage)
+  // console.log(`itemDamage`, itemDamage)
+  // console.log(`criticalBonus`, criticalBonus)
+  // console.log(`elementalBonus`, elementalBonus)
+  // console.log(`damage`, damage)
 
   return {
     roll: itemDamageResults,

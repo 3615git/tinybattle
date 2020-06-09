@@ -74,7 +74,7 @@ class Item extends Component {
     let marks = []
     if (item && item.sharpen) {
       for (let index = 0; index < item.sharpen; index++) {
-        marks.push(<div className="markWrapper"><div className="mark" /></div>)
+        marks.push(<div key={`markWrapper_${index}`} className="markWrapper"><div className="mark" /></div>)
       }
     }
 

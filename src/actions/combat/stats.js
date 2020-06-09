@@ -48,8 +48,10 @@ const listBuff = (stat, player) => {
     const type = types[index]
     if (player.buff && player.buff[type] && player.buff[type].length > 0) {
       // Find array of buffs for this stat
-      let activeBuffs = player.buff[type].filter(x => x.stat === stat)
-      // No value = emplty array, so push only if values
+      let activeBuffs
+      if (type === `permanent`) activeBuffs = player.buff[type].filter(x => x.stat === stat && x.origin !== "instant")
+      else activeBuffs = player.buff[type].filter(x => x.stat === stat)
+      // No value = empty array, so push only if values
       for (let buffIndex = 0; buffIndex < activeBuffs.length; buffIndex++) {
         if (activeBuffs.length > 0) buffs.push(activeBuffs[buffIndex])
       }
