@@ -11,10 +11,10 @@ if ($_SERVER['SERVER_ADDR'] == "127.0.0.1" OR $_SERVER['SERVER_ADDR'] == "::1") 
 	define('DB_PASS', 'root');
 	define('DB_NAME', 'mhd20');
 } else {
-	define('DB_HOST', 'localhost');
-	define('DB_USER', 'root');
-	define('DB_PASS', '');
-	define('DB_NAME', 'mhd20');
+	define('DB_HOST', 'blackpingvdata.mysql.db');
+	define('DB_USER', 'blackpingvdata');
+	define('DB_PASS', 'UhxftQ8y487fwD');
+	define('DB_NAME', 'blackpingvdata');
 }
 
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);

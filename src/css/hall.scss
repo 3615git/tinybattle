@@ -8,6 +8,14 @@
   width: 100%;
   max-width: 450px;
 
+  .loading {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .title {
     padding: 30px 0px;
     text-align: center;
