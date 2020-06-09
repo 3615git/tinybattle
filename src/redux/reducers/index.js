@@ -4,6 +4,7 @@ import { createMonsters } from '../../actions/settings/createMonsters'
 import { createPlayer } from '../../actions/settings/createPlayer'
 import { resetLevel } from '../../actions/settings/resetLevel'
 import { resetGame } from '../../actions/settings/resetGame'
+import { submitScore } from '../../actions/settings/submitScore'
 import { setItem } from '../../actions/settings/setItem'
 import { setGold } from '../../actions/settings/setGold'
 import { keepItem } from '../../actions/settings/keepItem'
@@ -91,6 +92,10 @@ function rootReducer(state = initialState, action) {
       case `resetGame`:
         clog(`resetGame`, `reducer`)
         nextState = resetGame(nextState)
+        break;
+      case `submitScore`:
+        clog(`submitScore`, `reducer`)
+        nextState = submitScore(nextState)
         break;
       case `setItem`:
         clog(`setItem`, `reducer`)

@@ -55,7 +55,7 @@ const Modal = ({ content, close, display }) => {
       >
         <div key="modalWrapper" className="modalWrapper" onClick={close}>
           <div className="modal" onClick={handleChildClick}>
-            <button id="closeModal" className="option" onClick={close}><img src={closeIcon} alt="Close" /></button>
+            <button key="closeModal" id="closeModal" className="option" onClick={close}><img src={closeIcon} alt="Close" /></button>
             {modalContent(content)}
           </div>
         </div>

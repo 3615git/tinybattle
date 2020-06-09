@@ -42,6 +42,7 @@ import './css/battle_logs.scss'
 import './css/battle_stats.scss'
 import './css/victory.scss'
 import './css/defeat.scss'
+import './css/hall.scss'
 import './css/items.scss'
 import './css/wheel.scss'
 
@@ -99,7 +100,7 @@ class App extends Component {
 
     let view
     let ambiantFog = (
-      <div className="fogWrapper">
+      <div className="fogWrapper" key="fogwrapper">
         <div className="smoke" key="smoke" />
         <div className="fog" key="fog" />
       </div>
@@ -160,7 +161,6 @@ class App extends Component {
         break;
       case `hallOfFame`:
         view = <HallOfFame />
-        ambiantFog = []
         options = smallOptions
         break;
       case `monstersDemo`:

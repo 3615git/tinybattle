@@ -1,0 +1,89 @@
+@import 'variables';
+@import 'mixins';
+
+.hall {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 450px;
+
+  .title {
+    padding: 30px 0px;
+    text-align: center;
+    font-size: $font_big;
+  }
+
+  .hallTabs {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    justify-content: space-between;
+
+    button {
+      font-size: $font_base;
+      flex-direction: column;
+      flex-basis:calc(50% - 5px);
+      height: 60px;
+
+      span {
+        font-size: $font_small;
+      }
+
+      .item {
+        margin: 5px;
+        // filter: grayscale(1);
+      }
+
+      &.on { @include buttonStyle(lighten($color_button, 13)); }
+      &.off { @include buttonStyle(darken($color_button, 5)); }
+    }
+  }
+
+  .hallList {
+    position: relative;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .scoreTitle {
+    opacity: .3;
+    font-size: $font_small;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .columns {
+    span {
+      flex-basis: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      line-height: 19px;
+
+      &.name {
+        text-align: left;
+        justify-content: left;
+        flex: 1;
+      }
+
+      &.level {
+        color: #eb1f69;
+      }
+    }
+  }
+
+  .hallListContent {
+    position: absolute;
+    width: 100%;
+    padding: 0px 20px;
+
+    div {
+      display: flex;
+      margin-bottom: 10px;
+      justify-content: space-between;
+    }
+  }
+}

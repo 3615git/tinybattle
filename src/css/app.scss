@@ -67,6 +67,10 @@ textarea:focus, input:focus, button:focus{
   margin: 0px !important;
 }
 
+.text-big {
+  font-size: $font_big;
+}
+
 /* Main app */
 html, body, #root, button {
   font-family: "alagard";
