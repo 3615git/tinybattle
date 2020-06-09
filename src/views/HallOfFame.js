@@ -56,7 +56,7 @@ class HallOfFame extends Component {
     const { score } = this.state
 
     if (!score) {
-      return "Loading scores, please wait!"
+      return <div className="loading">Loading scores, please wait!</div>
     } else {
       // Parse score data
       let scores = []
