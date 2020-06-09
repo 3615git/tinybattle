@@ -98,7 +98,7 @@ class GameCreate extends Component {
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
           <div className="presentationArea shopWrapper highIndex">
-            {score.game && score.game.runs
+            {score && score.game && score.game.runs
               ? <><div className="text-big">{name}</div><div style={{marginTop: `5px`}}>Run #{score.game.runs + 1}</div></>
               : <><label>Your name</label><input type="text" name="name" value={name} onChange={this.handleChange} autoComplete="off" /></>
             }
