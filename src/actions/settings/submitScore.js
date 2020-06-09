@@ -5,7 +5,7 @@
 const submitScore = (data) => {
 
   // Set score submitted
-  // data.score.run.scoreSent = true
+  data.score.run.scoreSent = true
 
   return data
 }
