@@ -4,8 +4,8 @@
 
 const submitScore = (data) => {
 
-  // Reset everything
-  data.score.run.scoreSent = true
+  // Set score submitted
+  // data.score.run.scoreSent = true
 
   return data
 }
