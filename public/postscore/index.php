@@ -1,23 +1,18 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+// header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST');
 header("Access-Control-Allow-Headers: Content-Type");
+
+header('Content-Type: application/json');
 
 // $content = file_get_contents('php://input');
 $content = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['SERVER_ADDR'] == "127.0.0.1" OR $_SERVER['SERVER_ADDR'] == "::1") {
-	define('DB_HOST', 'localhost');
-	define('DB_USER', 'root');
-	define('DB_PASS', 'root');
-	define('DB_NAME', 'mhd20');
-} else {
-	define('DB_HOST', 'blackpingvdata.mysql.db');
-	define('DB_USER', 'blackpingvdata');
-	define('DB_PASS', 'UhxftQ8y487fwD');
-	define('DB_NAME', 'blackpingvdata');
-}
-
+// DB connect
+define('DB_HOST', 'blackpingvdata.mysql.db');
+define('DB_USER', 'blackpingvdata');
+define('DB_PASS', 'UhxftQ8y487fwD');
+define('DB_NAME', 'blackpingvdata');
 $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Check connection
