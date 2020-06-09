@@ -101,12 +101,12 @@ class Welcome extends Component {
             <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
             <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>HOF</button>
             <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>   
+            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>HOF</button>
           */}
             
           </div>
           <div className="actionArea">
             {startButton}
-            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>HOF</button>
             {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>New game</button>}
             <div className="version">0.0.6</div>
           </div>
