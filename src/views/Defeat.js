@@ -167,8 +167,6 @@ class Defeat extends Component {
 
     clog(`Defeat render`, `location`)
 
-    console.log(scoreSubmitted)
-
     const itemCount = legacyItemsCount(game.level)
     const itemCountLabel = itemCount === 1 ? `1 item` : <>{itemCount} items</>
 

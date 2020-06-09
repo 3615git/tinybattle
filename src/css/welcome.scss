@@ -91,12 +91,13 @@
 
 
 .coverArt {
-max-width: 570px;
+  max-width: 570px;
   width: 120%;
   z-index: 10;
   position: absolute;
   filter: drop-shadow(0px 0px 30px rgba(0, 0, 0, 0.3));
   top: -6%;
+  image-rendering: auto;
 }
 
 .logoWrapper {
@@ -113,10 +114,12 @@ max-width: 570px;
     }
     .logo {
       filter: drop-shadow(0px 0px 10px rgba(0,0,0,0.6));
+      image-rendering: auto;
     }
     .logo2 {
       // animation: glow (30s) infinite;
       filter: drop-shadow(0px 0px 30px #fc266b) drop-shadow(0px 0px 40px #fc266b);
+      image-rendering: auto;
     }
     span {
       text-align: center;
