@@ -9,8 +9,8 @@ const gameSettings = {
   eliteCharPointsRange: [50, 100], // elite % spec bonus
   beastHealthBoostRange: [30, 100], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
-  postScoreUrl: "https://mhd20.com/postscore",
-  getScoreUrl: "https://mhd20.com/getscore",
+  postScoreUrl: "https://mhd20.com/postscore/",
+  getScoreUrl: "https://mhd20.com/getscore/",
   maxEnergyMultiplyer: {
     STR: 10,
     MAG: 10,
