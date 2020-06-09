@@ -28,6 +28,7 @@ import Modal from './ui/general/Modal'
 // Import pictures
 import help from './pics/ui/help.svg'
 import close from './pics/ui/close.svg'
+import score from './pics/ui/score.svg'
 
 // Import style
 import './css/app.scss'
@@ -110,6 +111,7 @@ class App extends Component {
     let fullOptions = (
       <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
+        <button className="option" onClick={() => setGameState({ state: `hallOfFame` })}><img src={score} alt="Score" /></button>
         {/* <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button> */}
       </div>
     )
