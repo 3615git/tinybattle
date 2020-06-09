@@ -70,10 +70,14 @@ class Welcome extends Component {
 
     // Start button
     let startButton
-    if (game.quitState && player.name) {
+    if (game.quitState && player && player.name) {
       startButton = <button className="navigation" onClick={() => setGameState({ state: game.quitState })}>Continue<span>{player.name} - Run #{score.game.runs} - lvl. {game.level}</span></button>
     } else {
-      startButton = <button className="navigation" onClick={() => this.newGame()}>{score && score.game && score.game.runs ? `New run (${score.game.runs})` : `Start new game`}</button>
+      // Secondary start button
+      let innerStartButton
+      if (score && score.game && score.game.runs) innerStartButton = <>New run <span>{player.name} - Run #{score.game.runs + 1}</span></>
+      else innerStartButton = "Start new game"
+      startButton = <button className="navigation" onClick={() => this.newGame()}>{innerStartButton}</button>
     }
     
     return [
@@ -95,14 +99,15 @@ class Welcome extends Component {
             <button className="navigation" onClick={() => setGameState({ state: `battleIntro` })}>Battle intro demo</button>
             <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Defeat demo</button> 
             <button className="navigation" onClick={() => setGameState({ state: `victory` })}>Victory demo</button>
-            <button className="navigation" onClick={() => setGameState({ state: `shop` })}>Enter shop</button>
+            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>HOF</button>
             <button className="navigation" onClick={() => setGameState({ state: `monstersDemo` })}>Monsters demo</button>   
           */}
             
           </div>
           <div className="actionArea">
             {startButton}
-            {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>Reset game</button>}
+            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>HOF</button>
+            {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>New game</button>}
             <div className="version">0.0.6</div>
           </div>
         </div>

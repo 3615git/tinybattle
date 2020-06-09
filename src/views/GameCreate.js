@@ -10,7 +10,8 @@ import { clog } from '../utils/utils'
 const mapStateToProps = state => {
   return {
     player: state.player,
-    game: state.game
+    game: state.game,
+    score: state.score
   }
 }
 
@@ -70,7 +71,7 @@ class GameCreate extends Component {
 
   render() {
 
-    const { player } = this.props
+    const { player, score } = this.props
     const { name, baseStyle } = this.state
 
     const goldIcon = {
@@ -97,8 +98,10 @@ class GameCreate extends Component {
       <div className="mainWrapper wideScreen">
         <div className="appWrapper">
           <div className="presentationArea shopWrapper highIndex">
-            <label>Your name</label>
-            <input type="text" name="name" value={name} onChange={this.handleChange} autoComplete="off" />
+            {score.game && score.game.runs
+              ? <><div className="text-big">{name}</div><div style={{marginTop: `5px`}}>Run #{score.game.runs + 1}</div></>
+              : <><label>Your name</label><input type="text" name="name" value={name} onChange={this.handleChange} autoComplete="off" /></>
+            }
             <div className="profileSelector">
               <button onClick={() => this.setStyle(`warrior`)} className={baseStyle !== `warrior` ? `third-transparent` : ``}>Warrior</button>
               <button onClick={() => this.setStyle(`mage`)} className={baseStyle !== `mage` ? `third-transparent` : ``}>Mage</button>
