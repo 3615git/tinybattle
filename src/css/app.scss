@@ -300,6 +300,13 @@ html, body, #root {
     }
   }
 
+  &.outline {
+    position: absolute;
+    z-index: 1;
+    background-color: transparent;
+    filter: brightness(0.25);
+  }
+
   // background-blend-mode: hard-light;
   // background-blend-mode: luminosity;
   background-blend-mode: soft-light;

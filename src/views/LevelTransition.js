@@ -11,6 +11,7 @@ const mapStateToProps = state => {
   return {
     game: state.game,
     player: state.player,
+    opponent: state.opponent,
     score: state.score,
     monsterList: state.monsters
   }
@@ -33,7 +34,7 @@ class LevelTransition extends Component {
   }
   
   render() {
-    const { game, setGameState, score, monsterList } = this.props
+    const { game, opponent, setGameState, score, monsterList } = this.props
 
     // Legacy items count
     const legacyItems = legacyItemsCount(game.level)
@@ -64,6 +65,13 @@ class LevelTransition extends Component {
         // Current level
         roadmap.push(
           <div key={`currentlevel_${level}`} className="infoWrapper" id="currentLevel">
+            <Monster
+              type={opponent.job}
+              name={opponent.name}
+              elite={opponent.elite}
+              monsterList={monsterList}
+              outline
+            />
             <div className="leftInfo">
               <div>Run #{score.game.runs}</div>
               {score.run.round > 1 && <div>{score.run.round} rounds</div>}
