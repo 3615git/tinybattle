@@ -2,6 +2,7 @@ import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 import { score } from '../../actions/score/score'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the results of itembreak skill
@@ -49,7 +50,8 @@ const itembreak = (data) => {
   switch (hit.result) {
     case `fumble`:
       // If fumble, LCK malus
-      DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
+      const activePlayerDEX = getStat(activePlayer, `DEX`)
+      DEXmalus = -Math.abs(Math.ceil(activePlayerDEX.total / 2))
       pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `stun`, 2)
       // Give LCK bonus to opponent 
       pushBuff(targetPlayer, `temporary`, `LCK`, 3, `attackfumble`, 5)

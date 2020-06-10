@@ -1,4 +1,5 @@
 import { bestScore } from '../../actions/score/score'
+import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
 
 /**
   * @desc Displaying next level number
@@ -12,6 +13,18 @@ const levelTransition = (data) => {
   data.game.level = previousLevel + 1
   // Set game state
   data.game.state = `levelTransition`
+
+  // Prepare opponent data from level
+  const level = data.game.level
+  const monsterTiers = data.monsterTiers
+  const monsters = data.monsters
+
+  // Create monster
+  data.opponent = getMonsterFromLevel(level, monsterTiers, monsters, data.game.pastOpponents)
+
+  // Add monster to history
+  if (!data.game.pastOpponents) data.game.pastOpponents = [data.opponent.job]
+  else data.game.pastOpponents.push(data.opponent.job)
 
   // Score
   data = bestScore(data, `maxlevel`, `run`, previousLevel + 1)

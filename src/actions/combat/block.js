@@ -3,6 +3,7 @@ import { energyRestore } from './energy'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { rage } from './rage'
 import { score } from '../../actions/score/score'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the basic physical attack results
@@ -15,10 +16,16 @@ const block = (data) => {
   let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
   // Defends gives temporary DEX and CON bonus but opponent will strike harder and MAG is reduced
-  const DEXbonus = Math.ceil(activePlayer.DEX / 2)
-  const CONbonus = activePlayer.CON
-  const MAGmalus = -Math.ceil(activePlayer.MAG / 2)
-  const STRbonus = Math.ceil(targetPlayer.STR / 2)
+  const activePlayerDEX = getStat(activePlayer, `DEX`)
+  const activePlayerCON = getStat(activePlayer, `CON`)
+  const activePlayerMAG = getStat(activePlayer, `MAG`)
+  const targetPlayerSTR = getStat(targetPlayer, `STR`)
+  // Computing bonus 
+  const DEXbonus = Math.ceil(activePlayerDEX.total / 2)
+  const CONbonus = activePlayerCON.total
+  const MAGmalus = -Math.ceil(activePlayerMAG.total / 2)
+  const STRbonus = Math.ceil(targetPlayerSTR.total / 2)
+  // Applying buffs
   pushBuff(activePlayer, `temporary`, `DEX`, DEXbonus, `block`)
   pushBuff(activePlayer, `temporary`, `CON`, CONbonus, `block`)
   pushBuff(activePlayer, `temporary`, `MAG`, MAGmalus, `block`)

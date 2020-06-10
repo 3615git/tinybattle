@@ -17,9 +17,8 @@ const specialcast = (data) => {
   // Push DEX and STR buff for next attack
   const activePlayerMAG = getStat(activePlayer, `MAG`)
   const activePlayerLCK = getStat(activePlayer, `LCK`)
-  const magBonus = activePlayerMAG.natural * 2
+  const magBonus = activePlayerMAG.natural
   const lckBonus = activePlayerLCK.natural
-
   pushBuff(activePlayer, `temporary`, `MAG`, magBonus, `specialcast`)
   pushBuff(activePlayer, `temporary`, `LCK`, lckBonus, `specialcast`)
   // Reset rage

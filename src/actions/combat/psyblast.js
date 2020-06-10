@@ -2,6 +2,7 @@ import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 import { score } from '../../actions/score/score'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the results of psyblast skill
@@ -15,23 +16,26 @@ const psyblast = (data) => {
 
   // Psychic blast can reduce opponent MAG to a super low value for 2 turns
   const hit = skillWheelRoll()
+  
   let MAGmalus
+  const activePlayerMAG = getStat(activePlayer, `MAG`)
+  const targetPlayerMAG = getStat(targetPlayer, `MAG`)
 
   switch (hit.result) {
     case `success`:
-      MAGmalus = -Math.abs(Math.ceil(targetPlayer.MAG))
+      MAGmalus = -Math.abs(Math.ceil(targetPlayerMAG.total))
       pushBuff(targetPlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 4)
       // Score
       data = score(data, `action/psyblast/success`, `game`)
       break;
     case `critical`:
-      MAGmalus = -Math.abs(Math.ceil(targetPlayer.MAG * 2))
+      MAGmalus = -Math.abs(Math.ceil(targetPlayerMAG.total * 2))
       pushBuff(targetPlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 4)
       // Score
       data = score(data, `action/psyblast/critical`, `game`)
       break;
     case `fumble`:
-      MAGmalus = -Math.abs(Math.ceil(activePlayer.MAG / 2))
+      MAGmalus = -Math.abs(Math.ceil(activePlayerMAG.total / 2))
       pushBuff(activePlayer, `temporary`, `MAG`, MAGmalus, `psyblast`, 2)
       // Score
       data = score(data, `action/psyblast/fumble`, `game`)

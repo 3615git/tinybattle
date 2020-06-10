@@ -12,6 +12,7 @@ import { monsterPic, monsterInfo } from '../../monsters/monster'
 const propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  outline: PropTypes.bool,
   elite: PropTypes.bool.isRequired
 }
 
@@ -69,7 +70,7 @@ class Monster extends Component {
 
   // Display component
   render() {
-    const { type, name, elite, monsterList } = this.props
+    const { type, name, outline, elite, monsterList } = this.props
     const { mode, portraitReady, color } = this.state
     const data = monsterInfo(type, 1, monsterList)
 
@@ -78,7 +79,7 @@ class Monster extends Component {
     const monsterbackground = color.darkVibrant
 
     // Component styling
-    const defaultClasses = `opponentWrapper round turn static` // removed "small" for offset testing
+    const defaultClasses = outline ? `opponentWrapper outline turn static` : `opponentWrapper round turn static`
   
     // Add custom classes to defined classes
     const itemClasses = [defaultClasses].filter(val => val).join(` `)
@@ -99,21 +100,28 @@ class Monster extends Component {
 
     // Monster display
     const portraitClasses = portraitReady ? `portrait ready` : `portrait`
-
-    return (
-      <div key="opponent" className={itemClasses} style={wrapperStyle}>
-        {elite && <EliteBackground />}
-        <div className="infos">
-          <div className="name">
-            {elite 
-              ? <div>{name}<div className="details"><span className="eliteMarker">Elite</span></div></div>
-              : <div>{name}<div className="details"></div></div>
-            }
-          </div>
+    if (outline) {
+      return (
+        <div key="opponent" className={itemClasses}>
+          <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={name} />
         </div>
-        <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={name} />
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div key="opponent" className={itemClasses} style={wrapperStyle}>
+          {elite && <EliteBackground />}
+          <div className="infos">
+            <div className="name">
+              {elite 
+                ? <div>{name}<div className="details"><span className="eliteMarker">Elite</span></div></div>
+                : <div>{name}<div className="details"></div></div>
+              }
+            </div>
+          </div>
+          <img id={`portrait_${type}`} className={portraitClasses} src={data.pic} style={portraitStyling} alt={name} />
+        </div>
+      )
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { score } from '../../actions/score/score'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the results of magical defense
@@ -13,9 +14,14 @@ const focus = (data) => {
   let targetPlayer = game.playerTurn ? {...opponent} : {...player}
 
   // Defends gives temporary MAGx2, lasts 2 turns, but decreases DEX and STR by half
-  const MAGbonus = Math.ceil(activePlayer.MAG * 2)
-  const DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
-  const STRmalus = -Math.abs(Math.ceil(targetPlayer.STR / 2))
+  const activePlayerMAG = getStat(activePlayer, `MAG`)
+  const activePlayerDEX = getStat(activePlayer, `DEX`)
+  const targetPlayerSTR = getStat(targetPlayer, `STR`)
+  // Computing bonus 
+  const MAGbonus = Math.ceil(activePlayerMAG.total)
+  const DEXmalus = -Math.abs(Math.ceil(activePlayerDEX.total / 2))
+  const STRmalus = -Math.abs(Math.ceil(targetPlayerSTR.total / 2))
+  // Applying buffs
   pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `focus`, 2)
   pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `focus`, 2)
   pushBuff(activePlayer, `temporary`, `MAG`, MAGbonus, `focus`, 2)

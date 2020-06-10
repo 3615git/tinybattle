@@ -2,6 +2,7 @@ import { pushBuff } from './stats'
 import { formatDataLog } from '../../utils/formatDataLog'
 import { skillWheelRoll } from '../../actions/combat/hit'
 import { score } from '../../actions/score/score'
+import { getStat } from './stats'
 
 /**
   * @desc Computing the results of stun skill
@@ -16,23 +17,30 @@ const stun = (data) => {
   // Stun can make opponent skip a fex turns
   const hit = skillWheelRoll()
   let DEXmalus, STRmalus, rounds
+  const activePlayerDEX = getStat(activePlayer, `DEX`)
+  const activePlayerSTR = getStat(activePlayer, `STR`)
+  const targetPlayerDEX = getStat(targetPlayer, `DEX`)
 
   switch (hit.result) {
     case `success`:
+      DEXmalus = -Math.abs(Math.ceil(targetPlayerDEX.total / 2))
       rounds = 1
       pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 2)
+      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 4)
       // Score
       data = score(data, `action/stun/success`, `game`)
       break;
     case `critical`:
+      DEXmalus = -Math.abs(Math.ceil(targetPlayerDEX.total / 2))
       rounds = 2
       pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 4)
+      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 6)
       // Score
       data = score(data, `action/stun/critical`, `game`)
       break;
     case `fumble`:
-      DEXmalus = -Math.abs(Math.ceil(activePlayer.DEX / 2))
-      STRmalus = -Math.abs(Math.ceil(activePlayer.STR / 2))
+      DEXmalus = -Math.abs(Math.ceil(activePlayerDEX.total / 2))
+      STRmalus = -Math.abs(Math.ceil(activePlayerSTR.total / 2))
       pushBuff(activePlayer, `temporary`, `DEX`, DEXmalus, `stun`, 2)
       pushBuff(activePlayer, `temporary`, `STR`, STRmalus, `stun`, 2)
       // Score
