@@ -18,10 +18,9 @@ const specialattack = (data) => {
   const activePlayerDEX = getStat(activePlayer, `DEX`)
   const activePlayerSTR = getStat(activePlayer, `STR`)
   const activePlayerLCK = getStat(activePlayer, `LCK`)
-  const strBonus = activePlayerDEX.natural
-  const dexBonus = activePlayerSTR.natural
+  const strBonus = activePlayerSTR.natural
+  const dexBonus = activePlayerDEX.natural
   const lckBonus = activePlayerLCK.natural
-
   pushBuff(activePlayer, `temporary`, `STR`, strBonus, `specialattack`)
   pushBuff(activePlayer, `temporary`, `DEX`, dexBonus, `specialattack`)
   pushBuff(activePlayer, `temporary`, `LCK`, lckBonus, `specialattack`)
