@@ -26,6 +26,8 @@ function monsterStats(monsterData, level, elite) {
 
   // Get points counts (base * level)
   let points = monsterCharPointsRange[0] + Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
+  // Beasts have no items, so they have some bonus points
+  if (!monsterData.humanoid) points += level * 6
   // Apply random elite bonus
   if (elite) points += Math.round(points * getRandomInt(eliteCharPointsRange[0], eliteCharPointsRange[1]) / 100)
 
