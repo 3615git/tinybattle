@@ -33,28 +33,28 @@ const charPower = {
 const itemQuality = {
   1: {
     quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [80, 20, 0, 0],
+    basicWeight: [80, 10, 0, 0],
     eliteWeight: [80, 20, 5, 1]
   },
   2: {
     quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 80, 20, 0],
+    basicWeight: [0, 80, 10, 0],
     eliteWeight: [0, 80, 20, 1]
   },
   3: {
     quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 20, 80, 0],
-    eliteWeight: [0, 20, 80, 1]
+    basicWeight: [0, 10, 80, 0],
+    eliteWeight: [0, 10, 90, 3]
   },
   4: {
     quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 0, 80, 20],
+    basicWeight: [0, 0, 80, 10],
     eliteWeight: [0, 0, 80, 30]
   },
   5: {
     quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 0, 20, 80],
-    eliteWeight: [0, 0, 20, 90]
+    basicWeight: [0, 0, 10, 80],
+    eliteWeight: [0, 0, 10, 90]
   }
 }
 
