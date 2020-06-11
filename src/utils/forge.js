@@ -34,9 +34,10 @@ function getItemPowerFromLevel(CHAR, level) {
   return getRandomInt(possiblePowerLow, possiblePowerHigh)
 }
 
-function getItemQuality(elite) {
-  const qualities = itemQuality.quality
-  const weight = elite ? itemQuality.eliteWeight : itemQuality.basicWeight
+function getItemQuality(level, elite) {
+  const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
+  const qualities = itemQuality[tier].quality
+  const weight = elite ? itemQuality[tier].eliteWeight : itemQuality[tier].basicWeight
   const weighedqualities = generateWeight(qualities, weight)
 
   return randomValue(weighedqualities)
@@ -186,6 +187,8 @@ function getInstant(itemType, itemQuality, level, option = false) {
   let effect, value, type, id, label, permanence, char
   let charges = 1
   let charColors
+  // Some instants are cheaper
+  let priceModifier
 
   switch (itemType) {
     case `quickheal`:
@@ -194,6 +197,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       type = instantSpecs[itemType][itemQuality].type
       id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       label = `${value} HP`
+      priceModifier = .7
       break;
 
     case `restore`:
@@ -203,6 +207,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       id = instantSpecs[itemType][itemQuality].id
       charges = instantSpecs[itemType][itemQuality].charges
       label = `Energy`
+      priceModifier = .7
       break;
 
     case `temporaryupgrade`:
@@ -214,6 +219,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       id = charColors[option]
       char = option
       label = `+${value} ${option}`
+      priceModifier = .7
       break;
 
     case `temporaryluckupgrade`:
@@ -225,6 +231,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       charges = instantSpecs[itemType][itemQuality].charges
       char = `LCK`
       label = `+${value} ${char}`
+      priceModifier = .7
       break;
 
     case `permanentupgrade`:
@@ -236,6 +243,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       id = charColors[option]
       char = option
       label = `+${value} ${option}`
+      priceModifier = .9
       break;
 
     case `damage`:
@@ -244,6 +252,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       type = instantSpecs[itemType][itemQuality].type
       id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       label = `${value} DMG`
+      priceModifier = .7
       break;
 
     case `sharpenphysical`:
@@ -253,6 +262,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       charges = instantSpecs[itemType][itemQuality].charges
       label = `Sharpen`
+      priceModifier = .7
       break;
 
     case `sharpenmagical`:
@@ -262,6 +272,7 @@ function getInstant(itemType, itemQuality, level, option = false) {
       id = getRandomInt(instantSpecs[itemType][itemQuality].id[0], instantSpecs[itemType][itemQuality].id[1])
       charges = instantSpecs[itemType][itemQuality].charges
       label = `Enchant`
+      priceModifier = .7
       break;
   
     default:
@@ -278,8 +289,8 @@ function getInstant(itemType, itemQuality, level, option = false) {
     value: value,
     label: label,
     charges: charges,
-    reward: getItemPrice(level, itemQuality),
-    price: getItemPrice(level, itemQuality, `buy`)
+    reward: Math.round(getItemPrice(level, itemQuality) * priceModifier),
+    price: Math.round(getItemPrice(level, itemQuality, `buy`) * priceModifier)
   }
 }
 
