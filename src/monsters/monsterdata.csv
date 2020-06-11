@@ -54,4 +54,4 @@ thanatos,"Thanatos, Death, The Reaper",40,,5,1,"STR, DEX, CON, MAG, LCK","STR, M
 alfadriel,"Alfadriel the Rigtheous, Alfadriel Lord of the Light, Archangel Alfadriel",,,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"DEX, STR",80
 yoggoth,"Yoggoth, Beast of Oort, Void Thing",49,,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,darkness,"CON, MAG",80
 myrdin,"Myrdin Sovereign of the Void, Myrdin Ruler of the Void, Myrdin Mistress of the Void",,,5,1,"STR, DEX, CON, MAG, LCK",MAG,wizard,darkness,"MAG, DEX",80
-cthulhu,"The Great Cthulhu, The Great Old One, Cthulhu",40,,5,,,,wizard,darkness,"MAG, DEX, STR, CON, LCK",100
+cthulhu,"The Great Cthulhu, The Great Old One, Cthulhu",40,,5,,,,wizard,darkness,,100
