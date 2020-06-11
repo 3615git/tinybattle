@@ -1,4 +1,3 @@
-import { itemQualityBonus } from "../conf/settings_items"
 import { getItemFromChar, getItemIdFromLevel, getItemPowerFromLevel, getItemQuality } from '../utils/forge'
 import { getRandomInt } from "../utils/utils"
 import { getItemPrice } from '../monsters/getMonsterReward'
@@ -10,14 +9,13 @@ function getMonsterItem(CHAR, level, humanoid, elite, forceQuality = false) {
   const itemQuality = forceQuality ? forceQuality : getItemQuality(level, elite) // Get item rank
   const itemId = getItemIdFromLevel(itemType, level) // Select item id from level
   const itemScore = getItemPowerFromLevel(CHAR, level) // Select item power from level
-  const itemBonus = getRandomInt(itemQualityBonus[CHAR][itemQuality][0], itemQualityBonus[CHAR][itemQuality][1]) // Get item bonus
 
   // Generate item conf
   return {
     type: itemType,
     char: CHAR,
     id: itemId,
-    score: itemScore + itemBonus, 
+    score: itemScore, 
     quality: itemQuality,
     reward: getItemPrice(level, itemQuality),
     price: getItemPrice(level, itemQuality, `buy`)
