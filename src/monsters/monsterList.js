@@ -68,12 +68,12 @@ const monsterPics = {
 
 const monsterProfiles = {
   brute: { STR: 10, DEX: 6, CON: 4, MAG: 1, LCK: 1 },     // High STR
-  tank: { STR: 5, DEX: 4, CON: 11, MAG: 1, LCK: 1 },      // High CON
-  duelist: { STR: 8, DEX: 9, CON: 2, MAG: 1, LCK: 4 },    // Hit strong, high luck, low HP
-  archmage: { STR: 1, DEX: 1, CON: 3, MAG: 15, LCK: 2 },  // Ultra high MAG
+  tank: { STR: 6, DEX: 4, CON: 9, MAG: 2, LCK: 1 },      // High CON
+  duelist: { STR: 7, DEX: 8, CON: 3, MAG: 2, LCK: 4 },    // Hit strong, high luck, low HP
+  archmage: { STR: 1, DEX: 3, CON: 4, MAG: 12, LCK: 2 },  // Ultra high MAG
   wizard: { STR: 2, DEX: 2, CON: 5, MAG: 11, LCK: 1 },    // High MAG
   balanced: { STR: 5, DEX: 5, CON: 5, MAG: 5, LCK: 2 },   // Full random
-  // Todo : mimic (same as player but a bit better)
+  // Todo : mimic (same as player but a bit better) (elemental orbs ?)
 }
 
 export {
