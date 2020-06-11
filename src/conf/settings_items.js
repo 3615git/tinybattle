@@ -31,9 +31,31 @@ const charPower = {
 
 // Repartition of item quality
 const itemQuality = {
-  quality: [`normal`, `magic`, `rare`, `legendary`],
-  basicWeight: [90, 5, 2, 1],
-  eliteWeight: [40, 30, 20, 10]
+  1: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [80, 20, 0, 0],
+    eliteWeight: [80, 20, 5, 1]
+  },
+  2: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 80, 20, 0],
+    eliteWeight: [0, 80, 20, 1]
+  },
+  3: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 20, 80, 0],
+    eliteWeight: [0, 20, 80, 1]
+  },
+  4: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 0, 80, 20],
+    eliteWeight: [0, 0, 80, 30]
+  },
+  5: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 0, 20, 80],
+    eliteWeight: [0, 0, 20, 90]
+  }
 }
 
 const weaponElements = {
