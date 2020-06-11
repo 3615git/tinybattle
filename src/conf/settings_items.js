@@ -22,11 +22,11 @@ const charItems = {
 
 // Maximum power range of items for each char
 const charPower = {
-  STR: 20,
-  DEX: 20,
-  CON: 20,
-  MAG: 20,
-  LCK: 3
+  STR: 30,
+  DEX: 30,
+  CON: 30,
+  MAG: 30,
+  LCK: 5
 }
 
 // Repartition of item quality
@@ -74,39 +74,6 @@ const setCharToElements = {
   STR: `fire`,
   CON: `earth`,
   MAG: `water`
-}
-
-const itemQualityBonus = {
-  STR: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  DEX: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  CON: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  MAG: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  LCK: {
-    normal: [0, 0],
-    magic: [1, 1],
-    rare: [1, 2],
-    legendary: [2, 3]
-  },
 }
 
 const weaponDamage = {
@@ -422,7 +389,6 @@ export {
   charPower,
   itemQuality,
   itemRanges,
-  itemQualityBonus,
   weaponDamage,
   weaponMultiplicator, 
   weaponBonus,
