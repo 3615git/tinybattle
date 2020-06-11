@@ -1,5 +1,4 @@
 import { getItemFromChar, getItemIdFromLevel, getItemPowerFromLevel, getItemQuality } from '../utils/forge'
-import { getRandomInt } from "../utils/utils"
 import { getItemPrice } from '../monsters/getMonsterReward'
 
 
