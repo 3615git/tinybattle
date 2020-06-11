@@ -154,11 +154,11 @@ function formatDataLog(type, fightLog, game) {
       // Hit
       if (fightLog.data.hit === `success`) {
         attackResult = `BAM!`
-        damage = `${opponentDisplay} is stunned, skip ${fightLog.data.rounds} turn and <span class="down">${fightLog.data.dexMalus}</span> DEX for 2 turns.`
+        damage = `${opponentDisplay} is stunned, skip ${fightLog.data.rounds} turn and <span class="down">${fightLog.data.dexMalus}</span> DEX for 3 turns.`
       }
       if (fightLog.data.hit === `critical`) {
         attackResult = `<span class="critical">Head shot!</span>`
-        damage = `${opponentDisplay} is knocked out, skip ${fightLog.data.rounds} turns and <span class="down">${fightLog.data.dexMalus}</span> DEX for 3 turns.`
+        damage = `${opponentDisplay} is knocked out, skip ${fightLog.data.rounds} turns and <span class="down">${fightLog.data.dexMalus}</span> DEX for 4 turns.`
       }
       if (fightLog.data.hit === `fumble`) {
         attackResult = `<span class="fumble">Missed!</span>`

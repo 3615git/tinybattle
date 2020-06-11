@@ -2,7 +2,7 @@ import { getRandomInt } from "../utils/utils"
 import { itemRanges } from "../conf/settings_items"
 
 function getMonsterReward(level, elite) {
-  const baseReward = 10 * level
+  const baseReward = 30 * level
   const randomBoost = getRandomInt(0, 20)
   const eliteBoost = getRandomInt(20, 40)
 
@@ -11,21 +11,20 @@ function getMonsterReward(level, elite) {
 }
 
 function getItemPrice(level, quality, transaction="sell") {
-  const baseReward = 20 * level / 2
   const randomBoost = getRandomInt(0, 10)
-  const qualityBoostRange = {
-    normal: [0,5],
-    magic: [20,40],
-    rare: [200,300],
-    legendary: [400,600]
+  const qualityRange = {
+    normal: [50,100],
+    magic: [100,300],
+    rare: [400,1000],
+    legendary: [1000,2000]
   }
-  const qualityBoost = getRandomInt(qualityBoostRange[quality][0], qualityBoostRange[quality][1])
+  const baseReward = getRandomInt(qualityRange[quality][0], qualityRange[quality][1])
 
-  let price = baseReward + (Math.round(baseReward * randomBoost / 100)) + (Math.round(baseReward * qualityBoost / 100))
+  let price = baseReward + (Math.round(baseReward * randomBoost / 100))
 
   // Buy or sell
-  if (transaction === `buy`) {
-    price = price * 2
+  if (transaction !== `buy`) {
+    price = Math.round(price / 2)
   }
   // Return conf
   return price

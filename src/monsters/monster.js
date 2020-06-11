@@ -26,6 +26,8 @@ function monsterStats(monsterData, level, elite) {
 
   // Get points counts (base * level)
   let points = monsterCharPointsRange[0] + Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
+  // Beasts have no items, so they have some bonus points
+  if (!monsterData.humanoid) points += level * 6
   // Apply random elite bonus
   if (elite) points += Math.round(points * getRandomInt(eliteCharPointsRange[0], eliteCharPointsRange[1]) / 100)
 
@@ -62,11 +64,18 @@ function monsterStats(monsterData, level, elite) {
   }
 
   // Compute mana & stamina
-  let CONItemBuff = monsterData.items && monsterData.items[`CON`] && monsterData.items[`CON`].score ? monsterData.items[`CON`].score : 0
-  let MAGItemBuff = monsterData.items && monsterData.items[`MAG`] && monsterData.items[`MAG`].score ? monsterData.items[`MAG`].score : 0
-  let hitPoints = (monsterCHAR[`CON`] + CONItemBuff) * 10
+
+  // Too soon for this ! Data not available
+  // let CONItemBuff = monsterData.items && monsterData.items[`CON`] && monsterData.items[`CON`].score ? monsterData.items[`CON`].score : 0
+  // let MAGItemBuff = monsterData.items && monsterData.items[`MAG`] && monsterData.items[`MAG`].score ? monsterData.items[`MAG`].score : 0
+
+  // Compute HP
+  // let hitPoints = (monsterCHAR[`CON`] + CONItemBuff) * 10
+  let hitPoints = monsterCHAR[`CON`] * 10
+  
+  // Beasts have a random HP boost
   if (!monsterData.humanoid) hitPoints += Math.round(hitPoints * getRandomInt(beastHealthBoostRange[0], beastHealthBoostRange[1]) / 100)
-  const magicPoints = (monsterCHAR[`MAG`] + MAGItemBuff) * 10 // Useless ATM
+  const magicPoints = monsterCHAR[`MAG`] * 10 // Useless ATM
 
   return {
     STR: monsterCHAR[`STR`] ? monsterCHAR[`STR`] : 1,
@@ -86,8 +95,15 @@ function monsterStats(monsterData, level, elite) {
 
 function monsterInfo(type, level, monsters) {
   const monsterData = monsters[type]
+  // console.log(monsterData)
   const elite = monsterElite(monsterData)
   const monsterSpecs = monsterStats(monsterData, level, elite)
+  const monsterItems = getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite)
+  const monsterWeapons = getMonsterWeapons(monsterSpecs[`weapons`], level, monsterSpecs[`humanoid`], elite)
+
+  // Computing final HP
+  let CONItemBuff = monsterItems[`CON`] && monsterItems[`CON`].score ? monsterItems[`CON`].score * 10 : 0
+  let MAGItemBuff = monsterItems[`MAG`] && monsterItems[`MAG`].score ? monsterItems[`MAG`].score * 10 : 0
 
   return {
     name: monsterName(monsterData),
@@ -104,12 +120,12 @@ function monsterInfo(type, level, monsters) {
     MAG: monsterSpecs[`MAG`],
     LCK: monsterSpecs[`LCK`],
     fumble: monsterData.fumble,
-    hitPoints: monsterSpecs[`hitPoints`],
-    maxHitPoints: monsterSpecs[`maxHitPoints`],
-    magicPoints: monsterSpecs[`magicPoints`],
-    maxMagicPoints: monsterSpecs[`maxMagicPoints`],
-    items: getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite),
-    weapons: getMonsterWeapons(monsterSpecs[`weapons`], level, monsterSpecs[`humanoid`], elite)
+    hitPoints: monsterSpecs[`hitPoints`] + CONItemBuff,
+    maxHitPoints: monsterSpecs[`maxHitPoints`] + CONItemBuff,
+    magicPoints: monsterSpecs[`magicPoints`] + MAGItemBuff,
+    maxMagicPoints: monsterSpecs[`maxMagicPoints`] + MAGItemBuff,
+    items: monsterItems,
+    weapons: monsterWeapons
   }
 }
 

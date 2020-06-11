@@ -24,17 +24,17 @@ const stun = (data) => {
   switch (hit.result) {
     case `success`:
       DEXmalus = -Math.abs(Math.ceil(targetPlayerDEX.total / 2))
-      rounds = 1
-      pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 2)
-      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 4)
+      rounds = 2
+      pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 4)
+      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 6)
       // Score
       data = score(data, `action/stun/success`, `game`)
       break;
     case `critical`:
-      DEXmalus = -Math.abs(Math.ceil(targetPlayerDEX.total / 2))
-      rounds = 2
-      pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 4)
-      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 6)
+      DEXmalus = -Math.abs(targetPlayerDEX.total)
+      rounds = 3
+      pushBuff(targetPlayer, `temporary`, `STUN`, rounds, `stun`, 6)
+      pushBuff(targetPlayer, `temporary`, `DEX`, DEXmalus, `stun`, 8)
       // Score
       data = score(data, `action/stun/critical`, `game`)
       break;

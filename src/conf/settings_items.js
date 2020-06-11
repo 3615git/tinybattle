@@ -22,18 +22,40 @@ const charItems = {
 
 // Maximum power range of items for each char
 const charPower = {
-  STR: 20,
-  DEX: 20,
-  CON: 20,
-  MAG: 20,
-  LCK: 3
+  STR: 30,
+  DEX: 30,
+  CON: 30,
+  MAG: 30,
+  LCK: 5
 }
 
 // Repartition of item quality
 const itemQuality = {
-  quality: [`normal`, `magic`, `rare`, `legendary`],
-  basicWeight: [90, 5, 2, 1],
-  eliteWeight: [40, 30, 20, 10]
+  1: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [80, 20, 0, 0],
+    eliteWeight: [80, 20, 5, 1]
+  },
+  2: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 80, 20, 0],
+    eliteWeight: [0, 80, 20, 1]
+  },
+  3: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 20, 80, 0],
+    eliteWeight: [0, 20, 80, 1]
+  },
+  4: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 0, 80, 20],
+    eliteWeight: [0, 0, 80, 30]
+  },
+  5: {
+    quality: [`normal`, `magic`, `rare`, `legendary`],
+    basicWeight: [0, 0, 20, 80],
+    eliteWeight: [0, 0, 20, 90]
+  }
 }
 
 const weaponElements = {
@@ -54,62 +76,27 @@ const setCharToElements = {
   MAG: `water`
 }
 
-const itemQualityBonus = {
-  STR: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  DEX: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  CON: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  MAG: {
-    normal: [0, 0],
-    magic: [1, 3],
-    rare: [4, 6],
-    legendary: [7, 10]
-  },
-  LCK: {
-    normal: [0, 0],
-    magic: [1, 1],
-    rare: [1, 2],
-    legendary: [2, 3]
-  },
-}
-
 const weaponDamage = {
-  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`],
-  normal: [50, 40, 20, 10, 5, 1],
-  magic: [10, 30, 40, 30, 30, 5],
-  rare: [5, 10, 20, 30, 40, 10],
-  legendary: [1, 5, 10, 40, 40, 15]
+  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`, `d100`],
+  normal: [50, 50, 10, 0, 0, 0, 0],
+  magic: [0, 0, 50, 50, 10, 0, 0],
+  rare: [0, 0, 0, 50, 50, 10, 0],
+  legendary: [0, 0, 0, 0, 50, 50, 10]
 }
 
-// @todo : balance this
+// Number of dice to cast
 const weaponMultiplicator = {
-  damage: [``, `2`, `3`, `4`, `5`],
-  normal: [70, 30, 0, 0, 0],
-  magic: [40, 40, 10, 3, 0],
-  rare: [0, 50, 30, 15, 5],
-  legendary: [0, 0, 40, 40, 20]
+  normal: [1,4],
+  magic: [3,6],
+  rare: [5,8],
+  legendary: [7,10]
 }
 
 const weaponBonus = {
-  damage: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  normal: [50, 50, 30, 20, 10, 5, 3, 2, 1, 1, 1],
-  magic: [10, 50, 50, 30, 20, 10, 6, 4, 3, 2, 1],
-  rare: [5, 10, 40, 50, 40, 30, 15, 10, 6, 4, 3],
-  legendary: [1, 1, 10, 30, 40, 50, 40, 30, 20, 10, 8]
+  normal: [1,8],
+  magic: [6,12],
+  rare: [10,16],
+  legendary: [14,20]
 }
 
 const weaponCost = {
@@ -400,7 +387,6 @@ export {
   charPower,
   itemQuality,
   itemRanges,
-  itemQualityBonus,
   weaponDamage,
   weaponMultiplicator, 
   weaponBonus,
