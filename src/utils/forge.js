@@ -56,14 +56,14 @@ function getWeaponType(type, humanoid) {
 }
 
 function getWeaponDamage(itemQuality) {
-  // Pick from a weighed array of dice (d4, d6, d8, d10, d12, d20)
+  // Pick from a weighed array of dice (d4, d6, d8, d10, d12, d20, d100)
   const heavyQualities = generateWeight(weaponDamage.damage, weaponDamage[itemQuality])
   // Pick from a weighed array of multiplicators
-  const heavyMultiplicators = generateWeight(weaponMultiplicator.damage, weaponMultiplicator[itemQuality])
+  const multiplicator = getRandomInt(weaponMultiplicator[itemQuality][0], weaponMultiplicator[itemQuality][1])
   // Pick from a weighed array of bonuses
-  const heavyBonus = randomValue( generateWeight(weaponBonus.damage, weaponBonus[itemQuality]) )
+  const heavyBonus = getRandomInt(weaponBonus[itemQuality][0], weaponBonus[itemQuality][1])
   const displayBonus = (heavyBonus === 0) ? `` : `+` + heavyBonus
-  return randomValue(heavyMultiplicators) + randomValue(heavyQualities) + displayBonus
+  return multiplicator + randomValue(heavyQualities) + displayBonus
 }
 
 function getWeaponCost(type, itemQuality) {

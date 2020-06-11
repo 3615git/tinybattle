@@ -77,28 +77,26 @@ const setCharToElements = {
 }
 
 const weaponDamage = {
-  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`],
-  normal: [50, 40, 20, 10, 5, 1],
-  magic: [10, 30, 40, 30, 30, 5],
-  rare: [5, 10, 20, 30, 40, 10],
-  legendary: [1, 5, 10, 40, 40, 15]
+  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`, `d100`],
+  normal: [50, 50, 10, 0, 0, 0, 0],
+  magic: [0, 0, 50, 50, 10, 0, 0],
+  rare: [0, 0, 0, 50, 50, 10, 0],
+  legendary: [0, 0, 0, 0, 50, 50, 10]
 }
 
-// @todo : balance this
+// Number of dice to cast
 const weaponMultiplicator = {
-  damage: [``, `2`, `3`, `4`, `5`],
-  normal: [70, 30, 0, 0, 0],
-  magic: [40, 40, 10, 3, 0],
-  rare: [0, 50, 30, 15, 5],
-  legendary: [0, 0, 40, 40, 20]
+  normal: [1,4],
+  magic: [3,6],
+  rare: [5,8],
+  legendary: [7,10]
 }
 
 const weaponBonus = {
-  damage: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-  normal: [50, 50, 30, 20, 10, 5, 3, 2, 1, 1, 1],
-  magic: [10, 50, 50, 30, 20, 10, 6, 4, 3, 2, 1],
-  rare: [5, 10, 40, 50, 40, 30, 15, 10, 6, 4, 3],
-  legendary: [1, 1, 10, 30, 40, 50, 40, 30, 20, 10, 8]
+  normal: [1,8],
+  magic: [6,12],
+  rare: [10,16],
+  legendary: [14,20]
 }
 
 const weaponCost = {
