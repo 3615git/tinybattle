@@ -5,7 +5,8 @@ import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
 import { setGameState, settings  } from '../redux/actions/index'
 import { clog } from '../utils/utils'
-import { gameSettings, legacyItemsCount } from '../conf/settings'
+import { gameSettings } from '../conf/settings'
+import { getLevelFromXp } from '../actions/score/score'
 
 const mapStateToProps = state => {
   return {
@@ -120,9 +121,9 @@ class Defeat extends Component {
   }
 
   parseLoot = (type) => {
-    const { player, game } = this.props
+    const { player } = this.props
     const { movedItems } = this.state
-    const itemCount = legacyItemsCount(game.level)
+    const itemCount = getLevelFromXp(player.xp)
 
     clog(`parseLoot`, `function`)
 
@@ -162,12 +163,12 @@ class Defeat extends Component {
   }
 
   render() {
-    const { setGameState, game, player } = this.props
-    const { movedItems, scoreSubmitted } = this.state
+    const { setGameState, player } = this.props
+    const { scoreSubmitted } = this.state
 
     clog(`Defeat render`, `location`)
 
-    const itemCount = legacyItemsCount(game.level)
+    const itemCount = getLevelFromXp(player.xp)
     const itemCountLabel = itemCount === 1 ? `1 item` : <>{itemCount} items</>
 
     // Submit score botton
@@ -181,16 +182,17 @@ class Defeat extends Component {
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className="shopWrapper shop legacy">
-              <div className="legacyTitle">Pass <span className="legacyCount">{player.gold} <ItemVisual item="coins" level={6} small /></span> and <span className="legacyCount">{itemCountLabel}</span><br />to your next game : choose wisely !</div>
+              <div className="legacyTitle">You can choose up to<span className="legacyCount big">{itemCountLabel}</span>to use in your next run.</div>
               <div className="lootBoxes"> 
                 {this.parseLoot(`items`)}
                 {this.parseLoot(`weapons`)}
               </div>
+              <div className="legacyTitle">You also saved <span className="legacyCount">{player.gold} <ItemVisual item="coins" level={5} small /></span></div>
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })} disabled={movedItems.length !== itemCount}>Hall of fame{submitButton}</button>
-            <button className="navigation" onClick={() => setGameState({ state: `welcome` })} disabled={movedItems.length !== itemCount}>Start again !</button>
+            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>Hall of fame{submitButton}</button>
+            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start again !</button>
           </div>
         </div>
       </div>
