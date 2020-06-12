@@ -452,6 +452,15 @@ html, body, #root {
   justify-content: center;
 }
 
+.bar.xp {
+  background-color: rgba(252, 215, 1, .16);
+  
+  .indicator {
+    background-color: $color_legacy;
+    height: 35px;
+  }
+}
+
 .bar.hitPoints .indicator {
   background-color: $color_STR;
   height: 35px;
