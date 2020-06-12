@@ -7,6 +7,8 @@ import { forceScore } from '../../actions/score/score'
 const victory = (data) => {
   // Get reward
   data.player.gold += data.opponent.reward
+  // Win XP
+  data.player.xp += data.opponent.xp
   // Loot screen
   data.game.state = `victory`
 

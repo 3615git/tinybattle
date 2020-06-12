@@ -5,9 +5,9 @@ const gameSettings = {
   combatSpeed: 3000,
   widgetDelay: 600,
   itemStateDelay: 2000,
-  monsterCharPointsRange: [10, 200], // Range of monsters points, from level 1 to last level
-  eliteCharPointsRange: [50, 100], // elite % spec bonus
-  beastHealthBoostRange: [30, 100], // non humanoid HP boost
+  monsterCharPointsRange: [10, 130], // Range of monsters points, from level 1 to last level
+  eliteCharPointsRange: [30, 50], // elite % spec bonus
+  beastHealthBoostRange: [30, 60], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings
   postScoreUrl: "https://mhd20.com/postscore/",
   getScoreUrl: "https://mhd20.com/getscore/",
@@ -90,20 +90,14 @@ const defaultChars = {
 
 // Default consumables
 const defaultInstants = {
-  warrior: [`quickheal`, `damage`, `sharpenphysical`],
-  mage: [`quickheal`, `temporaryupgrade`, `sharpenmagical`],
-  thief: [`quickheal`, `temporaryluckupgrade`, `restore`]
-}
-
-const legacyItemsCount = (level) => {
-  // Gain 1 legacy item every x level
-  return Math.ceil(level/(gameSettings.maxLevel/gameSettings.zones))
+  warrior: [`quickheal`, `damage`, `restore`, `sharpenphysical`],
+  mage: [`quickheal`, `damage`, `temporaryupgrade`, `sharpenmagical`],
+  thief: [`quickheal`, `restore`, `temporaryluckupgrade`, `permanentupgrade`]
 }
 
 export {
   initialState,
   gameSettings,
   defaultChars,
-  defaultInstants,
-  legacyItemsCount
+  defaultInstants
 }

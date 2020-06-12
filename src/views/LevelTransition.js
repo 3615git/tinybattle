@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from "react-redux"
 
 import { setGameState } from '../redux/actions/index'
-import { legacyItemsCount, gameSettings } from '../conf/settings'
+import { gameSettings } from '../conf/settings'
+import { getLevelFromXp } from '../actions/score/score'
 import Monster from '../ui/battle/Monster'
 
 import logo2 from '../pics/ui/logo2.png'
@@ -34,10 +35,10 @@ class LevelTransition extends Component {
   }
   
   render() {
-    const { game, opponent, setGameState, score, monsterList } = this.props
+    const { game, player, opponent, setGameState, score, monsterList } = this.props
 
     // Legacy items count
-    const legacyItems = legacyItemsCount(game.level)
+    const legacyItems = getLevelFromXp(player.xp)
     // Monster tier render
     const monsterTier = Math.ceil(game.level / (gameSettings.maxLevel / gameSettings.zones))
 
@@ -85,7 +86,7 @@ class LevelTransition extends Component {
               </div>
             </div>
             <div className="rightInfo">
-              <div>Legacy lv. {legacyItems}</div>
+              <div>XP lv. {legacyItems}</div>
               <div>Monsters lv. {monsterTier}</div>
             </div>
           </div>

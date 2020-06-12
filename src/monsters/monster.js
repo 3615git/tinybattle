@@ -3,6 +3,7 @@ import { monsterProfiles, monsterPics } from './monsterList'
 import { getMonsterItems } from './getMonsterItems'
 import { getMonsterWeapons } from './getMonsterWeapons'
 import { getMonsterReward } from './getMonsterReward'
+import { getMonsterXp } from './getMonsterXp'
 import { getRandomInt, randomValue, generateWeight } from '../utils/utils'
 
 function monsterName(monsterData) {
@@ -63,14 +64,7 @@ function monsterStats(monsterData, level, elite) {
     }
   }
 
-  // Compute mana & stamina
-
-  // Too soon for this ! Data not available
-  // let CONItemBuff = monsterData.items && monsterData.items[`CON`] && monsterData.items[`CON`].score ? monsterData.items[`CON`].score : 0
-  // let MAGItemBuff = monsterData.items && monsterData.items[`MAG`] && monsterData.items[`MAG`].score ? monsterData.items[`MAG`].score : 0
-
   // Compute HP
-  // let hitPoints = (monsterCHAR[`CON`] + CONItemBuff) * 10
   let hitPoints = monsterCHAR[`CON`] * 10
   
   // Beasts have a random HP boost
@@ -100,6 +94,7 @@ function monsterInfo(type, level, monsters) {
   const monsterSpecs = monsterStats(monsterData, level, elite)
   const monsterItems = getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite)
   const monsterWeapons = getMonsterWeapons(monsterSpecs[`weapons`], level, monsterSpecs[`humanoid`], elite)
+  const monsterXp = getMonsterXp(monsterSpecs, monsterItems)
 
   // Computing final HP
   let CONItemBuff = monsterItems[`CON`] && monsterItems[`CON`].score ? monsterItems[`CON`].score * 10 : 0
@@ -108,6 +103,7 @@ function monsterInfo(type, level, monsters) {
   return {
     name: monsterName(monsterData),
     job: type,
+    xp: monsterXp,
     reward: getMonsterReward(level, elite),
     element: monsterData.element,
     elite: elite,

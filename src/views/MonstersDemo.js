@@ -10,6 +10,7 @@ import Item from '../ui/battle/Item'
 import { gameSettings } from "../conf/settings"
 import { getMonsterFromLevel } from '../monsters/getMonsterFromLevel'
 import { getStat } from '../actions/combat/stats'
+import { getLevelFromXp } from '../actions/score/score'
 import Element from '../ui/battle/Element'
 
 const mapStateToProps = state => {
@@ -94,6 +95,7 @@ class MonstersDemo extends Component {
     let monsters = data.monsters
     let opponent
     let cumulatedReward = 0
+    let cumulatedXp = 0
 
     // Roadmap / balance demo
     for (let level = 1; level <= gameSettings.maxLevel; level++) {
@@ -125,20 +127,24 @@ class MonstersDemo extends Component {
 
       let itemsReward = STRreward + DEXreward + CONreward + MAGreward + LCKreward + STRWreward + MAGWreward
       cumulatedReward += itemsReward + opponent.reward
+      cumulatedXp += opponent.xp
 
       levels.push(
         <tr>
           <td>{level}</td>
           <td>{opponent.job}</td>
-          <td>{STR.total}</td>
-          <td>{DEX.total}</td>
-          <td>{CON.total}</td>
-          <td>{MAG.total}</td>
-          <td>{LCK.total}</td>
+          <td>{STR.natural}/{STR.total}</td>
+          <td>{DEX.natural}/{DEX.total}</td>
+          <td>{CON.natural}/{CON.total}</td>
+          <td>{MAG.natural}/{MAG.total}</td>
+          <td>{LCK.natural}/{LCK.total}</td>
           <td>{STR.total + DEX.total + CON.total + MAG.total + LCK.total}</td>
+          <td>{opponent.xp}</td>
+          <td>{cumulatedXp}</td>
+          <td>{getLevelFromXp(cumulatedXp)}</td>
           <td>{opponent.hitPoints}</td>
           <td>
-            <div  style={{display:`flex`}}>
+            <div style={{display:`flex`}}>
               <Item item={opponent.items.STR} />
               <Item item={opponent.items.DEX} />
               <Item item={opponent.items.CON} />
@@ -147,7 +153,7 @@ class MonstersDemo extends Component {
             </div>
           </td>
           <td>
-            <div  style={{display:`flex`}}>
+            <div style={{display:`flex`}}>
               <Item item={opponent.weapons.STR} />
               <Item item={opponent.weapons.MAG} />
             </div>
@@ -177,6 +183,9 @@ class MonstersDemo extends Component {
                 <td>MAG</td>
                 <td>LCK</td>
                 <td>SUM</td>
+                <td>Xp</td>
+                <td>Sum Xp</td>
+                <td>XpLvl</td>
                 <td>HP</td>
                 <td>Items</td>
                 <td>Weapons</td>

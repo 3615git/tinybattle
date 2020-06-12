@@ -2,12 +2,22 @@
 
 .legacyTitle {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   line-height: 19px;
+
+  &.small {
+    font-size: $font_small;
+  }
 
   .legacyCount {
     padding: 5px;
     color: $color_legacy;
+
+    &.big {
+      font-size: $font_verybig;
+      display: block;
+      padding: 10px;
+    }
   }
 }
 

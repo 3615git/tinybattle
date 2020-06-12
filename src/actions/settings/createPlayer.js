@@ -5,6 +5,7 @@ import { gameSettings } from "../../conf/settings"
 import { getShopInstants } from '../../monsters/getShopInstants'
 import { maxEnergyRefresh } from '../../actions/combat/energy'
 import { setBonus } from '../../actions/settings/onNewItem'
+import { getLevelFromXp } from '../../actions/score/score'
 
 /**
   * @desc Create initial player
@@ -13,6 +14,7 @@ import { setBonus } from '../../actions/settings/onNewItem'
 const createPlayer = (data, style) => {
 
   let previousName = data.player ? data.player.name : ``
+  let previousXp = data.player && data.player.xp ? data.player.xp : 0
   let previousGold = data.player ? data.player.gold : 0
 
   // Set basic player info
@@ -20,6 +22,7 @@ const createPlayer = (data, style) => {
     name: previousName,
     level: 1,
     gold: previousGold,
+    xp: previousXp,
     items: {},
     weapons: {},
     skills : {},
@@ -76,7 +79,8 @@ const createPlayer = (data, style) => {
   // Instant items
   data.player.instants = []
   let catalog = defaultInstants[style]
-  let startInstants = getShopInstants(catalog, 1, `normal`)
+  const instantsLevel = (Math.floor(getLevelFromXp(data.player.xp)/2))*5 < 1 ? 1 : (Math.floor(getLevelFromXp(data.player.xp)/2))*5
+  let startInstants = getShopInstants(catalog, instantsLevel)
   // eslint-disable-next-line no-unused-vars
   for (let [key, value] of Object.entries(startInstants)) {
     data.player.instants.push(value)

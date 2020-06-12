@@ -59,6 +59,11 @@ const Bar = ({ connectedData, type, opponent, color, current, ready }) => {
       maxValue = data.maxMagicalRage
       size = `small`
       break
+    case `xp`:
+        value = current
+        maxValue = ready
+        size = `big`
+        break
     default:
       value = current
       maxValue = ready

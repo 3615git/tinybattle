@@ -180,4 +180,12 @@ const pushScore = (data, item, depth, value) => {
   return data
 }
 
-export { score, forceScore, bestScore, pushScore }
+const getLevelFromXp = (xp) => {
+  return Math.floor(Math.floor(25 + Math.sqrt(625 + 100 * xp)) / 50)
+}
+
+const getXpToLevel = (level) => {
+  return 25 * level * level - 25 * level
+}
+
+export { score, forceScore, bestScore, pushScore, getLevelFromXp, getXpToLevel }

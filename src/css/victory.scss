@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  // margin-top: 40px;
 
   &.panelStore {
     padding: 5px;
@@ -207,6 +207,10 @@
       margin-top: 0px;
     }
 
+    &.noPadding {
+      padding: 0px;
+    }
+
     &.total {
       margin: 5px 0px 0px 0px;
     }
@@ -234,5 +238,31 @@
     position: relative;
     top: -1px;
     margin-right: 3px !important;
+  }
+}
+
+.xpBarWrapper {
+  width: 350px;
+  margin: 20px 0px;
+  text-align: center;
+
+  .levelUp {
+    margin-left: 10px;
+    color: $color_legacy;
+
+    span {
+      color: white;
+      font-size: $font_small;
+    }
+  }
+
+  .xpBar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+    .level {
+      padding: 0px 20px;
+    }
   }
 }
