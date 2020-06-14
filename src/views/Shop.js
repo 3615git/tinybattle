@@ -9,7 +9,9 @@ import StatsAndItems from '../ui/battle/StatsAndItems'
 import InstantButtons from '../ui/battle/InstantButtons'
 import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
-import { clog, randomValue } from '../utils/utils'
+import { clog, randomValue, getRandomInt } from '../utils/utils'
+import { uniqueItems } from "../conf/settings_items"
+
 
 const mapStateToProps = state => {
   return {
@@ -143,20 +145,29 @@ class Shop extends Component {
     /** Return list of items */
     // Unique weapons
     if (catalog === `unique_weapons`) {
-      // Get a weapon selection
-      let weaponKeys = Object.keys(uniques.weapons)
-      for (let index = 0; index < 2; index++) {
-        let selecteditemKey = weaponKeys[weaponKeys.length * Math.random() << 0]
-        itemList.push(uniques.weapons[selecteditemKey])
+
+      numberOfitems = 2
+      itemsRange = [`STR`, `MAG`]
+      for (let index = 0; index < numberOfitems; index++) {
+        let char = itemsRange[index]
+        let selectedItems = uniqueItems.weapons[char]
+        var elements = Object.keys(selectedItems);
+        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        let itemKey = randomValue(selecteditemsElement)
+        itemList.push(uniques.weapons[itemKey])
       }
     } 
     // Unique gear
     else if (catalog === `unique_items`) {
-      // Get an item selection
-      let itemKeys = Object.keys(uniques.items)
-      for (let index = 0; index < 3; index++) {
-        let selecteditemKey = itemKeys[itemKeys.length * Math.random() << 0]
-        itemList.push(uniques.items[selecteditemKey])
+      numberOfitems = 5
+      itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
+      for (let index = 0; index < numberOfitems; index++) {
+        let char = itemsRange[index]
+        let selectedItems = uniqueItems.items[char]
+        var elements = Object.keys(selectedItems);
+        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        let itemKey = randomValue(selecteditemsElement)
+        itemList.push(uniques.items[itemKey])
       }
     }
     // Classic items

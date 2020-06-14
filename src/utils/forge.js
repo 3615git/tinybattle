@@ -57,7 +57,6 @@ function getItemQuality(level, elite) {
     getQualityWeight(level, 13, 7), 
     getQualityWeight(level, 20, 7, true)
   ]
-  console.log(level, weight)
   const weighedqualities = generateWeight(qualities, weight)
 
   return randomValue(weighedqualities)
