@@ -22,40 +22,41 @@ const charItems = {
 
 // Maximum power range of items for each char
 const charPower = {
-  STR: 30,
-  DEX: 30,
-  CON: 30,
-  MAG: 30,
-  LCK: 5
+  STR: {
+    normal: [1,7],
+    magic: [8,15],
+    rare: [16,24],
+    legendary: [25,30]
+  },
+  DEX: {
+    normal: [1,7],
+    magic: [8,15],
+    rare: [16,24],
+    legendary: [25,30]
+  },
+  CON: {
+    normal: [1,7],
+    magic: [8,15],
+    rare: [16,24],
+    legendary: [25,30]
+  },
+  MAG: {
+    normal: [1,7],
+    magic: [8,15],
+    rare: [16,24],
+    legendary: [25,30]
+  },
+  LCK: {
+    normal: [1,1],
+    magic: [2,2],
+    rare: [3,3],
+    legendary: [4,5]
+  },
 }
 
 // Repartition of item quality
 const itemQuality = {
-  1: {
-    quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [80, 10, 0, 0],
-    eliteWeight: [80, 20, 5, 1]
-  },
-  2: {
-    quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 80, 10, 0],
-    eliteWeight: [0, 80, 20, 1]
-  },
-  3: {
-    quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 10, 80, 0],
-    eliteWeight: [0, 10, 90, 3]
-  },
-  4: {
-    quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 0, 80, 10],
-    eliteWeight: [0, 0, 80, 30]
-  },
-  5: {
-    quality: [`normal`, `magic`, `rare`, `legendary`],
-    basicWeight: [0, 0, 10, 80],
-    eliteWeight: [0, 0, 10, 90]
-  }
+  quality: [`normal`, `magic`, `rare`, `legendary`],
 }
 
 const weaponElements = {
@@ -93,10 +94,10 @@ const weaponMultiplicator = {
 }
 
 const weaponBonus = {
-  normal: [1,8],
-  magic: [6,12],
-  rare: [10,16],
-  legendary: [14,20]
+  normal: [1,5],
+  magic: [6,10],
+  rare: [11,15],
+  legendary: [16,20]
 }
 
 const weaponCost = {

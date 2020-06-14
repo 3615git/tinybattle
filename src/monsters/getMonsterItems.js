@@ -7,7 +7,7 @@ function getMonsterItem(CHAR, level, humanoid, elite, forceQuality = false) {
   // Check if item is special
   const itemQuality = forceQuality ? forceQuality : getItemQuality(level, elite) // Get item rank
   const itemId = getItemIdFromLevel(itemType, level) // Select item id from level
-  const itemScore = getItemPowerFromLevel(CHAR, level) // Select item power from level
+  const itemScore = getItemPowerFromLevel(CHAR, itemQuality) // Select item power from level
 
   // Generate item conf
   return {
