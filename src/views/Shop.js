@@ -9,7 +9,9 @@ import StatsAndItems from '../ui/battle/StatsAndItems'
 import InstantButtons from '../ui/battle/InstantButtons'
 import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
-import { clog, randomValue } from '../utils/utils'
+import { clog, randomValue, getRandomInt } from '../utils/utils'
+import { uniqueItems } from "../conf/settings_items"
+
 
 const mapStateToProps = state => {
   return {
@@ -107,16 +109,16 @@ class Shop extends Component {
     if (catalog === `items`) {
       // randomize selection
       numberOfitems = 10
-      itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
+      itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`, `STR`, `DEX`, `CON`, `MAG`, `LCK`]
       for (let index = 0; index < numberOfitems; index++) {
-        let char = randomValue(itemsRange)
+        let char = itemsRange[index]
         items.push(char)
       }
     } 
     else if(catalog === `weapons`) {
       // randomize selection
-      numberOfitems = 5
-      itemsRange = [`STR`, `MAG`]
+      numberOfitems = 6
+      itemsRange = [`STR`, `STR`, `STR`, `MAG`, `MAG`, `MAG`]
       for (let index = 0; index < numberOfitems; index++) {
         items.push(randomValue(itemsRange))
       }
@@ -124,17 +126,17 @@ class Shop extends Component {
     else if (catalog === `instants`) {
       // randomize selection
       numberOfitems = 6
-      itemsRange = [`quickheal`, `temporaryupgrade`, `temporaryluckupgrade`, `permanentupgrade`, `restore`]
+      itemsRange = [`quickheal`, `quickheal`, `temporaryupgrade`, `temporaryluckupgrade`, `permanentupgrade`, `restore`]
       for (let index = 0; index < numberOfitems; index++) {
-        items.push(randomValue(itemsRange))
+        items.push(itemsRange[index])
       }
     }
     else if (catalog === `instants_weapon`) {
       // randomize selection
       numberOfitems = 4
-      itemsRange = [`damage`, `sharpenphysical`, `sharpenmagical`]
+      itemsRange = [`damage`, `damage`, `sharpenphysical`, `sharpenmagical`]
       for (let index = 0; index < numberOfitems; index++) {
-        items.push(randomValue(itemsRange))
+        items.push(itemsRange[index])
       }
     }
 
@@ -143,20 +145,29 @@ class Shop extends Component {
     /** Return list of items */
     // Unique weapons
     if (catalog === `unique_weapons`) {
-      // Get a weapon selection
-      let weaponKeys = Object.keys(uniques.weapons)
-      for (let index = 0; index < 2; index++) {
-        let selecteditemKey = weaponKeys[weaponKeys.length * Math.random() << 0]
-        itemList.push(uniques.weapons[selecteditemKey])
+
+      numberOfitems = 2
+      itemsRange = [`STR`, `MAG`]
+      for (let index = 0; index < numberOfitems; index++) {
+        let char = itemsRange[index]
+        let selectedItems = uniqueItems.weapons[char]
+        var elements = Object.keys(selectedItems);
+        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        let itemKey = randomValue(selecteditemsElement)
+        itemList.push(uniques.weapons[itemKey])
       }
     } 
     // Unique gear
     else if (catalog === `unique_items`) {
-      // Get an item selection
-      let itemKeys = Object.keys(uniques.items)
-      for (let index = 0; index < 3; index++) {
-        let selecteditemKey = itemKeys[itemKeys.length * Math.random() << 0]
-        itemList.push(uniques.items[selecteditemKey])
+      numberOfitems = 5
+      itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
+      for (let index = 0; index < numberOfitems; index++) {
+        let char = itemsRange[index]
+        let selectedItems = uniqueItems.items[char]
+        var elements = Object.keys(selectedItems);
+        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        let itemKey = randomValue(selecteditemsElement)
+        itemList.push(uniques.items[itemKey])
       }
     }
     // Classic items
@@ -271,7 +282,7 @@ class Shop extends Component {
                   <ItemVisual item="unique" level={16} />Antiques
                 </button>
               </div>
-              <div className="storeBox">
+              <div className={`storeBox store_${storeTab}`}>
                 {storeTab === `equipment` && this.parseLoot(`items`, true)}
                 {storeTab === `items` && this.parseLoot(`instants`, false)}
                 {storeTab === `items` && this.parseLoot(`instants_weapon`, false)}

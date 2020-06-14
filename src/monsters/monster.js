@@ -57,6 +57,12 @@ function monsterStats(monsterData, level, elite) {
     else monsterCHAR[draw] = 1
   }
 
+  // Values are at least 1
+  if (!monsterCHAR[`STR`] || monsterCHAR[`STR`] === 0) monsterCHAR[`STR`] = 1
+  if (!monsterCHAR[`DEX`] || monsterCHAR[`DEX`] === 0) monsterCHAR[`DEX`] = 1
+  if (!monsterCHAR[`CON`] || monsterCHAR[`CON`] === 0) monsterCHAR[`CON`] = 1
+  if (!monsterCHAR[`MAG`] || monsterCHAR[`MAG`] === 0) monsterCHAR[`MAG`] = 1
+
   // Apply optional boost
   if (monsterData.boost) {
     for (let index = 0; index < monsterData.boost.length; index++) {
@@ -65,6 +71,7 @@ function monsterStats(monsterData, level, elite) {
   }
 
   // Compute HP
+  console.log(monsterCHAR[`CON`])
   let hitPoints = monsterCHAR[`CON`] * 10
   
   // Beasts have a random HP boost

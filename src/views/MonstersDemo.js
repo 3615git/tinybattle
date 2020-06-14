@@ -12,6 +12,7 @@ import { getMonsterFromLevel } from '../monsters/getMonsterFromLevel'
 import { getStat } from '../actions/combat/stats'
 import { getLevelFromXp } from '../actions/score/score'
 import Element from '../ui/battle/Element'
+import { getItemQuality } from '../utils/forge'
 
 const mapStateToProps = state => {
   return {
@@ -153,6 +154,9 @@ class MonstersDemo extends Component {
             </div>
           </td>
           <td>
+            {getItemQuality(level).toString()}
+          </td>
+          <td>
             <div style={{display:`flex`}}>
               <Item item={opponent.weapons.STR} />
               <Item item={opponent.weapons.MAG} />
@@ -188,6 +192,7 @@ class MonstersDemo extends Component {
                 <td>XpLvl</td>
                 <td>HP</td>
                 <td>Items</td>
+                <td>Qualities</td>
                 <td>Weapons</td>
                 <td>H/B</td>
                 <td>Elite</td>

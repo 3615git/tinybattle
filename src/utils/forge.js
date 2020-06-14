@@ -22,22 +22,41 @@ function getItemIdFromLevel(itemType, level) {
   return getRandomInt(possibleItemLow, possibleItemHigh)
 }
 
-function getItemPowerFromLevel(CHAR, level) {
-  // Cut power range into level segments
-  const maxPower = charPower[CHAR]
-  const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
-  const tierPower = Math.ceil(maxPower / gameSettings.zones)
+function getItemPowerFromLevel(CHAR, itemQuality) {
+  return getRandomInt(charPower[CHAR][itemQuality][0], charPower[CHAR][itemQuality][1])
+}
 
-  let possiblePowerLow = ((tier - 1) * tierPower === 0) ? 1 : (tier - 1) * tierPower
-  let possiblePowerHigh = tier * tierPower
-
-  return getRandomInt(possiblePowerLow, possiblePowerHigh)
+function getQualityWeight(level, peak, range, end=false) {
+  let value
+  if (level === peak) value = 100
+  else if (level < peak) value = 100 - (peak - level) * 15
+  else if (level > peak) {
+    if (end) value = 100
+    else {
+      value = 100 - (level - peak) * 15
+    }
+  }
+  // Non negative proba
+  if (value < 0) value = 0
+  
+  return value
 }
 
 function getItemQuality(level, elite) {
-  const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
-  const qualities = itemQuality[tier].quality
-  const weight = elite ? itemQuality[tier].eliteWeight : itemQuality[tier].basicWeight
+  // Old tier based solution
+  // const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
+  // const qualities = itemQuality[tier].quality
+  // const weight = elite ? itemQuality[tier].eliteWeight : itemQuality[tier].basicWeight
+  // const weighedqualities = generateWeight(qualities, weight)
+
+  // New dynamic solution
+  const qualities = itemQuality.quality
+  const weight = [
+    getQualityWeight(level, 1, 7), 
+    getQualityWeight(level, 7, 7), 
+    getQualityWeight(level, 13, 7), 
+    getQualityWeight(level, 20, 7, true)
+  ]
   const weighedqualities = generateWeight(qualities, weight)
 
   return randomValue(weighedqualities)

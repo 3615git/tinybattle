@@ -68,6 +68,15 @@
     min-height: 200px;
     width: 100%;
 
+    &.store_equipment, &.store_items, &.store_uniques {
+      max-width: 370px;
+    }
+
+    &.store_weapons {
+      max-width: 280px;
+
+    }
+
     .storeItemWrapper {
       position: relative;
       display: flex;
