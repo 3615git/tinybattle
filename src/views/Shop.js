@@ -9,7 +9,7 @@ import StatsAndItems from '../ui/battle/StatsAndItems'
 import InstantButtons from '../ui/battle/InstantButtons'
 import Item from '../ui/battle/Item'
 import ItemVisual from '../ui/battle/ItemVisual'
-import { clog, randomValue, getRandomInt } from '../utils/utils'
+import { clog, randomValue } from '../utils/utils'
 import { uniqueItems } from "../conf/settings_items"
 
 
@@ -143,17 +143,19 @@ class Shop extends Component {
     let itemList = []
 
     /** Return list of items */
+
+    let char, selectedItems, elements, selecteditemsElement, itemKey
+    
     // Unique weapons
     if (catalog === `unique_weapons`) {
-
       numberOfitems = 2
       itemsRange = [`STR`, `MAG`]
       for (let index = 0; index < numberOfitems; index++) {
-        let char = itemsRange[index]
-        let selectedItems = uniqueItems.weapons[char]
-        var elements = Object.keys(selectedItems);
-        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
-        let itemKey = randomValue(selecteditemsElement)
+        char = itemsRange[index]
+        selectedItems = uniqueItems.weapons[char]
+        elements = Object.keys(selectedItems);
+        selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        itemKey = randomValue(selecteditemsElement)
         itemList.push(uniques.weapons[itemKey])
       }
     } 
@@ -162,11 +164,11 @@ class Shop extends Component {
       numberOfitems = 5
       itemsRange = [`STR`, `DEX`, `CON`, `MAG`, `LCK`]
       for (let index = 0; index < numberOfitems; index++) {
-        let char = itemsRange[index]
-        let selectedItems = uniqueItems.items[char]
-        var elements = Object.keys(selectedItems);
-        let selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
-        let itemKey = randomValue(selecteditemsElement)
+        char = itemsRange[index]
+        selectedItems = uniqueItems.items[char]
+        elements = Object.keys(selectedItems);
+        selecteditemsElement = selectedItems[elements[elements.length * Math.random() << 0]]
+        itemKey = randomValue(selecteditemsElement)
         itemList.push(uniques.items[itemKey])
       }
     }
