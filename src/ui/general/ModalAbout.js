@@ -20,10 +20,6 @@ function mapDispatchToProps(dispatch) {
 
 const ModalAbout = () => {
 
-  // const logoStyle = {
-  //   imageRendering: `optimizeQuality`
-  // }
-
   // Display component
   return (
     <div className="credits">

@@ -1,5 +1,6 @@
 import { GAMESTATE, ATTACK, SETTINGS } from "../constants/action-types"
 // Settings
+import { tutorial } from '../../actions/settings/tutorial'
 import { createMonsters } from '../../actions/settings/createMonsters'
 import { createPlayer } from '../../actions/settings/createPlayer'
 import { resetLevel } from '../../actions/settings/resetLevel'
@@ -77,6 +78,10 @@ function rootReducer(state = initialState, action) {
 
   if (action.type === SETTINGS) {
     switch (action.payload.setting) {
+      case `tutorial`:
+        clog(`tutorial`, `reducer`)
+        nextState = tutorial(nextState)
+        break;
       case `createMonsters`:
         clog(`createMonsters`, `reducer`)
         nextState = createMonsters(nextState, action.payload.data)

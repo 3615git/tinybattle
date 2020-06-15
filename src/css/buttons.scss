@@ -2,8 +2,9 @@
 @import 'mixins';
 
 /* Buttons */
-button {
+button, a.button {
   color: white;
+  text-decoration: none;
   position: relative;
   height: 54px;
   width: 54px;
