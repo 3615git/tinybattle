@@ -49,7 +49,8 @@ import './css/wheel.scss'
 
 const mapStateToProps = state => {
   return {
-    game: state.game.state
+    game: state.game.state,
+    tutorial: state.game.tutorial
   }
 }
 
@@ -84,6 +85,7 @@ class App extends Component {
 
   componentDidMount() {
     const { settings } = this.props
+
     // Send raw csv to reducer
     Papa.parse(monsterData, {
       header: true,
@@ -96,7 +98,7 @@ class App extends Component {
 
   render() {
 
-    const { game, setGameState } = this.props
+    const { game, tutorial, setGameState, settings } = this.props
     const { openModal } = this.state
 
     let view
@@ -151,6 +153,13 @@ class App extends Component {
         options = []
         break;
       case `battle`:
+        // Detect first visit ever
+        if (!tutorial) {
+          // Display welcome modal, update store
+          settings({ setting: `tutorial` })
+          this.setState({ openModal: `first` })
+        }
+
         view = <Battle />
         ambiantFog = []
         options = helpOptions
@@ -195,6 +204,7 @@ class App extends Component {
       <Modal key="modalAbout" content="about" display={openModal === `about`} close={this.closeModal} />,
       <Modal key="modalSettings" content="settings" display={openModal === `settings`} close={this.closeModal} />,
       <Modal key="modalHelp" content="help" display={openModal === `help`} close={this.closeModal} />,
+      <Modal key="modalFirst" content="first" display={openModal === `first`} close={this.closeModal} />,
       ambiantFog
     ]
     

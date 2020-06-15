@@ -6,6 +6,7 @@ import ModalAbout from './ModalAbout'
 import ModalSettings from './ModalSettings'
 import ModalReset from './ModalReset'
 import ModalHelp from './ModalHelp'
+import ModalFirst from './ModalFirst'
 
 import '../../css/modal.scss'
 import closeIcon from '../../pics/ui/close.svg'
@@ -36,6 +37,8 @@ const modalContent = (content) => {
       return <ModalSettings key="modalSettings" />
     case `reset`:
       return <ModalReset key="modalReset" />
+    case `first`:
+      return <ModalFirst key="modalFirst" />
     default:
       break;
   }

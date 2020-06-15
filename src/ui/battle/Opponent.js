@@ -90,7 +90,6 @@ class Opponent extends Component {
       top: data.verticalPosition ? `${data.verticalPosition}%` : `50%`
     }
 
-
     // Monster display
     const portraitClasses = portraitReady ? `portrait ready` : `portrait`
 

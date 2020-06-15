@@ -41,6 +41,7 @@ const ModalHelp = ({player}) => {
       </p>
       <p>Choose a help topic</p>
       <div className="helpMenu">
+        <a className="button" href="#game">The game</a>
         <a className="button" href="#stats">Stats</a>
         <a className="button" href="#levelling">Levelling</a>
         <a className="button" href="#equipment">Equipment</a>
@@ -53,9 +54,13 @@ const ModalHelp = ({player}) => {
         <a className="button" href="#items">Items</a>
         <a className="button" href="#elite">Elite monsters</a>
       </div>
-      {/* <p>MHD20 is a turn based battle game, using a D20 system loosely based on the classic Dungeon&Dragons tabletop game</p>
+
+      <div className="separator" id="game" />
+      <div className="title">The game</div>
+
+      <p>MHD20 is a turn based battle game, using a D20 system loosely based on the classic Dungeon&Dragons tabletop game</p>
       <p>Your goal is to fight your way to the final boss, in a minimum number of turns.</p>
-      <p>If you die, you can keep your gold and some of your best gear, and retry.</p> */}
+      <p>If you die, you can keep your gold and some of your best gear, and retry.</p>
 
       <div className="separator" id="stats" />
       <div className="title">Stats</div>
