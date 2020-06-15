@@ -71,7 +71,6 @@ function monsterStats(monsterData, level, elite) {
   }
 
   // Compute HP
-  console.log(monsterCHAR[`CON`])
   let hitPoints = monsterCHAR[`CON`] * 10
   
   // Beasts have a random HP boost

@@ -41,7 +41,7 @@ const Items = ({ data, opponent, forceData, animations }) => {
     if (legacy && legacy[type] && legacy[type][char]) effect = `legacy`
     return effect
   }
-
+  
   // Display component
   return (
     <div className={itemClasses}>
