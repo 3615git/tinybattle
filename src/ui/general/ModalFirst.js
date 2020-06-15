@@ -34,8 +34,7 @@ const ModalHelp = ({player}) => {
         Welcome to MHD20 !
       </p>
   
-      <p>If you feel lost, help and user guide are located in the upper left corner of the app.</p>
-      <p><img className="helpInline" src={help} alt="help menu" /></p>
+      <p>If you feel lost, help and user guide are located in the upper left corner of the app : <br /><img className="helpInline" src={help} alt="help menu" /></p>
       <p>Have fun!</p>
 
     </div>
