@@ -17,6 +17,15 @@
     z-index: 40;
     display: flex;
     flex-direction: row;
+
+    &.help {
+      width: 100%;
+      max-width: 450px;
+      padding: 15px 0px 0px 5px;
+      opacity: .7;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 }
 
 .homeSigil {
@@ -134,7 +143,7 @@
   }
 }
 
-.credits {
+.credits, .help {
   p {
     a {
       color: white;
@@ -157,6 +166,82 @@
     color: $color_legacy;
   }
 }
+
+.help {
+  .helpMenu {
+    display: flex;
+    flex-wrap: wrap;
+
+    .button {
+      width: 50%;
+      padding: 0px 10px;
+    }
+  }
+
+  .backToTop {
+    display: block;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    margin: 20px 0px 40px 0px;
+  }
+
+  table {
+    width: 100%;
+    font-size: $font_small;
+    line-height: 18px;
+    td { 
+      text-align: left; 
+      padding: 10px;
+
+      .sectiontitle {
+        color: $color_elite;
+      }
+
+      .rule {
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+
+      &.center {
+        text-align: center;
+        > div {
+          margin: 0 auto;
+        }
+      }
+
+      &.horizontal {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .elementWrapper {
+          margin-right: 10px;
+        }
+      }
+
+      .buttons {
+        grid-template-columns: 54px;
+      }
+    }
+  }
+  p {
+    font-size: $font_small;
+    line-height: 18px;
+  }
+}
+
+// Some color
+.color_action_physical { color: $color_STR; }
+.color_action_magical { color: $color_MAG; }
+.color_quality_normal { color: $color_itemNormal; }
+.color_quality_magic { color: $color_itemMagic; }
+.color_quality_rare { color: $color_itemRare; }
+.color_quality_legenday { color: $color_itemLegendary; }
 
 .version {
   position: absolute;

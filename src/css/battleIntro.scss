@@ -64,6 +64,10 @@
     background-image: url('../pics/ui/element_darkness.gif'); 
     filter: drop-shadow(0px 0px 2px darken(rgba($element_darkness, 1),30));
   }
+  &.light { 
+    background-image: url('../pics/ui/element_light.gif'); 
+    filter: drop-shadow(0px 0px 2px darken(rgba($element_light, 1),30));
+  }
   &.elite { 
     background-image: url('../pics/ui/element_elite.gif'); 
     filter: drop-shadow(0px 0px 2px darken(rgba($element_elite, 1),30));
