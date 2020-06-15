@@ -1,16 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import { connect } from "react-redux"
-import Item from '../../ui/battle/Item'
-import ActionButton from '../../ui/battle/ActionButton'
 import SkillButton from '../../ui/battle/SkillButton'
-import Element from '../../ui/battle/Element'
-import logo from '../../pics/ui/logo2.png'
 import help from '../../pics/ui/help.svg'
-
-import fumble from '../../pics/ui/fumble.png'
-import critical from '../../pics/ui/critical.png'
-import death from '../../pics/ui/death.png'
 
 /**
   * @desc Help Modal
@@ -42,7 +34,7 @@ const ModalHelp = ({player}) => {
         Welcome to MHD20 !
       </p>
   
-      <p>If you feel lost, help and user guide <img className="helpInline" src={help} alt="help menu" /> is located in the upper left corner of the app.</p>
+      <p>If you feel lost, help and user guide are located in the upper left corner of the app : <br /><img className="helpInline" src={help} alt="help menu" /></p>
       <p>Have fun!</p>
 
     </div>
