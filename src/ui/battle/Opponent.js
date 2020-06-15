@@ -51,7 +51,7 @@ class Opponent extends Component {
 
   // Display component
   render() {
-    const { data, turn, level, color, intro } = this.props
+    const { data, turn, color, intro } = this.props
     const { mode, portraitReady } = this.state
 
     // Get colors from scene
@@ -99,7 +99,7 @@ class Opponent extends Component {
       <div key="opponent" className={itemClasses} style={wrapperStyle}>
         {data.elite && <EliteBackground />}
         <div className="infos">
-          <div className="level">Level {level}</div>
+          <div className="level"></div>
           <div className="name">
             <div>
               {data.name}

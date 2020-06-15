@@ -5,6 +5,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group"
 import ModalAbout from './ModalAbout'
 import ModalSettings from './ModalSettings'
 import ModalReset from './ModalReset'
+import ModalHelp from './ModalHelp'
 
 import '../../css/modal.scss'
 import closeIcon from '../../pics/ui/close.svg'
@@ -29,6 +30,8 @@ const modalContent = (content) => {
   switch (content) {
     case `about`:
       return <ModalAbout key="modalAbout" />
+    case `help`:
+      return <ModalHelp key="modalHelp" />
     case `settings`:
       return <ModalSettings key="modalSettings" />
     case `reset`:
@@ -54,7 +57,7 @@ const Modal = ({ content, close, display }) => {
         leave
       >
         <div key="modalWrapper" className="modalWrapper" onClick={close}>
-          <div className="modal" onClick={handleChildClick}>
+          <div key="modal" className="modal" onClick={handleChildClick}>
             <button key="closeModal" id="closeModal" className="option" onClick={close}><img src={closeIcon} alt="Close" /></button>
             {modalContent(content)}
           </div>

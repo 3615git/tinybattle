@@ -110,7 +110,7 @@ class App extends Component {
     let options
     let fullOptions = (
       <div className="optionsWrapper" key="options">
-        <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="Help" /></button>
+        <button className="option" onClick={() => this.openModal(`about`)}><img src={help} alt="About" /></button>
         <button className="option" onClick={() => setGameState({ state: `hallOfFame` })}><img src={score} alt="Score" /></button>
         {/* <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button> */}
       </div>
@@ -120,6 +120,12 @@ class App extends Component {
       <div className="optionsWrapper" key="options">
         <button className="option" onClick={() => setGameState({ state: `quit` })}><img src={close} alt="Quit" /></button>
         {/* <button className="option" onClick={() => this.openModal(`settings`)}><img src={settingsPic} alt="Settings" /></button> */}
+      </div>
+    )
+
+    let helpOptions = (
+      <div className="optionsWrapper help" key="options">
+        <button className="option fade" onClick={() => this.openModal(`help`)}><img src={help} alt="Help" /></button>
       </div>
     )
 
@@ -147,7 +153,7 @@ class App extends Component {
       case `battle`:
         view = <Battle />
         ambiantFog = []
-        options = []
+        options = helpOptions
         break;
       case `victory`:
         view = <Victory />
@@ -188,6 +194,7 @@ class App extends Component {
       options,
       <Modal key="modalAbout" content="about" display={openModal === `about`} close={this.closeModal} />,
       <Modal key="modalSettings" content="settings" display={openModal === `settings`} close={this.closeModal} />,
+      <Modal key="modalHelp" content="help" display={openModal === `help`} close={this.closeModal} />,
       ambiantFog
     ]
     
