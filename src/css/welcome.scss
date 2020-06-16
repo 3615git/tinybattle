@@ -12,12 +12,10 @@
 .optionsWrapper {
     position: absolute;
     top: 0;
-    width: 100%;
     padding: 10px;
     z-index: 40;
     display: flex;
     flex-direction: row;
-    pointer-events: none;
 
     &.help {
       width: 100%;
