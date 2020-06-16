@@ -19,6 +19,7 @@ import Battle from './views/Battle'
 import Victory from './views/Victory'
 import Defeat from './views/Defeat'
 import Shop from './views/Shop'
+import EndGame from './views/EndGame'
 import HallOfFame from './views/HallOfFame'
 import MonstersDemo from './views/MonstersDemo'
 
@@ -132,6 +133,7 @@ class App extends Component {
       </div>
     )
 
+    console.log(game)
     switch (game) {
       case `welcome`:
         view = <Welcome />
@@ -174,6 +176,10 @@ class App extends Component {
         break;
       case `shop`:
         view = <Shop />
+        options = smallOptions
+        break;
+      case `endgame`:
+        view = <EndGame />
         options = smallOptions
         break;
       case `hallOfFame`:
