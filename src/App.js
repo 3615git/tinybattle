@@ -46,6 +46,7 @@ import './css/defeat.scss'
 import './css/hall.scss'
 import './css/items.scss'
 import './css/wheel.scss'
+import './css/smallscreen.scss'
 
 const mapStateToProps = state => {
   return {
@@ -159,7 +160,6 @@ class App extends Component {
           settings({ setting: `tutorial` })
           this.setState({ openModal: `first` })
         }
-
         view = <Battle />
         ambiantFog = []
         options = helpOptions
