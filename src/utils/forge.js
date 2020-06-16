@@ -110,7 +110,7 @@ function forgeUniqueItems() {
   uniques["weapons"] = {}
 
   function uniquePrice(type, element) {
-    let price = getRandomInt(200, 400) * 10
+    let price = getRandomInt(200, 400) * 13
     // Light weapons are more exepensive (endgame critics)
     if (type === `weapons` && element === `light`) price = price * 2
     return price
@@ -150,12 +150,12 @@ function forgeUniqueItems() {
         switch (profile) {
           case 0:
           case 2:
-            score = getRandomInt(25,40)
+            score = getRandomInt(40,50)
             break;
   
           case 1:
           case 3:
-            score = getRandomInt(25, 35)
+            score = getRandomInt(45,65)
             break;
   
           default:
