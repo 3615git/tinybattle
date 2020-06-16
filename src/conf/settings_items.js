@@ -23,28 +23,28 @@ const charItems = {
 // Maximum power range of items for each char
 const charPower = {
   STR: {
-    normal: [1,7],
-    magic: [8,15],
-    rare: [16,24],
-    legendary: [25,30]
+    normal: [1,9],
+    magic: [10,19],
+    rare: [20,29],
+    legendary: [30,40]
   },
   DEX: {
-    normal: [1,7],
-    magic: [8,15],
-    rare: [16,24],
-    legendary: [25,30]
+    normal: [1,9],
+    magic: [10,19],
+    rare: [20,29],
+    legendary: [30,40]
   },
   CON: {
-    normal: [1,7],
-    magic: [8,15],
-    rare: [16,24],
-    legendary: [25,30]
+    normal: [1,9],
+    magic: [10,19],
+    rare: [20,29],
+    legendary: [30,40]
   },
   MAG: {
-    normal: [1,7],
-    magic: [8,15],
-    rare: [16,24],
-    legendary: [25,30]
+    normal: [1,9],
+    magic: [10,19],
+    rare: [20,29],
+    legendary: [30,40]
   },
   LCK: {
     normal: [1,1],
@@ -118,22 +118,22 @@ const weaponCost = {
 const instantSpecs = {
   quickheal: {
     normal: {
-      value: 20,
+      value: 30,
       type: `food`,
       id: [0, 34]
     },
     magic: {
-      value: 40,
+      value: 50,
       type: `food`,
       id: [35, 44]
     },
     rare: {
-      value: 60,
+      value: 100,
       type: `potion`,
       id: [14, 14]
     },
     legendary: {
-      value: 100,
+      value: 200,
       type: `potion`,
       id: [42,42]
     }
