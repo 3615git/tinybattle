@@ -1,7 +1,7 @@
 // Main game settings
 const gameSettings = {
-  maxLevel: 25, // Highest level of the game
-  zones: 5, // Number of sections in levels (should be 5)
+  maxLevel: 30, // Highest level of the game
+  zones: 6, // Number of sections in levels (should be 5)
   combatSpeed: 3000,
   widgetDelay: 600,
   itemStateDelay: 2000,
