@@ -1,0 +1,176 @@
+@import 'variables';
+
+@media screen and (max-width: 350px) {
+  // Global
+  .hideOnSmall {
+    display: none !important;
+  }
+  
+  .showOnSmall {
+    display: block !important;
+  }
+
+  .appWrapper {
+    padding: 0px;
+  }
+
+  .actionArea {
+    max-height: 100px;
+
+    &.oneitem {
+      max-height: 80px;
+    }
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 44px 44px 44px 44px 44px 44px;
+    grid-gap: 3px;
+  }
+
+  button, a.button {
+    height: 40px;
+    width: 47px;
+  }
+
+  // Welcome
+  .logoWrapper {
+    width: 250px;
+    height: 175px;
+  }
+
+  // Game create
+  input, .profileSelector {
+    width: calc(100% - 10px);
+  }
+
+  .profileSelector {
+    margin: 0px;
+  }
+
+  label {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: $font_small;
+  }
+
+  .shopWrapper span.subtitle {
+    margin: 10px 0px;
+  }
+
+  .goldLoot.noMargin, .playerItems.small_margin {
+    margin-top: 10px;
+  }
+
+  // Level transition
+  .logoWrapper .logoCombine span {
+    padding-top: 70px;
+  }
+
+  .roadmap {
+    .opponentWrapper {
+      min-height: 200px;
+    }
+    .logoWrapper {
+      width: 312px !important;
+      height: 219px !important;
+    }
+  }
+
+  // Battle intro
+  .opponentIntro .name {
+    font-size: $font_big;
+  }
+
+  // Battle
+  .dataLogsWrapper {
+    display: none;
+  }
+
+  .opponentWrapper {
+    min-height: 240px;
+  }
+
+  .statsAndItemsWrapper {
+    margin: 5px auto;
+  }
+
+  .bar.hitPoints .indicator {
+    height: 30px;
+  }
+
+  .playerItems .item_wrapper {
+    margin: 0px 2px;
+  }
+
+  .playerWeapons {
+    margin-left: 0px;
+  }
+
+  .item_wrapper, .playerStats > div {
+    width: 43px;
+    height: 47px;
+  }
+
+  .playerStats > div {
+    margin: 0px 2px;
+  }
+
+  .statsAndItemsWrapper .statsWrapper {
+    margin-right: 6px;
+  }
+
+  // Legacy 
+  .shopWrapper .lootBox .storeWrapper {
+    padding: 2px 6px 2px 6px;
+  }
+
+  .legacyTitle {
+    font-size: $font_small;
+    margin-bottom: 5px;
+
+    .legacyCount.big {
+      font-size: $font_small;
+      display: inline;
+    }
+  }
+
+  // Victory
+  .endGame .title {
+    font-size: $font_big;
+  }
+
+  .xpBarWrapper {
+    width: 100%;
+  }
+
+  .endGame img {
+    height: 150px;
+  }
+
+  // Shop
+  .shopWrapper .storeBox .storeItemWrapper {
+    margin: 0px;
+  }
+  .shopWrapper.panelStore .panelStoreTabs button {
+    height: 40px;
+  }
+  .shopWrapper.panelStore .panelStoreTabs button .item {
+    display: none;
+  }
+
+  .goldLoot {
+    margin: 0px;
+    padding: 0px;
+
+    .item_wrapper {
+      border: none;
+      background: none;
+      height: 40px;
+    }
+  }
+
+  .playerArea.shop {
+    margin-top: 0px;
+  }
+}

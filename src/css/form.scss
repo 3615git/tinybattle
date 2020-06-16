@@ -36,10 +36,11 @@ input {
   display: flex;
   justify-content: space-between;
   width: 300px;
+  padding: 5px;
   margin-top: 10px;
 
   button {
-    flex-basis: 31%;
+    flex-basis: 32%;
     font-size: $font_small;
   }
 }

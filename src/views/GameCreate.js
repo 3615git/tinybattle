@@ -108,30 +108,31 @@ class GameCreate extends Component {
               <button onClick={() => this.setStyle(`mage`)} className={baseStyle !== `mage` ? `third-transparent` : ``}>Mage</button>
               <button onClick={() => this.setStyle(`thief`)} className={baseStyle !== `thief` ? `third-transparent` : ``}>Thief</button>
             </div>
-            <label>Stats, gear and <span className="legacyColor">previous run</span> items </label>
+            <label className="hideOnSmall">Stats, gear and <span className="legacyColor">previous run</span> items </label>
             <div className="profileStats">
               <Stats />
               <Items animations={false} />
             </div>
 
-            <span className="subtitle">Weapons</span>
+            <span className="subtitle hideOnSmall">Weapons</span>
+            <span className="subtitle showOnSmall">Weapons and start items</span>
             <div className="playerItems">
               <Item item={player.weapons[`STR`]} effect={this.checkLegacy(`weapons`, `STR`)} />
               <Item item={player.weapons[`MAG`]} effect={this.checkLegacy(`weapons`, `MAG`)} />
             </div>
 
-            <span className="subtitle">Start items level {getLevelFromXp(player.xp)}</span>
-            <div className="playerItems">
+            <span className="subtitle hideOnSmall">Start items level {getLevelFromXp(player.xp)}</span>
+            <div className="playerItems small_margin">
               {instants}
             </div>
 
-            <span className="subtitle">Gold</span>
+            <span className="subtitle hideOnSmall">Gold</span>
             <div className="goldLoot noMargin noPadding">
               <Item item={goldIcon} effect="new" animateNumber noPlus />
             </div>
 
           </div>
-          <div className="actionArea">
+          <div className="actionArea oneitem">
             <button 
               className="navigation" 
               onClick={() => this.startGame()}

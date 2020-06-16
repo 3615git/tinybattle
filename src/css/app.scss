@@ -47,6 +47,10 @@ table tr td {
 }
 
 /* Utils */
+.showOnSmall {
+  display: none !important;
+}
+
 .transparent {
   opacity: .1;
   transition: opacity 700ms;
@@ -666,7 +670,7 @@ html, body, #root {
 
   img {
     z-index: 1;
-    height: 350px;
+    height: 250px;
     opacity: 1;
 
     &.death {
