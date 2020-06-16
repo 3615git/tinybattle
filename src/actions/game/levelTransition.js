@@ -15,8 +15,8 @@ const levelTransition = (data) => {
   // Set game state
   data.game.state = `levelTransition`
 
-  // TO BE REMOVED
-  // Temporary endgame fix
+
+  // TO BE REMOVED : temporary endgame fix for Thomas :)
   if (data.game.level > gameSettings.maxLevel) data.game.level = gameSettings.maxLevel
 
   // Prepare opponent data from level

@@ -133,7 +133,6 @@ class App extends Component {
       </div>
     )
 
-    console.log(game)
     switch (game) {
       case `welcome`:
         view = <Welcome />
