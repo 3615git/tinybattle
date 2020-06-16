@@ -1,5 +1,6 @@
 import { bestScore } from '../../actions/score/score'
 import { getMonsterFromLevel } from '../../monsters/getMonsterFromLevel'
+import { gameSettings } from "../../conf/settings"
 
 /**
   * @desc Displaying next level number
@@ -13,6 +14,9 @@ const levelTransition = (data) => {
   data.game.level = previousLevel + 1
   // Set game state
   data.game.state = `levelTransition`
+
+  // Temporary endgame fix
+  if (data.game.level > gameSettings.maxLevel) data.game.level = 25
 
   // Prepare opponent data from level
   const level = data.game.level
