@@ -3,9 +3,9 @@
 */
 
 const createMonsters = (data, monsters) => {
-
-  if (!data.monsters) data.monsters = {}
-  if (!data.monsterTiers) data.monsterTiers = {}
+  // Reset data
+  data.monsters = {}
+  data.monsterTiers = {}
 
   for (let index = 0; index < monsters.length; index++) {
     const monster = monsters[index];
