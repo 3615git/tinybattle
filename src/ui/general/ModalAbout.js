@@ -27,7 +27,7 @@ const ModalAbout = () => {
       <div className="separator" />
       <div className="title">Game dev & design</div>
       <p>
-        Rémi<br />
+        Ultimate Manatee Studio<br />
         <span className="smallText">
           ultimatemanatee@gmail.com<br />
           <a href="https://discord.gg/C46VEGx">Discord</a>
