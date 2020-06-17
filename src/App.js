@@ -94,7 +94,7 @@ class App extends Component {
 
   componentDidMount() {
     const { settings, setGameState, currentVersion, monsters } = this.props
-
+    console.log(version[0].version, currentVersion)
     // Never played : apply current version
     if (monsters) {
       if (version[0].version !== currentVersion) {
