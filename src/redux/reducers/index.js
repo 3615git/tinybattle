@@ -66,6 +66,7 @@ import { clog } from '../../utils/utils'
 // Initial state
 import { initialState } from '../../conf/settings'
 import { saveState } from '../../redux/localStorage'
+import { version } from '../../conf/version'
 
 function rootReducer(state = initialState, action) {
 
@@ -76,6 +77,12 @@ function rootReducer(state = initialState, action) {
 
   // Switch to next player turn
   let turnSwitch = true
+
+  // Version bumping highjack
+  if (nextState.monsters && version[0].version !== nextState.version && version[0].reset) {
+    action.type = GAMESTATE
+    action.payload = { state: `updateVersion` }
+  }
 
   clog(action.type, `action`)
 
