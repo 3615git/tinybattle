@@ -56,7 +56,8 @@ class ReleaseNotes extends Component {
         <div className="appWrapper">
           <div className="presentationArea releaseNotes">
             <div className="notes">
-              <div className="pagetitle">Release notes</div>
+              <div className="pagetitle">Game updates !</div>
+              <div>Release notes</div>
               <div className="separator" />
                 {releaseNotes}
             </div>
