@@ -6,7 +6,6 @@ import { gameSettings } from '../conf/settings'
 import { getLevelFromXp } from '../actions/score/score'
 import Monster from '../ui/battle/Monster'
 import Element from '../ui/battle/Element'
-import { getMonsterFromLevel } from '../monsters/getMonsterFromLevel'
 
 import logo2 from '../pics/ui/logo2.png'
 
@@ -17,9 +16,7 @@ const mapStateToProps = state => {
     opponent: state.opponent,
     score: state.score,
     monsterList: state.monsters,
-    opponentMap: state.game.opponentMap,
-    monsters: state.monsters,
-    monsterTiers: state.monsterTiers
+    opponentMap: state.game.opponentMap
   }
 }
 
@@ -40,28 +37,7 @@ class LevelTransition extends Component {
   }
   
   render() {
-    const { game, player, opponent, setGameState, score, monsterList, monsters, monsterTiers, opponentMap } = this.props
-
-    // TEMPORARY TEST/FIX
-    if (!opponentMap) {
-      // Prepare opponent roadmap
-      let opponentMap = []
-      let pastOpponents = []
-
-      for (let level = 1; level <= gameSettings.maxLevel; level++) {
-        let levelMonster
-        // Boss
-        if ( level % 5 === 0 ) {
-          levelMonster = getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents, true)
-        } else {
-          levelMonster = getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents)
-        }
-        // Add to roadmap
-        opponentMap.push(levelMonster)
-        // Add monster to history
-        pastOpponents.push(levelMonster.job)
-      }
-    }
+    const { game, player, opponent, setGameState, score, monsterList, opponentMap } = this.props
 
     // Legacy items count
     const legacyItems = getLevelFromXp(player.xp)

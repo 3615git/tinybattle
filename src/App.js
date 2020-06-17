@@ -98,8 +98,9 @@ class App extends Component {
     // Never played : apply current version
     if (monsters) {
       if (version[0].version !== currentVersion) {
-        if (version.reset) setGameState({ state: `updateVersion` })
-        else settings({ setting: `setVersion` })
+        // if (version.reset) setGameState({ state: `updateVersion` })
+        // else settings({ setting: `setVersion` })
+        setGameState({ state: `updateVersion` })
       }
     } else settings({ setting: `setVersion` })
 
