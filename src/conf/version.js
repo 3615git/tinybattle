@@ -1,7 +1,7 @@
 // Version and release notes
 const version = [
   {
-    version: `1.0`,
+    version: `1.1`,
     date: `18.06.20`,
     code: `Git gud`,
     reset: `run`,
