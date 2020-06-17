@@ -36,7 +36,6 @@ class GameCreate extends Component {
   }
 
   handleChange = (event) => {
-    clog(`handleChange`, `function`)
     this.setState({ name: event.target.value })
   }
 

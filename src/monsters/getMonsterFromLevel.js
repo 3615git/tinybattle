@@ -2,11 +2,15 @@ import { monsterInfo } from '../monsters/monster'
 import { randomValue } from '../utils/utils'
 import { gameSettings } from "../conf/settings"
 
-function getLevelInfo(level, monsterTiers) {
+function getLevelInfo(level, monsterTiers, boss=false) {
   let levelMonsters
-  
+
   // Tier switch
-  levelMonsters = monsterTiers[Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))]
+  if (boss) {
+    levelMonsters = monsterTiers['boss-'+Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))]
+  } else {
+    levelMonsters = monsterTiers[Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))]
+  }
 
   const levelInfo = {
     monsters: levelMonsters
@@ -15,8 +19,8 @@ function getLevelInfo(level, monsterTiers) {
   return levelInfo
 }
 
-function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents) {
-  const levelInfo = getLevelInfo(level, monsterTiers)
+function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents, boss=false) {
+  const levelInfo = getLevelInfo(level, monsterTiers, boss)
   // Remove alredy played monsters from array
   let availableOpponents
   if (pastOpponents) {

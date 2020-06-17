@@ -29,10 +29,21 @@
 
   .infoWrapper {
     position: relative;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nextLevel {
+    position: relative;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
   }
 
   .leftInfo {
     position: absolute;
+    padding-left: 20px;;
     top: 30%;
     width: calc(50% - 60px);
     left: 0;

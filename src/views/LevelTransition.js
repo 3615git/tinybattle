@@ -5,6 +5,7 @@ import { setGameState } from '../redux/actions/index'
 import { gameSettings } from '../conf/settings'
 import { getLevelFromXp } from '../actions/score/score'
 import Monster from '../ui/battle/Monster'
+import Element from '../ui/battle/Element'
 
 import logo2 from '../pics/ui/logo2.png'
 
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
     player: state.player,
     opponent: state.opponent,
     score: state.score,
-    monsterList: state.monsters
+    monsterList: state.monsters,
+    opponentMap: state.game.opponentMap
   }
 }
 
@@ -35,7 +37,7 @@ class LevelTransition extends Component {
   }
   
   render() {
-    const { game, player, opponent, setGameState, score, monsterList } = this.props
+    const { game, player, opponent, setGameState, score, monsterList, opponentMap } = this.props
 
     // Legacy items count
     const legacyItems = getLevelFromXp(player.xp)
@@ -71,7 +73,7 @@ class LevelTransition extends Component {
               name={opponent.name}
               elite={opponent.elite}
               monsterList={monsterList}
-              outline
+              outline="shade"
             />
             <div className="leftInfo">
               <div>Run #{score.game.runs}</div>
@@ -92,15 +94,30 @@ class LevelTransition extends Component {
           </div>
         )
       } else {
+        // @todo : display bosses every 5 levels 
         let wrapperStyle = { filter: `grayscale(100%)`, opacity: .4, transform: `scale(.8)` }
         // Incoming level
         roadmap.push(
-          <div key={`incominglevel_${level}`}>
+          <div key={`incominglevel_${level}`} className="nextLevel">
+            <Monster
+              type={opponentMap[level-1].job}
+              name={opponentMap[level-1].name}
+              elite={opponentMap[level-1].elite}
+              monsterList={monsterList}
+              outline={level % 5 === 0 ? "bright" : "shade"}
+            />
+            <div className="leftInfo">
+              {opponentMap[level-1].elite && level % 5 === 0 && <div><Element element="elite"/></div> }
+              {level % 5 === 0 && <div>{opponentMap[level-1].name}</div> }
+            </div>
             <div className="logoWrapper" style={logoStyle}>
               <div className="logoCombine" style={wrapperStyle}>
                 <span>{level}</span>
                 <img src={logo2} className={level === game.level ? "logo2" : ""} alt="Logo2" />
               </div>
+            </div>
+            <div className="rightInfo">
+              {level % 5 === 0 && <div>Boss</div> }
             </div>
           </div>
         )
@@ -114,18 +131,6 @@ class LevelTransition extends Component {
             <div className="roadmap">
               {roadmap}
             </div>
-            {/* 
-            </div>
-            <div className="title">Level {game.level}</div>
-            <div className="subTitle"></div>
-            <div className="levelTiersWrapper">
-              <div className={`levelTiers legacy_${legacyItems}`}>
-                <div className="legend legacyColor"></div>
-              </div>
-              <div className={`levelTiers monsters_${monsterTier}`}>
-                <div className="legend physicalColor"></div>
-              </div>
-            </div> */}
           </div>
           <div className="actionArea fixed">
             <button className="navigation bi_action" onClick={() => setGameState({ state: `battleIntro` })}>Next opponent !</button>
