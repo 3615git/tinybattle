@@ -1,57 +1,64 @@
 code,name,verticalPosition,Poor visual,tier,humanoid,items,weapons,profile,element,boost,elite
-blindworm,"Blind Worm, Cave Worm, Giant Worm",,,1,,,,brute,earth,STR,5
-dryad,"Dryad, Sylve Dryad, Dryad Swordmaster",,,1,1,"DEX, STR, LCK",STR,duelist,earth,DEX,5
-giantfish,"Giant Fish, River Monster, Giant Carp",30,,1,,,,tank,water,,5
-fireimp,"Fire Bird, Phoenix, Fire Crow",,,1,1,MAG,MAG,archmage,fire,,5
-bloodmage,"Blood Mage, Blood Warlock, Crimson Mage",60,,1,1,"DEX, CON, MAG","STR, MAG",archmage,fire,,5
-lamprey,"Psychic Lamprey, Psionic Worm, Mana Leech",49,,1,,,,wizard,water,MAG,5
-waterspirit,"Water Spirit, Water Djinn, Ocean Djinn",40,,1,1,"STR, MAG","STR, MAG",balanced,water,,15
-crow,"Giant Crow, High Raven, Black Raven",30,,1,,,,duelist,earth,DEX,15
-firewitch,"Fire Witch, Fire Angel, Fire Sorceress",,,1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,30
-succubus,"Succubus, Servant of Lilith, Void Demon",,,1,1,"STR, DEX, CON",STR,balanced,darkness,DEX,20
-scarletwyrm,"Scarlet Wyrm, Scaled Beast, Red Drake",20,,2,,,,brute,earth,STR,20
-runicgolem,"Runic Golem, Ancient Golem, Razor Golem",40,,2,1,"DEX, STR, LCK, MAG",STR,balanced,water,DEX,15
-gazer,"Eldritch Gazer, Abomination, Abyss Gazer",,,2,,,,brute,darkness,"STR, DEX",15
-sunwarrior,"Sun Warrior, Sun Knight, Fire Warrior",,,2,1,"MAG, DEX, CON","STR, MAG",archmage,fire,"STR,DEX",10
-vampire,"Count Solomon, Solomon Vampire Lord, Lord Solomon",70,,2,1,"STR, DEX, CON, MAG, LCK",STR,balanced,darkness,"DEX, MAG",20
-stonegolem,"Stone Golem, Rock Golem, Rock Spirit",60,,2,,,,brute,earth,STR,10
-arcanegolem,"Arcane Golem, Crystal Golem, Construct",60,,2,,,,brute,water,"MAG, DEX",10
-sparkdragon,"Spark Dragon, Yellow Drake, White Wyvern",40,,2,,,,balanced,earth,"DEX, STR",10
-ignis,"Ignis, Arcane Blaze, Infernis",,,2,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,fire,"MAG, DEX",50
-goblinmage,"Iron Mage, Iron Wizard, Iron Warlock",80,,2,1,"MAG, DEX",MAG,wizard,earth,MAG,15
-windpriest,"Wind Priest, Zephyr Wizard, Wind Mage",,,3,1,"DEX, MAG, LCK",MAG,wizard,water,,15
-koboldarcher,"Gargoyle Bandit, Gargoyle Assassin, Gargoyle Duelist",,,3,1,"DEX, LCK, STR",STR,duelist,earth,DEX,20
-imp,"Forest Imp, Forest Demon, Tree Gargoyle",,,3,1,"DEX, LCK, STR, MAG","STR, MAG",duelist,water,,20
-fireangel,"Fire Angel, Red Angel, Burning Angel",,,3,1,"STR, DEX, MAG",STR,balanced,fire,DEX,50
-behemoth,"Behemoth, Green Wyvern, Green Drake",40,,3,,,,tank,earth,STR,50
-cultist,"Insane Cultist, Chaos Mage, Dark Mage",,,3,1,"MAG, LCK, DEX",MAG,archmage,darkness,"MAG, DEX",15
-harbinger,"Messenger, Harbinger, Caller",,,3,1,"STR, DEX, LCK, CON, MAG",MAG,balanced,darkness,"MAG, DEX",60
-firelord,"Fire Lord, Blaze Lord, Flame Lord",55,,3,,,,balanced,fire,"DEX, CON",15
-mage,"Insane Wizard, Al-Hazred, Librarian",80,bof,3,1,"MAG, DEX, LCK","STR, MAG",wizard,darkness,"MAG, DEX",70
-minordemon,"Flame Servant, Flame Slave, Flame Minion",,,3,1,"STR, DEX, LCK, CON","STR, MAG",brute,fire,STR,20
-crocodilerogue,"Vapor Fighter, Smoke Fighter, Wind Fighter",80,,4,1,"DEX, STR, LCK, CON",STR,duelist,water,DEX,20
-ghostknight,"Ghost Knight, Spectral Knight, Fantom Knight",80,,4,1,"DEX, STR, LCK, MAG",STR,duelist,darkness,"DEX, STR",20
-forestgolem,"Forest Golem, Moss Golem, Forest Elemental",40,,4,,,,tank,earth,STR,20
-dynamo,"Immortal Flame, Unburning Fire, Sudden Blaze",60,,4,1,"STR, DEX, CON, LCK, MAG","STR, MAG",archmage,fire,"MAG, DEX",60
-chimera,"Chimera, Peryton, Illusion Beast",32,,4,,,,balanced,earth,"DEX, STR",15
-dryadqueen,"Dryad Queen, Forest Queen, Forest Sorceress",65,,4,1,"DEX, LCK, MAG, CON",MAG,wizard,earth,"DEX, MAG",60
-astrallich,"Astral Lich, Void Eater, Void Elemental",48,,4,,,,brute,darkness,"CON, MAG",15
-feralbeast,"Feral Beast, Fire Wolf, Wereflame",,,4,1,"DEX, STR, LCK, CON",,duelist,fire,"DEX, STR",15
-darknesstitan,"Dancing Flame, Burning Titan, Hell Knight",,,4,1,"STR, DEX, LCK, CON",STR,duelist,fire,"DEX, MAG",15
-crystalmage,"Crystal Mage, Ice Mage, Frozen Sorcerer",60,,4,1,"MAG, DEX, LCK",MAG,archmage,water,"MAG, DEX, CON",20
-iceelemental,"Ice Spirit, Ice Queen, Crystal Spirit",70,,5,1,"MAG, CON",MAG,archmage,water,"DEX, CON",20
-elvenmage,"Elven Mage, Forest Mage, Elven Overseer",80,,5,1,"LCK, MAG, DEX, CON","MAG, STR",wizard,earth,"MAG, CON",50
-radulac,"Ancient Ghoul, Lord Ghoul, Garghoul",,,5,1,"DEX, STR, LCK, MAG",STR,tank,darkness,"STR, MAG",60
-golddragon,"Gold Dragon, Lucky Dragon, Gold Wyvern",,,5,1,LCK,,wizard,earth,LCK,60
-dragonemperor,"Dragon Emperor, Dracolich, Darkness Emperor",,,5,1,"LCK, CON",,balanced,darkness,"STR, DEX, MAG",70
-voidgargoyle,"Void Gargoyle, Void Beast, Mi-Go",,,5,,,,balanced,darkness,"DEX, MAG",70
-demon,"Abaddon, Apollyon",,,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"STR, MAG",70
-bulldragon,"Bull Dragon, Great Beast, Bull Drake",60,,5,,,,brute,earth,"STR, CON",20
-knightking,"Night King, Night Emperor, Night Sword",,,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",duelist,darkness,"DEX, STR",20
-ansellus,"Ansellus, Isembard, Fendrel",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",duelist,darkness,"MAG, DEX",50
-excelsios,"Annoras the Unholy, Annoras the Void Rider, Annoras the World Eater",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,darkness,"MAG, DEX, STR",60
-thanatos,"Thanatos, Death, The Reaper",40,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,earth,MAG,70
-alfadriel,"Alfadriel the Rigtheous, Alfadriel Lord of the Light, Archangel Alfadriel",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"DEX, STR",70
-yoggoth,"Yoggoth, Beast of Oort, Void Thing",49,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,darkness,"CON, MAG",70
-myrdin,"Myrdin Sovereign of the Void, Myrdin Ruler of the Void, Myrdin Mistress of the Void",,,6,1,"STR, DEX, CON, MAG, LCK",MAG,wizard,darkness,"MAG, DEX",70
-cthulhu,"The Great Cthulhu, The Great Old One, Cthulhu",40,,6,,,,wizard,darkness,,90
+blindworm,"Blind Worm, Cave Worm, Giant Worm",,,1,,,,brute,earth,STR,3
+dryad,"Dryad, Sylve Dryad, Dryad Swordmaster",,,1,1,"DEX, STR, LCK",STR,duelist,earth,DEX,3
+giantfish,"Giant Fish, River Monster, Giant Carp",30,,1,,,,tank,water,,3
+fireimp,"Fire Bird, Phoenix, Fire Crow",,,1,1,MAG,MAG,archmage,fire,,3
+bloodmage,"Blood Mage, Blood Warlock, Crimson Mage",60,,1,1,"DEX, CON, MAG","STR, MAG",archmage,fire,,3
+clairvoyant,"Battle Mage, Archknight, Scythe Mage",,,1,1,"DEX, CON, MAG, STR","STR, MAG",balanced,darkness,"DEX, MAG",3
+rootgolem,"Root Golem, Angry Root, Root Elemental",,,1,1,LCK,STR,balanced,earth,"STR, CON",3
+lamprey,"Psychic Lamprey, Psionic Worm, Mana Leech",49,,1,,,,wizard,water,MAG,3
+waterspirit,"Water Spirit, Water Djinn, Ocean Djinn",40,,1,1,"STR, MAG","STR, MAG",balanced,water,,3
+crow,"Giant Crow, High Raven, Black Raven",30,,1,,,,duelist,earth,DEX,3
+succubus,"Succubus, Servant of Lilith, Void Demon",,,1,1,"STR, DEX, CON",STR,balanced,darkness,DEX,3
+scarletwyrm,"Scarlet Wyrm, Scaled Beast, Red Drake",20,,2,,,,brute,earth,STR,5
+runicgolem,"Runic Golem, Ancient Golem, Razor Golem",40,,2,1,"DEX, STR, LCK, MAG",STR,balanced,water,DEX,5
+gazer,"Eldritch Gazer, Abomination, Abyss Gazer",,,2,,,,brute,darkness,"STR, DEX",5
+sunwarrior,"Sun Warrior, Sun Knight, Fire Warrior",,,2,1,"MAG, DEX, CON","STR, MAG",archmage,fire,"STR,DEX",5
+vampire,"Count Solomon, Vampire Lord, Lord Solomon",70,,2,1,"STR, DEX, CON, MAG, LCK",STR,balanced,darkness,"DEX, MAG",5
+stonegolem,"Stone Golem, Rock Golem, Rock Spirit",60,,2,,,,brute,earth,STR,5
+arcanegolem,"Arcane Golem, Crystal Golem, Construct",60,,2,,,,brute,water,"MAG, DEX",5
+sparkdragon,"Spark Dragon, Yellow Drake, White Wyvern",40,,2,,,,balanced,earth,"DEX, STR",5
+goblinmage,"Iron Mage, Iron Wizard, Iron Warlock",80,,2,1,"MAG, DEX",MAG,wizard,earth,MAG,5
+windpriest,"Wind Priest, Zephyr Wizard, Wind Mage",,,3,1,"DEX, MAG, LCK",MAG,wizard,water,,7
+koboldarcher,"Gargoyle Bandit, Gargoyle Assassin, Gargoyle Duelist",,,3,1,"DEX, LCK, STR",STR,duelist,earth,DEX,7
+imp,"Forest Imp, Forest Demon, Tree Gargoyle",,,3,1,"DEX, LCK, STR, MAG","STR, MAG",duelist,water,,7
+fireangel,"Fire Angel, Red Angel, Burning Angel",,,3,1,"STR, DEX, MAG",STR,balanced,fire,DEX,7
+behemoth,"Behemoth, Green Wyvern, Green Drake",40,,3,,,,balanced,earth,"STR, CON",7
+cultist,"Insane Cultist, Chaos Mage, Dark Mage",,,3,1,"MAG, LCK, DEX",MAG,archmage,darkness,"MAG, DEX",7
+firelord,"Fire Lord, Blaze Lord, Flame Lord",55,,3,,,,balanced,fire,"DEX, CON",7
+mage,"Insane Wizard, Al-Hazred, Librarian",80,bof,3,1,"MAG, DEX, LCK","STR, MAG",wizard,darkness,"MAG, DEX",7
+minordemon,"Flame Servant, Flame Slave, Flame Minion",,,3,1,"STR, DEX, LCK, CON","STR, MAG",brute,fire,STR,7
+crocodilerogue,"Vapor Fighter, Smoke Fighter, Wind Fighter",80,,4,1,"DEX, STR, LCK, CON",STR,duelist,water,DEX,9
+ghostknight,"Ghost Knight, Spectral Knight, Fantom Knight",80,,4,1,"DEX, STR, LCK, MAG",STR,duelist,darkness,"DEX, STR",9
+forestgolem,"Forest Golem, Moss Golem, Forest Elemental",40,,4,,,,tank,earth,STR,9
+chimera,"Chimera, Peryton, Illusion Beast",32,,4,,,,balanced,earth,"DEX, STR",9
+dryadqueen,"Dryad Queen, Forest Queen, Forest Sorceress",65,,4,1,"DEX, LCK, MAG, CON",MAG,wizard,earth,"DEX, MAG",9
+astrallich,"Astral Lich, Void Eater, Void Elemental",48,,4,,,,brute,darkness,"CON, MAG",9
+feralbeast,"Feral Beast, Fire Wolf, Wereflame",,,4,1,"DEX, STR, LCK, CON",,duelist,fire,"DEX, STR",9
+darknesstitan,"Dancing Flame, Burning Titan, Hell Knight",,,4,1,"STR, DEX, LCK, CON",STR,duelist,fire,"DEX, MAG",9
+crystalmage,"Crystal Mage, Ice Mage, Frozen Sorcerer",60,,4,1,"MAG, DEX, LCK",MAG,archmage,water,"MAG, DEX, CON",9
+iceelemental,"Ice Spirit, Ice Queen, Crystal Spirit",70,,5,1,"MAG, CON",MAG,archmage,water,"DEX, CON",15
+elvenmage,"Elven Mage, Forest Mage, Elven Overseer",80,,5,1,"LCK, MAG, DEX, CON","MAG, STR",wizard,earth,"MAG, CON",15
+radulac,"Ancient Ghoul, Lord Ghoul, Garghoul",,,5,1,"DEX, STR, LCK, MAG",STR,tank,darkness,"STR, MAG",15
+golddragon,"Gold Dragon, Lucky Dragon, Gold Wyvern",,,5,1,LCK,,wizard,earth,LCK,15
+dragonemperor,"Dragon Emperor, Dracolich, Darkness Emperor",,,5,1,"LCK, CON",,balanced,darkness,"STR, DEX, MAG",15
+voidgargoyle,"Void Gargoyle, Void Beast, Mi-Go",,,5,,,,balanced,darkness,"DEX, MAG",15
+bulldragon,"Bull Dragon, Great Beast, Bull Drake",60,,5,,,,brute,earth,"STR, CON",15
+knightking,"Night King, Night Emperor, Night Sword",,,5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",duelist,darkness,"DEX, STR",15
+ansellus,"Ansellus, Isembard, Fendrel",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",duelist,darkness,"MAG, DEX",20
+excelsios,"Annoras the Unholy, Annoras the Void Rider, Annoras the World Eater",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,darkness,"MAG, DEX, STR",20
+thanatos,"Thanatos, Death, The Reaper",40,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,earth,MAG,20
+alfadriel,"Alfadriel the Rigtheous, Alfadriel Lord of the Light, Archangel Alfadriel",,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"DEX, STR",20
+yoggoth,"Yoggoth, Beast of Oort, Void Thing",49,,6,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,darkness,"CON, MAG",20
+firewitch,"Fire Witch, Fire Angel, Fire Sorceress",,,boss-1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,fire,MAG,100
+shadowscythe,"Scythe Shadow, Smoke Reaper, Mister Reaper",,,boss-1,1,"STR, DEX, CON, MAG, LCK","STR, MAG",brute,darkness,"DEX, MAG",100
+ignis,"Ignis, Arcane Blaze, Infernis",,,boss-2,1,"STR, DEX, CON, MAG, LCK","STR, MAG",archmage,fire,"MAG, DEX",100
+corruptedelemental,"Corrupted Elemental, Chaos Elemental, Void Elemental",,,boss-2,1,"STR, DEX, CON, MAG, LCK","STR, MAG",brute,darkness,"STR, CON",100
+harbinger,"Messenger, Harbinger, Caller",,,boss-3,1,"STR, DEX, LCK, CON, MAG",MAG,balanced,darkness,"MAG, DEX",100
+corruptedhorseman,"Corrupted Horseman, Chaos Horseman, Void Horseman",,,boss-3,1,"STR, DEX, LCK, CON, MAG",STR,balanced,darkness,"STR, DEX",100
+primaldemon,"Primal Demon, Feral Demon, Void Chimera",,,boss-4,1,"STR, DEX, CON, LCK, MAG","STR, MAG",brute,fire,"STR, CON",100
+dynamo,"Immortal Flame, Unburning Fire, Sudden Blaze",60,,boss-4,1,"STR, DEX, CON, LCK, MAG","STR, MAG",archmage,fire,"MAG, DEX",100
+lichwarlord,"Lich Warlord, Nazghoul, Lich Knight",,,boss-5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",wizard,darkness,"DEX, MAG",100
+demon,"Abaddon, Apollyon",,,boss-5,1,"STR, DEX, CON, MAG, LCK","STR, MAG",balanced,fire,"STR, MAG",100
+cthulhu,"The Great Cthulhu, The Great Old One, Cthulhu",40,,boss-6,,,,balanced,darkness,"STR, MAG, DEX, CON",100
+myrdin,"Myrdin Sovereign of the Void, Myrdin Ruler of the Void, Myrdin Mistress of the Void",,,boss-6,1,"STR, DEX, CON, MAG, LCK",MAG,wizard,darkness,"MAG, DEX",100
