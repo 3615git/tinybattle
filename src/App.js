@@ -92,7 +92,7 @@ class App extends Component {
     })
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { settings, setGameState, currentVersion, monsters } = this.props
     console.log(version[0].version, currentVersion)
     // Never played : apply current version
