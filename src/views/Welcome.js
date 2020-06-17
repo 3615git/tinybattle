@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { clog } from '../utils/utils'
 
 import { setGameState, settings } from '../redux/actions/index'
+import { version } from '../conf/version'
 import sigil from '../pics/ui/sigil-white.svg'
 import coverart from '../pics/ui/welcome.png'
 import logo from '../pics/ui/logo.png'
@@ -19,7 +20,8 @@ const mapStateToProps = state => {
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
     log: state.log,
-    score: state.score
+    score: state.score,
+    currentVersion: state.version
   }
 }
 
@@ -66,7 +68,7 @@ class Welcome extends Component {
 
   render() {
     const { openModal } = this.state
-    const { setGameState, game, player, score } = this.props
+    const { setGameState, game, player, score, currentVersion } = this.props
 
     // Start button
     let startButton
@@ -109,7 +111,7 @@ class Welcome extends Component {
           <div className="actionArea">
             {startButton}
             {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>New game</button>}
-            <div className="version">1.0</div>
+            <div className="version">{currentVersion} {version[0].code} - <button className="textOnly inline" onClick={() => setGameState({ state: `releaseNotes` })}>Release notes</button></div>
           </div>
         </div>
       </div>

@@ -94,7 +94,6 @@ class LevelTransition extends Component {
           </div>
         )
       } else {
-        // @todo : display bosses every 5 levels 
         let wrapperStyle = { filter: `grayscale(100%)`, opacity: .4, transform: `scale(.8)` }
         // Incoming level
         roadmap.push(

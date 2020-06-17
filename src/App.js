@@ -12,6 +12,7 @@ import { settings, setGameState } from './redux/actions/index'
 // Import views
 import Welcome from './views/Welcome'
 import AllReset from './views/AllReset'
+import ReleaseNotes from './views/ReleaseNotes'
 import GameCreate from './views/GameCreate'
 import LevelTransition from './views/LevelTransition'
 import BattleIntro from './views/BattleIntro'
@@ -31,6 +32,9 @@ import help from './pics/ui/help.svg'
 import close from './pics/ui/close.svg'
 import score from './pics/ui/score.svg'
 
+// Import current version number
+import { version } from './conf/version'
+
 // Import style
 import './css/app.scss'
 import './css/buttons.scss'
@@ -47,12 +51,15 @@ import './css/defeat.scss'
 import './css/hall.scss'
 import './css/items.scss'
 import './css/wheel.scss'
+import './css/releasenotes.scss'
 import './css/smallscreen.scss'
 
 const mapStateToProps = state => {
   return {
     game: state.game.state,
-    tutorial: state.game.tutorial
+    tutorial: state.game.tutorial,
+    currentVersion: state.version,
+    monsters: state.monsters
   }
 }
 
@@ -86,7 +93,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { settings } = this.props
+    const { settings, setGameState, currentVersion, monsters } = this.props
+
+    // Never played : apply current version
+    if (monsters) {
+      if (version[0].version !== currentVersion) {
+        if (version.reset) setGameState({ state: `updateVersion` })
+        else settings({ setting: `setVersion` })
+      }
+    } else settings({ setting: `setVersion` })
 
     // Send raw csv to reducer
     Papa.parse(monsterData, {
@@ -140,6 +155,10 @@ class App extends Component {
         break;
       case `allReset`:
         view = <AllReset />
+        options = []
+        break;
+      case `releaseNotes`:
+        view = <ReleaseNotes />
         options = []
         break;
       case `gameCreate`:
