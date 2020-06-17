@@ -104,7 +104,7 @@ class Defeat extends Component {
         <div className="appWrapper">
           <div className="presentationArea highIndex">
             <div className="shopWrapper shop legacy">
-                You won!
+                You won! Damn, now i have to make an endgame screen!
             </div>
           </div>
           <div className="actionArea">

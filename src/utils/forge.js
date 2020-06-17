@@ -43,12 +43,6 @@ function getQualityWeight(level, peak, range, end=false) {
 }
 
 function getItemQuality(level, elite) {
-  // Old tier based solution
-  // const tier = Math.ceil(level / (gameSettings.maxLevel / gameSettings.zones))
-  // const qualities = itemQuality[tier].quality
-  // const weight = elite ? itemQuality[tier].eliteWeight : itemQuality[tier].basicWeight
-  // const weighedqualities = generateWeight(qualities, weight)
-
   // New dynamic solution
   const qualities = itemQuality.quality
   const weight = [

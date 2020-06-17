@@ -13,3 +13,18 @@
     transition: all 100ms ease-in-out;
   }
 }
+
+@mixin itemStyle($color, $type: null) {
+  border: 2px solid rgba($color, 1);
+  @if $type == null {
+    background-color: rgba($color, .2);
+  }
+  @else {
+    background-color: rgba($color, .5);
+  }
+  box-shadow: inset 0px 0px 8px rgba(241, 241, 241, 0.1);
+  box-shadow: inset 0px 0px 5px darken(rgba($color, 1),30);
+  .item {
+    filter: drop-shadow(0px 0px 2px darken(rgba($color, 1),30));
+  }
+}

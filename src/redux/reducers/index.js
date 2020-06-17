@@ -4,6 +4,9 @@ import { tutorial } from '../../actions/settings/tutorial'
 import { createMonsters } from '../../actions/settings/createMonsters'
 import { createPlayer } from '../../actions/settings/createPlayer'
 import { resetLevel } from '../../actions/settings/resetLevel'
+import { updateVersion } from '../../actions/settings/updateVersion'
+import { releaseNotes } from '../../actions/settings/releaseNotes'
+import { setVersion } from '../../actions/settings/setVersion'
 import { resetGame } from '../../actions/settings/resetGame'
 import { submitScore } from '../../actions/settings/submitScore'
 import { setItem } from '../../actions/settings/setItem'
@@ -97,6 +100,10 @@ function rootReducer(state = initialState, action) {
       case `resetGame`:
         clog(`resetGame`, `reducer`)
         nextState = resetGame(nextState)
+        break;
+      case `setVersion`:
+        clog(`setVersion`, `reducer`)
+        nextState = setVersion(nextState)
         break;
       case `submitScore`:
         clog(`submitScore`, `reducer`)
@@ -200,6 +207,14 @@ function rootReducer(state = initialState, action) {
       case `shop`:
         clog(`shop`, `reducer`)
         nextState = openShop(nextState)
+        break;
+      case `updateVersion`:
+        clog(`updateVersion`, `reducer`)
+        nextState = updateVersion(nextState)
+        break;
+      case `releaseNotes`:
+        clog(`releaseNotes`, `reducer`)
+        nextState = releaseNotes(nextState)
         break;
       // Private views
       case `monstersDemo`:

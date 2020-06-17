@@ -3,7 +3,7 @@
 */
 
 const welcome = (data) => {
-  // Erasing quit save satte
+  // Erasing quit save state
   delete data.game.quitState
   // Set game state
   data.game.state = `welcome`
