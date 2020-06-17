@@ -34,12 +34,12 @@ class ReleaseNotes extends Component {
       for (let newsIndex = 0; newsIndex < element.changes.length; newsIndex++) {
         const change = element.changes[newsIndex];
         changesList.push(
-          <li className="change">{change}</li>
+          <li key={`change_${newsIndex}`} className="change">{change}</li>
         )
       }
 
       releaseNotes.push(
-        <div className="note">
+        <div className="note" key={`note_${index}`}>
           <div className="title">{element.version} "{element.code}"</div>
           <div className="date">{element.date}</div>
           {element.reset === `run` && <div className="reset">Major changes somewhere : your current run has to be reset. Sorry!</div>}
