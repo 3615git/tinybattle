@@ -143,20 +143,20 @@
   }
 }
 
+.separator {
+  width: 92px;
+  height: 32px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url("../pics/ui/attackskull.png");
+}
+
 .credits, .help {
   p {
     a {
       color: white;
     }
-  }
-
-  .separator {
-    width: 92px;
-    height: 32px;
-    margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
-    background-image: url("../pics/ui/attackskull.png");
   }
 
   .title {

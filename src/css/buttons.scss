@@ -59,6 +59,14 @@ button, a.button {
     font-size: $font_small;
     padding: 10px !important;
 
+    &.inline {
+      display: inline;
+      width: auto;
+      padding: 0px !important;
+      margin: 0px !important;
+      font-size: $font_tiny;
+    }
+
     &:after, &:before {
       display: none;
     }
