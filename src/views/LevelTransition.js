@@ -30,7 +30,7 @@ class LevelTransition extends Component {
 
   componentDidMount() {
     document.getElementById('currentLevel').scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'instant',
       block: 'center',
       inline: 'center'
     })
