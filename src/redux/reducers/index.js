@@ -23,6 +23,7 @@ import { setUIColor } from '../../actions/settings/setUIColor'
 import { preference } from '../../actions/settings/preference'
 // Game system
 import { welcome } from '../../actions/game/welcome'
+import { welcome_keepQuitState } from '../../actions/game/welcome_keepQuitState'
 import { quit } from '../../actions/game/quit'
 import { gameCreate } from '../../actions/game/gameCreate'
 import { levelTransition } from '../../actions/game/levelTransition'
@@ -170,10 +171,18 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === GAMESTATE) {
+
+    // Store page for origin use
+    nextState.game.previousState = nextState.game.state
+
     switch (action.payload.state) {
       case `welcome`:
         clog(`welcome`, `reducer`)
         nextState = welcome(nextState)
+        break;
+      case `welcome_keepQuitState`:
+        clog(`welcome_keepQuitState`, `reducer`)
+        nextState = welcome_keepQuitState(nextState)
         break;
       case `quit`:
         clog(`quit`, `reducer`)

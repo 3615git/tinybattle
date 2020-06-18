@@ -3,7 +3,7 @@
 */
 
 const welcome = (data) => {
-  // Erasing quit save state
+  // Erasing quit save state, except for home screen access
   delete data.game.quitState
   // Set game state
   data.game.state = `welcome`
