@@ -78,11 +78,11 @@ const setCharToElements = {
 }
 
 const weaponDamage = {
-  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`, `d100`],
-  normal: [50, 50, 10, 0, 0, 0, 0],
-  magic: [0, 0, 50, 50, 10, 0, 0],
-  rare: [0, 0, 0, 50, 50, 10, 0],
-  legendary: [0, 0, 0, 0, 50, 50, 10]
+  damage: [`d4`, `d6`, `d8`, `d10`, `d12`, `d20`],
+  normal: [50, 50, 10, 0, 0, 0],
+  magic: [0, 0, 50, 50, 10, 0],
+  rare: [0, 0, 0, 50, 50, 10],
+  legendary: [0, 0, 0, 0, 50, 50]
 }
 
 // Number of dice to cast
