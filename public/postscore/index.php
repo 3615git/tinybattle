@@ -30,7 +30,8 @@ $sql = 'INSERT INTO scores (
         game_battles_defeats,
         game_battles_victories,
         alltime_runs,
-        alltime_rounds
+        alltime_rounds,
+        abyss
     ) VALUES (
         "'.$mysqli->real_escape_string($content["name"]).'",
         "'.$content["run_rounds"].'",
@@ -42,7 +43,8 @@ $sql = 'INSERT INTO scores (
         "'.$content["game_battles_defeats"].'",
         "'.$content["game_battles_victories"].'",
         "'.$content["alltime_runs"].'",
-        "'.$content["alltime_rounds"].'"
+        "'.$content["alltime_rounds"].'",
+        "'.$content["abyss"].'"
     )';
 $mysqli->query($sql);
 
