@@ -38,7 +38,7 @@ $abyss = getMysqli($mysqli, $sql);
 $data = [
   'run' => $run,
   'game'=> $game,
-  'abyss' => $alltime,
+  'abyss' => $abyss,
 ];
 
 echo json_encode($data);
