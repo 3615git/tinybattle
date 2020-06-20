@@ -11,7 +11,8 @@ const mapStateToProps = state => {
   return {
     player: state.player,
     opponent: state.opponent,
-    game: state.game
+    game: state.game,
+    loop: state.game.loop
   }
 }
 
@@ -65,16 +66,20 @@ class BattleIntro extends Component {
   
   render() {
     
-    const { opponent } = this.props
+    const { opponent, loop } = this.props
     const { monstercolor } = this.state
+
+    // Abyss or special ambiant color
+    let appBodyClass = loop ? `mainWrapper wideScreen abyss` : `mainWrapper wideScreen`
     
     return (
-      <div className="mainWrapper wideScreen">
+      <div className={appBodyClass}>
         <div className="appWrapper">
           <Opponent color={monstercolor} intro="intro" />
           <div className="opponentIntro">
             <div className="name">
-              {opponent.elite && <span>Elite&nbsp;</span>}
+              {opponent.elite && loop && <span>Abyss</span>}
+              {opponent.elite && !loop && <span>Elite</span>}
               {opponent.name}
             </div>
             <div className="details">

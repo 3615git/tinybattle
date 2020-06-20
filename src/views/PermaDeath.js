@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 
-import Item from '../ui/battle/Item'
-import ItemVisual from '../ui/battle/ItemVisual'
 import { setGameState, settings  } from '../redux/actions/index'
 import { clog } from '../utils/utils'
 import { gameSettings } from '../conf/settings'
-import { getLevelFromXp } from '../actions/score/score'
 
 const mapStateToProps = state => {
   return {
@@ -33,13 +30,12 @@ class Defeat extends Component {
     const { score } = this.props
 
     this.state = {
-      movedItems: [],
       scoreSubmitted: score.run.scoreSent ? `success` : false
     }
   }
 
   componentDidMount() {
-    const { player, loop, score, settings } = this.props
+    const { player, score, loop, settings } = this.props
 
     if (!score.run.scoreSent) {
       // POST request using fetch with error handling
@@ -58,7 +54,7 @@ class Defeat extends Component {
           game_battles_victories: score.game.battles.victories,
           alltime_runs: score.alltime.runs,
           alltime_rounds: score.alltime.round,
-          loop: loop
+          abyss: loop
         })
       }
   
@@ -93,108 +89,35 @@ class Defeat extends Component {
     }
   }
 
-  checkLoot = (type, char) => {
-    const { movedItems } = this.state
-    let loot
-
-    clog(`checkLoot`, `function`)
-
-    for (let index = 0; index < movedItems.length; index++) {
-      if (movedItems[index].type === type && movedItems[index].char === char) loot = `new`
-    }
-
-    return loot
-  }
-
-  keepLoot = (type, char, item) => {
-    const { settings } = this.props
-    const { movedItems } = this.state
-    let updatedmovedItems = movedItems ? movedItems : []
-
-    clog(`keepLoot`, `function`)
-
-    // Update store
-    settings({ setting: `keepItem`, type: type, char: char, item: item })
-    // Update UI
-    updatedmovedItems.push({ type: type, char: char })
-    this.setState({
-      movedItems: updatedmovedItems
-    })
-  }
-
-  parseLoot = (type) => {
-    const { player } = this.props
-    const { movedItems } = this.state
-    const itemCount = getLevelFromXp(player.xp)
-
-    clog(`parseLoot`, `function`)
-
-    let loot = []
-    
-    for (let [key, value] of Object.entries(player[type])) {
-
-      // Check if item has been looted
-      const looted = this.checkLoot(type, key)
-
-      // Button labels
-      let keepButton = `Keep`
-
-      if (looted === `new`) {
-        keepButton = `Saved!`
-      }
-
-      loot.push(
-        <div className={`lootBox ${type} ${looted}`} key={`lootbox_${type}_${key}`}>
-          <div className="storeWrapper">
-            <Item 
-              item={player[type][key]} 
-              effect={looted} 
-              displayChar={type === `items`}
-            />
-          </div>
-          <div className="actions">
-            <button onClick={() => this.keepLoot(type, key, value)} disabled={looted || movedItems.length === itemCount}>
-              {keepButton}
-            </button>
-          </div>
-        </div>
-      )
-    }
-
-    return loot
-  }
-
   render() {
-    const { setGameState, player } = this.props
+    const { setGameState, game, player, score } = this.props
     const { scoreSubmitted } = this.state
 
-    clog(`Defeat render`, `location`)
-
-    const itemCount = getLevelFromXp(player.xp)
-    const itemCountLabel = itemCount === 1 ? `1 item` : <>{itemCount} items</>
+    clog(`EndGame screen`, `location`)
 
     // Submit score botton
     let submitButton = <span>Submitting score...</span>
     if (scoreSubmitted === `success`) submitButton = <span>Score sent !</span>
     else if (scoreSubmitted === `responseError`) submitButton = <span>Score not sent, sorry =[</span>
     else if (scoreSubmitted === `networkError`) submitButton = <span>No internet, score not sent =[</span>
-    
+
     return (
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
-            <div className="shopWrapper shop legacy">
-              <div className="legacyTitle">You can choose up to<span className="legacyCount big">{itemCountLabel}</span>to use in your next run.</div>
-              <div className="lootBoxes"> 
-                {this.parseLoot(`items`)}
-                {this.parseLoot(`weapons`)}
+            <div className="victoryWrapper">
+              <div className="bigTitle">The End</div>
+              <div>Congratulations {player.name} !</div>
+              <div className="separator"></div>
+              <div className="stats">
+                  You reached Abyss level
+                  <div className="abyssTitle">{game.level}</div>
               </div>
-              <div className="legacyTitle">You also saved <span className="legacyCount">{player.gold} <ItemVisual item="coins" level={5} small /></span></div>
+              <div>Thank you for playing !</div>
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>Hall of fame{submitButton}</button>
-            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start again !</button>
+            <button className="navigation abyss" onClick={() => setGameState({ state: `resetThenHallOfFame` })}>Hall of fame{submitButton}</button>
           </div>
         </div>
       </div>

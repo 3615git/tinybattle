@@ -6,6 +6,7 @@ const gameSettings = {
   widgetDelay: 600,
   itemStateDelay: 2000,
   monsterCharPointsRange: [8, 110], // Range of monsters points, from level 1 to last level
+  monsterCharPointsRange_loop: [120, 500], // Range of monsters points, from level 1 to last level
   eliteCharPointsRange: [30, 50], // elite % spec bonus
   beastHealthBoostRange: [30, 60], // non humanoid HP boost
   manualCharBoostRange: [30, 60], // manual char boost specified in monster settings

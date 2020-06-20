@@ -4,13 +4,16 @@ import { connect } from "react-redux"
 import { setGameState } from '../redux/actions/index'
 import { gameSettings } from '../conf/settings'
 
+import death from '../pics/ui/death.png'
+
 const mapStateToProps = state => {
   return {
     player: state.player,
     opponent: state.opponent,
     playerTurn: state.game.playerTurn,
     log: state.log,
-    score: state.score
+    score: state.score,
+    game: state.game
   }
 }
 
@@ -24,9 +27,10 @@ class HallOfFame extends Component {
 
   constructor(props) {
     super(props)
+    const { game } = this.props
 
     this.state = {
-      scoreTab: `run`
+      scoreTab: game.previousState === `permadeath` ? `abyss` : `run`
     }
   }
 
@@ -113,22 +117,22 @@ class HallOfFame extends Component {
           }
           break;
 
-        case `alltime`:
+        case `abyss`:
           scoresHeader = (
             <>
               <span className="name">Name</span>
-              <span className="">Runs</span>
-              <span className="">Rounds</span>
+              <span className="">Abyss level</span>
             </>
           )
 
           for (let index = 0; index < score.alltime.length; index++) {
-            const element = score.alltime[index];
+            const element = score.game[index];
+            let levelStyle = { filter: `hue-rotate(${Math.round(element.game_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
+
             scores.push(
               <div className="score">
                 <span className="name">{element.name}</span>
-                <span className="">{element.alltime_runs}</span>
-                <span className="">{element.alltime_rounds}</span>
+                <span className="level" style={levelStyle}>{element.game_maxlevel}</span>
               </div>
             )
           }
@@ -151,7 +155,7 @@ class HallOfFame extends Component {
 
   render() {
 
-    const { setGameState } = this.props
+    const { setGameState, game } = this.props
     const { scoreTab } = this.state
     
     return (
@@ -167,17 +171,20 @@ class HallOfFame extends Component {
                 <button className={scoreTab !== `game` ? `off` : `on`} onClick={() => this.changeTab(`game`)}>
                   Best game<span>Multiple runs</span>
                 </button>
-                {/* <button className={scoreTab !== `alltime` ? `off` : `on`} onClick={() => this.changeTab(`alltime`)}>
-                  Alltime
-                </button> */}
+                <button className={scoreTab !== `abyss` ? `off` : `on`} onClick={() => this.changeTab(`abyss`)}>
+                  Abyss<span>of Permadeath</span>
+                </button>
               </div>
               {scoreTab === `run` && this.parseScore(`run`)}
               {scoreTab === `game` && this.parseScore(`game`)}
-              {scoreTab === `alltime` && this.parseScore(`alltime`)}
+              {scoreTab === `abyss` && this.parseScore(`abyss`)}
             </div>
           </div>
           <div className="actionArea">
-            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start a new run !</button>
+            {game.previousState === `welcome` && <button className="navigation" onClick={() => setGameState({ state: `welcome_keepQuitState` })}>Back</button>}
+            {game.previousState === `defeat` && <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start again !</button>}
+            {game.previousState === `permadeath` && <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start again !</button>}
+            {game.previousState === `endgame` && <button className="navigation picture abyss" onClick={() => setGameState({ state: `nextLoop` })}><img src={death} alt="The Abyss of Permadeath"/>Enter the Abyss</button>}
           </div>
         </div>
       </div>

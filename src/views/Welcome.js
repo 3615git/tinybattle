@@ -111,7 +111,7 @@ class Welcome extends Component {
           <div className="actionArea">
             {startButton}
             {score && score.game && score.game.runs && <button className="textOnly" onClick={() => this.openModal(`reset`)}>New game</button>}
-            <div className="version">{currentVersion} {version[0].code} - <button className="textOnly inline" onClick={() => setGameState({ state: `releaseNotes` })}>Release notes</button></div>
+            <div className="version">{currentVersion} {version[0].code} - <button className="textOnly inline" onClick={() => setGameState({ state: `releaseNotes` })}>Release notes</button> <button className="textOnly inline" onClick={() => setGameState({ state: `jumptoendgame` })}>x</button></div>
           </div>
         </div>
       </div>
