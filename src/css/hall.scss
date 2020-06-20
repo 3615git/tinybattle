@@ -71,6 +71,10 @@
       padding: 5px;
       line-height: 19px;
 
+      &.abyss {
+        flex-basis: 100px;
+      }
+
       &.name {
         text-align: left;
         justify-content: left;

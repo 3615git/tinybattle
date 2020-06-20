@@ -121,12 +121,12 @@ class HallOfFame extends Component {
           scoresHeader = (
             <>
               <span className="name">Name</span>
-              <span className="">Abyss level</span>
+              <span className="abyss">Abyss level</span>
             </>
           )
 
           for (let index = 0; index < score.abyss.length; index++) {
-            const element = score.game[index];
+            const element = score.abyss[index];
             let levelStyle = { filter: `hue-rotate(${Math.round(element.game_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
 
             scores.push(
