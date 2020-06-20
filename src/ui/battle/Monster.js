@@ -12,7 +12,7 @@ import { monsterPic, monsterInfo } from '../../monsters/monster'
 const propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  outline: PropTypes.oneOf(['shade', 'bright']),
+  outline: PropTypes.oneOf(['shade', 'half', 'bright']),
   elite: PropTypes.bool.isRequired
 }
 
@@ -82,6 +82,7 @@ class Monster extends Component {
     let defaultClasses = `opponentWrapper round turn static`
     if (outline === `shade`) defaultClasses = `opponentWrapper outline turn static`
     if (outline === `bright`) defaultClasses = `opponentWrapper outline bright turn static`
+    if (outline === `half`) defaultClasses = `opponentWrapper outline half turn static`
   
     // Add custom classes to defined classes
     const itemClasses = [defaultClasses].filter(val => val).join(` `)
