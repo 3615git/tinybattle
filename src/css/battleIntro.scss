@@ -80,6 +80,11 @@
   }
 }
 
+.abyss .elementWrapper.elite {
+  background-image: url('../pics/ui/element_elite_abyss.gif'); 
+  filter: drop-shadow(0px 0px 3px lighten($element_darkness, 10)) drop-shadow(0px 0px 5px lighten($element_darkness, 10));
+}
+
 .dataLogsWrapper .elementWrapper {
   width: 16px;
   height: 16px;

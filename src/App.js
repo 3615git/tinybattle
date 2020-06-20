@@ -21,7 +21,9 @@ import Victory from './views/Victory'
 import Defeat from './views/Defeat'
 import Shop from './views/Shop'
 import EndGame from './views/EndGame'
+import PermaDeath from './views/PermaDeath'
 import HallOfFame from './views/HallOfFame'
+import NextLoop from './views/NextLoop'
 import MonstersDemo from './views/MonstersDemo'
 
 // Import UI utils
@@ -57,6 +59,7 @@ import './css/smallscreen.scss'
 const mapStateToProps = state => {
   return {
     game: state.game.state,
+    loop: state.game.loop,
     tutorial: state.game.tutorial,
     currentVersion: state.version,
     monsters: state.monsters
@@ -114,7 +117,7 @@ class App extends Component {
 
   render() {
 
-    const { game, tutorial, setGameState, settings } = this.props
+    const { game, tutorial, setGameState, settings, loop } = this.props
     const { openModal } = this.state
 
     let view
@@ -203,6 +206,14 @@ class App extends Component {
         view = <HallOfFame />
         options = smallOptions
         break;
+      case `permadeath`:
+        view = <PermaDeath />
+        options = []
+        break;
+      case `nextLoop`:
+        view = <NextLoop />
+        options = []
+        break;
       case `monstersDemo`:
         view = <MonstersDemo />
         options = []
@@ -210,6 +221,9 @@ class App extends Component {
       default:
         break;
     }
+
+    // Abyss or special ambiant color
+    let appBodyClass = loop ? `appBody abyss` : `appBody`
 
     return [
       <SwitchTransition key="switch">
@@ -228,7 +242,8 @@ class App extends Component {
       <Modal key="modalSettings" content="settings" display={openModal === `settings`} close={this.closeModal} />,
       <Modal key="modalHelp" content="help" display={openModal === `help`} close={this.closeModal} />,
       <Modal key="modalFirst" content="first" display={openModal === `first`} close={this.closeModal} />,
-      ambiantFog
+      ambiantFog,
+      <div className={appBodyClass} />
     ]
     
   }

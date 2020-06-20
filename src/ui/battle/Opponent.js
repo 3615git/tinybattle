@@ -57,8 +57,7 @@ class Opponent extends Component {
     // Get colors from scene
     const monstercolor = color.vibrant
     const monsterbackground = color.darkVibrant
-    const appbackground = chroma(color.darkMuted).darken(1).desaturate(.4); // color.darkMuted
-
+    const appbackground = `linear-gradient(${chroma(color.darkMuted).darken(1).desaturate(.4)} 50%, transparent)`; // color.darkMuted
     // Component styling
     const defaultClasses = `opponentWrapper`
     const turnClasses = turn ? `` : `turn`
@@ -76,10 +75,12 @@ class Opponent extends Component {
 
     // Monster bg styling
     const bgStyling = appbackground ? {
-      backgroundColor: appbackground
+      backgroundImage: appbackground
     } : {
 
     }
+
+    console.log(bgStyling)
 
     // Monster portrait size
     const portraitStyling = mode === `portrait` ? {

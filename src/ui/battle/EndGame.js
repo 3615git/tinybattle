@@ -72,27 +72,54 @@ class EndGame extends Component {
       }
 
       if (player.hitPoints === 0) {
-        return (
-          <div className={`${itemClasses} active`}>
-            <div className="presentationArea">
-              <div className="title defeat">Defeat !</div>
-              <div className="subtitle">
-                You quickly flee the battle,<br />trying to save as much as you can.
+        // Permadeath mode in loops
+        if (game.loop) {
+          return (
+            <div className={`${itemClasses} active abyss`}>
+              <div className="presentationArea">
+                <div className="title defeat">Final blow!</div>
+                <div className="subtitle">
+                  {player.name} fought bravely, but the Abyss of Permadeath never loses.
+                </div>
+                <div className="subtitle">
+                  <span style={opponentNameStyle}>{opponent.name}</span> won<br />
+                  {dataLogs.length - 1 > 1
+                    ? <span>{`${dataLogs.length - 1} rounds`}</span>
+                    : <span>{`${dataLogs.length - 1} round !`}</span>
+                  }
+                </div>
+                <img className="death" src={death} alt="You lose" />
               </div>
-              <div className="subtitle">
-                <span style={opponentNameStyle}>{opponent.name}</span> won<br />
-                {dataLogs.length - 1 > 1
-                  ? <span>{`${dataLogs.length - 1} rounds`}</span>
-                  : <span>{`${dataLogs.length - 1} round !`}</span>
-                }
+              <div className="actionArea">
+                <button className="navigation" onClick={() => setGameState({ state: `permadeath` })}>You're dead</button>
               </div>
-              <img className="death" src={death} alt="You lose" />
             </div>
-            <div className="actionArea">
-              <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Select legacy</button>
+          ) 
+        }
+        // Normal retreat
+        else {
+          return (
+            <div className={`${itemClasses} active`}>
+              <div className="presentationArea">
+                <div className="title defeat">Defeat !</div>
+                <div className="subtitle">
+                  You quickly flee the battle,<br />trying to save as much as you can.
+                </div>
+                <div className="subtitle">
+                  <span style={opponentNameStyle}>{opponent.name}</span> won<br />
+                  {dataLogs.length - 1 > 1
+                    ? <span>{`${dataLogs.length - 1} rounds`}</span>
+                    : <span>{`${dataLogs.length - 1} round !`}</span>
+                  }
+                </div>
+                <img className="death" src={death} alt="You lose" />
+              </div>
+              <div className="actionArea">
+                <button className="navigation" onClick={() => setGameState({ state: `defeat` })}>Select saved items</button>
+              </div>
             </div>
-          </div>
-        ) 
+          ) 
+        }
       }
       // If opponent is dead
       else if (opponent.hitPoints === 0) {

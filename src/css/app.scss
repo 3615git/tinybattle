@@ -104,7 +104,21 @@ html, body, #root {
   text-shadow: 1px 1px black;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
+}
+
+.appBody {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
   background-color: $color_body;
+  z-index: 0;
+  transition: background-color 3s;
+
+  &.abyss {
+    background-color: $color_body_abyss;
+  }
 }
 
 .mainWrapper {
@@ -119,6 +133,7 @@ html, body, #root {
   margin-right: auto;
   width: 100%;
   height: 100%;
+  z-index: 13;
 }
 
 .monsterOverlay {
@@ -320,6 +335,10 @@ html, body, #root {
 
     &.bright {
       filter: brightness(0.9);
+    }
+
+    &.half {
+      filter: brightness(0.4);
     }
   }
 
@@ -617,10 +636,31 @@ html, body, #root {
   animation: spin 30s linear infinite;
 }
 
+.bigTitle {
+  color: $color_legacy;
+  font-size: $font_huge;
+  margin-top: 60px;
+  margin-bottom: 15px;
+
+  &.abyss {
+    color: $element_darkness;
+  }
+  &.defeat {
+    color: $color_itemNormal;
+  }
+}
+
+.abyssTitle {
+  color: $element_darkness;
+  font-size: $font_huge;
+  margin-top: 20px;
+}
+
 /* End game screen */
 .endGame {
   z-index: 0;
   position: absolute;
+  padding: 20px;
   left: 0px;
   top: 0px;
   height: 100%;
@@ -630,7 +670,6 @@ html, body, #root {
   justify-content: center;
   opacity: 0;
   background: rgba(0, 0, 0, 0.85);
-
   flex-direction: column;
 
   &.active {

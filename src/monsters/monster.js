@@ -22,11 +22,13 @@ function monsterElite(monsterData) {
   return getRandomInt(1, 100) <= eliteRate
 }
 
-function monsterStats(monsterData, level, elite) {
-  const { maxLevel, monsterCharPointsRange, eliteCharPointsRange, beastHealthBoostRange, manualCharBoostRange } = gameSettings
+function monsterStats(monsterData, level, elite, loop=false) {
+  const { maxLevel, monsterCharPointsRange, monsterCharPointsRange_loop, eliteCharPointsRange, beastHealthBoostRange, manualCharBoostRange } = gameSettings
 
   // Get points counts (base * level)
-  let points = monsterCharPointsRange[0] + Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
+  let points = loop 
+    ? monsterCharPointsRange_loop[0] + Math.round(((monsterCharPointsRange_loop[1] - monsterCharPointsRange_loop[0]) / maxLevel) * level)
+    : monsterCharPointsRange[0] + Math.round(((monsterCharPointsRange[1] - monsterCharPointsRange[0]) / maxLevel) * level)
   // Beasts have no items, so they have some bonus points
   if (!monsterData.humanoid) points += level * 6
   // Apply random elite bonus
@@ -93,13 +95,13 @@ function monsterStats(monsterData, level, elite) {
   }
 }
 
-function monsterInfo(type, level, monsters) {
+function monsterInfo(type, level, monsters, loop=false) {
   const monsterData = monsters[type]
   // console.log(monsterData)
-  const elite = monsterElite(monsterData)
-  const monsterSpecs = monsterStats(monsterData, level, elite)
-  const monsterItems = getMonsterItems(monsterSpecs[`items`], level, monsterSpecs[`humanoid`], elite)
-  const monsterWeapons = getMonsterWeapons(monsterSpecs[`weapons`], level, monsterSpecs[`humanoid`], elite)
+  const elite = loop ? true : monsterElite(monsterData)
+  const monsterSpecs = monsterStats(monsterData, level, elite, loop)
+  const monsterItems = getMonsterItems(monsterSpecs[`items`], loop ? gameSettings.maxLevel : level, monsterSpecs[`humanoid`], elite)
+  const monsterWeapons = getMonsterWeapons(monsterSpecs[`weapons`], loop ? gameSettings.maxLevel : level, monsterSpecs[`humanoid`], elite)
   const monsterXp = getMonsterXp(monsterSpecs, monsterItems)
 
   // Computing final HP

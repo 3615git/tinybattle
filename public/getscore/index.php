@@ -32,13 +32,13 @@ $run =  getMysqli($mysqli, $sql);
 $sql = 'SELECT * FROM scores ORDER BY `game_maxlevel` DESC, `game_runs` ASC LIMIT 0,100';
 $game =  getMysqli($mysqli, $sql);
 
-$sql = 'SELECT * FROM scores ORDER BY `alltime_rounds` DESC LIMIT 0,100';
-$alltime = getMysqli($mysqli, $sql);
+$sql = 'SELECT * FROM scores WHERE `abyss` > 0 ORDER BY `abyss` DESC LIMIT 0,100';
+$abyss = getMysqli($mysqli, $sql);
 
 $data = [
   'run' => $run,
   'game'=> $game,
-  'alltime' => $alltime,
+  'abyss' => $alltime,
 ];
 
 echo json_encode($data);

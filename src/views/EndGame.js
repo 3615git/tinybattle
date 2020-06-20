@@ -5,12 +5,15 @@ import { setGameState, settings  } from '../redux/actions/index'
 import { clog } from '../utils/utils'
 import { gameSettings } from '../conf/settings'
 
+import death from '../pics/ui/death.png'
+
 const mapStateToProps = state => {
   return {
     player: state.player,
     opponent: state.opponent,
     game: state.game,
-    score: state.score
+    score: state.score,
+    loop: state.game.loop
   }
 }
 
@@ -34,7 +37,7 @@ class Defeat extends Component {
   }
 
   componentDidMount() {
-    const { player, score, settings } = this.props
+    const { player, loop, score, settings } = this.props
 
     if (!score.run.scoreSent) {
       // POST request using fetch with error handling
@@ -53,6 +56,7 @@ class Defeat extends Component {
           game_battles_victories: score.game.battles.victories,
           alltime_runs: score.alltime.runs,
           alltime_rounds: score.alltime.round,
+          loop: loop
         })
       }
   
@@ -88,7 +92,7 @@ class Defeat extends Component {
   }
 
   render() {
-    const { setGameState } = this.props
+    const { setGameState, player, score } = this.props
     const { scoreSubmitted } = this.state
 
     clog(`EndGame screen`, `location`)
@@ -103,13 +107,50 @@ class Defeat extends Component {
       <div className="mainWrapper">
         <div className="appWrapper">
           <div className="presentationArea highIndex">
-            <div className="shopWrapper shop legacy">
-                You won! Damn, now i have to make an endgame screen!
+            <div className="victoryWrapper">
+              <div className="bigTitle">You won !</div>
+              <div>All hail the mighty {player.name} !</div>
+              <div className="separator"></div>
+              <div className="stats">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Runs</td>
+                      <td>{score.game.runs}</td>
+                    </tr>
+                    <tr>
+                      <td>Battles</td>
+                      <td>{score.game.battles.total} ({score.game.battles.defeats} lost)</td>
+                    </tr>
+                    <tr>
+                      <td>Rounds</td>
+                      <td>{score.game.round}</td>
+                    </tr>
+                    <tr>
+                      <td>Damage dealt</td>
+                      <td>{score.game.damage}</td>
+                    </tr>
+                    <tr>
+                      <td>Physical damage</td>
+                      <td><span className="physicaldamage">{score.game.action.attack.damage}</span> ({score.game.action.attack.total})</td>
+                    </tr>
+                    <tr>
+                      <td>Magical damage</td>
+                      <td><span className="magicaldamage">{score.game.action.cast.damage}</span> ({score.game.action.cast.total})</td>
+                    </tr>
+                    <tr>
+                      <td>Health restored</td>
+                      <td>{score.game.heal}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>Congratulations ! <br /><br />But the <span className="element_darkness">Abyss of Permadeath</span> awaits...</div>
             </div>
           </div>
           <div className="actionArea">
             <button className="navigation" onClick={() => setGameState({ state: `hallOfFame` })}>Hall of fame{submitButton}</button>
-            <button className="navigation" onClick={() => setGameState({ state: `welcome` })}>Start again !</button>
+            <button className="navigation abyss picture" onClick={() => setGameState({ state: `nextLoop` })}><img src={death} alt="The Abyss of Permadeath"/>Enter the Abyss</button>
           </div>
         </div>
       </div>

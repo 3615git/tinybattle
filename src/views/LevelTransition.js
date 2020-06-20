@@ -16,7 +16,8 @@ const mapStateToProps = state => {
     opponent: state.opponent,
     score: state.score,
     monsterList: state.monsters,
-    opponentMap: state.game.opponentMap
+    opponentMap: state.game.opponentMap,
+    loop: state.game.loop
   }
 }
 
@@ -30,14 +31,14 @@ class LevelTransition extends Component {
 
   componentDidMount() {
     document.getElementById('currentLevel').scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'instant',
       block: 'center',
       inline: 'center'
     })
   }
   
   render() {
-    const { game, player, opponent, setGameState, score, monsterList, opponentMap } = this.props
+    const { game, player, opponent, setGameState, score, monsterList, opponentMap, loop } = this.props
 
     // Legacy items count
     const legacyItems = getLevelFromXp(player.xp)
@@ -73,13 +74,16 @@ class LevelTransition extends Component {
               name={opponent.name}
               elite={opponent.elite}
               monsterList={monsterList}
-              outline="shade"
+              outline="half"
             />
             <div className="leftInfo">
-              <div>Run #{score.game.runs}</div>
+              {loop ? <div>Final run</div> : <div>Run #{score.game.runs}</div>}
               {score.run.round > 1 && <div>{score.run.round} rounds</div>}
               {score.run.round <= 1 && <div>Game starts !</div>}
               {!score.run.round && <div>Game starts !</div>}
+              <br />
+              {opponentMap[level-1].elite && <div><Element element="elite"/></div> }
+              <div>{opponentMap[level-1].name}</div>
             </div>
             <div className="logoWrapper" style={logoStyle}>
               <div className="logoCombine" style={wrapperStyle}>
@@ -89,7 +93,7 @@ class LevelTransition extends Component {
             </div>
             <div className="rightInfo">
               <div>XP lv. {legacyItems}</div>
-              <div>Monsters lv. {monsterTier}</div>
+              {loop ? <div>Abyss monsters</div> : <div>Monsters lv. {monsterTier}</div>}
             </div>
           </div>
         )
@@ -122,9 +126,12 @@ class LevelTransition extends Component {
         )
       }
     }
+
+    // Abyss or special ambiant color
+    let appBodyClass = loop ? `mainWrapper wideScreen abyss` : `mainWrapper wideScreen`
     
     return (
-      <div className="mainWrapper wideScreen">
+      <div className={appBodyClass}>
         <div className="appWrapper">
           <div className="presentationArea levelTransition">
             <div className="roadmap">
@@ -132,7 +139,7 @@ class LevelTransition extends Component {
             </div>
           </div>
           <div className="actionArea fixed">
-            <button className="navigation bi_action" onClick={() => setGameState({ state: `battleIntro` })}>Next opponent !</button>
+            <button className={"navigation"} onClick={() => setGameState({ state: `battleIntro` })}>Next opponent !</button>
           </div>
         </div>
       </div>

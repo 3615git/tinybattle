@@ -23,6 +23,7 @@ import { setUIColor } from '../../actions/settings/setUIColor'
 import { preference } from '../../actions/settings/preference'
 // Game system
 import { welcome } from '../../actions/game/welcome'
+import { welcome_keepQuitState } from '../../actions/game/welcome_keepQuitState'
 import { quit } from '../../actions/game/quit'
 import { gameCreate } from '../../actions/game/gameCreate'
 import { levelTransition } from '../../actions/game/levelTransition'
@@ -30,7 +31,10 @@ import { battleIntro } from '../../actions/game/battleIntro'
 import { startBattle } from '../../actions/game/startBattle'
 import { victory } from '../../actions/game/victory'
 import { defeat } from '../../actions/game/defeat'
+import { permadeath } from '../../actions/game/permadeath'
 import { hallOfFame } from '../../actions/game/hallOfFame'
+import { resetThenHallOfFame } from '../../actions/game/resetThenHallOfFame'
+import { nextLoop } from '../../actions/game/nextLoop'
 import { openShop } from '../../actions/game/openShop'
 import { logsToPlayerTurn } from '../../actions/game/logsToPlayerTurn'
 import { score } from '../../actions/score/score'
@@ -170,10 +174,18 @@ function rootReducer(state = initialState, action) {
   }
 
   if (action.type === GAMESTATE) {
+
+    // Store page for origin use
+    nextState.game.previousState = nextState.game.state
+
     switch (action.payload.state) {
       case `welcome`:
         clog(`welcome`, `reducer`)
         nextState = welcome(nextState)
+        break;
+      case `welcome_keepQuitState`:
+        clog(`welcome_keepQuitState`, `reducer`)
+        nextState = welcome_keepQuitState(nextState)
         break;
       case `quit`:
         clog(`quit`, `reducer`)
@@ -207,9 +219,21 @@ function rootReducer(state = initialState, action) {
         clog(`defeat`, `reducer`)
         nextState = defeat(nextState)
         break;
+      case `permadeath`:
+        clog(`permadeath`, `reducer`)
+        nextState = permadeath(nextState)
+        break;
       case `hallOfFame`:
         clog(`hallOfFame`, `reducer`)
         nextState = hallOfFame(nextState)
+        break;
+      case `resetThenHallOfFame`:
+        clog(`resetThenHallOfFame`, `reducer`)
+        nextState = resetThenHallOfFame(nextState)
+        break;
+      case `nextLoop`:
+        clog(`nextLoop`, `reducer`)
+        nextState = nextLoop(nextState)
         break;
       case `shop`:
         clog(`shop`, `reducer`)
@@ -227,6 +251,9 @@ function rootReducer(state = initialState, action) {
       case `monstersDemo`:
         clog(`monstersDemo`, `reducer`)
         nextState = monstersDemo(nextState)
+        break;
+      case `jumptoendgame`:
+        nextState.game.state = `endgame`
         break;
       default:
         break;

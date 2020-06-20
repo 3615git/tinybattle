@@ -23,7 +23,8 @@ const mapStateToProps = state => {
     game: state.game,
     settings: state.game.settings,
     log: state.log,
-    uicolor: state.game.uicolor
+    uicolor: state.game.uicolor,
+    loop: state.game.loop
   }
 }
 
@@ -168,7 +169,7 @@ class Battle extends Component {
 
   render() {
     const { playerTurnUI, battleEnd } = this.state
-    const { game, player, uicolor } = this.props
+    const { game, player, uicolor, loop } = this.props
 
     clog(`Battle render`, `location`)
 
@@ -176,10 +177,11 @@ class Battle extends Component {
     const hpRange = 10 - Math.round((player.hitPoints * 10) / player.maxHitPoints)
 
     const playerAreaClass = playerTurnUI ? `playerArea playerTurn` : `playerArea opponentTurn`
+    const wrapperClass = loop ? `appWrapper battle danger_${hpRange} abyss` : `appWrapper battle danger_${hpRange}`
 
     return (
       <div className="mainWrapper">
-        <div className={`appWrapper battle danger_${hpRange}`}>
+        <div className={wrapperClass}>
           <EndGame display={battleEnd} />
           <VibrationWrapper condition={game.opponentHit}>
             <Opponent color={uicolor} turn={playerTurnUI} />
