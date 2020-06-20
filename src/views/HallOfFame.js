@@ -125,7 +125,7 @@ class HallOfFame extends Component {
             </>
           )
 
-          for (let index = 0; index < score.alltime.length; index++) {
+          for (let index = 0; index < score.abyss.length; index++) {
             const element = score.game[index];
             let levelStyle = { filter: `hue-rotate(${Math.round(element.game_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
 
