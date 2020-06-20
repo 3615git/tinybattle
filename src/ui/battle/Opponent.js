@@ -80,8 +80,6 @@ class Opponent extends Component {
 
     }
 
-    console.log(bgStyling)
-
     // Monster portrait size
     const portraitStyling = mode === `portrait` ? {
       width: `400px`,
