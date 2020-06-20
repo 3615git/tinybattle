@@ -19,7 +19,7 @@ function getLevelInfo(level, monsterTiers, boss=false) {
   return levelInfo
 }
 
-function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents, boss=false) {
+function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents, boss, loop) {
   const levelInfo = getLevelInfo(level, monsterTiers, boss)
   // Remove alredy played monsters from array
   let availableOpponents
@@ -33,7 +33,7 @@ function getMonsterFromLevel(level, monsterTiers, monsters, pastOpponents, boss=
 
   const monster = randomValue(availableOpponents)
   
-  return monsterInfo(monster, level, monsters)
+  return monsterInfo(monster, level, monsters, loop)
 }
 
 export {
