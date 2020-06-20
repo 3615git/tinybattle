@@ -1,6 +1,20 @@
 // Version and release notes
 const version = [
   {
+    version: `1.2`,
+    date: `21.06.20`,
+    code: `Permadeath`,
+    reset: false,
+    note: `A final run, the Abyss of Permadeath, is now available after the last boss is defeated (thanks to GrandMaster Bab for the idea). The run is extra hard, and death is final.`,
+    changes: [
+      `New last run in super hard mode`,
+      `Better endgame screens (they still suck)`,
+      `Various nerfing`,
+      `Various bug fixes`,
+      `Hall of fame scores reset`
+    ],
+  },
+  {
     version: `1.1`,
     date: `18.06.20`,
     code: `Git gud`,
