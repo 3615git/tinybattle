@@ -275,3 +275,26 @@
     }
   }
 }
+
+/* Final victory screen */
+.victoryWrapper {
+  text-align: center;
+  padding: 20px;
+
+  .stats {
+    @include itemStyle($color_itemNormal);
+    width: 100%;
+    padding: 20px;
+    border-radius: 6px;
+    margin: 20px 0px;
+
+    table {
+      tr, td { border: none }
+      td:first-child { 
+        text-align: right;
+        color: rgba(255,255,255,.6);
+      }
+      td:last-child { text-align: left; }
+    }
+  }
+}

@@ -114,6 +114,11 @@ button, a.button {
     width: 250px;
     margin: 0 auto;
 
+    &.picture {
+      flex-direction: row;
+      img { margin-right: 10px; }
+    }
+
     span {
       font-size: $font_small;
     }
@@ -166,6 +171,10 @@ button, a.button {
       @include buttonStyle(desaturate(darken($color_instant, 20),40));
     }
   }
+}
+
+.abyss .navigation, button.abyss {
+  @include buttonStyle($color_button_abyss);
 }
 
 .buttons {
