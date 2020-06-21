@@ -82,7 +82,7 @@ class HallOfFame extends Component {
             let levelStyle = { filter: `hue-rotate(${Math.round(element.run_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
 
             scores.push(
-              <div className="score" key={`score_run_${index}`}>
+              <div id={`run_${element.id}`} className="score" key={`score_run_${index}`}>
                 <span className="name">{element.name}</span>
                 <span className="level" style={levelStyle}>{element.run_maxlevel}</span>
                 <span className="">{element.run_rounds}</span>
@@ -107,7 +107,7 @@ class HallOfFame extends Component {
             let levelStyle = { filter: `hue-rotate(${Math.round(element.game_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
 
             scores.push(
-              <div className="score" key={`score_game_${index}`}>
+              <div id={`game_${element.id}`} className="score" key={`score_game_${index}`}>
                 <span className="name">{element.name}</span>
                 <span className="level" style={levelStyle}>{element.game_maxlevel}</span>
                 <span className="">{element.game_runs}</span>
@@ -130,9 +130,9 @@ class HallOfFame extends Component {
             let levelStyle = { filter: `hue-rotate(${Math.round(element.game_maxlevel * (360 / gameSettings.maxLevel))}deg)` }
 
             scores.push(
-              <div className="score">
+              <div id={`abyss_${element.id}`} className="score">
                 <span className="name">{element.name}</span>
-                <span className="level" style={levelStyle}>{element.game_maxlevel}</span>
+                <span className="level" style={levelStyle}>{element.run_maxlevel}</span>
               </div>
             )
           }
